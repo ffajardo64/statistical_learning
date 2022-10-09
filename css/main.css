@@ -469,9 +469,9 @@ img.pull-left {
 }
 #loader:before {
 	content: "";
-	border-top: 11px solid rgba(255, 255, 255, 0.1);
-	border-right: 11px solid rgba(255, 255, 255, 0.1);
-	border-bottom: 11px solid rgba(255, 255, 255, 0.1);
+	border-top: 11px solid rgba(255, 255, 255, 0.308);
+	border-right: 11px solid rgba(255, 255, 255, 0.308);
+	border-bottom: 11px solid rgba(255, 255, 255, 0.308);
 	border-left: 11px solid #cc5200;
 	-webkit-animation: load 1.1s infinite linear;
 	animation: load 1.1s infinite linear;
@@ -660,8 +660,8 @@ input[type="button"] {
 	line-height: 5.4rem;
 	padding: 0 3rem;
 	margin: 0 .3rem 1.2rem 0;
-	background: #d8d8d8;
-	color: #313131;
+	background: #afaeae;
+	color: rgb(134, 130, 130);
 	text-decoration: none;
 	cursor: pointer;
 	text-align: center;
@@ -963,7 +963,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 	line-height: 2.4rem;
 }
 .skill-bars li .progress {
-	background: #313131;
+	background: #cc5200;
 	position: relative;
 	height: 100%;
 }
