@@ -1095,7 +1095,7 @@ header .row {
 }
 header .top-bar {
 	display: block;
-	background: #0E0E0E;
+	background: transparent;
 	min-width: 220px;
 	min-height: 66px;
 	position: absolute;
@@ -1120,7 +1120,7 @@ header .logo a {
 	width: 92px;
 	height: 15px;
 	background: url("../images/logo.png") no-repeat center;
-	background-size: 92px 15px;
+	background-size: 75px 15px;
 }
 
 /**
@@ -1138,7 +1138,7 @@ header .logo a {
 }
 .menu-toggle span {
 	display: block;
-	background-color: #FF0077;
+	background-color: #cc5200;
 	width: 24px;
 	height: 3px;
 	margin-top: -1.5px;
@@ -1196,7 +1196,7 @@ header .logo a {
 	background-color: rgba(255, 0, 119, 0);
 }
 .menu-toggle.is-clicked span::before, .menu-toggle.is-clicked span::after {
-	background-color: #ff0077;
+	background-color: #d65e0e;
 	-moz-transition-delay: 0s, 0.2s;
 	-o-transition-delay: 0s, 0.2s;
 	-webkit-transition-delay: 0s, 0.2s;
@@ -1229,7 +1229,7 @@ header .logo a {
 
 /* dropdown nav */
 .main-navigation {
-	background: #0E0E0E;
+	background: transparent;
 	padding: 24px 30px 42px;
 	margin: 0;
 	width: 100%;
@@ -1252,12 +1252,12 @@ header .logo a {
 	border: none;
 }
 .main-navigation li a:hover {
-	color: #FF0077;
+	color: #d65e0e;
 	padding-left: 1rem;
 }
 .main-navigation li.current > a {
 	background: none;
-	color: #FF0077;
+	color: #d65e0e;
 }
 
 /**
@@ -1312,7 +1312,7 @@ header .logo a {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: #111111;
+	background: transparent;
 	opacity: .85;
 }
 
@@ -1337,7 +1337,7 @@ header .logo a {
 	text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 .intro-content h5 {
-	color: #cc005f;
+	color: #cc5200;
 	font-family: "poppins-bold", sans-serif;
 	font-size: 2.3rem;
 	line-height: 1.565;
