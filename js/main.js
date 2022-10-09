@@ -156,7 +156,7 @@
         navigationText: false
     });
 
-	$("#owl-slider-languages").owlCarousel({
+	$("#owl-slider-knowledge").owlCarousel({
         navigation: false,
         pagination: true,
         itemsCustom : [
