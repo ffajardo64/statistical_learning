@@ -1579,6 +1579,7 @@ header .logo a {
 	.intro-info img {
 		height: 10rem;
 		width: 45rem;
+		float:center;
 	}
 }
 @media only screen and (max-width:768px) {
