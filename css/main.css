@@ -1592,7 +1592,7 @@ header .logo a {
 		width: 37.8rem;
 	}
 	.intro-info .lead {
-		padding-left: 110rem;
+		padding-left: 0rem;
 	}
 	.about-content h3 {
 		text-align: center;
