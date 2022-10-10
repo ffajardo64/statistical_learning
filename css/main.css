@@ -1575,7 +1575,7 @@ header .logo a {
 @media only screen and (max-width:1024px) {
 	.intro-info {
 		margin-right: -30px;
-		margin-left: -30px;
+		margin-left: 0px;
 	}
 	.intro-info .lead {
 		padding-left: 0rem;
