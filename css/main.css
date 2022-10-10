@@ -1570,9 +1570,9 @@ header .logo a {
 /**
  * responsive:
  * about
- * ------------------------------------------------------------------- 
+ * --------------------------------------------------------------1024 
  */
-@media only screen and (max-width:1024px) {
+@media only screen and (max-width:1920px) {
 	.intro-info .lead {
 		padding-left: 0rem;
 	}
