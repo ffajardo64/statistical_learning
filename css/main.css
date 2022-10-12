@@ -1805,7 +1805,7 @@ header .logo a {
  * ------------------------------------------------------------------- 
  */
 #portfolio {
-	background: #FFFFFF;
+	background: #ffffffe5;
 	padding-top: 12rem;
 	padding-bottom: 12rem;
 }
@@ -1856,7 +1856,7 @@ header .logo a {
 }
 
 #portfolio .folio-title {
-	color: #FFFFFF;
+	color: #ffffffd2;
 	font-size: 3.3rem;
 	padding: 0 3rem;
 	margin-bottom: 0;
@@ -1868,10 +1868,10 @@ header .logo a {
 	font-family: "poppins-regular", sans-serif;
 	font-size: 1.2rem;
 	letter-spacing: .1rem;
-	color: rgba(255, 255, 255, 0.6);
+	color: #ffffff99;
 }
 #portfolio .folio-item:hover .overlay {
-	background: rgba(0, 0, 0, 0.8);
+	background: #000000cc;
 }
 #portfolio .folio-item:hover .folio-item-cell {
 	left: 0;
@@ -1909,7 +1909,7 @@ header .logo a {
  */
 .popup-modal {
 	max-width: 550px;
-	background: #FFFFFF;
+	background: #fffffff1;
 	position: relative;
 	margin: 0 auto;
 }
@@ -1947,7 +1947,7 @@ header .logo a {
 .popup-modal .link-box {
 	width: 100%;
 	overflow: hidden;
-	background: #000000;
+	background: #0a1b2f;
 }
 .popup-modal .link-box a {
 	font-family: "poppins-bold", sans-serif;
@@ -1968,10 +1968,10 @@ header .logo a {
 	transition: all 0.3s ease-in-out;
 }
 .popup-modal .link-box a:first-child {
-	border-right: 1px solid rgba(200, 200, 200, 0.1);
+	border-right: 1px solid #0a1b2f;
 }
 .popup-modal .link-box a:hover {
-	background: #cc005f;
+	background: #cc5200;
 	border: none;
 }
 @media only screen and (max-width:600px) {
@@ -2117,6 +2117,8 @@ header .logo a {
 	background-size: cover;
 	padding-top: 12rem;
 	padding-bottom: 12rem;
+	width: 100%;
+	height: 100%;
 	color: white;
 	position: relative;
 }
@@ -2306,8 +2308,8 @@ header .logo a {
  */
 #stats {
 	background: #cc5200;
-	padding-top: 7.2rem;
-	padding-bottom: 6rem;
+	padding-top: 4.2rem;
+	padding-bottom: 4rem;
 	text-align: center;
 }
 #stats .row {
