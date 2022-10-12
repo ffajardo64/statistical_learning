@@ -1572,7 +1572,7 @@ header .logo a {
  * about
  * --------------------------------------------------------------1024 
  */
-@media only screen and (max-width:1920px) {
+@media only screen and (max-width:10px) {
 	.intro-info .lead {
 		padding-left: 0rem;
 	}
@@ -1613,8 +1613,8 @@ header .logo a {
 	.intro-info {
 		text-align: center;
 		margin-top: 3rem;
-		margin-right: -30px;
-		margin-left: -30px;
+		margin-right: -0px;
+		margin-left: -0px;
 	}
 	.intro-info img {
 		height: 6.6rem;
@@ -2308,8 +2308,8 @@ header .logo a {
  */
 #stats {
 	background: #cc5200;
-	padding-top: 4.2rem;
-	padding-bottom: 4rem;
+	padding-top: 7.2rem;
+	padding-bottom: 6rem;
 	text-align: center;
 }
 #stats .row {
