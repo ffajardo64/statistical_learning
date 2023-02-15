@@ -16,13 +16,14 @@
  *  08. common styles
  *  09. header styles
  *  10. intro
- *  11. about
- *  12. courses
+ *  11. datasets
+ *  11a. referencias
+ *  12. slides
  *  13. portfolio
  *  14. call-to-action section
- *  15. services
+ *  15. scripts
  *  16. stats
- *  17. contact
+ *  17. contato
  *  18. footer
  *
  * =================================================================== 
@@ -157,6 +158,7 @@ p.lead {
 	font-size: 2rem;
 	line-height: 1.8;
 	color: #888888;
+	text-align: justify;
 }
 @media only screen and (max-width:768px) {
 	p.lead {
@@ -273,6 +275,8 @@ hr {
  */
 ol {
 	list-style: decimal;
+	text-align: left;
+	color: #888888;
 }
 ul {
 	list-style: disc;
@@ -1020,7 +1024,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
  * ------------------------------------------------------------------- 
  */
 .grey-section {
-	background: #ebebeb;
+	background: #c5c3c3;
 }
 .grey-section p.lead {
 	color: #7d7d7d;
@@ -1294,7 +1298,7 @@ header .logo a {
  * ------------------------------------------------------------------- 
  */
 #intro {
-	background: #151515 url(../images/intro-bg.jpg) no-repeat center bottom;
+	background: #151515 url(../images/ts-bg.jpg) no-repeat center bottom;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	background-size: cover;
@@ -1485,18 +1489,19 @@ header .logo a {
 	}
 }
 
+/*********************************************************************
 /** 
  * ===================================================================
- * 11. about - (_layout.scss)
+ * 11a. referencias - (_layout.scss)
  *
  * ------------------------------------------------------------------- 
  */
-#about {
+#referencias {
 	background: #0a1b2f;
 	padding-top: 12rem;
 	padding-bottom: 15rem;
 }
-#about .section-intro {
+#referencias .section-intro {
 	margin-bottom: 3rem;
 }
 
@@ -1517,27 +1522,27 @@ header .logo a {
 	padding-left: 0rem;
 }
 
-.about-content {
+.referencias-content {
 	position: relative;
 	text-align: left;
 	max-width: 850px;
 	margin-bottom: 3.6rem;
 }
-.about-content h3 {
+.referencias-content h3 {
 	font-family: "poppins-bold", sans-serif;
 	font-size: 1.8rem;
 	text-transform: uppercase;
 	letter-spacing: .25rem;
 }
-.about-content .info-list {
+.referencias-content .info-list {
 	list-style: none;
 	margin-left: 0;
 }
-.about-content .info-list li {
+.referencias-content .info-list li {
 	padding: 0 0 1.5rem 0;
 	margin-bottom: .6rem;
 }
-.about-content .info-list li strong {
+.referencias-content .info-list li strong {
 	font-family: "poppins-bold", sans-serif;
 	color: #FFFFFF;
 	text-transform: uppercase;
@@ -1545,14 +1550,14 @@ header .logo a {
 	font-size: 1.5rem;
 	line-height: 3rem;
 }
-.about-content .info-list li span {
+.referencias-content .info-list li span {
 	display: block;
 	font-family: "poppins-regular", sans-serif;
 	color: #c9c6c6;
 	font-size: 1.5rem;
 	line-height: 1;
 }
-.about-content .skill-bars {
+.referencias-content .skill-bars {
 	margin-top: 6rem;
 }
 
@@ -1568,7 +1573,7 @@ header .logo a {
 
 /**
  * responsive:
- * about
+ * referencias
  * --------------------------------------------------------------1024 
  */
 @media only screen and (max-width:10px) {
@@ -1594,10 +1599,10 @@ header .logo a {
 	.intro-info .lead {
 		padding-left: 0rem;
 	}
-	.about-content h3 {
+	.referencias-content h3 {
 		text-align: center;
 	}
-	.about-content .info-list, .about-content .skill-bars {
+	.referencias-content .info-list, .referencias-content .skill-bars {
 		margin-bottom: 4.2rem;
 	}
 	.button-section .button {
@@ -1627,34 +1632,183 @@ header .logo a {
 	}
 }
 
+
+/*********************************************************************
+
+
+
 /** 
  * ===================================================================
- * 12. courses - (_layout.scss)
+ * 11. datasets - (_layout.scss)
  *
  * ------------------------------------------------------------------- 
  */
-#courses {
+#datasets {
+	background: #0a1b2f;
+	padding-top: 12rem;
+	padding-bottom: 15rem;
+}
+#datasets .section-intro {
+	margin-bottom: 3rem;
+}
+
+.intro-info {
+	margin-top: 4.2rem;
+	margin-right: -30px;
+	margin-left: -30px;
+}
+.intro-info img {
+	height: 10rem;
+	width: 45rem;
+	border-radius: 0%;
+	margin: -3.1rem 0 0 0;
+	float:center;
+}
+.intro-info .lead {
+	text-align: justify;
+	padding-left: 0rem;
+}
+
+.datasets-content {
+	position: relative;
+	text-align: left;
+	max-width: 850px;
+	margin-bottom: 3.6rem;
+}
+.datasets-content h3 {
+	font-family: "poppins-bold", sans-serif;
+	font-size: 1.8rem;
+	text-transform: uppercase;
+	letter-spacing: .25rem;
+}
+.datasets-content .info-list {
+	list-style: none;
+	margin-left: 0;
+}
+.datasets-content .info-list li {
+	padding: 0 0 1.5rem 0;
+	margin-bottom: .6rem;
+}
+.datasets-content .info-list li strong {
+	font-family: "poppins-bold", sans-serif;
+	color: #FFFFFF;
+	text-transform: uppercase;
+	letter-spacing: .2rem;
+	font-size: 1.5rem;
+	line-height: 3rem;
+}
+.datasets-content .info-list li span {
+	display: block;
+	font-family: "poppins-regular", sans-serif;
+	color: #c9c6c6;
+	font-size: 1.5rem;
+	line-height: 1;
+}
+.datasets-content .skill-bars {
+	margin-top: 6rem;
+}
+
+.button-section {
+	text-align: center;
+}
+.button-section .button {
+	width: 250px;
+}
+.button-section [class*="col-"] .button:first-child {
+	margin-right: 4rem;
+}
+
+/**
+ * responsive:
+ * datasets
+ * --------------------------------------------------------------1024 
+ */
+@media only screen and (max-width:10px) {
+	.intro-info .lead {
+		padding-left: 0rem;
+	}
+	.intro-info img {
+		height: 10rem;
+		width: 45rem;
+		float:center;
+	}
+}
+@media only screen and (max-width:768px) {
+	.intro-info {
+		margin-right: -30px;
+		margin-left: -30px;
+	}
+	.intro-info img {
+		height: 7.8rem;
+		width: 37.8rem;
+		float:center;
+	}
+	.intro-info .lead {
+		padding-left: 0rem;
+	}
+	.datasets-content h3 {
+		text-align: center;
+	}
+	.datasets-content .info-list, .datasets-content .skill-bars {
+		margin-bottom: 4.2rem;
+	}
+	.button-section .button {
+		width: 100%;
+		margin-bottom: 3rem;
+	}
+	.button-section [class*="col-"] .button:first-child {
+		margin-right: 0;
+	}
+}
+@media only screen and (max-width:600px) {
+	.intro-info {
+		text-align: center;
+		margin-top: 3rem;
+		margin-right: -0px;
+		margin-left: -0px;
+	}
+	.intro-info img {
+		height: 7.6rem;
+		width: 36.6rem;
+		float: none;
+		display: inline-block;
+	}
+	.intro-info .lead {
+		padding-left: 0;
+		text-align: justify;
+	}
+}
+
+
+/**********************************************************************
+/** 
+ * ===================================================================
+ * 12. slides - (_layout.scss)
+ *
+ * ------------------------------------------------------------------- 
+ */
+#slides {
 	background: #0a1b2f;
 	padding-top: 12rem;
 	padding-bottom: 12rem;
 }
 
-#courses .courses-header {
+#slides .slides-header {
 	text-align: center;
 }
-#courses .courses-header h2 {
+#slides .slides-header h2 {
 	color: #cc5200;
 }
 
-#courses .courses-timeline {
+#slides .slides-timeline {
 	max-width: 980px;
 }
-#courses .timeline-wrap {
+#slides .timeline-wrap {
 	position: relative;
 	margin-top: 1.5rem;
 	margin-bottom: 6rem;
 }
-#courses .timeline-wrap::before {
+#slides .timeline-wrap::before {
 	content: "";
 	display: block;
 	width: 1px;
@@ -1664,11 +1818,11 @@ header .logo a {
 	left: 35%;
 	top: 0;
 }
-#courses .timeline-block {
+#slides .timeline-block {
 	position: relative;
 	padding-top: 1.5rem;
 }
-#courses .timeline-ico {
+#slides .timeline-ico {
 	height: 4.8rem;
 	width: 4.8rem;
 	line-height: 4.8rem;
@@ -1681,35 +1835,37 @@ header .logo a {
 	top: .9rem;
 	margin-left: -2.4rem;
 }
-#courses .timeline-ico i {
+#slides .timeline-ico i {
 	position: relative;
 	left: .05rem;
 	top: .2rem;
 }
 
-#courses .timeline-header {
+#slides .timeline-header {
 	float: left;
 	width: 35%;
 	padding-right: 90px;
 	text-align: right;
 }
-#courses .timeline-header h3 {
+#slides .timeline-header h3 {
 	margin-bottom: 0;
 }
-#courses .timeline-header p {
+#slides .timeline-header p {
 	font-family: "poppins-regular", sans-serif;
 	font-size: 1.6rem;
 	color: #888888;
 }
-#courses .timeline-content {
+#slides .timeline-content {
 	margin-left: 35%;
 	padding-left: 60px;
+	text-align: justify;
 }
-#courses .timeline-content h4 {
+#slides .timeline-content h4 {
 	position: relative;
 	padding-bottom: 1.8rem;
+	text-align: justify;
 }
-#courses .timeline-content h4::after {
+#slides .timeline-content h4::after {
 	content: "";
 	display: block;
 	height: 3px;
@@ -1718,72 +1874,73 @@ header .logo a {
 	position: absolute;
 	left: 0;
 	bottom: 0;
+	text-align: justify;
 }
 
 /**
  * responsive:
- * courses
+ * slides
  * ------------------------------------------------------------------- 
  */
 @media only screen and (max-width:1024px) {
-	#courses .timeline-header {
+	#slides .timeline-header {
 		padding-right: 50px;
 	}
-	#courses .timeline-header h3 {
+	#slides .timeline-header h3 {
 		font-size: 1.8rem;
 	}
-	#courses .timeline-header p {
+	#slides .timeline-header p {
 		font-size: 1.4rem;
 	}
-	#courses .timeline-content {
+	#slides .timeline-content {
 		padding-left: 50px;
 	}
 }
 @media only screen and (max-width:768px) {
-	#courses .timeline-wrap::before {
+	#slides .timeline-wrap::before {
 		left: 2.4rem;
 	}
-	#courses .timeline-ico {
+	#slides .timeline-ico {
 		left: 2.4rem;
 	}
-	#courses .timeline-header {
+	#slides .timeline-header {
 		float: none;
 		width: auto;
 		padding-right: 15px;
 		text-align: left;
 	}
-	#courses .timeline-header h3 {
+	#slides .timeline-header h3 {
 		font-size: 2rem;
 	}
-	#courses .timeline-header p {
+	#slides .timeline-header p {
 		font-size: 1.5rem;
 		margin-bottom: 1.5rem;
 	}
-	#courses .timeline-content {
+	#slides .timeline-content {
 		margin: 0;
 	}
-	#courses .timeline-content h4 {
+	#slides .timeline-content h4 {
 		padding-bottom: 0;
 		padding-top: 2.1rem;
 		margin-bottom: .6rem;
 		font-size: 1.7rem;
 	}
-	#courses .timeline-content h4::after {
+	#slides .timeline-content h4::after {
 		bottom: auto;
 		top: 0;
 	}
-	#courses .timeline-header, #courses .timeline-content {
+	#slides .timeline-header, #slides .timeline-content {
 		padding-left: 7rem;
 	}
 }
 @media only screen and (max-width:480px) {
-	#courses .courses-header h2 {
+	#slides .slides-header h2 {
 		font-size: 2.2rem;
 	}
-	#courses .timeline-wrap::before {
+	#slides .timeline-wrap::before {
 		left: 1.8rem;
 	}
-	#courses .timeline-ico {
+	#slides .timeline-ico {
 		height: 3.6rem;
 		width: 3.6rem;
 		line-height: 3.6rem;
@@ -1791,10 +1948,27 @@ header .logo a {
 		margin-left: -1.8rem;
 		font-size: 1.5rem;
 	}
-	#courses .timeline-header, #courses .timeline-content {
+	#slides .timeline-header, #slides .timeline-content {
 		padding-left: 5.5rem;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/**********************************************************************
+
+
+
+
 
 
 /** 
@@ -2041,7 +2215,7 @@ header .logo a {
  * ------------------------------------------------------------------- 
  */
 #cta {
-	padding-top: 10.2rem;
+	padding-top: 6.2rem;
 	padding-bottom: 9rem;
 	text-align: center;
 }
@@ -2105,21 +2279,21 @@ header .logo a {
 
 /** 
  * ===================================================================
- * 15. services - (_layout.scss)
+ * 15. scripts - (_layout.scss)
  *
  * ------------------------------------------------------------------- 
  */
-#services {
-	background: #313131 url(../images/bg.jpg) no-repeat center;
+#scripts {
+	background: #313131 url(../images/ts-bg_bottom.jpg) no-repeat center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	background-size: cover;
 	padding-top: 12rem;
-	padding-bottom: 12rem;
+	padding-bottom: 16.2rem;
 	color: white;
 	position: relative;
 }
-#services .overlay {
+#scripts .overlay {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -2129,42 +2303,42 @@ header .logo a {
 	opacity: .9;
 }
 
-#services .section-intro {
+#scripts .section-intro {
 	margin-bottom: 1.8rem;
 }
 
-#services .section-intro h1 {
+#scripts .section-intro h1 {
 	color: white;
 }
-#services .section-intro h5 {
+#scripts .section-intro h5 {
 	color: #cc5200;
 }
-#services .section-intro p {
+#scripts .section-intro p {
 	color: rgba(255, 255, 255, 0.7);
 }
-.services-content {
+.scripts-content {
 	max-width: 1200px;
 }
-.services-list {
+.scripts-list {
 	margin-top: 1.2rem;
 	text-align: center;
 }
-.services-list .service {
+.scripts-list .scripts {
 	margin-bottom: 1.2rem;
 	padding: 0 30px;
 }
-.services-list .icon {
+.scripts-list .icon {
 	display: inline-block;
 	margin-bottom: 2.1rem;
 }
-.services-list .icon i {
+.scripts-list .icon i {
 	font-size: 5.4rem;
 	color: #cc5200;
 }
-.services-list h3 {
+.scripts-list h3 {
 	color: #FFFFFF;
 }
-.services-list .desc {
+.scripts-list .desc {
 	color: rgba(255, 255, 255, 0.6);
 }
 /* pagination */
@@ -2366,61 +2540,61 @@ header .logo a {
 
 /** 
  * ===================================================================
- * 17. contact - (_layout.scss)
+ * 17. contato - (_layout.scss)
  *
  * ------------------------------------------------------------------- 
  */
-#contact {
+#contato {
 	background: #0a1b2f;
-	padding-top: 12rem;
-	padding-bottom: 7.2rem;
+	padding-top: 2rem;
+	padding-bottom: 0.2rem;
 }
-#contact .section-intro h1 {
+#contato .section-intro h1 {
 	color: white;
 }
-#contact .section-intro h5 {
+#contato .section-intro h5 {
 	color: #cc5200;
 }
-#contact .section-intro p {
+#contato .section-intro p {
 	color: rgba(255, 255, 255, 0.7);
 }
 
-/* contact form */
-.contact-form {
+/* contato form */
+.contato-form {
 	max-width: 740px;
 }
 
-.contact-form ::-webkit-input-placeholder {
+.contato-form ::-webkit-input-placeholder {
 	color: rgba(255, 255, 255, 0.3);
 }
-.contact-form :-moz-placeholder {
+.contato-form :-moz-placeholder {
 	color: rgba(255, 255, 255, 0.3);  /* Firefox 18- */
 }
-.contact-form ::-moz-placeholder {
+.contato-form ::-moz-placeholder {
 	color: rgba(255, 255, 255, 0.3);  /* Firefox 19+ */
 }
-.contact-form :-ms-input-placeholder {
+.contato-form :-ms-input-placeholder {
 	color: rgba(255, 255, 255, 0.3);
 }
-.contact-form .placeholder {
+.contato-form .placeholder {
 	color: rgba(255, 255, 255, 0.3) !important;
 }
 
-#contact form {
+#contato form {
 	margin-top: 0;
 	margin-bottom: 3rem;
 }
-#contact form .form-field {
+#contato form .form-field {
 	position: relative;
 }
-#contact form .form-field:before, #contact form .form-field:after {
+#contato form .form-field:before, #contato form .form-field:after {
 	content: "";
 	display: table;
 }
-#contact form .form-field:after {
+#contato form .form-field:after {
 	clear: both;
 }
-#contact form .form-field label {
+#contato form .form-field label {
 	font-family: "poppins-bold", sans-serif;
 	font-size: 1.1rem;
 	line-height: 2.4rem;
@@ -2434,7 +2608,7 @@ header .logo a {
 	color: #FFFFFF;
 	background: #cc5200;
 }
-#contact form .form-field label::after {
+#contato form .form-field label::after {
 	position: absolute;
 	left: -5px;
 	top: 50%;
@@ -2444,37 +2618,37 @@ header .logo a {
 	border-right: 5px solid #cc5200;
 	content: "";
 }
-#contact input[type="text"],
-#contact input[type="password"],
-#contact input[type="email"],
-#contact textarea {
+#contato input[type="text"],
+#contato input[type="password"],
+#contato input[type="email"],
+#contato textarea {
 	width: 100%;
 	color: rgba(255, 255, 255, 0.7);
 	margin-bottom: 0;
 	border: none;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-#contact input[type="text"],
-#contact input[type="password"],
-#contact input[type="email"] {
+#contato input[type="text"],
+#contato input[type="password"],
+#contato input[type="email"] {
 	height: 6.6rem;
 	padding: 1.8rem 2rem;
 }
-#contact input[type="text"]:focus,
-#contact input[type="password"]:focus,
-#contact input[type="email"]:focus {
+#contato input[type="text"]:focus,
+#contato input[type="password"]:focus,
+#contato input[type="email"]:focus {
 	border-color: #cc5200;
 	color: #FFFFFF;
 }
-#contact textarea {
+#contato textarea {
 	min-height: 20rem;
 	padding: 1.8rem 2rem;
 }
-#contact textarea:focus {
+#contato textarea:focus {
 	border-color: #cc5200;
 	color: #ffffff;
 }
-#contact button.submitform {
+#contato button.submitform {
 	font-size: 1.5rem;
 	display: block;
 	letter-spacing: .2rem;
@@ -2486,7 +2660,7 @@ header .logo a {
 	background: #cc5200;
 	color: #FFFFFF;
 }
-#contact button.submitform:hover, #contact button.submitform:focus {
+#contato button.submitform:hover, #contato button.submitform:focus {
 	background: #cc8500;
 }
 #message-warning, #message-success {
@@ -2529,23 +2703,23 @@ header .logo a {
 .oldie #submit-loader .text-loader {
 	display: block;
 }
-.contact-info {
+.contato-info {
 	margin: 4.8rem auto 0;
 	font-family: "poppins-regular", sans-serif;
 	font-size: 1.5rem;
 	text-align: center;
 }
-.contact-info .collapse {
+.contato-info .collapse {
 	padding: 0;
 }
-.contact-info .icon {
+.contato-info .icon {
 	margin-bottom: 2.1rem;
 }
-.contact-info .icon i {
+.contato-info .icon i {
 	font-size: 4.2rem;
 	color: #FFFFFF;
 }
-.contact-info h5 {
+.contato-info h5 {
 	color: #cc5200;
 }
 
