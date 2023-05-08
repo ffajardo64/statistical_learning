@@ -40,3 +40,12 @@ $presentation-heading-font: "News Cycle", Noto Sans !default;
   font-size: 26px;
   background-color: #E6E6E6;
 }
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #5c81cf;
+  margin: 1em 0;
+  padding: 0;
+}

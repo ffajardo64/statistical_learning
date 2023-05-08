@@ -531,15 +531,23 @@ dtype: float64</code></pre>
 </div>
 <!-- Fim Columnas -->
 <div class="fragment" data-fragment-index="2">
-<p><span style="color:#82243a"><font size="5">Quando uma observação é considerada “suficientemente discrepante” para ser desconsiderada do conjunto?</font></span></p>
+<p><span style="color:#82243a"><font size="5"><b>Quando uma observação é considerada “suficientemente discrepante” para ser desconsiderada do conjunto?</b></font></span></p>
 </div>
 </div></section>
-<section id="estatísticas-de-ordem" class="slide level2">
-<h2>Estatísticas de ordem</h2>
+<section id="mediana" class="slide level2">
+<h2>Mediana</h2>
+<div style="text-align: justify">
+<p>Em termos da função de distribuição acumulada <span class="math inline">\(F_X\)</span>, a <strong>mediana</strong> define-se como o número real <span class="math inline">\(m\)</span> que satisfaz <span class="math display">\[\mathbb{P}(X\le m)\ge\frac12 \quad \text{ e } \quad \mathbb{P}(X\ge m)\le\frac12.\]</span></p>
+<blockquote>
+<p>No caso em que a variável aleatória é absolutamente contínua, a <strong>mediana</strong> satisfaz <span class="math display">\[\mathbb{P}(X\le m)=\int_{-\infty}^mf(x)\,dx=\frac12=\int_m^{\infty}f(x)\,dx=\mathbb{P}(X\ge m).\]</span></p>
+</blockquote>
+</div></section>
+<section id="mediana-amostral" class="slide level2">
+<h2>Mediana amostral</h2>
 <div style="text-align: justify">
 
 <div id="def-definicao1" class="theorem definition">
-<p><span class="theorem-title"><strong>Definição 1 (Estatisticas de ordem) </strong></span>Seja <span class="math inline">\(X_1, X_2, \dots, X_n\)</span> uma amostra aleatória de uma população com função de distribuição acumulada <span class="math inline">\(F_X\)</span>. Então, <span class="math inline">\(Y_{1:n}, Y_{2:n}, \ldots, Y_{n:n}\)</span> representam as variáveis ordenadas na ordem crescente, i.e. <span class="math display">\[Y_{1:n}\le Y_{2:n}\le \cdots\le Y_{n:n}, \quad (\text{com prob. 1}).\]</span> As variáveis <span class="math inline">\(Y_{1:n}, Y_{2:n}, \ldots, Y_{n:n}\)</span> são chamadas de <strong>estatísticas de ordem</strong> da amostra.</p>
+<p><span class="theorem-title"><strong>Definição 1 (Estatísticas de ordem) </strong></span>Seja <span class="math inline">\(X_1, X_2, \dots, X_n\)</span> uma amostra aleatória de uma população com função de distribuição acumulada <span class="math inline">\(F_X\)</span>. Então, <span class="math inline">\(Y_{1:n}, Y_{2:n}, \ldots, Y_{n:n}\)</span> representam as variáveis ordenadas na ordem crescente, i.e. <span class="math display">\[Y_{1:n}\le Y_{2:n}\le \cdots\le Y_{n:n}, \quad (\text{com prob. 1}).\]</span> As variáveis <span class="math inline">\(Y_{1:n}, Y_{2:n}, \ldots, Y_{n:n}\)</span> são chamadas de <strong>estatísticas de ordem</strong> da amostra.<sup>1</sup></p>
 </div>
 <div class="callout callout-note callout-captioned callout-style-default">
 <div class="callout-body">
@@ -550,19 +558,21 @@ dtype: float64</code></pre>
 <p><strong>Notação</strong></p>
 </div>
 <div class="callout-content">
-<p>Outra notação muito comum encontrada na literatura é <span class="math inline">\(Y_{(1)}, Y_{(2)}, \ldots, Y_{(n)}\)</span>, onde <span class="math inline">\(Y_{(1)}=\min\{X_1, X_2, \dots, X_n\}\)</span> e <span class="math inline">\(Y_{(n)}=\max\{X_1, X_2, \dots, X_n\}\)</span>.</p>
+<p>Outra notação muito comum encontrada na literatura é <span class="math inline">\(Y_{(1)}, Y_{(2)}, \ldots, Y_{(n)}\)</span> ou simplesmente <span class="math inline">\(Y_{1}, Y_{2}, \ldots, Y_{n}\)</span>, onde <span class="math inline">\(Y_{1}=\min\{X_1, X_2, \dots, X_n\}\)</span> e <span class="math inline">\(Y_{n}=\max\{X_1, X_2, \dots, X_n\}\)</span>.</p>
 </div>
 </div>
 </div>
-</div></section>
-<section id="estatísticas-de-ordem-1" class="slide level2">
-<h2>Estatísticas de ordem</h2>
+<p><br></p>
+<hr>
+</div><aside><ol class="aside-footnotes"><li id="fn2"><p>Para detalhes, vide <span class="citation" data-cites="mood:graybill:boes:1974">Mood et al. (<a href="#/referências" role="doc-biblioref" onclick="">1974</a>)</span> e <span class="citation" data-cites="hogg:mckean:craig:2004">Hogg et al. (<a href="#/referências" role="doc-biblioref" onclick="">2004</a>)</span>.</p></li></ol></aside></section>
+<section id="mediana-amostral-1" class="slide level2">
+<h2>Mediana amostral</h2>
 <div style="text-align: justify">
 
-<p>Dessa forma, se <span class="math inline">\(Y_{(1)}, Y_{(2)}, \ldots, Y_{(n)}\)</span> representam as estatísticas de odem de uma amostra aleatória <span class="math inline">\(X_1, X_2, \dots, X_n\)</span>, então a <strong>mediana</strong> é calculada como:</p>
+<p>Dessa forma, se <span class="math inline">\(Y_{1}, Y_{2}, \ldots, Y_{n}\)</span> representam as estatísticas de ordem de uma amostra aleatória <span class="math inline">\(X_1, X_2, \dots, X_n\)</span>, então a <strong>mediana</strong> é calculada como:</p>
 <ul>
-<li>Para <span class="math inline">\(n\)</span> ímpar, i.e., <span class="math inline">\(n=2m-1\)</span> para algum inteiro <span class="math inline">\(m\)</span>, então a mediana é dada por <span class="math display">\[Med(X) = Y_{(m)};\]</span></li>
-<li>Para <span class="math inline">\(n\)</span> par, i.e., <span class="math inline">\(n=2m\)</span> para algum inteiro <span class="math inline">\(m\)</span>, então a mediana é dada por <span class="math display">\[Med(X) = \frac{Y_{(m)}+Y_{(m+1)}}{2}.\]</span></li>
+<li>Para <span class="math inline">\(n\)</span> ímpar, i.e., <span class="math inline">\(n=2m-1\)</span> para algum inteiro <span class="math inline">\(m\)</span>, então a mediana é dada por <span class="math display">\[Med(X) = Y_{m};\]</span></li>
+<li>Para <span class="math inline">\(n\)</span> par, i.e., <span class="math inline">\(n=2m\)</span> para algum inteiro <span class="math inline">\(m\)</span>, então a mediana é dada por <span class="math display">\[Med(X) = \frac{Y_{m}+Y_{m+1}}{2}.\]</span></li>
 </ul>
 <div class="callout callout-caution callout-captioned callout-style-default">
 <div class="callout-body">
@@ -573,10 +583,33 @@ dtype: float64</code></pre>
 <p><strong>Atenção</strong></p>
 </div>
 <div class="callout-content">
-<p>Em alguns casos pode ser mais conveniente escolher <span class="math inline">\(Y{(m)}\)</span> ou <span class="math inline">\(Y_{(m+1)}\)</span> (<em>mediana inferior</em> e <em>mediana superior</em>, respectivamente).</p>
+<p>Em alguns casos pode ser mais conveniente escolher <span class="math inline">\(Y_{m}\)</span> ou <span class="math inline">\(Y_{m+1}\)</span> (<em>mediana inferior</em> e <em>superior</em>, respectivamente).</p>
 </div>
 </div>
 </div>
+</div></section>
+<section id="mediana-1" class="slide level2">
+<h2>Mediana</h2>
+<div style="text-align: justify">
+
+<h4 id="algumas-considerações">Algumas considerações</h4>
+<div class="fragment semi-fade-out" data-fragment-index="1">
+<p>As medianas existem mesmo para algumas distribuições que não possuem uma média bem definida, como a distribuição de Cauchy. Nesse caso, a mediana de uma distribuição de Cauchy com parâmetro de locação <span class="math inline">\(\alpha\)</span> é igual ao parâmetro de locação;</p>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="fragment semi-fade-out" data-fragment-index="2">
+<p>A mediana de uma distribuição unimodal simétrica com média <span class="math inline">\(\mu\)</span>, também assume o valor <span class="math inline">\(\mu\)</span> e coincide com a moda. Por exemplo: A mediana de uma distribuição <span class="math inline">\(U[a, b]\)</span> é <span class="math inline">\(\frac{a + b}{2}\)</span>, que também é a média;</p>
+</div>
+</div>
+<div class="fragment fade-in" data-fragment-index="2">
+<p>A distribuição da mediana amostral de uma população com função de densidade <span class="math inline">\(f(x;\mu,\sigma^2)\)</span> é assintoticamente normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\frac{1}{4n[f(m)]^2}\)</span>, onde <span class="math inline">\(m\)</span> é a mediana de <span class="math inline">\(f(x)\)</span> e <span class="math inline">\(n\)</span> é o tamanho de amostra. Se a densidade é normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span>, então a variância assintótica é dada por <span class="math inline">\(\frac{\pi}{2}\frac{\sigma^2}{n}\)</span>.</p>
+</div>
+</div></section>
+<section id="mediana-2" class="slide level2">
+<h2>Mediana</h2>
+<div style="text-align: justify">
+
+
 </div></section>
 <section id="bullets" class="slide level2 center" data-background-color="#172a46">
 <h2>Bullets</h2>
@@ -595,9 +628,9 @@ dtype: float64</code></pre>
 </div>
 <p>When you click the <strong>Render</strong> button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<pre><code>[1] 3</code></pre>
 </div>
 </div>
 <p>Para detalhes, <a href="#/exm-exemplo1">Exemplo&nbsp;1</a>, <a href="#/exm-exemplo2">Exemplo&nbsp;2</a></p>
@@ -611,11 +644,17 @@ dtype: float64</code></pre>
 <div id="ref-hampel:ronchetti:rousseeuw:stahel:1986" class="csl-entry" role="doc-biblioentry">
 Hampel, F., Ronchetti, E., Rousseeuw, P., and Stahel, W. (1986), <em>Robust statistics: The approach based on influence functions</em>, John Wiley &amp; sons.
 </div>
+<div id="ref-hogg:mckean:craig:2004" class="csl-entry" role="doc-biblioentry">
+Hogg, R., McKean, J., and Craig, A. (2004), <em>Introduction to mathematical statistics</em>, Prentice Hall.
+</div>
 <div id="ref-huber:2004" class="csl-entry" role="doc-biblioentry">
 Huber, P. J. (2004), <em>Robust statistics</em>, John Wiley &amp; Sons.
 </div>
 <div id="ref-maronna:martin:yohai:2006" class="csl-entry" role="doc-biblioentry">
 Maronna, R., Martin, R. D., and Yohai, V. (2006), <em>Robust statistics</em>, John Wiley &amp; sons.
+</div>
+<div id="ref-mood:graybill:boes:1974" class="csl-entry" role="doc-biblioentry">
+Mood, A., Graybill, F., and Boes, D. (1974), <em>Introduction to the theory of statistics</em>, McGraw-Hill Higher Education.
 </div>
 </div>
 </section>
