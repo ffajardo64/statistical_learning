@@ -1,0 +1,42 @@
+/*-- scss:defaults --*/
+
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Cabin:600,600i&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&display=swap);
+
+
+// fonts
+$font-family-sans-serif: Noto Sans !default;
+
+// colors
+$body-bg:  #E9EBEE !default;
+$body-color: #172a46 !default;
+$text-color: #172a46;
+$input-bg: #23395b;
+$link-color: #5c81cf !default;
+$selection-bg: #5c81cf;
+
+// headings
+$presentation-heading-font: "News Cycle", Noto Sans !default;
+
+.reveal .slide-logo {
+  bottom: 5px !important;
+  right: 12px !important;
+  top: unset;
+  left: unset;
+  display: block;
+  position: fixed;
+  height: 60px !important;
+  width: 100x !important;
+  max-width: unset !important;
+  max-height: unset !important;
+}
+
+.box {
+  margin-top: 10px;
+  margin-right: 10px;
+  border: 5px solid #006DAE;
+  padding: 10px;
+  font-size: 26px;
+  background-color: #E6E6E6;
+}
