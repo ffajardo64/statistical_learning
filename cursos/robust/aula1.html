@@ -399,13 +399,29 @@ dtype: float64</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:70%;">
+<div class="r-stack">
+<div class="fragment fade-out" data-fragment-index="1">
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-bar" class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="aula1_files/figure-revealjs/fig-bar-1.png" width="960"></p>
-<p></p><figcaption>Figura&nbsp;1: Diagrama de barras dados teor de cobre.</figcaption><p></p>
+<p></p><figcaption>Figura&nbsp;1: Diagrama de barras dos dados teor de cobre.</figcaption><p></p>
 </figure>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-bar2" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="aula1_files/figure-revealjs/fig-bar2-3.png" width="960"></p>
+<p></p><figcaption>Figura&nbsp;2: Boxplot do dados de teor de cobre.</figcaption><p></p>
+</figure>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -593,19 +609,80 @@ dtype: float64</code></pre>
 <section id="curva-de-sensibilidade" class="slide level2">
 <h2>Curva de sensibilidade</h2>
 <div style="text-align: justify">
+
 <div id="def-definicao2" class="theorem definition">
-<p><span class="theorem-title"><strong>Definição 2 (Curva de sensibilidade) </strong></span>Considere uma amostra aleatória <span class="math inline">\(X_1.X_2,\ldots,X_{n-1}\)</span> e <span class="math inline">\(T_n:=T_n(X_1,X_2,\ldots,X_{n})\)</span> um estimador. A <strong>curva de sensibilidade</strong> do estimador <span class="math inline">\(T_n\)</span> define-se como a função <span class="math display">\[SC_n(x,T_n)=n\left[T_n(x_1.x_2,\ldots,x_{n-1},x)-T_{n-1}(x_1,x_2,\ldots,x_{n-1})\right].\]</span></p>
+<p><span class="theorem-title"><strong>Definição 2 (Curva de sensibilidade) </strong></span>Considere uma amostra aleatória <span class="math inline">\(X_1.X_2,\ldots,X_{n-1}\)</span> e <span class="math inline">\(T_n:=T_n(X_1,X_2,\ldots,X_{n})\)</span> um estimador. A <strong>curva de sensibilidade</strong> do estimador <span class="math inline">\(T_n\)</span> define-se como uma função de <span class="math inline">\(x\)</span>, tal que <span class="math display">\[SC_n(x,T_n)=n\left[T_n(x_1.x_2,\ldots,x_{n-1},x)-T_{n-1}(x_1,x_2,\ldots,x_{n-1})\right].\]</span></p>
 </div>
-<blockquote>
-A curva de sensibilidade da média aritmética <span class="math inline">\(T_n=\bar{x}_n\)</span> é dada por
+<div class="fragment">
+<div id="exm-exemplo2" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 2 </strong></span>A curva de sensibilidade da média aritmética <span class="math inline">\(T_n=\bar{x}_n\)</span> é dada por</p>
 <div class="math">
 <p><span class="math display">\[\begin{align*}
-SC_n\left(x,\bar{x}_n\right)&amp;=
-n\left[\frac{x+\sum_{i=1}^{n-1}x_i}{n}-\frac{\sum_{i=1}^{n-1}x_i}{n-1}\right]\\
-&amp;=n\left[\frac{(n-1)x-\sum_{i=1}^{n-1}x_i}{n(n-1)}=\frac{x-\bar{x}_{n-1}}{n}\right]=x-\bar{x}_{n-1}
-\end{align*}\]</span></p>
-</div></blockquote>
+    SC_n\left(x,\bar{x}_n\right)&amp;=
+    n\left[\frac{x+\sum_{i=1}^{n-1}x_i}{n}-\frac{\sum_{i=1}^{n-1}x_i}{n-1}\right]
+    =n\left[\frac{(n-1)x-\sum_{i=1}^{n-1}x_i}{n(n-1)}\right]\\
+    &amp;=x-\bar{x}_{n-1}
+  \end{align*}\]</span></p>
 </div>
+<p>A curva de sensibilidade é uma função <strong>ilimitada</strong>, o que significa que uma única observação pode ter um efeito devastador nas propriedades da média amostral.</p>
+</div>
+</div>
+</div></section>
+<section id="testando-coisas" class="slide level2">
+<h2>testando coisas</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="r-stack">
+<div class="fragment fade-out" data-fragment-index="1">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Text(0.5, 1.0, 'Boxplot')</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-bar2xxxxx" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="aula1_files/figure-revealjs/fig-bar2xxxxx-5.png" width="960"></p>
+<p></p><figcaption>Figura&nbsp;3: Boxplot do dados de teor de cobre.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-bar1xxxx" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="aula1_files/figure-revealjs/fig-bar1xxxx-7.png" width="960"></p>
+<p></p><figcaption>Figura&nbsp;4: Diagrama de barras dos dados teor de cobre.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment" data-fragment-index="1">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Text(0.5, 1.0, 'Boxplot')</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-bar2x" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="aula1_files/figure-revealjs/fig-bar2x-9.png" width="960"></p>
+<p></p><figcaption>Figura&nbsp;5: Boxplot do dados de teor de cobre.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Fim Columnas -->
+</section>
+<section id="testando-coisas-1" class="slide level2">
+<h2>testando coisas</h2>
 </section>
 <section id="referências" class="slide level2 smaller scrollable">
 <h2>Referências</h2>
