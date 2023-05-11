@@ -354,7 +354,7 @@
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 09 maio, 2023
+            Última atualização: 10 maio, 2023
           </p>
     </div>
 </div>
@@ -596,8 +596,8 @@ dtype: float64</code></pre>
 <p>Ao contrário da variância, que pode ser infinita ou indefinida, o MAD populacional é sempre um número finito. Por exemplo, para uma distribuição Cauchy padrão o MAD é 1.</p>
 </div>
 </div></section>
-<section id="medidas-de-robustez" class="slide level2 center" data-background-color="#172a46">
-<h2>Medidas de robustez</h2>
+<section id="locação-e-escala" class="slide level2 center" data-background-color="#172a46">
+<h2>Locação e Escala</h2>
 <div class="cell">
 <style type="text/css">
 .center h2 {
@@ -606,16 +606,228 @@ dtype: float64</code></pre>
 </style>
 </div>
 </section>
+<section id="locação" class="slide level2">
+<h2>Locação</h2>
+<div style="text-align: justify">
+
+<div id="def-definicao2" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 2 (Parâmetros de locação) </strong></span>Seja <span class="math inline">\(X\)</span> uma variável aleatória cuja função de distribuição <span class="math inline">\(F(x)\)</span> é da forma <span class="math inline">\(F(x)=G(x−\theta)\)</span>, onde <span class="math inline">\(\theta\)</span> é o parâmetro da distribuição. Neste caso, dizemos que <span class="math inline">\(\theta\)</span> é um parâmetro de <strong>locação</strong>.</p>
+</div>
+<p><br></p>
+<div id="exm-exemplo2" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 2 </strong></span>Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição <span class="math inline">\(N(\theta, 1)\)</span>. A função de distribuição de <span class="math inline">\(X\)</span> é dada por <span class="math inline">\(F (x) = \Phi(x − \theta)\)</span>.</p>
+</div>
+<p><br></p>
+<div id="exm-exemplo3" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 3 </strong></span>Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição <span class="math inline">\(Cauchy(\theta)\)</span>. A função de densidade de <span class="math inline">\(X\)</span> é dada por <span class="math inline">\(f(x;\theta) = \frac{1}{\pi\left(1+(x-\theta)^2\right)}\mathbb{I}_\mathbb{R}(x)\)</span>. Daí, a função de distribuição acumulada é dada por <span class="math display">\[F(x)=\frac\pi2+\arctan(x-\theta).\]</span></p>
+</div>
+</div></section>
+<section id="locação-1" class="slide level2">
+<h2>Locação</h2>
+<div style="text-align: justify">
+
+<div id="def-definicao3" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 3 (Invariância por locação) </strong></span>Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição <span class="math inline">\(F\)</span>. Dizemos que a estatística <span class="math inline">\(T=t(X_1,X_2,\ldots,X_n)\)</span> é <strong>invariante por locação</strong> quando <span class="math display">\[t(X_1+c,X_2+c,\ldots,X_n+c)=t(X_1,X_2,\ldots,X_n),\]</span> para todo <span class="math inline">\(c\in\mathbb{R}\)</span>.</p>
+</div>
+<div id="exm-exemplo4" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 4 </strong></span>Considere a estatística <span class="math inline">\(T=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2\)</span>. Sabendo que <span class="math inline">\(\frac1n\sum_{i=1}^n(X_i+c)=\frac1n\sum_{i=1}^nX_i+c\)</span>, então <span class="math inline">\(\frac{1}{n-1}\sum_{i=1}^n(X_i+c-(\bar{X}+c)^2=T\)</span>.</p>
+</div>
+<div id="exm-exemplo5" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 5 </strong></span>Considere <span class="math inline">\(T = \max\{X_1, X_2, \ldots, X_n\} - \min\{X_1, X_2, \ldots, X_n\}\)</span>, então</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \max\{X_1+c,&amp; X_2+c, \ldots, X_n+c\} - \min\{X_1+c, X_2+c, \ldots, X_n+c\}\\
+    &amp;=\max\{X_1, X_2, \ldots, X_n\} - \min\{X_1, X_2, \ldots, X_n\}
+  \end{align*}\]</span></p>
+</div>
+</div>
+</div></section>
+<section id="escala" class="slide level2">
+<h2>Escala</h2>
+<div style="text-align: justify">
+
+<div id="def-definicao4" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 4 (Parâmetros de escala) </strong></span>Seja <span class="math inline">\(X\)</span> uma variável aleatória cuja função de distribuição <span class="math inline">\(F(x)\)</span> é da forma <span class="math inline">\(F(x)=G\left(\frac{x}{\theta}\right)\)</span>, onde <span class="math inline">\(\theta&gt;0\)</span>. Neste caso, dizemos que <span class="math inline">\(\theta\)</span> é um parâmetro de <strong>escala</strong>.</p>
+</div>
+<div class="callout callout-caution callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Atenção</strong></p>
+</div>
+<div class="callout-content">
+<p>Para uma variável aleatória <span class="math inline">\(X\)</span> contínua, a função de densidade é dada por <span class="math inline">\(f(x;\theta)=\frac1\theta g\left(\frac{x}{\theta}\right)\)</span>, onde <span class="math inline">\(g\)</span> representa a derivada de <span class="math inline">\(G\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="exm-exemplo6" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 6 </strong></span>Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com densidade <span class="math display">\[f(x;\lambda)=\frac1\lambda\exp\left\{\frac{x}{\lambda}\right\}\mathbb{I}_{(0,\infty)}(x).\]</span></p>
+</div>
+</div></section>
+<section id="escala-1" class="slide level2">
+<h2>Escala</h2>
+<div style="text-align: justify">
+
+<div id="def-definicao5" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 5 (Invariância por escala) </strong></span>Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição <span class="math inline">\(F\)</span>. Dizemos que a estatística <span class="math inline">\(T=t(X_1,X_2,\ldots,X_n)\)</span> é <strong>invariante por escala</strong> quando <span class="math display">\[t(cX_1, cX_2,\ldots,cX_n)=t(X_1,X_2,\ldots,X_n),\]</span> para todo <span class="math inline">\(c\in\mathbb{R}\)</span>.</p>
+</div>
+<div id="exm-exemplo7" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 7 </strong></span>Considere <span class="math inline">\(T = \frac{\max\{X_1, X_2, \ldots, X_n\}}{\min\{X_1, X_2, \ldots, X_n\}}= \frac{\max\{cX_1, cX_2, \ldots, cX_n\}}{\min\{cX_1, cX_2, \ldots, cX_n\}}.\)</span></p>
+</div>
+<p><br></p>
+<div id="exm-exemplo8" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 8 </strong></span>Seja <span class="math inline">\(X_1, X_2,\ldots, X_n\)</span> uma amostra aleatória de uma população com distribuição <span class="math inline">\(N(0,\theta)\)</span>. A estatística <span class="math inline">\(T =\frac{\sqrt{n}\bar{X}}{\sqrt{\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2}}\)</span> é invariante por escala.</p>
+</div>
+</div></section>
+<section id="m-estimadores-de-locação" class="slide level2 center" data-background-color="#172a46">
+<h2>M-estimadores de locação</h2>
+</section>
+<section id="generalizando-a-máxima-verossimilhança" class="slide level2">
+<h2>Generalizando a Máxima verossimilhança</h2>
+<div style="text-align: justify">
+
+<p>Seja <span class="math inline">\(X_1, X_2, \dots, X_n\)</span> uma amostra aleatória de uma população com uma distribuição que envolve um parâmetro <span class="math inline">\(\theta\)</span>. A função de verossimilhança define-se como a função de densidade conjunta <span class="math display">\[L(\theta)=f(x_1,x_2,\ldots,x_n;\theta)=\prod_{i=1}^nf(x_i;\theta).\]</span> A estimativa de máxima verossimilhança é o valor de <span class="math inline">\(\theta\)</span> tal que <span class="math display">\[\hat{\theta}=t(x_1,x_2,\ldots,x_n)=\underset{\theta\in\Theta}{\arg\max}\, L(\theta).\]</span> Dessa forma, o estimador de máxima verossimilhança de <span class="math inline">\(\theta\)</span> é dado por <span class="math inline">\(\hat{\theta}=t(X_1,X_2,\ldots,X_n)\)</span>.</p>
+</div></section>
+<section id="generalizando-a-máxima-verossimilhança-1" class="slide level2">
+<h2>Generalizando a Máxima verossimilhança</h2>
+<div style="text-align: justify">
+
+<p>Suponha uma amostra aleatória <span class="math inline">\(X_1, X_2, \dots, X_n\)</span> de uma população com densidade <span class="math inline">\(f(x;\mu)\)</span>, onde <span class="math inline">\(\mu\)</span> é um parâmetro de locação, então o estimador de máxima verossimilhança de <span class="math inline">\(\mu\)</span> é dado por <span class="math inline">\(\hat{\mu}=t(X_1,X_2,\ldots,X_n)\)</span>.</p>
+<p><br></p>
+<p>Supondo que a densidade uma função positiva em todo seu domínio, então podemos encontrar a estimativa de máxima verossimilhança como</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \hat{\mu}&amp;=\underset{\mu\in\Theta}{\arg\max}\, L(\mu)=\underset{\mu\in\Theta}{\arg\max}\, \prod_{i=1}^nf(x_i;\mu)\\
+    &amp;=\underset{\mu\in\Theta}{\arg\min}\, \sum_{i=1}^n\rho(x_i;\mu),
+  \end{align*}\]</span></p>
+</div>
+<p>onde <span class="math inline">\(\rho(x_i;\mu)=-\log f(x_i;\mu)\)</span>.</p>
+</div></section>
+<section id="generalizando-a-máxima-verossimilhança-2" class="slide level2">
+<h2>Generalizando a Máxima verossimilhança</h2>
+<div style="text-align: justify">
+
+<p>Por exemplo, se a amostra aleatória é de uma população com densidade normal com parâmetro de locação <span class="math inline">\(\mu\)</span> e parâmetro de escala <span class="math inline">\(1\)</span>, i.e.&nbsp; <span class="math display">\[f(x;\mu,1)=\frac{1}{\sqrt{2\pi}}\exp\left\{-\frac12(x-\mu)^2\right\},\]</span> então</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \hat{\mu}&amp;=\underset{\mu\in\Theta}{\arg\min}\, \sum_{i=1}^n\rho(x_i;\mu),
+  \end{align*}\]</span></p>
+</div>
+<p>onde <span class="math inline">\(\rho(x_i;\mu)=\frac{(x_i-\mu)^2}{2}\)</span>. Dessa forma, o estimador de máxima verossimilhança é dado por <span class="math inline">\(\hat{\mu}=\bar{X}_n\)</span>.</p>
+</div></section>
+<section id="generalizando-a-máxima-verossimilhança-3" class="slide level2">
+<h2>Generalizando a Máxima verossimilhança</h2>
+<div style="text-align: justify">
+
+<p>Por outro lado, se a amostra aleatória é de uma população com densidade de Laplace com parâmetro de locação <span class="math inline">\(\mu\)</span> e parâmetro de escala <span class="math inline">\(1\)</span>, i.e., <span class="math display">\[f(x;\mu,1)=\frac{1}{2}\exp\left\{-|x-\mu|\right\}\]</span></p>
+<p>então</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \hat{\mu}&amp;=\underset{\mu\in\Theta}{\arg\min}\, \sum_{i=1}^n\rho(x_i;\mu),
+  \end{align*}\]</span></p>
+</div>
+<p>onde <span class="math inline">\(\rho(x_i;\mu)=|x_i-\mu|\)</span>. Dessa forma, o estimador de máxima verossimilhança é dado por <span class="math inline">\(\hat{\mu}=Med({X})\)</span>.</p>
+</div></section>
+<section id="generalizando-a-máxima-verossimilhança-4" class="slide level2">
+<h2>Generalizando a Máxima verossimilhança</h2>
+<div style="text-align: justify">
+
+<p>Observe que, a derivada de <span class="math inline">\(\rho(x)=|x|\)</span> existe para todo <span class="math inline">\(x\ne0\)</span> e a mesma é dada por</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \mathrm{sgn}(x)&amp;=
+    \begin{cases}
+    -1, &amp; \text{ se } x&lt;0;\\
+     0, &amp; \text{ se } x=0;\\
+     1, &amp; \text{ se } x&gt;0.
+    \end{cases}
+  \end{align*}\]</span></p>
+</div>
+<p>Como a função <span class="math inline">\(\rho(x)=|x|\)</span> é contínua, então basta encontrar os valores de <span class="math inline">\(\mu\)</span> onde a sua derivada muda de sinal. Dessa forma, observe que <span class="math display">\[\mathrm{sgn}(x)=\mathbb{I}_{(0,\infty)}(x)-\mathbb{I}_{(-\infty,0)}(x).\]</span> Dessa forma, <span class="math inline">\(\sum_{i=1}^n\mathrm{sgn}(x)=\sum_{i=1}^n\mathbb{I}_{(0,\infty)}(x)-\sum_{i=1}^n\mathbb{I}_{(-\infty,0)}(x)=0\)</span>, o que implica que <span class="math inline">\(\mu\)</span> é qualquer mediana de amostral.</p>
+</div></section>
+<section id="generalizando-a-máxima-verossimilhança-5" class="slide level2">
+<h2>Generalizando a Máxima verossimilhança</h2>
+<div style="text-align: justify">
+
+<p>Em 1964, Peter J. Huber propôs generalizar a estimativa de máxima verossimilhança considerando <span class="math display">\[\hat{\theta}=\underset{\mu\in\Theta}{\arg\min}\, \sum_{i=1}^n\rho(x_i;\mu),\]</span> onde <span class="math inline">\(\rho(\cdot)\)</span> é uma função com certas propriedades. Os estimadores que satisfazem essas condições são chamados de <strong>M-estimadores</strong>.<sup>1</sup></p>
+</div><aside><ol class="aside-footnotes"><li id="fn3"><p>Para detalhes, vide <span class="citation" data-cites="maronna:martin:yohai:2006">Maronna et al. (<a href="#/referências" role="doc-biblioref" onclick="">2006</a>)</span>, <span class="citation" data-cites="huber:2004">Huber (<a href="#/referências" role="doc-biblioref" onclick="">2004</a>)</span>.</p></li></ol></aside></section>
+<section id="generalizando-a-máxima-verossimilhança-6" class="slide level2">
+<h2>Generalizando a Máxima verossimilhança</h2>
+<div style="text-align: justify">
+
+<p>Algumas alternativas para <span class="math inline">\(\rho(\cdot)\)</span> são as seguintes:</p>
+<ul>
+<li>Função de Huber:</li>
+</ul>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \rho(x)=
+    \begin{cases}
+    \frac{x^2}{2}, &amp; \text{ se } |x|&lt;b;\\
+     b|x|-\frac{b^2}{2}, &amp; \text{ se } |x|&gt;b.
+    \end{cases}
+  \end{align*}\]</span></p>
+</div>
+<ul>
+<li>Função biponderada de Tukey:</li>
+</ul>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \rho(x)=
+    \begin{cases}
+    \frac{x^6}{6}-\frac{r^2x^4}{2}+\frac{r^4x^2}{2}, &amp; \text{ se } |x|\le r;\\
+     b|x|-\frac{r^6}{6}, &amp; \text{ se } |x|&gt;r.
+    \end{cases}
+  \end{align*}\]</span></p>
+</div>
+</div></section>
+<section id="generalizando-a-máxima-verossimilhança-7" class="slide level2">
+<h2>Generalizando a Máxima verossimilhança</h2>
+<div style="text-align: justify">
+
+<ul>
+<li>Função de Hampel:</li>
+</ul>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \rho(x)=
+    \begin{cases}
+    \rho(-x), &amp; \text{ se } x&lt;0;\\
+    \frac{x^2}{2}, &amp; \text{ se } 0\le x&lt;a;\\
+     ax-\frac{a^2}{2}, &amp; \text{ se } a\le x&lt;b;\\
+     ab-\frac{a^2}{2}+\frac{ac(x-b)}{c-b}-\frac{x^2-b^2}{2(c-b)}, &amp; \text{ se } b\le x&lt;c;\\
+     ab+ac-\frac{a^2}{2}-\frac{c}{2}-\frac{b}{2}, &amp; \text{ se } x\ge c.
+    \end{cases}
+  \end{align*}\]</span></p>
+</div>
+<ul>
+<li>Função de Andrews:</li>
+</ul>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \rho(x)=
+    \begin{cases}
+    a-a\cos(x/a), &amp; \text{ se } |x|\le a\pi;\\
+    2a, &amp; \text{ se } |x|&gt;a\pi.
+    \end{cases}
+  \end{align*}\]</span></p>
+</div>
+</div></section>
+<section id="medidas-de-robustez" class="slide level2 center" data-background-color="#172a46">
+<h2>Medidas de robustez</h2>
+</section>
 <section id="curva-de-sensibilidade" class="slide level2">
 <h2>Curva de sensibilidade</h2>
 <div style="text-align: justify">
 
-<div id="def-definicao2" class="theorem definition">
-<p><span class="theorem-title"><strong>Definição 2 (Curva de sensibilidade) </strong></span>Considere uma amostra aleatória <span class="math inline">\(X_1.X_2,\ldots,X_{n-1}\)</span> e <span class="math inline">\(T_n:=T_n(X_1,X_2,\ldots,X_{n})\)</span> um estimador. A <strong>curva de sensibilidade</strong> do estimador <span class="math inline">\(T_n\)</span> define-se como uma função de <span class="math inline">\(x\)</span>, tal que <span class="math display">\[SC_n(x,T_n)=n\left[T_n(x_1.x_2,\ldots,x_{n-1},x)-T_{n-1}(x_1,x_2,\ldots,x_{n-1})\right].\]</span></p>
+<div id="def-definicao6" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 6 (Curva de sensibilidade) </strong></span>Considere uma amostra aleatória <span class="math inline">\(X_1.X_2,\ldots,X_{n-1}\)</span> e <span class="math inline">\(T_n:=T_n(X_1,X_2,\ldots,X_{n})\)</span> um estimador. A <strong>curva de sensibilidade</strong> do estimador <span class="math inline">\(T_n\)</span> define-se como uma função de <span class="math inline">\(x\)</span>, tal que <span class="math display">\[SC_n(x,T_n)=n\left[T_n(x_1.x_2,\ldots,x_{n-1},x)-T_{n-1}(x_1,x_2,\ldots,x_{n-1})\right].\]</span></p>
 </div>
 <div class="fragment">
-<div id="exm-exemplo2" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 2 </strong></span>A curva de sensibilidade da média aritmética <span class="math inline">\(T_n=\bar{x}_n\)</span> é dada por</p>
+<div id="exm-exemplo" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 9 </strong></span>A curva de sensibilidade da média aritmética <span class="math inline">\(T_n=\bar{x}_n\)</span> é dada por</p>
 <div class="math">
 <p><span class="math display">\[\begin{align*}
     SC_n\left(x,\bar{x}_n\right)&amp;=
@@ -628,12 +840,6 @@ dtype: float64</code></pre>
 </div>
 </div>
 </div></section>
-<section id="testando-coisas" class="slide level2">
-<h2>testando coisas</h2>
-</section>
-<section id="testando-coisas-1" class="slide level2">
-<h2>testando coisas</h2>
-</section>
 <section id="referências" class="slide level2 smaller scrollable">
 <h2>Referências</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
