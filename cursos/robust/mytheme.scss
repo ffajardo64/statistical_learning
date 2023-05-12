@@ -8,13 +8,18 @@
 // fonts
 $font-family-sans-serif: Noto Sans !default;
 
+#title-block-header.quarto-title-block.default .quarto-title .title {
+  font-family: "Oleo Script", "Libre Baskerville";
+  color: #006DAE;
+}
+
 // colors
 $body-bg:  #E9EBEE !default;
 $body-color: #172a46 !default;
-$text-color: #172a46;
 $input-bg: #23395b;
 $link-color: #5c81cf !default;
 $selection-bg: #5c81cf;
+$exm-label:#82243a;
 
 // headings
 $presentation-heading-font: "News Cycle", Noto Sans !default;
@@ -48,4 +53,8 @@ hr {
   border-top: 1px solid #5c81cf;
   margin: 1em 0;
   padding: 0;
+}
+
+.example .theorem-title strong {
+  color: $exm-label;
 }
