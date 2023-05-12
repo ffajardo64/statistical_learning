@@ -354,7 +354,7 @@
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 10 maio, 2023
+            Última atualização: 12 maio, 2023
           </p>
     </div>
 </div>
@@ -435,7 +435,7 @@ dtype: float64</code></pre>
 <h2>Motivação</h2>
 <div style="text-align: justify">
 
-<p><strong>Exemplo 1</strong> <span class="citation" data-cites="maronna:martin:yohai:2006">(<a href="#/referências" role="doc-biblioref" onclick="">Maronna et al. 2006,p. 2</a>)</span> Considere as seguintes 24 determinações do teor de cobre em farinha integral (em partes por milhão), classificadas em ordem crescente:</p>
+<p><strong><span style="color:#82243a">Exemplo 1</span></strong> <span class="citation" data-cites="maronna:martin:yohai:2006">(<a href="#/referências" role="doc-biblioref" onclick="">Maronna et al. 2006,p. 2</a>)</span> Considere as seguintes 24 determinações do teor de cobre em farinha integral (em partes por milhão), classificadas em ordem crescente:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="box">
@@ -761,6 +761,9 @@ dtype: float64</code></pre>
 <ul>
 <li>Função de Huber:</li>
 </ul>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="column quarto-layout-cell" style="flex-basis: 5.7%;justify-content: center;">
 <div class="math">
 <p><span class="math display">\[\begin{align*}
     \rho(x)=
@@ -770,9 +773,43 @@ dtype: float64</code></pre>
     \end{cases}
   \end{align*}\]</span></p>
 </div>
+<p><br> <br></p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \psi(x)=
+    \begin{cases}
+    -b, &amp; \text{ se } x&lt;b;\\
+     x, &amp; \text{ se } |x|\le b;\\
+     b, &amp; \text{ se } x&gt;b.
+    \end{cases}
+  \end{align*}\]</span></p>
+</div>
+</div>
+<div class="column quarto-layout-cell" style="flex-basis: 94.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/huber.png" width="500"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/huber2.png" width="500"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div></section>
+<section id="generalizando-a-máxima-verossimilhança-7" class="slide level2">
+<h2>Generalizando a Máxima verossimilhança</h2>
+<div style="text-align: justify">
+
 <ul>
 <li>Função biponderada de Tukey:</li>
 </ul>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="column quarto-layout-cell" style="flex-basis: 5.7%;justify-content: center;">
 <div class="math">
 <p><span class="math display">\[\begin{align*}
     \rho(x)=
@@ -782,8 +819,33 @@ dtype: float64</code></pre>
     \end{cases}
   \end{align*}\]</span></p>
 </div>
+<p><br> <br></p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \psi(x)=
+    \begin{cases}
+    x(r^2-x^2)^2, &amp; \text{ se } |x|\le r;\\
+    0, &amp; \text{ se } |x|&gt;r.
+    \end{cases}
+  \end{align*}\]</span></p>
+</div>
+</div>
+<div class="column quarto-layout-cell" style="flex-basis: 94.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/tukey.png" width="500"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/tukey2.png" width="500"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </div></section>
-<section id="generalizando-a-máxima-verossimilhança-7" class="slide level2">
+<section id="generalizando-a-máxima-verossimilhança-8" class="slide level2">
 <h2>Generalizando a Máxima verossimilhança</h2>
 <div style="text-align: justify">
 
@@ -802,6 +864,41 @@ dtype: float64</code></pre>
     \end{cases}
   \end{align*}\]</span></p>
 </div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/hampel.png" width="600"></p>
+</figure>
+</div>
+</div></section>
+<section id="generalizando-a-máxima-verossimilhança-9" class="slide level2">
+<h2>Generalizando a Máxima verossimilhança</h2>
+<div style="text-align: justify">
+
+<ul>
+<li>Função de Hampel:</li>
+</ul>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \psi(x)=
+    \begin{cases}
+    -\psi(-x), &amp; \text{ se } x&lt;0;\\
+     x, &amp; \text{ se } 0\le x&lt;a;\\
+     a, &amp; \text{ se } a\le x&lt;b;\\
+     \frac{c-x}{c-b}a, &amp; \text{ se } b\le x&lt;c;\\
+     0, &amp; \text{ se } x\ge c.
+    \end{cases}
+  \end{align*}\]</span></p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/hampel2.png" width="700"></p>
+</figure>
+</div>
+</div></section>
+<section id="generalizando-a-máxima-verossimilhança-10" class="slide level2">
+<h2>Generalizando a Máxima verossimilhança</h2>
+<div style="text-align: justify">
+
 <ul>
 <li>Função de Andrews:</li>
 </ul>
