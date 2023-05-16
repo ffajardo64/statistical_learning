@@ -354,7 +354,7 @@
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 12 maio, 2023
+            Última atualização: 16 maio, 2023
           </p>
     </div>
 </div>
@@ -745,13 +745,13 @@ dtype: float64</code></pre>
     \end{cases}
   \end{align*}\]</span></p>
 </div>
-<p>Como a função <span class="math inline">\(\rho(x)=|x|\)</span> é contínua, então basta encontrar os valores de <span class="math inline">\(\mu\)</span> onde a sua derivada muda de sinal. Dessa forma, observe que <span class="math display">\[\mathrm{sgn}(x)=\mathbb{I}_{(0,\infty)}(x)-\mathbb{I}_{(-\infty,0)}(x).\]</span> Dessa forma, <span class="math inline">\(\sum_{i=1}^n\mathrm{sgn}(x)=\sum_{i=1}^n\mathbb{I}_{(0,\infty)}(x)-\sum_{i=1}^n\mathbb{I}_{(-\infty,0)}(x)=0\)</span>, o que implica que <span class="math inline">\(\mu\)</span> é qualquer mediana de amostral.</p>
+<p>Como a função <span class="math inline">\(\rho(x)=|x|\)</span> é contínua, então basta encontrar os valores de <span class="math inline">\(\mu\)</span> onde a sua derivada muda de sinal. Dessa forma, observe que <span class="math display">\[\mathrm{sgn}(x)=\mathbb{I}_{(0,\infty)}(x)-\mathbb{I}_{(-\infty,0)}(x).\]</span> Daí, <span class="math inline">\(\sum_{i=1}^n\mathrm{sgn}(x_i-\mu)=\sum_{i=1}^n\mathbb{I}_{(0,\infty)}(x_i-\mu)-\sum_{i=1}^n\mathbb{I}_{(-\infty,0)}(x_i-\mu)=0\)</span>, o que implica que <span class="math inline">\(\mu\)</span> é qualquer mediana de amostral.</p>
 </div></section>
 <section id="generalizando-a-máxima-verossimilhança-5" class="slide level2">
 <h2>Generalizando a Máxima verossimilhança</h2>
 <div style="text-align: justify">
 
-<p>Em 1964, Peter J. Huber propôs generalizar a estimativa de máxima verossimilhança considerando <span class="math display">\[\hat{\theta}=\underset{\mu\in\Theta}{\arg\min}\, \sum_{i=1}^n\rho(x_i;\mu),\]</span> onde <span class="math inline">\(\rho(\cdot)\)</span> é uma função com certas propriedades. Os estimadores que satisfazem essas condições são chamados de <strong>M-estimadores</strong>.<sup>1</sup></p>
+<p>Em 1964, Peter J. Huber propôs generalizar a estimativa de máxima verossimilhança considerando <span class="math display">\[\hat{\mu}=\underset{\mu\in\Theta}{\arg\min}\, \sum_{i=1}^n\rho(x_i;\mu),\]</span> onde <span class="math inline">\(\rho(\cdot)\)</span> é uma função com certas propriedades. Os estimadores que satisfazem essas condições são chamados de <strong>M-estimadores</strong>.<sup>1</sup></p>
 </div><aside><ol class="aside-footnotes"><li id="fn3"><p>Para detalhes, vide <span class="citation" data-cites="maronna:martin:yohai:2006">Maronna et al. (<a href="#/referências" role="doc-biblioref" onclick="">2006</a>)</span>, <span class="citation" data-cites="huber:2004">Huber (<a href="#/referências" role="doc-biblioref" onclick="">2004</a>)</span>.</p></li></ol></aside></section>
 <section id="generalizando-a-máxima-verossimilhança-6" class="slide level2">
 <h2>Generalizando a Máxima verossimilhança</h2>
@@ -768,7 +768,7 @@ dtype: float64</code></pre>
 <p><span class="math display">\[\begin{align*}
     \rho(x)=
     \begin{cases}
-    \frac{x^2}{2}, &amp; \text{ se } |x|&lt;b;\\
+    \frac{x^2}{2}, &amp; \text{ se } |x|\le b;\\
      b|x|-\frac{b^2}{2}, &amp; \text{ se } |x|&gt;b.
     \end{cases}
   \end{align*}\]</span></p>
@@ -902,6 +902,9 @@ dtype: float64</code></pre>
 <ul>
 <li>Função de Andrews:</li>
 </ul>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="column quarto-layout-cell" style="flex-basis: 5.7%;justify-content: center;">
 <div class="math">
 <p><span class="math display">\[\begin{align*}
     \rho(x)=
@@ -911,6 +914,191 @@ dtype: float64</code></pre>
     \end{cases}
   \end{align*}\]</span></p>
 </div>
+<p><br> <br></p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \psi(x)=
+    \begin{cases}
+    \sin(x/a), &amp; \text{ se } |x|\le a\pi;\\
+    0, &amp; \text{ se } |x|&gt;a\pi.
+    \end{cases}
+  \end{align*}\]</span></p>
+</div>
+</div>
+<div class="column quarto-layout-cell" style="flex-basis: 94.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/andrews.png" width="500"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/andrews2.png" width="500"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div></section>
+<section id="propriedades-dos-m-estimadores" class="slide level2 center" data-background-color="#172a46">
+<h2>Propriedades dos M-estimadores</h2>
+</section>
+<section id="distribuição-dos-m-estimadores" class="slide level2">
+<h2>Distribuição dos M-estimadores</h2>
+<div style="text-align: justify">
+
+<p>Em geral, não existem expressões explícitas para a distribuição dos M-estimadores para tamanhos de amostra finitos, mas é possível estudar aproximações assintóticas que permitam verificar suas suas propriedades probabilísticas.</p>
+<p>Sabemos que, <span class="math display">\[\hat{\mu}=\underset{\mu\in\Theta}{\arg\min}\, \sum_{i=1}^n\rho(x_i-\mu),\]</span> Se <span class="math inline">\(\rho\)</span> é diferenciável, i.e., <span class="math inline">\(\psi=\rho'\)</span> existe, então <span class="math display">\[\sum_{i=1}^n\psi(x_i-\hat{\mu})=0\]</span></p>
+</div></section>
+<section id="distribuição-dos-m-estimadores-1" class="slide level2">
+<h2>Distribuição dos M-estimadores</h2>
+<div style="text-align: justify">
+
+<p>Assumindo que <span class="math inline">\(\psi\)</span> é uma função crescente, então <span class="math display">\[\mathbb{E}_F\psi(X-\mu_0)=0,\]</span> onde <span class="math inline">\(F\)</span> representa a função de distribuição.</p>
+<p>Para a média <span class="math inline">\(\psi(x)=x\)</span>, então <span class="math inline">\(\mu_0=\mathbb{E}X\)</span>. Para a mediana, sabemos que <span class="math inline">\(\mathrm{sgn}(x)=\mathbb{I}_{(0,\infty)}(x)-\mathbb{I}_{(-\infty,0)}(x)\)</span>, então <span class="math display">\[\mathbb{P}[X&gt;\mu_0]-\mathbb{P}[X&lt;\mu_0]=1-2F(\mu_0)=0.\]</span> Dessa forma, <span class="math inline">\(F(\mu_0)=\frac12\)</span>, que corresponde à <span class="math inline">\(\mu_0=\mathrm{Med}(X)\)</span>.</p>
+</div></section>
+<section id="distribuição-dos-m-estimadores-2" class="slide level2">
+<h2>Distribuição dos M-estimadores</h2>
+<div style="text-align: justify">
+
+<p><span class="math inline">\(\hat{\mu}\)</span> é assintoticamente normal com média <span class="math inline">\(\mu_0\)</span> e variância <span class="math inline">\(\frac{\nu}{n}\)</span>, onde <span class="math display">\[\nu=\frac{\mathbb{E}_F\psi(X-\mu_0)^2}{\left[\mathbb{E}_F\psi'(X-\mu_0)\right]^2}.\]</span> Se a distribuição é invariante por locação, então <span class="math display">\[\nu=\frac{\mathbb{E}_F\psi(X)^2}{\left[\mathbb{E}_F\psi'(X)\right]^2}.\]</span></p>
+</div></section>
+<section id="distribuição-dos-m-estimadores-3" class="slide level2">
+<h2>Distribuição dos M-estimadores</h2>
+<div style="text-align: justify">
+
+<div id="exm-exemplo9" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 9 </strong></span>Considere a função de Huber dada por</p>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="column quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \rho_k(x)=
+    \begin{cases}
+    x^2, &amp; \text{ se } |x|\le k;\\
+     2k|x|-\frac{k^2}{2}, &amp; \text{ se } |x|&gt;k;
+    \end{cases}
+  \end{align*}\]</span></p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/huber3.png" width="700"></p>
+</figure>
+</div>
+</div>
+<div class="column quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \psi_k(x)=
+    \begin{cases}
+     2x, &amp; \text{ se } |x|\le k;\\
+     2k\,\mathrm{sgn}(x), &amp; \text{ se } |x|&gt;k.
+    \end{cases}
+  \end{align*}\]</span></p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/huber4.png" width="700"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></section>
+<section id="distribuição-dos-m-estimadores-4" class="slide level2">
+<h2>Distribuição dos M-estimadores</h2>
+<div style="text-align: justify">
+
+<p>Suponha que <span class="math inline">\(F=(1-\varepsilon)G+\varepsilon H\)</span>, onde <span class="math inline">\(G=N(0,1)\)</span> e <span class="math inline">\(H=N(0,10)\)</span>, então a variância assintótica é dada por</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(k\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(\varepsilon=0\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(\varepsilon=0.05\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(\varepsilon=0.10\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0.0</td>
+<td style="text-align: right;">1.571</td>
+<td style="text-align: right;">1.722</td>
+<td style="text-align: right;">1.897</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0.7</td>
+<td style="text-align: right;">1.187</td>
+<td style="text-align: right;">1.332</td>
+<td style="text-align: right;">1.501</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1.0</td>
+<td style="text-align: right;">1.107</td>
+<td style="text-align: right;">1.263</td>
+<td style="text-align: right;">1.443</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1.4</td>
+<td style="text-align: right;">1.047</td>
+<td style="text-align: right;">1.227</td>
+<td style="text-align: right;">1.439</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1.7</td>
+<td style="text-align: right;">1.023</td>
+<td style="text-align: right;">1.233</td>
+<td style="text-align: right;">1.479</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2.0</td>
+<td style="text-align: right;">1.010</td>
+<td style="text-align: right;">1.259</td>
+<td style="text-align: right;">1.550</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\infty\)</span></td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">5.950</td>
+<td style="text-align: right;">10.900</td>
+</tr>
+</tbody>
+</table>
+</div></section>
+<section id="distribuição-dos-m-estimadores-5" class="slide level2">
+<h2>Distribuição dos M-estimadores</h2>
+<div style="text-align: justify">
+
+<div id="exm-exemplo9" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 10 (L-estimadores) </strong></span>Uma classe de estimadores definidos como a combinação linear de estatísticas de ordem é chamada de <strong>L-estimadores</strong> e são definidos como: <span class="math display">\[\hat{\mu}=\sum_{i=1}^na_iY_i,\]</span> onde <span class="math inline">\(Y_i\)</span> representa a <span class="math inline">\(i\)</span>-ésima estatística de ordem da amostra aleatória e <span class="math inline">\(a_i\)</span>, com <span class="math inline">\(i=1,2,\ldots,n\)</span>, são constantes.</p>
+<p>Se <span class="math inline">\(a_i=\frac{1}{n-2m}\mathbb{I}_{[m+1,n-m]}(i)\)</span>, com <span class="math inline">\(m=\lfloor(n-1)\alpha\rfloor\)</span> e <span class="math inline">\(\alpha\in[0,1/2)\)</span> então <span class="math inline">\(\hat{\mu}\)</span> é chamado de <strong>média truncada</strong> (ou <span class="math inline">\(\alpha\)</span><em>-trimmed means</em>), i.e. <span class="math display">\[\bar{X}_\alpha=\frac{1}{n-2m}\sum_{i=m+1}^{n-m}Y_i.\]</span></p>
+</div>
+</div></section>
+<section id="m-estimadores-de-escala" class="slide level2 center" data-background-color="#172a46">
+<h2>M-estimadores de escala</h2>
+</section>
+<section id="estimadores-para-dispersão" class="slide level2">
+<h2>Estimadores para dispersão</h2>
+<div style="text-align: justify">
+
+<p>Sabemos que o estimador <span class="math inline">\(S=\left[\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})\right]^{1/2}\)</span> é uma medida que quantifica a dispersão em uma amostra aleatória. Se a amostra é contaminada por observaçãoes discrepantes, a medida <span class="math inline">\(S\)</span> será comprometida.</p>
+<p>Uma alternativa para <span class="math inline">\(S\)</span> é dada por <span class="math display">\[DM(\mathbf{X})=\frac1n\sum_{i=1}^n|X_i-\bar{X}|.\]</span> <span class="math inline">\(DM(\mathbf{X})\)</span>, ao igual que <span class="math inline">\(S\)</span>, é sensível a dados atípicos. Observe que as duas medidas são função de <span class="math inline">\(\bar{X}\)</span>.</p>
+<p>Em cenários contaminados, uma alternativa robusta é dada por <span class="math display">\[MAD(\mathbf{X})=\mathrm{Med}|\mathbf{X}-\mathrm{Med}(\mathbf{X})|.\]</span></p>
+</div></section>
+<section id="estimadores-para-dispersão-1" class="slide level2">
+<h2>Estimadores para dispersão</h2>
+<div style="text-align: justify">
+
+<blockquote>
+<p>Para que um estimador <span class="math inline">\(SD\)</span> seja considerado de dispersão, o mesmo deve satisfazer duas condições:</p>
+<ul>
+<li><span class="math inline">\(SD(\mathbf{X}+c)=SD(\mathbf{X})\)</span>;</li>
+<li><span class="math inline">\(SD(\mathbf{cX})=|c|SD(\mathbf{X})\)</span>.</li>
+</ul>
+<p>O <span class="math inline">\(MAD(\mathbf{X})\)</span> satisfaz as duas condições acima.</p>
+</blockquote>
 </div></section>
 <section id="medidas-de-robustez" class="slide level2 center" data-background-color="#172a46">
 <h2>Medidas de robustez</h2>
@@ -924,7 +1112,7 @@ dtype: float64</code></pre>
 </div>
 <div class="fragment">
 <div id="exm-exemplo" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 9 </strong></span>A curva de sensibilidade da média aritmética <span class="math inline">\(T_n=\bar{x}_n\)</span> é dada por</p>
+<p><span class="theorem-title"><strong>Exemplo 11 </strong></span>A curva de sensibilidade da média aritmética <span class="math inline">\(T_n=\bar{x}_n\)</span> é dada por</p>
 <div class="math">
 <p><span class="math display">\[\begin{align*}
     SC_n\left(x,\bar{x}_n\right)&amp;=
