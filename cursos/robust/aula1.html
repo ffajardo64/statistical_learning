@@ -1097,8 +1097,13 @@ dtype: float64</code></pre>
 <li><span class="math inline">\(SD(\mathbf{X}+c)=SD(\mathbf{X})\)</span>;</li>
 <li><span class="math inline">\(SD(\mathbf{cX})=|c|SD(\mathbf{X})\)</span>.</li>
 </ul>
-<p>O <span class="math inline">\(MAD(\mathbf{X})\)</span> satisfaz as duas condições acima.</p>
+<p>As medidas <span class="math inline">\(DM(\mathbf{X})=\mathbb{E}|X-\mathbb{E}\mathbf{X}|\)</span> e <span class="math inline">\(MAD(\mathbf{X})\)</span> satisfazem as duas condições acima.</p>
 </blockquote>
+<p>Outras duas medidas para dispersão são:</p>
+<ul>
+<li>Amplitude: <span class="math inline">\(Y_n-Y_1:=\max\{X_,X_2,\ldots,X_n\}-\min\{X_,X_2,\ldots,X_n\}\)</span>;</li>
+<li>Amplitude interquantílica: <span class="math inline">\(IQR(X)=Y_{n-m+1}-Y_{m}\)</span>, onde <span class="math inline">\(m=\lfloor n/4\rfloor\)</span>.</li>
+</ul>
 </div></section>
 <section id="medidas-de-robustez" class="slide level2 center" data-background-color="#172a46">
 <h2>Medidas de robustez</h2>
