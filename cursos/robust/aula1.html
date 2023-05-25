@@ -7,7 +7,7 @@
 <link href="aula1_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="aula1_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="aula1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.335">
+  <meta name="generator" content="quarto-1.2.475">
 
   <meta name="author" content="LECON/DEST - UFES">
   <title>Estatística robusta</title>
@@ -354,7 +354,7 @@
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 16 maio, 2023
+            Última atualização: 22 maio, 2023
           </p>
     </div>
 </div>
@@ -685,13 +685,13 @@ dtype: float64</code></pre>
 <h2>M-estimadores de locação</h2>
 </section>
 <section id="generalizando-a-máxima-verossimilhança" class="slide level2">
-<h2>Generalizando a Máxima verossimilhança</h2>
+<h2>Generalizando a máxima verossimilhança</h2>
 <div style="text-align: justify">
 
 <p>Seja <span class="math inline">\(X_1, X_2, \dots, X_n\)</span> uma amostra aleatória de uma população com uma distribuição que envolve um parâmetro <span class="math inline">\(\theta\)</span>. A função de verossimilhança define-se como a função de densidade conjunta <span class="math display">\[L(\theta)=f(x_1,x_2,\ldots,x_n;\theta)=\prod_{i=1}^nf(x_i;\theta).\]</span> A estimativa de máxima verossimilhança é o valor de <span class="math inline">\(\theta\)</span> tal que <span class="math display">\[\hat{\theta}=t(x_1,x_2,\ldots,x_n)=\underset{\theta\in\Theta}{\arg\max}\, L(\theta).\]</span> Dessa forma, o estimador de máxima verossimilhança de <span class="math inline">\(\theta\)</span> é dado por <span class="math inline">\(\hat{\theta}=t(X_1,X_2,\ldots,X_n)\)</span>.</p>
 </div></section>
 <section id="generalizando-a-máxima-verossimilhança-1" class="slide level2">
-<h2>Generalizando a Máxima verossimilhança</h2>
+<h2>Generalizando a máxima verossimilhança</h2>
 <div style="text-align: justify">
 
 <p>Suponha uma amostra aleatória <span class="math inline">\(X_1, X_2, \dots, X_n\)</span> de uma população com densidade <span class="math inline">\(f(x;\mu)\)</span>, onde <span class="math inline">\(\mu\)</span> é um parâmetro de locação, então o estimador de máxima verossimilhança de <span class="math inline">\(\mu\)</span> é dado por <span class="math inline">\(\hat{\mu}=t(X_1,X_2,\ldots,X_n)\)</span>.</p>
@@ -706,7 +706,7 @@ dtype: float64</code></pre>
 <p>onde <span class="math inline">\(\rho(x_i;\mu)=-\log f(x_i;\mu)\)</span>.</p>
 </div></section>
 <section id="generalizando-a-máxima-verossimilhança-2" class="slide level2">
-<h2>Generalizando a Máxima verossimilhança</h2>
+<h2>Generalizando a máxima verossimilhança</h2>
 <div style="text-align: justify">
 
 <p>Por exemplo, se a amostra aleatória é de uma população com densidade normal com parâmetro de locação <span class="math inline">\(\mu\)</span> e parâmetro de escala <span class="math inline">\(1\)</span>, i.e.&nbsp; <span class="math display">\[f(x;\mu,1)=\frac{1}{\sqrt{2\pi}}\exp\left\{-\frac12(x-\mu)^2\right\},\]</span> então</p>
@@ -718,7 +718,7 @@ dtype: float64</code></pre>
 <p>onde <span class="math inline">\(\rho(x_i;\mu)=\frac{(x_i-\mu)^2}{2}\)</span>. Dessa forma, o estimador de máxima verossimilhança é dado por <span class="math inline">\(\hat{\mu}=\bar{X}_n\)</span>.</p>
 </div></section>
 <section id="generalizando-a-máxima-verossimilhança-3" class="slide level2">
-<h2>Generalizando a Máxima verossimilhança</h2>
+<h2>Generalizando a máxima verossimilhança</h2>
 <div style="text-align: justify">
 
 <p>Por outro lado, se a amostra aleatória é de uma população com densidade de Laplace com parâmetro de locação <span class="math inline">\(\mu\)</span> e parâmetro de escala <span class="math inline">\(1\)</span>, i.e., <span class="math display">\[f(x;\mu,1)=\frac{1}{2}\exp\left\{-|x-\mu|\right\}\]</span></p>
@@ -731,7 +731,7 @@ dtype: float64</code></pre>
 <p>onde <span class="math inline">\(\rho(x_i;\mu)=|x_i-\mu|\)</span>. Dessa forma, o estimador de máxima verossimilhança é dado por <span class="math inline">\(\hat{\mu}=Med({X})\)</span>.</p>
 </div></section>
 <section id="generalizando-a-máxima-verossimilhança-4" class="slide level2">
-<h2>Generalizando a Máxima verossimilhança</h2>
+<h2>Generalizando a máxima verossimilhança</h2>
 <div style="text-align: justify">
 
 <p>Observe que, a derivada de <span class="math inline">\(\rho(x)=|x|\)</span> existe para todo <span class="math inline">\(x\ne0\)</span> e a mesma é dada por</p>
@@ -748,13 +748,13 @@ dtype: float64</code></pre>
 <p>Como a função <span class="math inline">\(\rho(x)=|x|\)</span> é contínua, então basta encontrar os valores de <span class="math inline">\(\mu\)</span> onde a sua derivada muda de sinal. Dessa forma, observe que <span class="math display">\[\mathrm{sgn}(x)=\mathbb{I}_{(0,\infty)}(x)-\mathbb{I}_{(-\infty,0)}(x).\]</span> Daí, <span class="math inline">\(\sum_{i=1}^n\mathrm{sgn}(x_i-\mu)=\sum_{i=1}^n\mathbb{I}_{(0,\infty)}(x_i-\mu)-\sum_{i=1}^n\mathbb{I}_{(-\infty,0)}(x_i-\mu)=0\)</span>, o que implica que <span class="math inline">\(\mu\)</span> é qualquer mediana de amostral.</p>
 </div></section>
 <section id="generalizando-a-máxima-verossimilhança-5" class="slide level2">
-<h2>Generalizando a Máxima verossimilhança</h2>
+<h2>Generalizando a máxima verossimilhança</h2>
 <div style="text-align: justify">
 
 <p>Em 1964, Peter J. Huber propôs generalizar a estimativa de máxima verossimilhança considerando <span class="math display">\[\hat{\mu}=\underset{\mu\in\Theta}{\arg\min}\, \sum_{i=1}^n\rho(x_i;\mu),\]</span> onde <span class="math inline">\(\rho(\cdot)\)</span> é uma função com certas propriedades. Os estimadores que satisfazem essas condições são chamados de <strong>M-estimadores</strong>.<sup>1</sup></p>
 </div><aside><ol class="aside-footnotes"><li id="fn3"><p>Para detalhes, vide <span class="citation" data-cites="maronna:martin:yohai:2006">Maronna et al. (<a href="#/referências" role="doc-biblioref" onclick="">2006</a>)</span>, <span class="citation" data-cites="huber:2004">Huber (<a href="#/referências" role="doc-biblioref" onclick="">2004</a>)</span>.</p></li></ol></aside></section>
 <section id="generalizando-a-máxima-verossimilhança-6" class="slide level2">
-<h2>Generalizando a Máxima verossimilhança</h2>
+<h2>Generalizando a máxima verossimilhança</h2>
 <div style="text-align: justify">
 
 <p>Algumas alternativas para <span class="math inline">\(\rho(\cdot)\)</span> são as seguintes:</p>
@@ -801,7 +801,7 @@ dtype: float64</code></pre>
 </div>
 </div></section>
 <section id="generalizando-a-máxima-verossimilhança-7" class="slide level2">
-<h2>Generalizando a Máxima verossimilhança</h2>
+<h2>Generalizando a máxima verossimilhança</h2>
 <div style="text-align: justify">
 
 <ul>
@@ -846,7 +846,7 @@ dtype: float64</code></pre>
 </div>
 </div></section>
 <section id="generalizando-a-máxima-verossimilhança-8" class="slide level2">
-<h2>Generalizando a Máxima verossimilhança</h2>
+<h2>Generalizando a máxima verossimilhança</h2>
 <div style="text-align: justify">
 
 <ul>
@@ -871,7 +871,7 @@ dtype: float64</code></pre>
 </div>
 </div></section>
 <section id="generalizando-a-máxima-verossimilhança-9" class="slide level2">
-<h2>Generalizando a Máxima verossimilhança</h2>
+<h2>Generalizando a máxima verossimilhança</h2>
 <div style="text-align: justify">
 
 <ul>
@@ -896,7 +896,7 @@ dtype: float64</code></pre>
 </div>
 </div></section>
 <section id="generalizando-a-máxima-verossimilhança-10" class="slide level2">
-<h2>Generalizando a Máxima verossimilhança</h2>
+<h2>Generalizando a máxima verossimilhança</h2>
 <div style="text-align: justify">
 
 <ul>
@@ -1071,7 +1071,7 @@ dtype: float64</code></pre>
 <h2>Distribuição dos M-estimadores</h2>
 <div style="text-align: justify">
 
-<div id="exm-exemplo9" class="theorem example">
+<div id="exm-exemplo10" class="theorem example">
 <p><span class="theorem-title"><strong>Exemplo 10 (L-estimadores) </strong></span>Uma classe de estimadores definidos como a combinação linear de estatísticas de ordem é chamada de <strong>L-estimadores</strong> e são definidos como: <span class="math display">\[\hat{\mu}=\sum_{i=1}^na_iY_i,\]</span> onde <span class="math inline">\(Y_i\)</span> representa a <span class="math inline">\(i\)</span>-ésima estatística de ordem da amostra aleatória e <span class="math inline">\(a_i\)</span>, com <span class="math inline">\(i=1,2,\ldots,n\)</span>, são constantes.</p>
 <p>Se <span class="math inline">\(a_i=\frac{1}{n-2m}\mathbb{I}_{[m+1,n-m]}(i)\)</span>, com <span class="math inline">\(m=\lfloor(n-1)\alpha\rfloor\)</span> e <span class="math inline">\(\alpha\in[0,1/2)\)</span> então <span class="math inline">\(\hat{\mu}\)</span> é chamado de <strong>média truncada</strong> (ou <span class="math inline">\(\alpha\)</span><em>-trimmed means</em>), i.e. <span class="math display">\[\bar{X}_\alpha=\frac{1}{n-2m}\sum_{i=m+1}^{n-m}Y_i.\]</span></p>
 </div>
@@ -1091,18 +1091,26 @@ dtype: float64</code></pre>
 <h2>Estimadores para dispersão</h2>
 <div style="text-align: justify">
 
-<blockquote>
 <p>Para que um estimador <span class="math inline">\(SD\)</span> seja considerado de dispersão, o mesmo deve satisfazer duas condições:</p>
 <ul>
 <li><span class="math inline">\(SD(\mathbf{X}+c)=SD(\mathbf{X})\)</span>;</li>
 <li><span class="math inline">\(SD(\mathbf{cX})=|c|SD(\mathbf{X})\)</span>.</li>
 </ul>
-<p>As medidas <span class="math inline">\(DM(\mathbf{X})=\mathbb{E}|X-\mathbb{E}\mathbf{X}|\)</span> e <span class="math inline">\(MAD(\mathbf{X})\)</span> satisfazem as duas condições acima.</p>
-</blockquote>
+<p><br></p>
+<div id="exm-exemplo11" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 11 </strong></span>As seguintes medidas <span class="math inline">\(S_n=\left(\frac1n\sum_{i=1}^n(X_i-\bar{X}_n)^2\right)^{1/2}\)</span>, <span class="math inline">\(MAD(\mathbf{X})=Med\left\{\left|\mathbf{X}-Med(\mathbf{X})\right|\right\}\)</span> e <span class="math inline">\(DM_n=\frac1n\sum_{i=1}^n|X_i-\bar{X}_n|\)</span> satisfazem as duas condições acima.</p>
+</div>
+</div></section>
+<section id="estimadores-para-dispersão-2" class="slide level2">
+<h2>Estimadores para dispersão</h2>
+<div style="text-align: justify">
+
 <p>Outras duas medidas para dispersão são:</p>
 <ul>
-<li>Amplitude: <span class="math inline">\(Y_n-Y_1:=\max\{X_,X_2,\ldots,X_n\}-\min\{X_,X_2,\ldots,X_n\}\)</span>;</li>
-<li>Amplitude interquantílica: <span class="math inline">\(IQR(X)=Y_{n-m+1}-Y_{m}\)</span>, onde <span class="math inline">\(m=\lfloor n/4\rfloor\)</span>.</li>
+<li><p><strong>Amplitude:</strong> <span class="math inline">\(Y_n-Y_1:=\max\{X_1,X_2,\ldots,X_n\}-\min\{X_1,X_2,\ldots,X_n\}\)</span>;</p></li>
+<li><p><strong>Amplitude interquantílica:</strong> <span class="math inline">\(IQR(X)=Y_{n-m+1}-Y_{m}\)</span>, onde <span class="math inline">\(m=\lfloor n/4\rfloor\)</span>;</p></li>
+<li><p><strong>Diferença média de Gini:</strong> <span class="math inline">\(G_n=\frac{1}{n(n-1)}\sum_{i=1}^n\sum_{j=1}^n|X_i-X_j|=\frac{2}{n(n-1)}\sum_{i=1}^n(2i-n-1)Y_i\)</span>;</p></li>
+<li><p><strong>Estimador <span class="math inline">\(Q_n\)</span>:</strong> <span class="math inline">\(Q_n(\mathbf{X})=c\{|X_i-X_j|; i&lt;j\}_{(k)}\)</span>, onde <span class="math inline">\(c=2.2191\)</span> no cenário gaussiano e <span class="math inline">\(k=\displaystyle\binom{\lfloor\frac{n}{2}\rfloor+1}{2}\)</span>. Na prática, o estimador <span class="math inline">\(Q_n\)</span> é aproximadamente o primeiro quantil das diferenças <span class="math inline">\(|X_i-X_j|\)</span>;</p></li>
 </ul>
 </div></section>
 <section id="medidas-de-robustez" class="slide level2 center" data-background-color="#172a46">
@@ -1117,7 +1125,7 @@ dtype: float64</code></pre>
 </div>
 <div class="fragment">
 <div id="exm-exemplo" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 11 </strong></span>A curva de sensibilidade da média aritmética <span class="math inline">\(T_n=\bar{x}_n\)</span> é dada por</p>
+<p><span class="theorem-title"><strong>Exemplo 12 </strong></span>A curva de sensibilidade da média aritmética <span class="math inline">\(T_n=\bar{x}_n\)</span> é dada por</p>
 <div class="math">
 <p><span class="math display">\[\begin{align*}
     SC_n\left(x,\bar{x}_n\right)&amp;=
