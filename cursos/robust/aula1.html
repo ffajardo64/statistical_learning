@@ -354,7 +354,7 @@
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 22 maio, 2023
+            Última atualização: 31 maio, 2023
           </p>
     </div>
 </div>
@@ -1124,7 +1124,7 @@ dtype: float64</code></pre>
 <p><span class="theorem-title"><strong>Definição 6 (Curva de sensibilidade) </strong></span>Considere uma amostra aleatória <span class="math inline">\(X_1.X_2,\ldots,X_{n-1}\)</span> e <span class="math inline">\(T_n:=T_n(X_1,X_2,\ldots,X_{n})\)</span> um estimador. A <strong>curva de sensibilidade</strong> do estimador <span class="math inline">\(T_n\)</span> define-se como uma função de <span class="math inline">\(x\)</span>, tal que <span class="math display">\[SC_n(x,T_n)=n\left[T_n(x_1.x_2,\ldots,x_{n-1},x)-T_{n-1}(x_1,x_2,\ldots,x_{n-1})\right].\]</span></p>
 </div>
 <div class="fragment">
-<div id="exm-exemplo" class="theorem example">
+<div id="exm-exemplo12" class="theorem example">
 <p><span class="theorem-title"><strong>Exemplo 12 </strong></span>A curva de sensibilidade da média aritmética <span class="math inline">\(T_n=\bar{x}_n\)</span> é dada por</p>
 <div class="math">
 <p><span class="math display">\[\begin{align*}
@@ -1136,6 +1136,185 @@ dtype: float64</code></pre>
 </div>
 <p>A curva de sensibilidade é uma função <strong>ilimitada</strong>, o que significa que uma única observação pode ter um efeito devastador nas propriedades da média amostral.</p>
 </div>
+</div>
+</div></section>
+<section id="função-de-influência" class="slide level2">
+<h2>Função de influência</h2>
+<div style="text-align: justify">
+
+<p>A função de influência (IF) é um dos mais importantes instrumentos disponı́veis para o estudo das propriedades de robustez de um estimador.</p>
+<p>A proposta inicial da IF é a mesma ideia presente na curva de sensibilidade, mas fazendo a dimensão da amostra tender para infinito, ou seja, passando a trabalhar num contexto assintótico.</p>
+<p><br></p>
+<div id="def-influence" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 7 (Funcional) </strong></span>Um funcional estatístico é uma função que a cada elemento de um espaço distribuições faz corresponder um valor real, ou um vector de valores reais, i.e.,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+T\colon \mathcal{D}(T)\subset\mathcal{F} &amp; \longrightarrow \mathbb{R}^p\\
+F &amp;\mapsto T(F),
+\end{align*}\]</span>
+<p>onde <span class="math inline">\(\mathcal{D}(T)\)</span> representa o domínio de <span class="math inline">\(T\)</span> e <span class="math inline">\(\mathcal{F}\)</span> é o espaço de distribuições.</p>
+</div>
+</div>
+</div></section>
+<section id="função-de-influência-1" class="slide level2">
+<h2>Função de influência</h2>
+<div style="text-align: justify">
+
+<div id="exm-exemplo13" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 13 </strong></span>Considere uma variável aleatória <span class="math inline">\(X\)</span> com função de distribuição <span class="math inline">\(F\)</span>. O valor esperado de <span class="math inline">\(X\)</span>, dado por <span class="math display">\[T(F)=\mathbb{E}_F[X]=\int_{-\infty}^\infty x\,dF(x).\]</span> Se <span class="math inline">\(F\)</span> é estimada pela função de distribuição empírica, definida como <span class="math inline">\(F_n(x)=\frac1n\sum_{i=1}^n\mathbb{I}_{(-\infty,x]}(X_i)\)</span>, então <span class="math inline">\(T(F)\)</span> pode ser estimada por <span class="math display">\[T(F_n)=\frac1n\sum_{i=1}^nX_i.\]</span></p>
+</div>
+</div></section>
+<section id="função-de-influência-2" class="slide level2">
+<h2>Função de influência</h2>
+<div style="text-align: justify">
+
+<div id="exm-exemplo14" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 14 </strong></span>Considere uma variável aleatória <span class="math inline">\(X\)</span> com função de distribuição <span class="math inline">\(F\)</span>. Seja <span class="math display">\[T(F)=F^{-1}(p)=\inf\{x:F(x)\ge p,\,\,\, p\in(0,1)\}\]</span> o <span class="math inline">\(p\)</span>-ésimo quantil de <span class="math inline">\(F\)</span>. Então <span class="math inline">\(T(F_n)=F_n^{-1}(p)\)</span> é o <span class="math inline">\(p\)</span>-ésimo quantil amostral.</p>
+</div>
+<p><br></p>
+<blockquote>
+<p>Algumas propriedades da função de distribuição empírica podem ser verificadas em <span class="citation" data-cites="vander:1998">Van der Vaart (<a href="#/referências" role="doc-biblioref" onclick="">1998</a>)</span>, por exemplo:</p>
+<ul>
+<li>Lei forte dos grandes números: <span class="math inline">\(F_n(x)\overset{q.c.}{\longrightarrow}F(x)\)</span>, quando <span class="math inline">\(n\to\infty\)</span>;</li>
+<li>Teorema central do limite: <span class="math inline">\(\sqrt{n}(F_n(x)-F(x))\overset{d}{\longrightarrow}N(0,F(x)(1-F(x)))\)</span>.</li>
+</ul>
+</blockquote>
+</div></section>
+<section id="função-de-influência-3" class="slide level2">
+<h2>Função de influência</h2>
+<div style="text-align: justify">
+
+<div id="def-FI" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 8 (Função de influência) </strong></span>Seja <span class="math inline">\(F\)</span> uma distribuição pertencente ao domínimo de <span class="math inline">\(T\)</span>. Define-se a função de influência (IF) do funcional <span class="math inline">\(T\)</span> em <span class="math inline">\(F\)</span> à função <span class="math display">\[IF(x; T, F)=T'_x(F)=\underset{\varepsilon\to0^{+}}{\lim}\frac{T((1-\varepsilon)F+\varepsilon\delta_x)-T(F)}{\varepsilon}\]</span> definida em todos os valores <span class="math inline">\(x\in\mathcal{X}\subset\mathbb{R}\)</span> para os quais o limite existe. <span class="math inline">\(\delta_x\)</span> representa a distribuição discreta degenerada em <span class="math inline">\(x\)</span></p>
+</div>
+<blockquote>
+<p>Uma definição equivalente da função de influência é dada por <span class="math display">\[IF(x; T, F)=\frac{\partial}{\partial\varepsilon}T(F_{\varepsilon,x})\Biggr|_{\varepsilon=0},\]</span> onde <span class="math inline">\(F_{\varepsilon,x}=(1-\varepsilon)F+\varepsilon\delta_x\)</span>.</p>
+</blockquote>
+</div></section>
+<section id="função-de-influência-5" class="slide level2">
+<h2>Função de influência</h2>
+<div style="text-align: justify">
+
+<div id="exm-exemplo15" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 15 </strong></span>Alguns exemplos para estimadores conhecidos:</p>
+<ul>
+<li><strong>Média amostral:</strong> Seja <span class="math inline">\(T_n=\frac1n\sum_{i=1}^nX_i\)</span>, então</li>
+</ul>
+<div class="math">
+<span class="math display">\[\begin{align*}
+T((1-\varepsilon)F+\varepsilon\delta_x)&amp;=(1-\varepsilon)\int u\,dF(u)+\varepsilon\int u\,d\delta_x(u)\\
+&amp;=(1-\varepsilon)T(F)+\varepsilon x=T(F)+\varepsilon(x-T(F)).
+\end{align*}\]</span>
+</div>
+<p>Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+IF(x; T, F)&amp;=\underset{\varepsilon\to0^{+}}{\lim}\frac{T(F)+\varepsilon(x-T(F))-T(F)}{\varepsilon}
+=x-T(F). \quad\checkmark
+\end{align*}\]</span>
+</div>
+<p>O resultado mostra que, a influência de uma única observação no valor da estimativa pode ser tão grande quanto se queira.</p>
+</div>
+</div></section>
+<section id="função-de-influência-6" class="slide level2">
+<h2>Função de influência</h2>
+<div style="text-align: justify">
+
+<ul>
+<li><strong>Média aparada (ou <em>trimmed</em>):</strong> Seja <span class="math inline">\(T_{\alpha,n}=\frac{1}{n-2\lfloor\alpha n\rfloor}\sum\limits_{i=\lfloor\alpha n\rfloor+1}^{n-\lfloor\alpha n\rfloor}Y_i\)</span>, onde <span class="math inline">\(Y_1,Y_2,\ldots,Y_n\)</span> representam as estatísticas de ordem da amostra aleatória. O funcional associado ao estimador <span class="math inline">\(T_{\alpha,n}\)</span> é dado por</li>
+</ul>
+<p><span class="math display">\[T_\alpha(F)=\frac{1}{1-2\alpha}\int_{\alpha}^{1-\alpha} F^{-1}(x)\,dx.\]</span></p>
+</div></section>
+<section id="função-de-influência-7" class="slide level2">
+<h2>Função de influência</h2>
+<div style="text-align: justify">
+
+<p>Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  IF(x;T_\alpha,F)&amp;=\begin{cases}
+  \frac{1}{1-2\alpha}(F^{-1}(\alpha)-W(F)), &amp; x&lt;F^{-1}(\alpha);\\
+  \frac{1}{1-2\alpha}(x-W(F)), &amp; F^{-1}(\alpha)\le x\le F^{-1}(1-\alpha);\\
+  \frac{1}{1-2\alpha}(F^{-1}(1-\alpha)-W(F)), &amp; x&gt;F^{-1}(1-\alpha),
+  \end{cases}
+\end{align*}\]</span>
+</div>
+<p>onde <span class="math inline">\(W(F)=(1-2\alpha)T_\alpha(F)+\alpha F^{-1}(\alpha)+\alpha F^{-1}(1-\alpha)\)</span>.</p>
+</div></section>
+<section id="função-de-influência-8" class="slide level2">
+<h2>Função de influência</h2>
+<div style="text-align: justify">
+
+<p>Funções de influência da média (<span class="math inline">\(T_0\)</span>), de <span class="math inline">\(T_{0.05}\)</span> , <span class="math inline">\(T_{0.10}\)</span> e a mediana (<span class="math inline">\(T_{0.50}\)</span>) para a distribuição normal padrão.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/IF_trimmed.png" width="700"></p>
+</figure>
+</div>
+</div></section>
+<section id="função-de-influência-9" class="slide level2">
+<h2>Função de influência</h2>
+<div style="text-align: justify">
+
+<ul>
+<li><strong>Desvio absoluto mediano (MAD):</strong> O funcional associado ao estimador é dado por <span class="math display">\[MAD(F)=c\,Med(G)=c\,G^{-1}(0.5),\]</span> onde <span class="math inline">\(c=\frac{1}{\Phi^{-1}(3/4)}\)</span>, <span class="math inline">\(F\)</span> representa a distribuição de <span class="math inline">\(X\)</span> e <span class="math inline">\(G\)</span> representa a distribuição de <span class="math inline">\(|X-Med(F)|\)</span>. O funcional pode ainda ser definido como a solução da equação</li>
+</ul>
+<p><span class="math display">\[F\left(Med(F)+\frac{MAD(F)}{c}\right)-F\left(Med(F)-\frac{MAD(F)}{c}\right)=\frac12,\]</span> onde <span class="math inline">\(G(u)=F(Med(F)+u)-F(Med(F)-u)\)</span>.</p>
+</div></section>
+<section id="função-de-influência-10" class="slide level2">
+<h2>Função de influência</h2>
+<div style="text-align: justify">
+
+<p>Dessa forma, assumindo uma distribuição normal padrão, temos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  IF(x;MAD,\Phi)&amp;=\begin{cases}
+  -\frac{c}{4\phi(\Phi^{-1}(\frac14))}, &amp; |x|&lt;\Phi^{-1}(\frac34);\\
+  \frac{c}{4\phi(\Phi^{-1}(\frac14))}, &amp; |x|&gt;\Phi^{-1}(\frac34).
+  \end{cases}
+\end{align*}\]</span>
+</div>
+</div></section>
+<section id="função-de-influência-11" class="slide level2">
+<h2>Função de influência</h2>
+<div style="text-align: justify">
+
+<p>Funções de influência do desvio absoluto mediano (<span class="math inline">\(MAD\)</span>), do desvio padrão (<span class="math inline">\(\sigma\)</span>) e do desvio médio (<span class="math inline">\(D\)</span>) para a distribuição normal padrão.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/IF_mad.png" width="700"></p>
+</figure>
+</div>
+</div></section>
+<section id="ponto-de-ruptura-ou-breakdown-point" class="slide level2">
+<h2>Ponto de ruptura ou <em>breakdown point</em></h2>
+<div style="text-align: justify">
+
+<div id="def-ponto_rup" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 9 (Ponto de ruptura) </strong></span>Numa dada amostra aleatória <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> substituem-se <span class="math inline">\(m\)</span> observações quaisquer, <span class="math inline">\(X_{i_1},\ldots, X_{i_m}\)</span> por valores arbitrários <span class="math inline">\(\mathcal{Y}_1,\ldots,\mathcal{Y}_m\)</span> e consideramos a nova amostra com os valores substituídos <span class="math inline">\((Z_1,\ldots, Z_n)\)</span>. O ponto de ruptura (em dimensão finita) de <span class="math inline">\(T_n\)</span> define-se como</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \varepsilon^*_n(T_n)&amp;=\varepsilon^*_n(T_n;x_1,x_2,\ldots,x_n)\\
+  &amp;=\frac1n\max\left\{\underset{i_1,\ldots,i_m}{\max}\underset{\mathcal{y}_1,\ldots,\mathcal{y}_m}{\sup}|T_n(z_1,z_2,\ldots,z_n)|&lt;\infty\right\}.
+\end{align*}\]</span>
+</div>
+</div>
+</div></section>
+<section id="ponto-de-ruptura-ou-breakdown-point-1" class="slide level2">
+<h2>Ponto de ruptura ou <em>breakdown point</em></h2>
+<div style="text-align: justify">
+
+<div id="exm-exemplo16" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 16 </strong></span>Em relação aos estimadores de localização considerados anteriormente, pode-se verificar que:</p>
+<ul>
+<li><p>para a média aritmética: <span class="math inline">\(\varepsilon^∗_n = 0\)</span>;</p></li>
+<li><p>para a média <em>trimmed</em> a <span class="math inline">\(100\times\alpha\%\)</span>: <span class="math inline">\(\varepsilon^∗_n=\frac1n\lfloor\alpha n\rfloor\)</span>;</p></li>
+<li><p>para a mediana: <span class="math inline">\(\varepsilon^∗_n = \frac{\lfloor(n + 1)/2\rfloor − 1}{n}\)</span>;</p></li>
+<li><p>para a variância, desvio padrão e desvio médio: <span class="math inline">\(\varepsilon^∗_n = 0\)</span>;</p></li>
+<li><p>para o desvio absoluto mediano: <span class="math inline">\(\varepsilon^∗_n = \frac{\lfloor(n + 1)/2\rfloor − 1}{n}\)</span>;</p></li>
+<li><p>para o IQR: <span class="math inline">\(\varepsilon^∗_n = \frac{\lfloor(n + 3)/4\rfloor − 1}{n}\)</span>;</p></li>
+<li><p>para o estimador <span class="math inline">\(Q_n\)</span>: <span class="math inline">\(\varepsilon^∗_n = \frac{\lfloor(n + 1)/2\rfloor − 1}{n}\)</span>.</p></li>
+</ul>
 </div>
 </div></section>
 <section id="referências" class="slide level2 smaller scrollable">
@@ -1155,6 +1334,9 @@ Maronna, R., Martin, R. D., and Yohai, V. (2006), <em>Robust statistics</em>, Jo
 </div>
 <div id="ref-mood:graybill:boes:1974" class="csl-entry" role="doc-biblioentry">
 Mood, A., Graybill, F., and Boes, D. (1974), <em>Introduction to the theory of statistics</em>, McGraw-Hill Higher Education.
+</div>
+<div id="ref-vander:1998" class="csl-entry" role="doc-biblioentry">
+Van der Vaart, A. W. (1998), <em>Asymptotic statistics</em>, Cambridge university press.
 </div>
 </div>
 </section>
