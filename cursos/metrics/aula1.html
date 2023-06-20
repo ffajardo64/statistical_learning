@@ -817,9 +817,41 @@ LECON/DEST - UFES
 
 <p>O <span class="math inline">\(AIC\)</span> define-se como</p>
 <p><span class="math display">\[AIC = -\log\hat{p}(x)-2k,\]</span> onde <span class="math inline">\(\log\hat{p}(x)\)</span> representa a log-verossimilhança e <span class="math inline">\(k\)</span> o número de parâmetros no modelo. Dado um conjunto de modelos candidatos, aquele modelo com menor <span class="math inline">\(AIC\)</span> será o selecionado. O <span class="math inline">\(AIC\)</span> bonifica a qualidade de ajuste e penaliza a quantidade de parâmetros do modelo.</p>
+<p><br></p>
 <blockquote>
-<p>Para tamanhos amostras pequenos é aconselhável utilizar uma correção o critério, chamado de <span class="math inline">\(AICc\)</span>, dado por <span class="math display">\[AICc=AIC+\frac{2k^2+2k}{n-k-1}.\]</span> Se <span class="math inline">\(n\to\infty\)</span>, então <span class="math inline">\(AICc\to AIC\)</span>, onde <span class="math inline">\(n\)</span> representa o tamanho de amostra.</p>
+<p>O termo <span class="math inline">\(2k\)</span> é o termo de penalidade e seu papel é compensar pelo viés na falta de ajuste quando os estimadores de máxima verossimilhança são usados;</p>
+<p>O <span class="math inline">\(AIC\)</span> é assintoticamente eficiente, mas o desempenho do critério pode ser comprometido quando o tamanho de amostra é pequeno.</p>
 </blockquote>
+</div></section>
+<section id="critério-de-informação-de-akaike-corrigido---aicc" class="slide level2">
+<h2>Critério de informação de Akaike corrigido - AICc</h2>
+<div style="text-align: justify">
+
+<p>Para tamanhos amostras pequenos é aconselhável utilizar uma correção o critério, chamado de <span class="math inline">\(AICc\)</span>, dado por <span class="math display">\[AICc=AIC+\frac{2k^2+2k}{n-k-1}.\]</span></p>
+<blockquote>
+<p>Se o tamanho da amostra for suficientemente grande com respeito ao número de parâmetros, essa correção é desprezível e o <span class="math inline">\(AIC\)</span> deve ter um bom desempenho</p>
+</blockquote>
+<blockquote>
+<p>Resultados empíricos sugerem que o <span class="math inline">\(AICc\)</span> é aconselhado quando <span class="math inline">\(\frac{n}{k}&lt;40\)</span>. Por outro lado, se <span class="math inline">\(\frac{n}{k}\)</span> é suficientemente grande, o <span class="math inline">\(AICc\)</span> e o <span class="math inline">\(AIC\)</span> apresentam resultados semelhantes, em outras palavras, se <span class="math inline">\(n\to\infty\)</span>, então <span class="math inline">\(AICc\to AIC\)</span>, onde <span class="math inline">\(n\)</span> representa o tamanho de amostra.</p>
+</blockquote>
+</div></section>
+<section id="critério-de-informação-bayesiano---bic" class="slide level2">
+<h2>Critério de informação bayesiano - BIC</h2>
+<div style="text-align: justify">
+
+<p>O BIC é baseado na avaliação de modelos definidos em termos da probabilidade <em>a posteriori</em>. Dessa forma, se <span class="math inline">\(p(x)\)</span> é o modelo estatístico estimado pelo método de máxima verossimilhança, então</p>
+<p><span class="math display">\[BIC=-2\log\hat{p}(x)+k\log n,\]</span> o <span class="math inline">\(k\)</span> é o número de parâmetros do modelo e <span class="math inline">\(n\)</span> representa o tamanho de amostra.</p>
+<p><br></p>
+<p><font size="16"><b>Critério de informação de Hannan-Quinn - HQ</b></font></p>
+<p>O HQ é uma medida de adequação de um modelo estatístico e frequentemente usado como uma alternativa ao <span class="math inline">\(AIC\)</span> e <span class="math inline">\(BIC\)</span> para selecionar um modelo a partir de um conjunto finito de modelos. O HQ é dado por</p>
+<p><span class="math display">\[HQ=-2\log\hat{p}(x)-2k\log(\log n).\]</span></p>
+</div></section>
+<section id="curva-roc" class="slide level2">
+<h2>Curva ROC</h2>
+<div style="text-align: justify">
+
+<p>A curva <span class="math inline">\(AUC\)</span> - <span class="math inline">\(ROC\)</span> é uma medida de desempenho para os problemas de classificação em várias configurações de limite. <span class="math inline">\(ROC\)</span> (<em>Receiver Operating Characteristics</em>) é uma curva de probabilidade e <span class="math inline">\(AUC\)</span> representa o grau ou medida de separabilidade. Diz o quanto o modelo é capaz de distinguir entre as classes.</p>
+<p>Um modelo “excelente” tem <span class="math inline">\(AUC\)</span> próximo de <span class="math inline">\(1\)</span>, o que significa que tem uma boa medida de separabilidade. Um modelo pobre tem um <span class="math inline">\(AUC\)</span> próximo a <span class="math inline">\(0\)</span>, o que significa que ele tem a pior medida de separabilidade.</p>
 </div></section>
 <section id="referências" class="slide level2 smaller scrollable">
 <h2>Referências</h2>
