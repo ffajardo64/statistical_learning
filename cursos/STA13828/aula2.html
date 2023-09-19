@@ -25,7 +25,7 @@ class: center, middle, inverse, title-slide
 ### LECON/DEST - UFES
 ]
 .date[
-### Vitória. ES - 04/09/2023
+### Vitória. ES - 19/09/2023
 ]
 
 ---
@@ -721,8 +721,8 @@ class: animated, fadeInDown
 &gt; O Critério de Schur-Cohn afirma que o módulo das raízes da equação 
 característica serão menores do que `\(1\)`, _see_ os `\(p\)` determinates `\(D_1,D_2,\ldots,D_p\)`
 são todos positivos, i.e., para verificar a estabilidade de uma equação
-em diferenças de ordem requer-se que todos os `\(p\)` determinantes sejam 
-positivos. Em caso, que um dos determinantes não seja positivo, então
+em diferenças de ordem `\(p\)`, requer-se que todos os `\(p\)` determinantes sejam 
+**positivos**. Em caso, que um dos determinantes não seja positivo, então
 não teremos estabilidade na solução.
 
 Por exemplo, para `\(k=1, 2\)` e `\(3\)`
@@ -787,7 +787,7 @@ Dessa forma, os determinantes a considerar são dados por
   D_1&amp;=\left|\begin{array}{c:c}
   -1       &amp; a_2\\ \hdashline
   a_2 &amp; -1
-  \end{array}\right|=1-a^2=(1-a_2)(1+a_2)\\
+  \end{array}\right|=1-a_2^2=(1-a_2)(1+a_2)\\
   D_2&amp;=\left|\begin{array}{cc:cc}
   -1 &amp; 0  &amp; a_2 &amp; a_{1}\\
   a_1 &amp; -1  &amp; 0 &amp; a_{2}\\ \hdashline
@@ -804,7 +804,7 @@ class: animated, fadeUp
 
 ### Equações em diferenças - II
 
-Temos então, `\(D_1=1-a^2\)` e `\(D_2=(1+a_2)^2\left[(1-a_2)^2-a_1^2\right]\)`. Daí,
+Temos então, `\(D_1=1-a_2^2\)` e `\(D_2=(1+a_2)^2\left[(1-a_2)^2-a_1^2\right]\)`. Daí,
 a condição `\(D_1&gt;0\)` é equivalente a `\(1-a_2^2&gt;0\)` ou `\(|a_2|&lt;1\)`. Enquanto que,
 a condição `\(D_2&gt;0\)` é equivalente a
 `$$(1+a_2)^2\left[(1-a_2)^2-a_1^2\right]&gt;0.$$`
@@ -812,7 +812,7 @@ O que significa que, `\(D_2&gt;0\)` _see_ `\((1-a_2)^2&gt;a_1^2\)` ou `\(|1-a_2|
 Dessa forma, as condições de estabilidade são dada por
 &lt;div class="math"&gt;
   \begin{align}
-    |a_2|&amp;&lt; 1; &amp; a_2+a_1&amp;&lt;1; &amp; \text{ e } &amp; &amp; a_2-a_1&amp;&lt;1.
+    |a_2|&amp;&lt; 1; &amp; a_2+a_1&amp;&lt;1 &amp; \text{ e } &amp; &amp; a_2-a_1&amp;&lt;1.
   \end{align}
 &lt;/div&gt;
 
@@ -846,7 +846,7 @@ com `\(a_p\ne0\)`. Daí, a equação característica é dada por
 Dessa forma, pelo teorema fundamental da álgebra, temos que 
 `$$(1-R_1B)(1-R_2B)\cdots(1-R_pB)=0,$$`
 onde as raízes da equação característica são dadas por
-`\(R_1^{-1}, R_2^{-1}, R_3^{-1}. \ldots, R_p^{-1}\)`. 
+`\(R_1^{-1}, R_2^{-1}, R_3^{-1}, \ldots, R_p^{-1}\)`. 
 
 Se todas as raízes são diferentes, então a solução da equação em diferenças é dada 
 por
