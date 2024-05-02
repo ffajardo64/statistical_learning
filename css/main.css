@@ -1026,7 +1026,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 	color: #7d7d7d;
 }
 .section-intro {
-	max-width: 700px;
+	max-width: 1500px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -1104,7 +1104,7 @@ header .top-bar {
 }
 header .logo {
 	float: left;
-	margin-left: 20px;
+	margin-left: -300px;
 	margin-right: 50px;
 	margin-top: 25px;
 	position: relative;
@@ -1131,7 +1131,7 @@ header .logo a {
 	float: left;
 	width: 40px;
 	height: 40px;
-	margin-left: 20px;
+	margin-left: -350px;
 	margin-top: 13px;
 	display: block;
 	position: relative;
@@ -1223,6 +1223,7 @@ header .logo a {
 	font-family: "poppins-medium", sans-serif;
 	font-size: 1.5rem;
 	position: absolute;
+	margin-left: -350px;
 	top: 100%;
 	left: 0;
 }
@@ -1500,6 +1501,10 @@ header .logo a {
 	margin-bottom: 3rem;
 }
 
+#about .about-header {
+	text-align: justify;
+}
+
 .intro-info {
 	margin-top: 4.2rem;
 	margin-right: -30px;
@@ -1519,7 +1524,7 @@ header .logo a {
 
 .about-content {
 	position: relative;
-	text-align: left;
+	text-align: justify;
 	max-width: 850px;
 	margin-bottom: 3.6rem;
 }
@@ -1640,7 +1645,7 @@ header .logo a {
 }
 
 #courses .courses-header {
-	text-align: center;
+	text-align: justify;
 }
 #courses .courses-header h2 {
 	color: #cc5200;
@@ -2210,9 +2215,11 @@ header .logo a {
 	display: inline-block;
 	background: #BBB;
 }
-.owl-theme .owl-controls{
+/* .owl-theme .owl-controls{
 
-} .owl-page.active {
+}  */
+
+.owl-page.active {
 	background: none	
 }
 
@@ -2237,9 +2244,12 @@ header .logo a {
 	display: inline-block;
 	background: #BBB;
 }
-.owl-theme .owl-controls{
 
-} .owl-page.active {
+/* .owl-theme .owl-controls{
+
+}  */
+
+.owl-page.active {
 	background: none	
 }
 
@@ -2264,9 +2274,12 @@ header .logo a {
 	display: inline-block;
 	background: #BBB;
 }
-.owl-theme .owl-controls{
 
-} .owl-page.active {
+/* .owl-theme .owl-controls{
+
+}  */
+
+.owl-page.active {
 	background: none	
 }
 
@@ -2291,9 +2304,12 @@ header .logo a {
 	display: inline-block;
 	background: #BBB;
 }
-.owl-theme .owl-controls{
 
-} .owl-page.active {
+/* .owl-theme .owl-controls{
+
+}  */
+
+.owl-page.active {
 	background: none	
 }
 

@@ -453,6 +453,7 @@ textarea {
 .col-six,
 .col-1-2 {
 	width: 50%;
+	text-align: justify;
 }
 
 .col-seven {
