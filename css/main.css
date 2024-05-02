@@ -16,9 +16,9 @@
  *  08. common styles
  *  09. header styles
  *  10. intro
- *  11. about
- *  12. courses
- *  13. portfolio
+ *  11. sobre
+ *  12. cursos
+ *  13. projetos
  *  14. call-to-action section
  *  15. services
  *  16. stats
@@ -157,6 +157,13 @@ p.lead {
 	font-size: 2rem;
 	line-height: 1.8;
 	color: #888888;
+}
+p.paragraph {
+	font-family: "lora-regular", serif;
+	font-size: 1.7rem;
+	line-height: 1.5;
+	color: #888888;
+	text-align: justify;
 }
 @media only screen and (max-width:768px) {
 	p.lead {
@@ -1488,20 +1495,20 @@ header .logo a {
 
 /** 
  * ===================================================================
- * 11. about - (_layout.scss)
+ * 11. sobre - (_layout.scss)
  *
  * ------------------------------------------------------------------- 
  */
-#about {
+#sobre {
 	background: #0a1b2f;
 	padding-top: 12rem;
 	padding-bottom: 15rem;
 }
-#about .section-intro {
+#sobre .section-intro {
 	margin-bottom: 3rem;
 }
 
-#about .about-header {
+#sobre .sobre-header {
 	text-align: justify;
 }
 
@@ -1522,27 +1529,27 @@ header .logo a {
 	padding-left: 0rem;
 }
 
-.about-content {
+.sobre-content {
 	position: relative;
 	text-align: justify;
 	max-width: 850px;
 	margin-bottom: 3.6rem;
 }
-.about-content h3 {
+.sobre-content h3 {
 	font-family: "poppins-bold", sans-serif;
 	font-size: 1.8rem;
 	text-transform: uppercase;
 	letter-spacing: .25rem;
 }
-.about-content .info-list {
+.sobre-content .info-list {
 	list-style: none;
 	margin-left: 0;
 }
-.about-content .info-list li {
+.sobre-content .info-list li {
 	padding: 0 0 1.5rem 0;
 	margin-bottom: .6rem;
 }
-.about-content .info-list li strong {
+.sobre-content .info-list li strong {
 	font-family: "poppins-bold", sans-serif;
 	color: #FFFFFF;
 	text-transform: uppercase;
@@ -1550,14 +1557,14 @@ header .logo a {
 	font-size: 1.5rem;
 	line-height: 3rem;
 }
-.about-content .info-list li span {
+.sobre-content .info-list li span {
 	display: block;
 	font-family: "poppins-regular", sans-serif;
 	color: #c9c6c6;
 	font-size: 1.5rem;
 	line-height: 1;
 }
-.about-content .skill-bars {
+.sobre-content .skill-bars {
 	margin-top: 6rem;
 }
 
@@ -1573,7 +1580,7 @@ header .logo a {
 
 /**
  * responsive:
- * about
+ * sobre
  * --------------------------------------------------------------1024 
  */
 @media only screen and (max-width:10px) {
@@ -1599,10 +1606,10 @@ header .logo a {
 	.intro-info .lead {
 		padding-left: 0rem;
 	}
-	.about-content h3 {
+	.sobre-content h3 {
 		text-align: center;
 	}
-	.about-content .info-list, .about-content .skill-bars {
+	.sobre-content .info-list, .sobre-content .skill-bars {
 		margin-bottom: 4.2rem;
 	}
 	.button-section .button {
@@ -1634,32 +1641,32 @@ header .logo a {
 
 /** 
  * ===================================================================
- * 12. courses - (_layout.scss)
+ * 12. cursos - (_layout.scss)
  *
  * ------------------------------------------------------------------- 
  */
-#courses {
+#cursos {
 	background: #0a1b2f;
 	padding-top: 12rem;
 	padding-bottom: 12rem;
 }
 
-#courses .courses-header {
+#cursos .cursos-header {
 	text-align: justify;
 }
-#courses .courses-header h2 {
+#cursos .cursos-header h2 {
 	color: #cc5200;
 }
 
-#courses .courses-timeline {
+#cursos .cursos-timeline {
 	max-width: 980px;
 }
-#courses .timeline-wrap {
+#cursos .timeline-wrap {
 	position: relative;
 	margin-top: 1.5rem;
 	margin-bottom: 6rem;
 }
-#courses .timeline-wrap::before {
+#cursos .timeline-wrap::before {
 	content: "";
 	display: block;
 	width: 1px;
@@ -1669,11 +1676,11 @@ header .logo a {
 	left: 35%;
 	top: 0;
 }
-#courses .timeline-block {
+#cursos .timeline-block {
 	position: relative;
 	padding-top: 1.5rem;
 }
-#courses .timeline-ico {
+#cursos .timeline-ico {
 	height: 4.8rem;
 	width: 4.8rem;
 	line-height: 4.8rem;
@@ -1686,35 +1693,35 @@ header .logo a {
 	top: .9rem;
 	margin-left: -2.4rem;
 }
-#courses .timeline-ico i {
+#cursos .timeline-ico i {
 	position: relative;
 	left: .05rem;
 	top: .2rem;
 }
 
-#courses .timeline-header {
+#cursos .timeline-header {
 	float: left;
 	width: 35%;
 	padding-right: 90px;
 	text-align: right;
 }
-#courses .timeline-header h3 {
+#cursos .timeline-header h3 {
 	margin-bottom: 0;
 }
-#courses .timeline-header p {
+#cursos .timeline-header p {
 	font-family: "poppins-regular", sans-serif;
 	font-size: 1.6rem;
 	color: #888888;
 }
-#courses .timeline-content {
+#cursos .timeline-content {
 	margin-left: 35%;
 	padding-left: 60px;
 }
-#courses .timeline-content h4 {
+#cursos .timeline-content h4 {
 	position: relative;
 	padding-bottom: 1.8rem;
 }
-#courses .timeline-content h4::after {
+#cursos .timeline-content h4::after {
 	content: "";
 	display: block;
 	height: 3px;
@@ -1727,68 +1734,68 @@ header .logo a {
 
 /**
  * responsive:
- * courses
+ * cursos
  * ------------------------------------------------------------------- 
  */
 @media only screen and (max-width:1024px) {
-	#courses .timeline-header {
+	#cursos .timeline-header {
 		padding-right: 50px;
 	}
-	#courses .timeline-header h3 {
+	#cursos .timeline-header h3 {
 		font-size: 1.8rem;
 	}
-	#courses .timeline-header p {
+	#cursos .timeline-header p {
 		font-size: 1.4rem;
 	}
-	#courses .timeline-content {
+	#cursos .timeline-content {
 		padding-left: 50px;
 	}
 }
 @media only screen and (max-width:768px) {
-	#courses .timeline-wrap::before {
+	#cursos .timeline-wrap::before {
 		left: 2.4rem;
 	}
-	#courses .timeline-ico {
+	#cursos .timeline-ico {
 		left: 2.4rem;
 	}
-	#courses .timeline-header {
+	#cursos .timeline-header {
 		float: none;
 		width: auto;
 		padding-right: 15px;
 		text-align: left;
 	}
-	#courses .timeline-header h3 {
+	#cursos .timeline-header h3 {
 		font-size: 2rem;
 	}
-	#courses .timeline-header p {
+	#cursos .timeline-header p {
 		font-size: 1.5rem;
 		margin-bottom: 1.5rem;
 	}
-	#courses .timeline-content {
+	#cursos .timeline-content {
 		margin: 0;
 	}
-	#courses .timeline-content h4 {
+	#cursos .timeline-content h4 {
 		padding-bottom: 0;
 		padding-top: 2.1rem;
 		margin-bottom: .6rem;
 		font-size: 1.7rem;
 	}
-	#courses .timeline-content h4::after {
+	#cursos .timeline-content h4::after {
 		bottom: auto;
 		top: 0;
 	}
-	#courses .timeline-header, #courses .timeline-content {
+	#cursos .timeline-header, #cursos .timeline-content {
 		padding-left: 7rem;
 	}
 }
 @media only screen and (max-width:480px) {
-	#courses .courses-header h2 {
+	#cursos .cursos-header h2 {
 		font-size: 2.2rem;
 	}
-	#courses .timeline-wrap::before {
+	#cursos .timeline-wrap::before {
 		left: 1.8rem;
 	}
-	#courses .timeline-ico {
+	#cursos .timeline-ico {
 		height: 3.6rem;
 		width: 3.6rem;
 		line-height: 3.6rem;
@@ -1796,7 +1803,7 @@ header .logo a {
 		margin-left: -1.8rem;
 		font-size: 1.5rem;
 	}
-	#courses .timeline-header, #courses .timeline-content {
+	#cursos .timeline-header, #cursos .timeline-content {
 		padding-left: 5.5rem;
 	}
 }
@@ -1804,21 +1811,190 @@ header .logo a {
 
 /** 
  * ===================================================================
- * 13. portfolio - (_layout.scss)
+ * 12a. eventos - (_layout.scss)
  *
  * ------------------------------------------------------------------- 
  */
-#portfolio {
+ #eventos {
+	background: #0a1b2f;
+	padding-top: 16rem;
+	padding-bottom: 16rem;
+}
+
+#eventos .eventos-header {
+	text-align: justify;
+}
+#eventos .eventos-header h2 {
+	color: #cc5200;
+}
+
+#eventos .eventos-timeline {
+	max-width: 980px;
+}
+#eventos .timeline-wrap {
+	position: relative;
+	margin-top: 1.5rem;
+	margin-bottom: 6rem;
+}
+#eventos .timeline-wrap::before {
+	content: "";
+	display: block;
+	width: 1px;
+	height: 100%;
+	background: rgba(192, 185, 185, 0.1);
+	position: absolute;
+	left: 35%;
+	top: 0;
+}
+#eventos .timeline-block {
+	position: relative;
+	padding-top: 1.5rem;
+}
+#eventos .timeline-ico {
+	height: 4.8rem;
+	width: 4.8rem;
+	line-height: 4.8rem;
+	background: #5c5b5b;
+	border-radius: 50%;
+	text-align: center;
+	color: #FFFFFF;
+	position: absolute;
+	left: 35%;
+	top: .9rem;
+	margin-left: -2.4rem;
+}
+#eventos .timeline-ico i {
+	position: relative;
+	left: .05rem;
+	top: .2rem;
+}
+
+#eventos .timeline-header {
+	float: left;
+	width: 35%;
+	padding-right: 90px;
+	text-align: right;
+}
+#eventos .timeline-header h3 {
+	margin-bottom: 0;
+}
+#eventos .timeline-header p {
+	font-family: "poppins-regular", sans-serif;
+	font-size: 1.6rem;
+	color: #888888;
+}
+#eventos .timeline-content {
+	margin-left: 35%;
+	padding-left: 60px;
+}
+#eventos .timeline-content h4 {
+	position: relative;
+	padding-bottom: 1.8rem;
+}
+#eventos .timeline-content h4::after {
+	content: "";
+	display: block;
+	height: 3px;
+	width: 50px;
+	background: rgba(214, 210, 210, 0.329);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+/**
+ * responsive:
+ * eventos
+ * ------------------------------------------------------------------- 
+ */
+@media only screen and (max-width:1024px) {
+	#eventos .timeline-header {
+		padding-right: 50px;
+	}
+	#eventos .timeline-header h3 {
+		font-size: 1.8rem;
+	}
+	#eventos .timeline-header p {
+		font-size: 1.4rem;
+	}
+	#eventos .timeline-content {
+		padding-left: 50px;
+	}
+}
+@media only screen and (max-width:768px) {
+	#eventos .timeline-wrap::before {
+		left: 2.4rem;
+	}
+	#eventos .timeline-ico {
+		left: 2.4rem;
+	}
+	#eventos .timeline-header {
+		float: none;
+		width: auto;
+		padding-right: 15px;
+		text-align: left;
+	}
+	#eventos .timeline-header h3 {
+		font-size: 2rem;
+	}
+	#eventos .timeline-header p {
+		font-size: 1.5rem;
+		margin-bottom: 1.5rem;
+	}
+	#eventos .timeline-content {
+		margin: 0;
+	}
+	#eventos .timeline-content h4 {
+		padding-bottom: 0;
+		padding-top: 2.1rem;
+		margin-bottom: .6rem;
+		font-size: 1.7rem;
+	}
+	#eventos .timeline-content h4::after {
+		bottom: auto;
+		top: 0;
+	}
+	#eventos .timeline-header, #eventos .timeline-content {
+		padding-left: 7rem;
+	}
+}
+@media only screen and (max-width:480px) {
+	#eventos .eventos-header h2 {
+		font-size: 2.2rem;
+	}
+	#eventos .timeline-wrap::before {
+		left: 1.8rem;
+	}
+	#eventos .timeline-ico {
+		height: 3.6rem;
+		width: 3.6rem;
+		line-height: 3.6rem;
+		left: 1.8rem;
+		margin-left: -1.8rem;
+		font-size: 1.5rem;
+	}
+	#eventos .timeline-header, #eventos .timeline-content {
+		padding-left: 5.5rem;
+	}
+}
+
+/** 
+ * ===================================================================
+ * 13. projetos - (_layout.scss)
+ *
+ * ------------------------------------------------------------------- 
+ */
+#projetos {
 	background: #ffffffe5;
 	padding-top: 12rem;
 	padding-bottom: 12rem;
 }
-#portfolio .folio-item {
+#projetos .folio-item {
 	padding: 0;
 	position: relative;
 	overflow: hidden;
 }
-#portfolio .folio-item img {
+#projetos .folio-item img {
 	vertical-align: middle;
 	-moz-transition: all 0.5s ease-in-out;
 	-o-transition: all 0.5s ease-in-out;
@@ -1827,7 +2003,7 @@ header .logo a {
 	transition: all 0.5s ease-in-out;
 }
 
-#portfolio .overlay {
+#projetos .overlay {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -1841,12 +2017,12 @@ header .logo a {
 	transition: all 0.5s ease-in-out;
 }
 
-#portfolio .folio-item-table {
+#projetos .folio-item-table {
 	display: table;
 	width: 100%;
 	height: 100%;
 }
-#portfolio .folio-item-cell {
+#projetos .folio-item-cell {
 	display: table-cell;
 	vertical-align: middle;
 	text-align: center;
@@ -1859,13 +2035,13 @@ header .logo a {
 	left: -100%;
 }
 
-#portfolio .folio-title {
+#projetos .folio-title {
 	color: #ffffffd2;
 	font-size: 3.3rem;
 	padding: 0 3rem;
 	margin-bottom: 0;
 }
-#portfolio .folio-types {
+#projetos .folio-types {
 	margin: 0;
 	padding: 0;
 	text-transform: uppercase;
@@ -1874,13 +2050,13 @@ header .logo a {
 	letter-spacing: .1rem;
 	color: #ffffff99;
 }
-#portfolio .folio-item:hover .overlay {
+#projetos .folio-item:hover .overlay {
 	background: #000000cc;
 }
-#portfolio .folio-item:hover .folio-item-cell {
+#projetos .folio-item:hover .folio-item-cell {
 	left: 0;
 }
-#portfolio .folio-item:hover img {
+#projetos .folio-item:hover img {
 	-webkit-transform: scale(1.05);
 	-ms-transform: scale(1.05);
 	transform: scale(1.05);
@@ -1888,21 +2064,21 @@ header .logo a {
 
 /**
  * responsive:
- * portfolio
+ * projetos
  * ------------------------------------------------------------------- 
  */
 @media only screen and (max-width:1024px) {
-	#portfolio .folio-title {
+	#projetos .folio-title {
 		font-size: 3.1rem;
 	}
 }
 @media only screen and (max-width:768px) {
-	#portfolio .folio-title {
+	#projetos .folio-title {
 		font-size: 2.5rem;
 	}
 }
 @media only screen and (max-width:400px) {
-	#portfolio .folio-title {
+	#projetos .folio-title {
 		font-size: 2.2rem;
 	}
 }
@@ -2223,7 +2399,7 @@ header .logo a {
 	background: none	
 }
 
-#portfolio .portfolio-list {
+#projetos .projetos-list {
 	margin-top: 1.2rem;
 	text-align: center;
 }
