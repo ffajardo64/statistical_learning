@@ -17,7 +17,7 @@
  *  09. header styles
  *  10. intro
  *  11. depoimentos
- *  11a. agenda
+ *  11a. agenda2019
  *  12. sobre
  *  13. portfolio
  *  14. call-to-action section
@@ -1503,6 +1503,7 @@ header .logo a {
 	}
 }
 
+
 /*********************************************************************
 /** 
  * ===================================================================
@@ -1510,11 +1511,159 @@ header .logo a {
  *
  * ------------------------------------------------------------------- 
  */
-#agenda2019 {
+ #agenda2019, #agenda2024, #agenda2025, #agenda2026{
 	background: #0a1b2f;
 	padding-top: 12rem;
 	padding-bottom: 15rem;
 }
+#agenda2024 .section-intro {
+	margin-bottom: 3rem;
+}
+
+.intro-info {
+	margin-top: 4.2rem;
+	margin-right: -30px;
+	margin-left: -30px;
+}
+.intro-info img {
+	height: 10rem;
+	width: 45rem;
+	border-radius: 0%;
+	margin: -3.1rem 0 0 0;
+	float:center;
+}
+.intro-info .lead {
+	text-align: justify;
+	padding-left: 0rem;
+}
+
+.agenda2024-content {
+	position: relative;
+	text-align: left;
+	max-width: 850px;
+	margin-bottom: 3.6rem;
+}
+.agenda2024-content h3 {
+	font-family: "poppins-bold", sans-serif;
+	font-size: 1.8rem;
+	text-transform: uppercase;
+	letter-spacing: .25rem;
+}
+.agenda2024-content .info-list {
+	list-style: none;
+	margin-left: 0;
+}
+.agenda2024-content .info-list li {
+	padding: 0 0 1.5rem 0;
+	margin-bottom: .6rem;
+}
+.agenda2024-content .info-list li strong {
+	font-family: "poppins-bold", sans-serif;
+	color: #FFFFFF;
+	text-transform: uppercase;
+	letter-spacing: .2rem;
+	font-size: 1.5rem;
+	line-height: 3rem;
+}
+.agenda2024-content .info-list li span {
+	display: block;
+	font-family: "poppins-regular", sans-serif;
+	color: #c9c6c6;
+	font-size: 1.5rem;
+	line-height: 1;
+}
+.agenda2024-content .skill-bars {
+	margin-top: 6rem;
+}
+
+.button-section {
+	text-align: center;
+}
+.button-section .button {
+	width: 250px;
+}
+.button-section [class*="col-"] .button:first-child {
+	margin-right: 4rem;
+}
+
+/**
+ * responsive:
+ * agenda2024
+ * --------------------------------------------------------------1024 
+ */
+@media only screen and (max-width:10px) {
+	.intro-info .lead {
+		padding-left: 0rem;
+	}
+	.intro-info img {
+		height: 10rem;
+		width: 45rem;
+		float:center;
+	}
+}
+@media only screen and (max-width:768px) {
+	.intro-info {
+		margin-right: -30px;
+		margin-left: -30px;
+	}
+	.intro-info img {
+		height: 7.8rem;
+		width: 37.8rem;
+		float:center;
+	}
+	.intro-info .lead {
+		padding-left: 0rem;
+	}
+	.agenda2024-content h3 {
+		text-align: center;
+	}
+	.agenda2024-content .info-list, .agenda2024-content .skill-bars {
+		margin-bottom: 4.2rem;
+	}
+	.button-section .button {
+		width: 100%;
+		margin-bottom: 3rem;
+	}
+	.button-section [class*="col-"] .button:first-child {
+		margin-right: 0;
+	}
+}
+@media only screen and (max-width:600px) {
+	.intro-info {
+		text-align: center;
+		margin-top: 3rem;
+		margin-right: -0px;
+		margin-left: -0px;
+	}
+	.intro-info img {
+		height: 7.6rem;
+		width: 36.6rem;
+		float: none;
+		display: inline-block;
+	}
+	.intro-info .lead {
+		padding-left: 0;
+		text-align: justify;
+	}
+}
+
+
+/*********************************************************************
+
+
+
+/*********************************************************************
+/** 
+ * ===================================================================
+ * 11a. 2019 - (_layout.scss)
+ *
+ * ------------------------------------------------------------------- 
+ */
+/* #agenda2019 {
+	background: #0a1b2f;
+	padding-top: 12rem;
+	padding-bottom: 15rem;
+} */
 #agenda2019 .section-intro {
 	margin-bottom: 3rem;
 }
