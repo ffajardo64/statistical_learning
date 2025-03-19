@@ -31,8 +31,8 @@ $presentation-heading-font: "News Cycle", Noto Sans !default;
   left: unset;
   display: block;
   position: fixed;
-  height: 60px !important;
-  width: 100x !important;
+  height: 40px !important;
+  width: 200px !important;
   max-width: unset !important;
   max-height: unset !important;
 }
@@ -57,4 +57,21 @@ hr {
 
 .example .theorem-title strong {
   color: $exm-label;
+}
+
+.reveal .slides section .fragment.highlight-newred, .reveal .slides section .fragment.highlight-blue, .reveal .slides section .fragment.highlight-current-blue, .reveal .slides section .fragment.highlight-current-green, .reveal .slides section .fragment.highlight-current-red, .reveal .slides section .fragment.highlight-green, .reveal .slides section .fragment.highlight-red{
+  opacity: 1;
+  visibility: inherit;
+}
+
+.reveal .slides section .fragment.highlight-newred.visible{
+  color: $exm-label;
+}
+
+p {
+ text-align: justify;
+}
+
+ul li {
+ text-align: justify;
 }
