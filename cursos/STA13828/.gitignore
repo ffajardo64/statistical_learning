@@ -524,6 +524,7 @@ cython_debug/
 
 # RStudio files
 .Rproj.user/
+*.Rproj
 
 # produced vignettes
 vignettes/*.html
@@ -541,9 +542,11 @@ vignettes/*.pdf
 *.knit.md
 *.Rmd
 
-# Quarto files
-/.quarto/
+# Temporary files created by R Quarto
+*.utf8.qmd
+*.knit.qmd
 *.qmd
+/.quarto/
 
 # R Environment Variables
 .Renviron
