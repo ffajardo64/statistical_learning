@@ -1,988 +1,1359 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
-  <head>
-    <title>Análise de Séries Temporais</title>
-    <meta charset="utf-8" />
-    <meta name="author" content="  " />
-    <script src="libs/header-attrs/header-attrs.js"></script>
-    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
-  </head>
-  <body>
-    <textarea id="source">
-class: center, middle, inverse, title-slide
+<html lang="pt-BR"><head>
+<script src="aula3_files/libs/clipboard/clipboard.min.js"></script>
+<script src="aula3_files/libs/quarto-html/tabby.min.js"></script>
+<script src="aula3_files/libs/quarto-html/popper.min.js"></script>
+<script src="aula3_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="aula3_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="aula3_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="aula3_files/libs/quarto-html/quarto-syntax-highlighting-de84f8d6bb715db06a919283c2d1e787.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.42">
 
-.title[
-# Análise de Séries Temporais
-]
-.subtitle[
-## Processos com representação ARMA(p,q) - I
-]
-.author[
-### <br/><br/>
-]
-.institute[
-### LECON/DEST - UFES
-]
-.date[
-### Vitória. ES - 25/10/2023
-]
+  <meta name="author" content="LECON/DEST - UFES">
+  <title>STA13828 - Análise de Séries Temporais I  Processos com representação ARMA(p,q) </title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="aula3_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="aula3_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="aula3_files/libs/revealjs/dist/theme/quarto-bbd3fe9ba78fe19100bb54757e835c1d.css">
+  <link href="aula3_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="aula3_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="aula3_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="aula3_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="aula3_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="aula3_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
 
----
+<section id="title-slide" data-background-color="#172a46" data-background-opacity="number" data-background-size="contain" class="quarto-title-block center">
+  <h1 class="title">STA13828 - Análise de Séries Temporais I<br>
+</h1><h3><br>
+Processos com representação ARMA(p,q)<br>
+</h3>
+  <p class="subtitle"><br><br></p>
 
-[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/countdown/#1)
-[//]: &lt;&gt; (https://github.com/animate-css/animate.css/blob/main/animate.css)
-[//]: &lt;&gt; (xaringan::inf_mr())
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+LECON/DEST - UFES 
+</div>
+        <p class="quarto-title-affiliation">
+            Última atualização: 11 novembro, 2025
+          </p>
+    </div>
+</div>
 
-class: animated, fadeIn
+</section>
+<section id="processos-com-representação-armapq" class="slide level2">
+<h2>Processos com representação ARMA(p,q)</h2>
+<div id="def-eqdiffp" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 1</strong></span> Um <span class="math inline">\(\{X_t; t\in\mathbb{Z}\}\)</span> diz-se um processo com representação ARMA<span class="math inline">\((p,q)\)</span> se ele é estacionário e tem a seguinte representação: <span class="math display">\[\phi(B)X_t=\theta(B)Z_t,\]</span> onde <span class="math inline">\(\phi(B)=1-\phi_1B-\cdots-\phi_pB^p\)</span> e <span class="math inline">\(\theta(B)=1+\theta_1B+\theta_2B^2+\cdots+\theta_qB^q\)</span> e <span class="math inline">\(\{Z_t\}\)</span> é um processo de ruído branco com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(\sigma^2\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<ul>
+<li><p>O processo com representação ARMA<span class="math inline">\((p,q)\)</span> também é chamado de processo autorregressivo e de médias móveis de ordens <span class="math inline">\(p\)</span> e <span class="math inline">\(q\)</span>;</p></li>
+<li><p>Dizemos que o processo <span class="math inline">\(\{X_t\}\)</span>, com média <span class="math inline">\(\mu\)</span>, é ARMA<span class="math inline">\((p,q)\)</span> se o processo <span class="math inline">\(\{X_t-\mu\}\)</span> tem representação ARMA<span class="math inline">\((p,q)\)</span>;</p></li>
+<li><p>Na literatura, podemos encontrar os primeiros estudos desse tipo de processos nos trabalhos de <span class="citation" data-cites="wold:1938">Wold (<a href="#/referências" role="doc-biblioref" onclick="">1938</a>)</span> e <span class="citation" data-cites="bartlett:1946">Bartlett (<a href="#/referências" role="doc-biblioref" onclick="">1946</a>)</span>.</p></li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
 
-
-
-
-
-
-
-&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
-
-### Processos ARMA(p,q) - I
-
-* **Definição**: Um `\(\{X_t; t\in\mathbb{Z}\}\)` diz-se um 
-processo com representação ARMA `\(\!(p,q)\)` se ele é estacionário
-e tem a seguinte representação:
-`$$\phi(B)X_t=\theta(B)Z_t,$$`
-onde `\(\phi(B)=1-\phi_1B-\cdots-\phi_pB^p\)` e `\(\theta(B)=1+\theta_1B+\theta_2B^2+\cdots+\theta_qB^q\)`
-e `\(\{Z_t\}\)` é um processo de ruído branco com 
-média `\(0\)` e variância `\(\sigma^2\)`. 
-
-
-&gt; * O processo com representação ARMA `\(\!(p,q)\)` também é chamado de processo 
-autorregressivo e de médias móveis_ de ordens `\(p\)` e `\(q\)`;
-
-&gt; * Dizemos que o processo `\(\{X_t\}\)`, com média `\(\mu\)`, é ARMA `\(\!(p,q)\)` se 
-o processo `\(\{X_t-\mu\}\)` tem representação ARMA `\(\!(p,q)\)`;
-
-&gt; * Na literatura, podemos encontrar os primeiros estudos desse tipo de 
-processos nos trabalhos de Wold (1938) e 
-Bartlett (1946).
-
-&lt;br/&gt;
-
-***
-Para detalhes, sugere-se a leitura do livro de Brockwell and Davis (2016),
-Wei (2005) e Morettin and Toloi (2006).
-
----
-class: animated, fadeIn
-
-### Processos ARMA(p,q) - I
-
-&lt;b&gt;&lt;span style="color:rgba(141, 0, 69, 1)"&gt;Exemplo.&lt;/span&gt;&lt;/b&gt; Seja
-`\(\{X_t; t\in\mathbb{Z}\}\)` um processo com representação ARMA `\(\!(p,q)\)`.
-Se `\(\phi(z)\equiv1\)`, então `\(X_t=\theta(B)Z_t\)`, i.e., o processo se torna
-um processo com representação MA `\(\!\!(q)\)`, onde a média e a FACV do 
-processo são dadas, respectivamente, por
-&lt;div class="math"&gt;
-  \begin{align}
-    \mathbb{E}X_t&amp;=\sum_{j=0}^q\theta_j\mathbb{E}Z_{t-j}=0 &amp; \text{e} &amp; &amp;
-    \gamma_X(h)=\mathrm{Cov}(X_{t+h}X_t)&amp;=\begin{cases}
+<div id="exm-exemplo1" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 1</strong></span> Seja <span class="math inline">\(\{X_t; t\in\mathbb{Z}\}\)</span> um processo com representação ARMA<span class="math inline">\((p,q)\)</span>. Se <span class="math inline">\(\phi(z)\equiv1\)</span>, então <span class="math inline">\(X_t=\theta(B)Z_t\)</span>, i.e., o processo se torna um processo com representação MA<span class="math inline">\((q)\)</span>, onde a média do processo é calculada como <span class="math inline">\(\mathbb{E}X_t=\sum_{j=0}^q\theta_j\mathbb{E}Z_{t-j}=0\)</span>.</p>
+<p>Para calcular a FACV do processo, sabemos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \gamma_X(h)&amp;=\mathrm{Cov}(X_{t+h}X_t)=\sum_{j=0}^\infty\psi_j\psi_{j+|h|}\sigma^2
+    =\sigma^2\sum_{j=0}^\infty\theta_j\theta_{j+|h|}\\
+    &amp;=\begin{cases}
     \sigma^2\sum_{j=0}^{q-|h|}\theta_j\theta_{j+|h|}, &amp; \text{ para } |h|\le q;\\
     0, &amp; \text{ para } |h|&gt;q.
     \end{cases}
-  \end{align}
-&lt;/div&gt;
+  \end{align*}\]</span></p>
+</div>
+</div>
+<p><br></p>
+<hr>
 
---
+<p><font size="6">Para detalhes, vide <span class="citation" data-cites="box:jenkins:reinsel:1994">Box et al. (<a href="#/referências" role="doc-biblioref" onclick="">1994</a>)</span>, <span class="citation" data-cites="brockwell:davis:2016">Brockwell e Davis (<a href="#/referências" role="doc-biblioref" onclick="">2016</a>)</span>, <span class="citation" data-cites="morettin:toloi:2006">Morettin e Toloi (<a href="#/referências" role="doc-biblioref" onclick="">2006</a>)</span> e <span class="citation" data-cites="wei:2005">Wei (<a href="#/referências" role="doc-biblioref" onclick="">2005</a>)</span>.</font></p>
+</section>
+<section class="slide level2">
 
-* **Definição**: Um processo `\(\{X_t; t\in\mathbb{Z}\}\)` com representação 
-ARMA `\(\!(p,q)\)` é **causal**, ou função causal de `\(\{Z_t\}\)`, se existe
-uma sequência de constantes `\(\{\psi_j\}\)`, tal que 
-`\(\sum_{j=0}^\infty|\psi_j|&lt;\infty\)` e 
-`$$X_t=\sum_{j=0}^\infty\psi_jZ_{t-j}, \quad t\in\mathbb{Z}, \quad \text{(com prob. 1)}$$`
-onde os coeficientes `\(\{\psi_j\}\)` são calculados a partir da relação
-`\(\psi(z)=\sum_{j=0}^\infty\psi_jz^j=\theta(z)\phi^{-1}(z)\)`, com `\(|z|\le1\)`.
+<div id="exm-exemplo2" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 2</strong></span> Seja <span class="math inline">\(\{X_t; t\in\mathbb{Z}\}\)</span> um processo com representação ARMA<span class="math inline">\((1,1)\)</span>, i.e., <span class="math display">\[X_t-\phi X_{t-1}=Z_t+\theta Z_{t-1},\]</span> onde <span class="math inline">\(\{Z_t\}\)</span> representa um processo de ruído branco com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(\sigma^2\)</span> e <span class="math inline">\(|\phi|&lt;1\)</span>.</p>
+<p>O processo é linear, já que pode ser representado como <span class="math display">\[X_t=Z_t+(\phi+\theta)\sum_{j=1}^\infty\phi^{j-1}Z_{t-j}.\]</span> Dessa forma, a função de autocovariância é dada por:</p>
+<p><span class="math display">\[\gamma(h)=\sum_{j=0}^\infty\psi_j\psi_{j+|h|}\sigma^2.\]</span></p>
+</div>
+</section>
+<section class="slide level2">
 
----
-class: animated, fadeInLeft
+<ul>
+<li>Para <span class="math inline">\(h=0\)</span>,</li>
+</ul>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+  \gamma(0)&amp;=\sigma^2+\sigma^2\sum_{j=1}^\infty\psi_j^2
+  =\sigma^2\left[1+(\phi+\theta)^2\sum_{j=1}^\infty\phi^{2j-2}\right]\\
+  &amp;=\sigma^2\left[1+(\phi+\theta)^2\sum_{j=0}^\infty\phi^{2j}\right]
+  =\sigma^2\left[1+\frac{(\phi+\theta)^2}{1-\phi^2}\right].
+\end{align*}\]</span></p>
+</div>
+<ul>
+<li>Para <span class="math inline">\(h=1\)</span>, temos que</li>
+</ul>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+  \gamma(1)&amp;=\sigma^2\sum_{j=0}^\infty\psi_j\psi_{j+1}
+  =\sigma^2\psi_0\psi_1+\sigma^2\sum_{j=1}^\infty\psi_j\psi_{j+1}
+\end{align*}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
 
-### Processos ARMA(p,q) - I
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+  \gamma(1)&amp;=\sigma^2(\phi+\theta)+\sigma^2\sum_{j=1}^\infty(\phi+\theta)\phi^{j-1}(\phi+\theta)\phi^{j}
+  =\sigma^2\left[\phi+\theta+(\phi+\theta)^2\sum_{j=1}^\infty\phi^{2j-1}\right]\\
+  &amp;=\sigma^2\left[\phi+\theta+(\phi+\theta)^2\sum_{j=0}^\infty\phi^{2j+1}\right]
+  =\sigma^2\left[\phi+\theta+(\phi+\theta)^2\phi\sum_{j=0}^\infty\phi^{2j}\right]\\
+  &amp;=\sigma^2\left[\phi+\theta+\frac{(\phi+\theta)^2\phi}{1-\phi^2}\right].
+\end{align*}\]</span></p>
+</div>
+<ul>
+<li>Para <span class="math inline">\(h\ge 2\)</span>, temos que</li>
+</ul>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+  \gamma(h)&amp;=\sigma^2\sum_{j=0}^\infty\psi_j\psi_{j+h}
+  =\sigma^2\left[\psi_h+\sum_{j=1}^\infty\psi_j\psi_{j+h}\right]
+\end{align*}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
 
-* **Proposição**: Seja `\(\{X_t\}\)` um processo com representação ARMA `\(\!(p,q)\)`,
-i.e., `\(\phi(B)X_t=\theta(B)Z_t\)`, e tal que os polinômios `\(\phi(\cdot)\)` e 
-`\(\theta(\cdot)\)` não possuem raízes comuns. Então, `\(\{X_t\}\)` é **causal** 
-_see_ `\(\phi(z)\ne0\)`, para todo `\(|z|\le1\)`, com `\(z\in\mathbb{C}\)`.
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+  \gamma(h)&amp;=\sigma^2\left[(\phi+\theta)\phi^{h-1}+(\phi+\theta)^2\sum_{j=1}^\infty\phi^{j-1}\phi^{j+h-1}\right]\\
+  &amp;=\sigma^2\left[(\phi+\theta)\phi^{h-1}+(\phi+\theta)^2\phi^{h-1}\sum_{j=1}^\infty\phi^{2j-1}\right]\\
+  &amp;=\phi^{h-1}\sigma^2\left[\phi+\theta+(\phi+\theta)^2\sum_{j=1}^\infty\phi^{2j-1}\right]\\
+  &amp;=\phi^{h-1}\gamma(1), \quad \text{para }h\ge2.
+\end{align*}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
 
+<div id="def-causal" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 2 (Causalidade)</strong></span> Um processo <span class="math inline">\(\{X_t; t\in\mathbb{Z}\}\)</span> com representação ARMA<span class="math inline">\((p,q)\)</span> é <strong>causal</strong>, ou função causal de <span class="math inline">\(\{Z_t\}\)</span>, se existe uma sequência de constantes <span class="math inline">\(\{\psi_j\}\)</span>, tal que <span class="math inline">\(\sum_{j=0}^\infty|\psi_j|&lt;\infty\)</span> e <span class="math display">\[X_t=\sum_{j=0}^\infty\psi_jZ_{t-j}, \quad t\in\mathbb{Z}, \quad \text{(com prob. 1)}\]</span> onde os coeficientes <span class="math inline">\(\{\psi_j\}\)</span> são calculados a partir da relação <span class="math inline">\(\psi(z)=\sum_{j=0}^\infty\psi_jz^j=\theta(z)\phi^{-1}(z)\)</span>, com <span class="math inline">\(|z|\le1\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div id="prp-causalidade" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposição 1</strong></span> Seja <span class="math inline">\(\{X_t\}\)</span> um processo com representação ARMA<span class="math inline">\((p,q)\)</span>, i.e., <span class="math inline">\(\phi(B)X_t=\theta(B)Z_t\)</span>, e tal que os polinômios <span class="math inline">\(\phi(\cdot)\)</span> e <span class="math inline">\(\theta(\cdot)\)</span> não possuem raízes comuns. Então, <span class="math inline">\(\{X_t\}\)</span> é <strong>causal</strong> <em>see</em> <span class="math inline">\(\phi(z)\ne0\)</span>, para todo <span class="math inline">\(|z|\le1\)</span>, com <span class="math inline">\(z\in\mathbb{C}\)</span>.</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
 
-&gt; * O resultado anterior mostra que, se `\(\{X_t\}\)` é uma solução 
-estacionária de uma equação ARMA, com `\(\phi(z)\ne0\)`, para `\(|z|\le1\)`, 
-então, a solução é representada por
-`$$X_t=\sum_{j=0}^\infty\psi_jZ_{t-j},\quad \text{(com prob. 1)}$$`
-onde `\(\{\psi_j\}\)` são calculados a partir da relação
-`\(\psi(z)=\sum_{j=0}^\infty\psi_jz^j=\theta(z)\phi^{-1}(z)\)`, com `\(|z|\le1\)`.
+<div class="fragment semi-fade-out" data-fragment-index="1">
+<ul>
+<li>O resultado da <a href="#/prp-causalidade" class="quarto-xref">Proposição&nbsp;1</a> mostra que, se <span class="math inline">\(\{X_t\}\)</span> é uma solução estacionária de uma equação ARMA, com <span class="math inline">\(\phi(z)\ne0\)</span>, para <span class="math inline">\(|z|\le1\)</span>, então, a solução é representada por <span class="math display">\[X_t=\sum_{j=0}^\infty\psi_jZ_{t-j},\quad \text{(com prob. 1)}\]</span> onde <span class="math inline">\(\{\psi_j\}\)</span> são calculados a partir da relação <span class="math inline">\(\psi(z)=\sum_{j=0}^\infty\psi_jz^j=\theta(z)\phi^{-1}(z)\)</span>, com <span class="math inline">\(|z|\le1\)</span>.</li>
+</ul>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<ul>
+<li>Por outra parte, se <span class="math inline">\(X_t=\sum_{j=0}^\infty\psi_jZ_{t-j}\)</span>, então <span class="math display">\[\phi(B)X_t=\phi(B)\psi(B)Z_t=\theta(B)Z_t.\]</span> Dessa forma, o processo <span class="math inline">\(\{\psi(B)Z_t\}\)</span> é a única solução estacionária das equações ARMA se <span class="math inline">\(\phi(z)\ne0\)</span> para <span class="math inline">\(|z|\le1\)</span>.</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
 
-&gt; * Por outra parte, se `\(X_t=\sum_{j=0}^\infty\psi_jZ_{t-j}\)`, então
-`$$\phi(B)X_t=\phi(B)\psi(B)Z_t=\theta(B)Z_t.$$`
-Dessa forma, o processo `\(\{\psi(B)Z_t\}\)` é a única solução estacionária
-das equações ARMA se `\(\phi(z)\ne0\)` para `\(|z|\le1\)`.
+<ul>
+<li>A sequência <span class="math inline">\(\{\psi_j\}\)</span> é calculada a partir da relação <span class="math inline">\(\psi(z)=\sum_{j=0}^\infty\psi_jz^j=\theta(z)\phi^{-1}(z)\)</span>, dessa forma <span class="math display">\[(1-\phi_1z-\cdots-\phi_pz^p)(\psi_0+\psi_1z+\psi_2z^2+\cdots)=1+\theta_1z+\theta_2z^2+\cdots+\theta_qz^q.\]</span> Se igualamos os coeficientes dos termos <span class="math inline">\(z^j\)</span>, para <span class="math inline">\(j=0,1,2,\ldots\)</span>, temos que
+<div class="math">
+<p><span class="math display">\[\begin{align}
+1&amp;=\psi_0,\\
+\theta_1&amp;=\psi_1-\psi_0\phi_1,\\
+\theta_2&amp;=\psi_2-\psi_1\phi_1-\psi_0\phi_2,\\
+&amp;\,\,\, \vdots\\
+\theta_j&amp;=\psi_j-\sum_{k=1}^p\phi_k\psi_{j-k}, \quad j=0,1,2,\ldots,
+\end{align}\]</span></p>
+</div></li>
+</ul>
+<p>onde <span class="math inline">\(\theta_0=1\)</span>, <span class="math inline">\(\theta_j=0\)</span> para <span class="math inline">\(j&gt;q\)</span> e <span class="math inline">\(\psi_j=0\)</span> para <span class="math inline">\(j&lt;0\)</span>.</p>
+</section>
+<section class="slide level2">
 
+<div class="fragment semi-fade-out" data-fragment-index="1">
+<ul>
+<li>A condição <span class="math inline">\(\phi(z)\ne0\)</span>, para todo <span class="math inline">\(|z|\le1\)</span>, é equivalente a dizer que as raízes do polinômio autorregressivo, em módulo, devem ser maiores que <span class="math inline">\(1\)</span>;</li>
+</ul>
+</div>
+<div class="fragment semi-fade-out" data-fragment-index="2">
+<div class="fragment fade-in" data-fragment-index="1">
+<ul>
+<li>A região definida pelo conjunto de números complexos <span class="math inline">\(z\)</span>, tal que <span class="math inline">\(|z| = 1\)</span> é referida como o <strong>círculo unitário</strong>;</li>
+</ul>
+</div>
+</div>
+<div class="fragment semi-fade-out" data-fragment-index="3">
+<div class="fragment fade-in" data-fragment-index="2">
+<ul>
+<li>Se <span class="math inline">\(\{X_t\}\)</span> é um processo com representação ARMA<span class="math inline">\((p,q)\)</span>, tal que os polinômios <span class="math inline">\(\phi(\cdot)\)</span> e <span class="math inline">\(\theta(\cdot)\)</span> possuem raízes comuns, então, temos duas opções:
+<ul>
+<li>Nenhuma das raízes comuns se encontra no círculo unitário. Nesse caso, <span class="math inline">\(\{X_t\}\)</span> é a única solução estacionária das equações ARMA sem zeros comuns, obtida cancelando os fatores comuns de <span class="math inline">\(\phi(\cdot)\)</span> e <span class="math inline">\(\theta(\cdot)\)</span>;</li>
+<li>Pelo menos uma das raízes comuns se encontra no círculo unitário. Nesse caso, as equações ARMA podem ter mais do que uma solução estacionária;</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="fragment fade-in" data-fragment-index="3">
+<div class="fragment highlight-newred" data-fragment-index="3">
+<ul>
+<li>Processos com representação ARMA, para os quais <span class="math inline">\(\phi(\cdot)\)</span> e <span class="math inline">\(\theta(\cdot)\)</span> possuem raízes comuns são raramente considerados.</li>
+</ul>
+</div>
+</div>
+</section>
+<section class="slide level2">
 
----
-class: animated, lightSpeedIn
+<div id="exm-arma1" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 3</strong></span> Considere o processo <span class="math inline">\(\{X_t\}\)</span> com representação <span class="math display">\[X_t=0.6X_{t-1}-0.08X_{t-2}+0.2Z_{t-1}+Z_t,\]</span> onde <span class="math inline">\(\{Z_t\}\)</span> é um processo de ruído branco com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(\sigma^2\)</span>.</p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Dessa forma, temos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+  (1-0.6B+0.08B^2)X_t&amp;=(1-0.4B)(1-0.2B)X_t=(1-0.2B)Z_t\\
+  (1-0.4B)X_t&amp;=Z_t.
+  \end{align*}\]</span></p>
+</div>
+<p>Que corresponde à representação de um processo AR(1) com <span class="math inline">\(\phi=0.4\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="co"># Calculando as raízes do polinômio AR</span></span>
+<span id="cb1-2"><a href=""></a>AR_roots <span class="ot">&lt;-</span>  <span class="fu">polyroot</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.6</span>, <span class="fl">0.08</span>))</span>
+<span id="cb1-3"><a href=""></a><span class="fu">Mod</span>(AR_roots)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.5 5.0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co"># Calculando as raízes do polinômio MA</span></span>
+<span id="cb3-2"><a href=""></a>MA_roots <span class="ot">&lt;-</span>  <span class="fu">polyroot</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.2</span>))</span>
+<span id="cb3-3"><a href=""></a><span class="fu">Mod</span>(MA_roots)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
 
-### Processos ARMA(p,q) - I
+<div id="def-invertibilidade" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 3 (Invertibilidade)</strong></span> Um processo <span class="math inline">\(\{X_t; t\in\mathbb{Z}\}\)</span> com representação ARMA<span class="math inline">\((p,q)\)</span> é <strong>invertível</strong>, se existe uma sequência de constantes <span class="math inline">\(\{\pi_j\}\)</span>, tal que <span class="math inline">\(\sum_{j=0}^\infty|\pi_j|&lt;\infty\)</span> e <span class="math display">\[Z_t=\sum_{j=0}^\infty\pi_jX_{t-j}, \quad t\in\mathbb{Z}.\]</span></p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div id="prp-invertivel" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposição 2</strong></span> Seja <span class="math inline">\(\{X_t\}\)</span> um processo com representação ARMA<span class="math inline">\((p,q)\)</span>, i.e., <span class="math inline">\(\phi(B)X_t=\theta(B)Z_t\)</span>, e tal que os polinômios <span class="math inline">\(\phi(\cdot)\)</span> e <span class="math inline">\(\theta(\cdot)\)</span> não possuem raízes comuns. Então, <span class="math inline">\(\{X_t\}\)</span> é <strong>invertível</strong> <em>see</em> <span class="math inline">\(\theta(z)\ne0\)</span>, para todo <span class="math inline">\(|z|\le1\)</span>, com <span class="math inline">\(z\in\mathbb{C}\)</span>.</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
 
-&gt; * A sequência `\(\{\psi_j\}\)` é calculada a partir da relação
-`\(\psi(z)=\sum_{j=0}^\infty\psi_jz^j=\theta(z)\phi^{-1}(z)\)`, daí
-`$$(1-\phi_1z-\cdots-\phi_pz^p)(\psi_0+\psi_1z+\psi_2z^2+\cdots)=1+\theta_1z+\theta_2z^2+\cdots+\theta_qz^q.$$`
-Se igualamos os coeficientes dos termos `\(z^j\)`, para `\(j=0,1,2,\ldots\)`, temos que
-&lt;div class="math"&gt;
-  \begin{align}
-  1&amp;=\psi_0,\\
-  \theta_1&amp;=\psi_1-\psi_0\phi_1,\\
-  \theta_2&amp;=\psi_2-\psi_1\phi_1-\psi_0\phi_2,\\
-  &amp;\,\,\, \vdots\\
-  \theta_j&amp;=\psi_j-\sum_{k=1}^p\phi_k\psi_{j-k}, \quad j=0,1,2,\ldots,
-  \end{align}
-&lt;/div&gt;
+<ul>
+<li><p>Assim como a <strong>causalidade</strong>, a propriedade de <strong>invertibilidade</strong> não é exclusiva do processo <span class="math inline">\(\{X_t\}\)</span>, e sim uma propriedade conjunta dos processos <span class="math inline">\(\{X_t\}\)</span> e <span class="math inline">\(\{Z_t\}\)</span>;</p></li>
+<li><p>Os coeficientes <span class="math inline">\(\{\pi_j\}\)</span> são calculados a partir da relação <span class="math display">\[\pi(z)=\sum_{j=0}^\infty\pi_jz^j=\phi(z)\theta^{-1}(z), \quad |z|\le1,\]</span> ou, pelas equações <span class="math display">\[\pi_j+\sum_{k=1}^{q}\theta_k\pi_{j-k}=-\phi_j,\quad \text{ para } j=0,1,2,\ldots,\]</span> onde <span class="math inline">\(\phi_0=-1\)</span>, <span class="math inline">\(\phi_j=0\)</span> para <span class="math inline">\(j&gt;p\)</span> e <span class="math inline">\(\pi_j=0\)</span> para <span class="math inline">\(j&lt;0\)</span>;</p></li>
+</ul>
+</section>
+<section class="slide level2">
 
-&gt;  onde `\(\theta_0=1\)`, `\(\theta_j=0\)` para `\(j&gt;q\)` e `\(\psi_j=0\)` para `\(j&lt;0\)`.
+<ul>
+<li>Se <span class="math inline">\(\{X_t\}\)</span> é uma solução estacionária das equações <span class="math inline">\(\phi(B)X_t=\theta(B)Z_t\)</span>, onde <span class="math inline">\(\{Z_t\}\)</span> é um processo de ruído branco com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(\sigma^2\)</span>, e se <span class="math inline">\(\phi(z)\theta(z)\ne0\)</span> para <span class="math inline">\(|z|\le1\)</span>, então
+<div class="math">
+<p><span class="math display">\[\begin{align}
+  X_t&amp;=\sum_{j=0}^\infty\psi_jZ_{t-j} &amp;&amp; \text{e}&amp;&amp; Z_t=\sum_{j=0}^\infty\pi_jX_{t-j},
+\end{align}\]</span></p>
+</div></li>
+</ul>
+<p>onde <span class="math inline">\(\sum_{j=0}^\infty\psi_jz^j=\dfrac{\theta(z)}{\phi(z)}\)</span> e <span class="math inline">\(\sum_{j=0}^\infty\pi_jz^j=\dfrac{\phi(z)}{\theta(z)}\)</span>, para <span class="math inline">\(|z|\le1\)</span>.</p>
+<ul>
+<li>Em resumo, para que um processo com representação ARMA<span class="math inline">\((p,q)\)</span> seja <strong>causal</strong> as raízes do polinômio <span class="math inline">\(\phi(z)=0\)</span> devem estar fora do círculo unitário. Para que o processo seja <strong>invertível</strong>, as raízes do polinômio <span class="math inline">\(\theta(z)=0\)</span> devem estar fora do círculo unitário.</li>
+</ul>
+</section>
+<section class="slide level2">
 
+<div id="exm-arma2" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 4</strong></span> Considere um processo <span class="math inline">\(\{X_t\}\)</span> com a seguinte representação <span class="math display">\[X_t-0.5X_{t-1}=Z_t+0.4Z_{t-1},\]</span> com <span class="math inline">\(\{Z_t\}\)</span> um processo de ruído branco com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>Repare que o processo <span class="math inline">\(\{X_t\}\)</span>, com representação ARMA<span class="math inline">\((1,1)\)</span>, pode ser reescrito da seguinte forma: <span class="math display">\[(1-0.5B)X_t=(1+0.4B)Z_t.\]</span></p>
+<p>Nesse caso, o polinômio <span class="math inline">\(\phi(z)=1-0.5z\)</span> tem uma única raíz real <span class="math inline">\(R_1^{-1}=2\)</span>, fora do círculo unitário, isso significa que o processo é <strong>causal</strong>, i.e., podemos representar o processo (com prob. 1), em termos passados do ruído, <span class="math display">\[X_t=\sum_{j=0}^\infty\psi_jZ_{t-j}, \quad t\in\mathbb{Z}.\]</span></p>
+</div>
+</section>
+<section class="slide level2">
 
----
-class: animated, fadeInDown
-
-### Processos ARMA(p,q) - I
-
-&gt; * A condição `\(\phi(z)\ne0\)`, para todo `\(|z|\le1\)`, é equivalente a dizer 
-que as raízes do polinômio autorregressivo, em módulo, devem ser maiores 
-que `\(1\)`;
-
-&gt; * A região definida pelo conjunto de números complexos `\(z\)`, tal que 
-`\(|z| = 1\)` é referida como o **círculo unitário**;
-
-&gt; * Se `\(\{X_t\}\)` é um processo com representação ARMA `\(\!(p,q)\)`, tal que
-os polinômios `\(\phi(\cdot)\)` e `\(\theta(\cdot)\)` não possuem raízes comuns,
-então, temos que:
-
-&gt;  - Nenhuma das raízes comuns se encontra no círculo unitário, nesse 
-    caso `\(\{X_t\}\)` é a única solução estacionária das equações ARMA sem 
-    zeros comuns, obtida cancelando os fatores comuns de `\(\phi(\cdot)\)` 
-    e `\(\theta(\cdot)\)`;
-&gt;    
-  - Pelo menos uma das raízes comuns se encontra no círculo unitário, 
-    nesse caso as equações ARMA podem ter mais do que em solução estacionária;
-
-&gt; * Processos com representação ARMA, para os quais `\(\phi(\cdot)\)` e 
-`\(\theta(\cdot)\)` possuem raízes comuns são raramente considerados.
-
-
----
-class: animated, fadeIn
-
-### Processos ARMA(p,q) - I
-
-* **Definição**: Um processo `\(\{X_t; t\in\mathbb{Z}\}\)` com representação 
-ARMA `\(\!(p,q)\)` é **invertível**, se existe uma sequência de constantes 
-`\(\{\pi_j\}\)`, tal que `\(\sum_{j=0}^\infty|\pi_j|&lt;\infty\)` e
-`$$Z_t=\sum_{j=0}^\infty\pi_jX_{t-j}, \quad t\in\mathbb{Z}.$$`
-
-* **Proposição**: Seja `\(\{X_t\}\)` um processo com representação ARMA `\(\!(p,q)\)`,
-i.e., `\(\phi(B)X_t=\theta(B)Z_t\)`, e tal que os polinômios `\(\phi(\cdot)\)` e 
-`\(\theta(\cdot)\)` não possuem raízes comuns. Então, `\(\{X_t\}\)` é **invertível** 
-_see_ `\(\theta(z)\ne0\)`, para todo `\(|z|\le1\)`, com `\(z\in\mathbb{C}\)`.
-
-&gt; * Assim como a **causalidade**, a propriedade de **invertibilidade** não
-é exclusiva do processo `\(\{X_t\}\)`, e sim uma propriedade conjunta dos
-processos `\(\{X_t\}\)` e `\(\{Z_t\}\)`;
-
-&gt; * Os coeficientes `\(\{\pi_j\}\)` são calculados a partir da relação
-`$$\pi(z)=\sum_{j=0}^\infty\pi_jz^j=\frac{\phi(z)}{\theta(z)}, \quad |z|\le1.$$`
-
-
----
-class: animated, fadeIn
-
-### Processos ARMA(p,q) - I
-
-&gt; * Os coeficientes `\(\{\pi_j\}\)` são calculados pelas equações
-`$$\pi_j+\sum_{k=1}^q\theta_k\pi_{j-k}=-\phi_j,\quad \text{ para } j=0,1,2,\ldots,$$`
-onde `\(\phi_0=-1\)`, `\(\phi_j=0\)` para `\(j&gt;p\)` e `\(\pi_j=0\)` para `\(j&lt;0\)`;
-
-&gt; * Se `\(\{X_t\}\)` é uma solução estacionária das equações `\(\phi(B)X_t=\theta(B)Z_t\)`,
-onde `\(\{Z_t\}\)` é um processo de ruído branco com média `\(0\)` e variância `\(\sigma^2\)`,
-e se `\(\phi(z)\theta(z)\ne0\)` para `\(|z|\le1\)`, então
-&lt;div class="math"&gt;
-  \begin{align}
-    X_t&amp;=\sum_{j=0}^\infty\psi_jZ_{t-j} &amp;&amp; \text{e}&amp;&amp; Z_t=\sum_{j=0}^\infty\pi_jX_{t-j},
-  \end{align}
-&lt;/div&gt;
-
-&gt;   onde `\(\sum_{j=0}^\infty\psi_jz^j=\dfrac{\theta(z)}{\phi(z)}\)` e
-`\(\sum_{j=0}^\infty\pi_jz^j=\dfrac{\phi(z)}{\theta(z)}\)`, para `\(|z|\le1\)`.
-
-
----
-class: animated, fadeInRight
-
-### Processos ARMA(p,q) - I
-
-&gt; * Em resumo, para que um processo com representação ARMA `\(\!(p,q)\)` seja
-**causal** as raízes do polinômio `\(\phi(z)=0\)` devem estar fora do 
-círculo unitário. Para que o processo seja **invertível**, as raízes do 
-polinômio `\(\theta(z)=0\)` devem estar fora do círculo unitário.
-
-&lt;br/&gt;
-
-&lt;b&gt;&lt;span style="color:rgba(141, 0, 69, 1)"&gt;Exemplo.&lt;/span&gt;&lt;/b&gt; Considere
-o processo `\(\{X_t\}\)` com a seguinte representação
-`$$X_t-0.5X_{t-1}=Z_t+0.4Z_{t-1},$$`
-com `\(\{Z_t\}\)` um processo de ruído branco com média `\(0\)` e variância `\(\sigma^2\)`.
-Pode-se observar que o processo `\(\{X_t\}\)`, com representação ARMA `\(\!(1,1)\)`, pode
-ser reescrito da seguinte forma:
-`$$(1-0.5B)X_t=(1+0.4B)Z_t.$$`
-
----
-class: animated, hide-logo, fadeInRight
-
-### Processos ARMA(p,q) - I
-
-Nesse caso, o polinômio `\(\phi(z)=1-0.5z\)` tem uma única raíz real `\(R_1^{-1}=2\)`,
-fora do círculo unitário, isso significa que o processo é **causal**, i.e.,
-podemos representar o processo (com prob. 1), em termos passados do ruído,
-`$$X_t=\sum_{j=0}^\infty\psi_jZ_{t-j}, \quad t\in\mathbb{Z}.$$`
-Os coeficientes `\(\{\psi_j\}\)` são calculados como `\(\psi_j=\theta_j+\sum_{k=1}^p\phi_k\psi_{j-k}\)`,
-`\(j=0,1,2,\ldots\)`, daí
-
-&lt;div class="math"&gt;
-  \begin{align}
+<p>Os coeficientes <span class="math inline">\(\{\psi_j\}\)</span> são calculados como <span class="math inline">\(\psi_j=\theta_j+\sum_{k=1}^p\phi_k\psi_{j-k}\)</span>, <span class="math inline">\(j=0,1,2,\ldots\)</span>, daí</p>
+<div class="math">
+<p><span class="math display">\[\begin{align}
   \psi_0&amp;=1,\\
   \psi_1&amp;=\theta_1+\psi_0\phi_1=0.4+(1)(0.5)=0.4+0.5=0.9,\\
   \psi_2&amp;=\theta_2+\psi_1\phi_1=0+(0.4+0.5)(0.5)=0.45,\\
   \psi_3&amp;=\theta_3+\psi_2\phi_1=(0.4+0.5)(0.5)^2=0.225,\\
   &amp;\,\,\, \vdots\\
   \psi_j&amp;=(0.5)^{j-1}(0.4+0.5), \quad j=1,2,\ldots.
-  \end{align}
-&lt;/div&gt;
+  \end{align}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
 
----
-class: animated, fadeInDown
+<p>O polinômio <span class="math inline">\(\theta(z)=1+0.4z\)</span> tem uma única raíz real <span class="math inline">\(R_1^{-1}=-\frac52=-2.5\)</span>, também fora do círculo unitário, isso significa que o processo é <strong>invertível</strong>, i.e., podemos representar o processo de ruído (com prob. 1) em termos passados do processo, <span class="math display">\[Z_t=\sum_{j=0}^\infty\pi_jX_{t-j}, \quad t\in\mathbb{Z}.\]</span></p>
+<p>Os coeficientes <span class="math inline">\(\{\pi_j\}\)</span> são calculados como <span class="math display">\[\pi_j=-\sum_{k=1}^q\theta_k\pi_{j-k}-\phi_j,\]</span> com <span class="math inline">\(j=0,1,2,\ldots\)</span>.</p>
+</section>
+<section class="slide level2">
 
-### Processos ARMA(p,q) - I
-O polinômio `\(\theta(z)=1+0.4z\)` tem uma única raíz real `\(R_1^{-1}=-\frac52=-2.5\)`,
-também fora do círculo unitário, isso significa que o processo é **invertível**,
-i.e., podemos representar o processo de ruído (com prob. 1) em termos passados
-do processo,
-`$$Z_t=\sum_{j=0}^\infty\pi_jX_{t-j}, \quad t\in\mathbb{Z}.$$`
-
-Os coeficientes `\(\{\pi_j\}\)` são calculados como `\(\pi_j=-\sum_{k=1}^q\theta_k\pi_{j-k}-\phi_j\)`,
-`\(j=0,1,2,\ldots\)`, daí
-&lt;div class="math"&gt;
-  \begin{align}
+<p>Dessa forma,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align}
   \pi_0&amp;=1,\\
   \pi_1&amp;=-\theta_1\pi_0-\phi_1=-(0.4+0.5)=-0.9,\\
   \pi_2&amp;=-\theta_1\pi_1=-(0.4+0.5)(-0.4)=0.36,\\
   \pi_3&amp;=-\theta_1\pi_2=-\theta_1(-\theta_1\pi_1)=\theta_1^2\pi_1=-(0.4+0.5)(0.4)^2=-0.144,\\
   &amp;\,\,\, \vdots\\
   \pi_j&amp;=\theta_1^{j-1}\pi_1=(-0.9)(-0.4)^{j-1}, \quad j=1,2,\ldots.
-  \end{align}
-&lt;/div&gt;
+  \end{align}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
 
----
-class: animated, fadeInUp
+<div id="exm-arma3" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 5</strong></span> Considere um processo estacionário <span class="math inline">\(\{X_t\}\)</span> com representação ARMA<span class="math inline">\((1,1)\)</span>, i.e., <span class="math display">\[X_t-\phi X_{t-1}=Z_t+\theta Z_{t-1},\]</span> onde <span class="math inline">\(\{Z_t\}\)</span> é um processo de ruído branco com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(\sigma^2\)</span> e <span class="math inline">\(\phi+\theta\ne0\)</span>.</p>
+<ul>
+<li><p>Se <span class="math inline">\(\phi=\pm1\)</span>, o processo não é estacionário;</p></li>
+<li><p>Se <span class="math inline">\(|\phi|&lt;1\)</span>, existe uma única solução estacionária. Em outras palavras <span class="math inline">\(\{X_t\}\)</span> é <strong>causal</strong>;</p></li>
+<li><p>Se <span class="math inline">\(|\phi|&gt;1\)</span>, existe uma única solução estacionária <strong>não-causal</strong>;</p></li>
+<li><p>Se <span class="math inline">\(|\theta|&lt;1\)</span>, o processo é <strong>invertível</strong>;</p></li>
+<li><p>Se <span class="math inline">\(|\theta|&gt;1\)</span>, o processo é <strong>não-invertível</strong>;</p></li>
+<li><p>Se <span class="math inline">\(\theta=\pm1\)</span>, o processo é <strong>invertível</strong> em um sentido mais geral.</p></li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
 
-### Processos ARMA(p,q) - I
-
-&lt;b&gt;&lt;span style="color:rgba(141, 0, 69, 1)"&gt;Exemplo.&lt;/span&gt;&lt;/b&gt; Considere
-um processo estacionário `\(\{X_t\}\)` com representação ARMA `\(\!(1,1)\)`, i.e.,
-`$$X_t-\phi X_{t-1}=Z_t+\theta Z_{t-1},$$`
-onde `\(\{Z_t\}\)` é um processo de ruído branco com média `\(0\)` e 
-variância `\(\sigma^2\)` e `\(\phi+\theta\ne0\)`.
-
-* Se `\(\phi=\pm1\)`, o processo não é estacionário;
-
-*  Se `\(|\phi|&lt;1\)`, existe uma única solução estacionária. Em outras
-palavras `\(\{X_t\}\)` é **causal**;
-
-* Se `\(|\phi|&gt;1\)`, existe uma única solução estacionária **não-causal**;
-
-* Se `\(|\theta|&lt;1\)`, o processo é **invertível**;
-
-* Se `\(|\theta|&gt;1\)`, o processo é **não-invertível**;
-
-* Se `\(\theta=\pm1\)`, o processo é **invertível** em um sentido mais geral.
-
-
----
-class: animated, fadeIn
-
-### Processos ARMA(p,q) - I
-
-&lt;b&gt;&lt;span style="color:rgba(141, 0, 69, 1)"&gt;Exemplo.&lt;/span&gt;&lt;/b&gt; Considere
-o processo `\(\{X_t\}\)` com a seguinte representação
-`$$X_t=0.7X_{t-1}-0.1X_{t-2}+Z_t,$$`
-com `\(\{Z_t\}\)` um processo de ruído branco com média `\(0\)` e variância `\(\sigma^2\)`.
-
-O polinômio característico associado à equação em diferenças é dado por
-`$$\phi(z)=1-0.7z+0.1z^2.$$`
-Daí, 
-&lt;div class="math"&gt;
-  \begin{align}
+<div id="exm-arma4" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 6</strong></span> Considere o processo <span class="math inline">\(\{X_t\}\)</span> com a seguinte representação <span class="math display">\[X_t=0.7X_{t-1}-0.1X_{t-2}+Z_t,\]</span> com <span class="math inline">\(\{Z_t\}\)</span> um processo de ruído branco com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(\sigma^2\)</span>.</p>
+O polinômio característico associado à equação em diferenças é dado por <span class="math display">\[\phi(z)=1-0.7z+0.1z^2.\]</span> Daí,
+<div class="math">
+<p><span class="math display">\[\begin{align}
   z&amp;=\frac{0.7\pm\sqrt{(-0.7)^2-4(0.1)(1)}}{2(0.1)}=\frac{0.7\pm\sqrt{0.49-0.4}}{0.2}=\frac{0.7\pm\sqrt{0.09}}{0.2}=\frac{0.7\pm0.3}{0.2},
-  \end{align}
-&lt;/div&gt;
+  \end{align}\]</span></p>
+</div>
+<p>onde <span class="math inline">\(R_1^{-1}=\frac{0.7+0.3}{0.2}=5\)</span> e <span class="math inline">\(R_2^{-1}=\frac{0.7-0.3}{0.2}=2\)</span>, ambas fora do círculo unitário. Dessa forma, o processo <span class="math inline">\(\{X_t\}\)</span> é <strong>causal</strong>.</p>
+</div>
+</section>
+<section class="slide level2">
 
-onde `\(R_1^{-1}=\frac{0.7+0.3}{0.2}=5\)` e `\(R_2^{-1}=\frac{0.7-0.3}{0.2}=2\)`, 
-ambas fora do círculo unitário. Dessa forma, o processo `\(\{X_t\}\)` é **causal**.
-
-
----
-class: animated, fadeInLeft
-
-### Processos ARMA(p,q) - I
-
-Podemos representar o processo (com prob. 1), em termos passados do ruído,
-`$$X_t=\sum_{j=0}^\infty\psi_jZ_{t-j}, \quad t\in\mathbb{Z}.$$`
-Os coeficientes `\(\{\psi_j\}\)` são calculados como `\(\psi_j=\theta_j+\sum_{k=1}^p\phi_k\psi_{j-k}\)`,
-`\(j=0,1,2,\ldots\)`, daí
-
-&lt;div class="math"&gt;
-  \begin{align}
+<p>Podemos representar o processo (com prob. 1), em termos passados do ruído, <span class="math display">\[X_t=\sum_{j=0}^\infty\psi_jZ_{t-j}, \quad t\in\mathbb{Z}.\]</span> Os coeficientes <span class="math inline">\(\{\psi_j\}\)</span> são calculados como <span class="math inline">\(\psi_j=\theta_j+\sum_{k=1}^p\phi_k\psi_{j-k}\)</span>, <span class="math inline">\(j=0,1,2,\ldots\)</span>, daí</p>
+<div class="math">
+<p><span class="math display">\[\begin{align}
   \psi_0&amp;=1,\\
   \psi_1&amp;=\psi_0\phi_1=0.7,\\
   \psi_2&amp;=\psi_1\phi_1+\psi_0\phi_2=(0.7)(0.7)+(1)(-0.1)=0.49-0.1=0.48,\\
   \psi_3&amp;=\psi_2\phi_1+\psi_1\phi_2=\left(0.7^2-0.1\right)(0.7)+(0.7)(-0.1)=0.203,\\
   &amp;\,\,\, \vdots\\
   \psi_j&amp;=0.7\psi_{j-1}-0.1\psi_{j-1}, \quad j=2,\ldots.
-  \end{align}
-&lt;/div&gt;
+  \end{align}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
 
-
----
-class: animated, fadeIn
-
-### Processos ARMA(p,q) - I
-
-&lt;b&gt;&lt;span style="color:rgba(141, 0, 69, 1)"&gt;Exemplo.&lt;/span&gt;&lt;/b&gt;
-Considere o processo `\(\{X_t\}\)` com a seguinte representação
-`$$X_t-0.75X_{t-1}+0.5625X_{t-2}=Z_t+1.25Z_{t-1},$$`
-com `\(\{Z_t\}\)` um processo de ruído branco com média `\(0\)` e variância `\(\sigma^2\)`.
-
-O polinômio característico associado à parte autorregressiva é dado por
-`$$\phi(z)=1-0.75z+0.5625z^2.$$`
-Daí, 
-&lt;div class="math"&gt;
-  \begin{align}
+<div id="exm-arma5" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 7</strong></span> Considere o processo <span class="math inline">\(\{X_t\}\)</span> com a seguinte representação <span class="math display">\[X_t-0.75X_{t-1}+0.5625X_{t-2}=Z_t+1.25Z_{t-1},\]</span> com <span class="math inline">\(\{Z_t\}\)</span> um processo de ruído branco com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(\sigma^2\)</span>.</p>
+O polinômio característico associado à parte autorregressiva é dado por <span class="math display">\[\phi(z)=1-0.75z+0.5625z^2.\]</span> Daí,
+<div class="math">
+<p><span class="math display">\[\begin{align}
   z&amp;=\frac{0.75\pm\sqrt{(-0.75)^2-4(0.5625)(1)}}{2(0.5625)}=\frac{0.75\pm\sqrt{0.5625-4(0.5625)}}{2(0.5625)}\\
   &amp;=\frac{0.75\pm0.75\sqrt{-3}}{2(0.75)^2}=\frac{1\pm\sqrt{-3}}{1.5}=\frac23(1\pm\sqrt{3}\, i).
-  \end{align}
-&lt;/div&gt;
+  \end{align}\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
 
----
-class: animated, fadeInDown
+<p>Então, o polinômio tem duas raízes complexas <span class="math inline">\(R_i^{-1}=\frac23(1\pm\sqrt{3}\, i)\)</span>, para <span class="math inline">\(i=1,2\)</span>.</p>
+<p><br></p>
+<p>Dessa forma, <span class="math inline">\(|\frac23(1\pm\sqrt{3}\,i)|=\left(\frac23\right)^2+\left(\frac23\sqrt{3}\right)^2=\frac49+\frac{12}{9}=\frac{16}{9}&gt;1\)</span>, fora do círculo unitário. Portanto, o processo <span class="math inline">\(\{X_t\}\)</span> é <strong>causal</strong>.</p>
+<p><br></p>
+<p>Por otra parte, o polinômio <span class="math inline">\(\theta(z)=1+1.25z\)</span> tem uma única raíz real <span class="math inline">\(R_1^{-1}=-0.8\)</span>, dentro do círculo unitário, isso significa que o processo é <strong>não-invertível</strong>.</p>
+</section>
+<section id="função-de-autocovariância" class="slide level2 center" data-background-color="#172a46">
+<h2>Função de autocovariância</h2>
+<div class="cell">
+<style type="text/css">
+.center h2 {
+  text-align: center !important
+}
+</style>
+</div>
+</section>
+<section class="slide level2">
 
-### Processos ARMA(p,q) - I
+<h3 id="função-de-autocovariância-1">Função de autocovariância</h3>
+<p>Seja processo <span class="math inline">\(\{X_t; t\in\mathbb{Z}\}\)</span> com representação ARMA<span class="math inline">\((p,q)\)</span> causal, com representação <span class="math inline">\(\phi(B)X_t=\theta(B)Z_t\)</span>, onde <span class="math inline">\(\{Z_t\}\)</span> é um processo de ruído branco com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(\sigma^2\)</span>. Sendo <span class="math inline">\(\{X_t\}\)</span> causal, então <span class="math display">\[X_t=\sum_{j=0}^\infty\psi_jZ_{t-j},\]</span> onde <span class="math inline">\(\sum_{j=0}^\infty\psi_jz^j=\theta(z)\phi^{-1}(z)\)</span>, para <span class="math inline">\(|z|&lt;1\)</span>.</p>
+<ul>
+<li><strong>Método 1</strong>: Pelo resultado da <ins><a href="https://ffajardo64.github.io/statistical_learning/cursos/STA13828/aula2.html#/10" target="_blank">Proposição 1</a></ins> apresentada na seção de Processos Lineares, temos que <span class="math display">\[\gamma(h)=\mathbb{E}\left[X_{t+h}X_t\right]=\sum_{j=-\infty}^\infty\psi_j\psi_{j+h}\sigma^2=\sigma^2\sum_{j=0}^\infty\psi_j\psi_{j+|h|}.\]</span></li>
+</ul>
+</section>
+<section class="slide level2">
 
-Então, o polinômio tem duas raízes complexas `\(R_i^{-1}=\frac23(1\pm\sqrt{3}\, i)\)`, para i=1,2. 
-Dessa forma, `\(|\frac23(1\pm\sqrt{3}\,i)|=\left(\frac23\right)^2+\left(\frac23\sqrt{3}\right)^2=\frac49+\frac{12}{9}=\frac{16}{9}&gt;1\)`, fora do círculo unitário. Portanto, o processo `\(\{X_t\}\)` é **causal**.
+<div id="exm-arma6" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 8</strong></span> Considere um processo <span class="math inline">\(\{X_t\}\)</span> causal com representação ARMA<span class="math inline">\((1,1)\)</span>, i.e., <span class="math display">\[X_t-\phi X_{t-1}=Z_t+\theta Z_{t-1},\]</span> onde <span class="math inline">\(\{Z_t\}\)</span> é um processo de ruído branco com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(\sigma^2\)</span>. A função de autocovariância do processo <span class="math inline">\(\{X_t\}\)</span> é dada por:</p>
+<ul>
+<li>Para <span class="math inline">\(h=0\)</span>,</li>
+</ul>
+<p><span class="math display">\[\gamma(0)=\sigma^2\sum_{j=0}^\infty\psi_j^2,\]</span></p>
+<p>onde <span class="math inline">\(\psi_j=\theta_j+\sum_{k=1}^p\phi_k\psi_{j-k}\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
 
-Por otra parte, o polinômio `\(\theta(z)=1+1.25z\)` tem uma única raíz real `\(R_1^{-1}=-0.8\)`,
-dentro do círculo unitário, isso significa que o processo é **não-invertível**.
-
-
----
-class: inverse, hide-logo, middle, center
-
-### Função de autocovariância
-
----
-class: animated, fadeInLeft
-
-### Função de autocovariância - I
-
-Seja processo `\(\{X_t; t\in\mathbb{Z}\}\)` com representação 
-ARMA `\(\!(p,q)\)` causal, com representação `\(\phi(B)X_t=\theta(B)Z_t\)`,
-onde `\(\{Z_t\}\)` é um processo de ruído branco com média `\(0\)` e variância
-`\(\sigma^2\)`. Sendo `\(\{X_t\}\)` causal, então
-`$$X_t=\sum_{j=0}^\infty\psi_jZ_{t-j},$$`
-onde `\(\sum_{j=0}^\infty\psi_jz^j=\theta(z)\phi^{-1}(z)\)`, para `\(|z|&lt;1\)`.
-
-
-* **Método 1**: Pelo resultado da &lt;ins&gt;&lt;a href="https://bit.ly/48mVgMe" target="_blank"&gt;Proposição&lt;/a&gt;&lt;/ins&gt;
-apresentada na seção de Processos Lineares, temos que
-`$$\gamma(h)=\mathbb{E}\left[X_{t+h}X_t\right]=\sum_{j=-\infty}^\infty\psi_j\psi_{j+h}\sigma^2=\sigma^2\sum_{j=0}^\infty\psi_j\psi_{j+|h|}.$$`
-
-
----
-class: animated, fadeIn
-
-### Função de autocovariância - I
-
-&lt;b&gt;&lt;span style="color:rgba(141, 0, 69, 1)"&gt;Exemplo.&lt;/span&gt;&lt;/b&gt; Considere
-um processo `\(\{X_t\}\)` causal com representação ARMA `\(\!(1,1)\)`, i.e.,
-`$$X_t-\phi X_{t-1}=Z_t+\theta Z_{t-1},$$`
-onde `\(\{Z_t\}\)` é um processo de ruído branco com média `\(0\)` e 
-variância `\(\sigma^2\)`. A função de autocovariância do processo `\(\{X_t\}\)` é dada por:
-
-Para `\(h=0\)`,
-`$$\gamma(0)=\sigma^2\sum_{j=0}^\infty\psi_j^2,$$`
-onde `\(\psi_j=\theta_j+\sum_{k=1}^p\phi_k\psi_{j-k}\)`, i.e., `\(\psi_0=1\)`,
-&lt;div class="math"&gt;
-  \begin{align}
-  \psi_1&amp;=\theta+\phi; &amp; \psi_2&amp;=\psi_1\phi_1=(\theta+\phi)\phi; &amp; \psi_3&amp;=\psi_2\phi_1=(\theta+\phi)\phi^2; &amp;\cdots&amp; &amp; \psi_j&amp;=(\theta+\phi)\phi^{j-1}.
-  \end{align}
-&lt;/div&gt;
-
----
-class: animated, fadeInUp
-
-### Função de autocovariância - I
-
+<p>Dessa forma, temo que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+  \psi_0&amp;=1; &amp; \psi_1&amp;=\theta+\phi; &amp; \psi_2&amp;=\psi_1\phi_1=(\theta+\phi)\phi; \\ \psi_3&amp;=\psi_2\phi_1=(\theta+\phi)\phi^2; &amp;&amp;\cdots &amp; \psi_j&amp;=(\theta+\phi)\phi^{j-1}.
+  \end{align*}\]</span></p>
+</div>
+<p><br></p>
 Daí,
-&lt;div class="math"&gt;
-  \begin{align}
+<div class="math">
+<p><span class="math display">\[\begin{align}
     \gamma(0)&amp;=\sigma^2\sum_{j=0}^\infty\psi_j^2=\sigma^2\left[1+\sum_{j=1}^\infty(\theta+\phi)^2\phi^{2(j-1)}\right]
     =\sigma^2\left[1+(\theta+\phi)^2\sum_{j=0}^\infty\phi^{2j}\right]\\
     &amp;=\sigma^2\left[1+(\theta+\phi)^2\frac{1}{1-\phi^2}\right].
-  \end{align}
-&lt;/div&gt;
+  \end{align}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
 
-Para `\(h=1\)`,
-
-&lt;div class="math"&gt;
-  \begin{align}
-    \gamma(1)&amp;=\sigma^2\sum_{j=0}^\infty\psi_j\psi_{j+1}=\sigma^2\left[\psi_1\psi_0+\sum_{j=1}^\infty\psi_{j+1}\psi_j\right]=\sigma^2\left[\theta+\phi+\sum_{j=1}^\infty(\theta+\phi)\phi^j(\theta+\phi)\phi^{j-1}\right]\\
+<ul>
+<li>Para <span class="math inline">\(h=1\)</span>,</li>
+</ul>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \gamma(1)&amp;=\sigma^2\sum_{j=0}^\infty\psi_j\psi_{j+1}=\sigma^2\left[\psi_1\psi_0+\sum_{j=1}^\infty\psi_{j+1}\psi_j\right]\\
+    &amp;=\sigma^2\left[\theta+\phi+\sum_{j=1}^\infty(\theta+\phi)\phi^j(\theta+\phi)\phi^{j-1}\right]\\
     &amp;=\sigma^2\left[\theta+\phi+(\theta+\phi)^2\sum_{j=1}^\infty\phi^j\phi^{j-1}\right]=\sigma^2\left[\theta+\phi+(\theta+\phi)^2\sum_{j=1}^\infty\phi^{2j-1}\right]\\
     &amp;=\sigma^2\left[\theta+\phi+(\theta+\phi)^2\phi\left(1+\phi^2\sum_{j=0}^\infty\phi^{2j}\right)\right]
     =\sigma^2\left[\theta+\phi+(\theta+\phi)^2\frac{\phi}{1-\phi^2}\right].
-  \end{align}
-&lt;/div&gt;
+  \end{align*}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
 
----
-class: animated, fadeInDown
+<ul>
+<li>Para <span class="math inline">\(h=2\)</span>,</li>
+</ul>
+<div class="math">
+<p><span class="math display">\[\begin{align}
+    \gamma(2)&amp;=\sigma^2\sum_{j=0}^\infty\psi_j\psi_{j+2}=\sigma^2\left[\psi_2\psi_0+\sum_{j=1}^\infty\psi_{j+2}\psi_j\right]\\
+    &amp;=\sigma^2\left[(\theta+\phi)\phi+\sum_{j=1}^\infty(\theta+\phi)\phi^{j+1}(\theta+\phi)\phi^{j-1}\right]\\
+    &amp;=\sigma^2\left[(\theta+\phi)\phi+(\theta+\phi)^2\sum_{j=1}^\infty\phi^{2j}\right]
+    =\sigma^2\left[(\theta+\phi)\phi+(\theta+\phi)^2\phi^2\sum_{j=0}^\infty\phi^{2j}\right]\\
+    &amp;=\sigma^2\left[(\theta+\phi)\phi+(\theta+\phi)^2\frac{\phi^2}{1-\phi^2}\right]
+    =\sigma^2\phi\left[(\theta+\phi)+(\theta+\phi)^2\frac{\phi}{1-\phi^2}\right]\\
+    &amp;=\phi\gamma(1).
+  \end{align}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
 
-### Função de autocovariância - I
+Em geral, para <span class="math inline">\(h\ge2\)</span>
+<div class="math">
+<p><span class="math display">\[\begin{align}
+    \gamma(h)&amp;=\sigma^2\sum_{j=0}^\infty\psi_j\psi_{j+h}=\sigma^2\left[\psi_h\psi_0+\sum_{j=1}^\infty\psi_{j+h}\psi_j\right]\\
+    &amp;=\sigma^2\left[(\theta+\phi)\phi^{h-1}+\sum_{j=1}^\infty(\theta+\phi)\phi^{j+h-1}(\theta+\phi)\phi^{j-1}\right]\\
+    &amp;=\sigma^2\left[(\theta+\phi)\phi^{h-1}+(\theta+\phi)^2\sum_{j=1}^\infty\phi^{2j+h-2}\right]\\
+    &amp;=\sigma^2\left[(\theta+\phi)\phi^{h-1}+(\theta+\phi)^2\phi^{h-1}\sum_{j=1}^\infty\phi^{2j-1}\right]
+  \end{align}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
 
-Para `\(h=2\)`,
-
-&lt;div class="math"&gt;
-  \begin{align}
-    \gamma(2)&amp;=\sigma^2\sum_{j=0}^\infty\psi_j\psi_{j+2}=\sigma^2\left[\psi_2\psi_0+\sum_{j=1}^\infty\psi_{j+2}\psi_j\right]=\sigma^2\left[(\theta+\phi)\phi+\sum_{j=1}^\infty(\theta+\phi)\phi^{j+1}(\theta+\phi)\phi^{j-1}\right]\\
-    &amp;=\sigma^2\left[(\theta+\phi)\phi+(\theta+\phi)^2\sum_{j=1}^\infty\phi^{2j}\right]=\sigma^2\left[(\theta+\phi)\phi+(\theta+\phi)^2\sum_{j=1}^\infty\phi^{2j}\right]\\
-    &amp;=\sigma^2\left[(\theta+\phi)\phi+(\theta+\phi)^2\phi^2\sum_{j=0}^\infty\phi^{2j}\right]=\sigma^2\left[(\theta+\phi)\phi+(\theta+\phi)^2\frac{\phi^2}{1-\phi^2}\right]\\
-    &amp;=\sigma^2\phi\left[(\theta+\phi)+(\theta+\phi)^2\frac{\phi}{1-\phi^2}\right]=\phi\gamma(1).
-  \end{align}
-&lt;/div&gt;
-
----
-class: animated, fadeIn
-
-### Função de autocovariância - I
-
-Em geral, para `\(h\ge2\)`
-&lt;div class="math"&gt;
-  \begin{align}
-    \gamma(h)&amp;=\sigma^2\sum_{j=0}^\infty\psi_j\psi_{j+h}=\sigma^2\left[\psi_h\psi_0+\sum_{j=1}^\infty\psi_{j+h}\psi_j\right]=\sigma^2\left[(\theta+\phi)\phi^{h-1}+\sum_{j=1}^\infty(\theta+\phi)\phi^{j+h-1}(\theta+\phi)\phi^{j-1}\right]\\
-    &amp;=\sigma^2\left[(\theta+\phi)\phi^{h-1}+(\theta+\phi)^2\sum_{j=1}^\infty\phi^{2j+h-2}\right]=\sigma^2\left[(\theta+\phi)\phi^{h-1}+(\theta+\phi)^2\phi^{h-1}\sum_{j=1}^\infty\phi^{2j-1}\right]\\
-    &amp;=\sigma^2\left[(\theta+\phi)\phi^{h-1}+(\theta+\phi)^2\phi^{h-1}\frac{\phi}{1-\phi^2}\right]=\sigma^2\phi^{h-1}\left[(\theta+\phi)+(\theta+\phi)^2\frac{\phi}{1-\phi^2}\right]\\
+<div class="math">
+<p><span class="math display">\[\begin{align}
+    \gamma(h)&amp;=\sigma^2\left[(\theta+\phi)\phi^{h-1}+(\theta+\phi)^2\phi^{h-1}\sum_{j=1}^\infty\phi^{2j-1}\right]\\
+    &amp;=\sigma^2\left[(\theta+\phi)\phi^{h-1}+(\theta+\phi)^2\phi^{h-1}\frac{\phi}{1-\phi^2}\right]\\
+    &amp;=\sigma^2\phi^{h-1}\left[(\theta+\phi)+(\theta+\phi)^2\frac{\phi}{1-\phi^2}\right]\\
     &amp;=\phi^{h-1}\gamma(1).
-  \end{align}
-&lt;/div&gt;
+  \end{align}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
 
-
----
-class: animated, fadeInRight
-
-### Função de autocovariância - I
-
-&lt;b&gt;&lt;span style="color:rgba(141, 0, 69, 1)"&gt;Exemplo.&lt;/span&gt;&lt;/b&gt; Considere
-um processo `\(\{X_t\}\)` com representação MA `\(\!(q)\)`, i.e.,
-`$$X_t=Z_t+\theta_1 Z_{t-1}+\cdots+\theta_qZ_{t-q},$$`
-onde `\(\{Z_t\}\)` é um processo de ruído branco com média `\(0\)` e 
-variância `\(\sigma^2\)`. A função de autocovariância do processo `\(\{X_t\}\)` é dada por:
-`$$\gamma(h)=\sigma^2\sum_{j=0}^\infty\psi_j\psi_{j+|h|},$$`
-onde `\(\psi_j=\theta_j+\sum_{k=1}^p\phi_k\psi_{j-k}\)`, onde `\(\theta_0=1\)`,
-`\(\theta_j=0\)`, para `\(j&gt;q\)` e `\(\psi_j=0\)` para `\(j&lt;0\)`. Daí,
-&lt;div class="math"&gt;
-  \begin{align}
+<div id="exm-arma7" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 9</strong></span> Considere um processo <span class="math inline">\(\{X_t\}\)</span> com representação MA<span class="math inline">\((q)\)</span>, i.e., <span class="math display">\[X_t=Z_t+\theta_1 Z_{t-1}+\cdots+\theta_qZ_{t-q},\]</span> onde <span class="math inline">\(\{Z_t\}\)</span> é um processo de ruído branco com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(\sigma^2\)</span>. A função de autocovariância do processo <span class="math inline">\(\{X_t\}\)</span> é dada por: <span class="math display">\[\gamma(h)=\sigma^2\sum_{j=0}^\infty\psi_j\psi_{j+|h|},\]</span> onde <span class="math inline">\(\psi_j=\theta_j+\sum_{k=1}^p\phi_k\psi_{j-k}\)</span>, onde <span class="math inline">\(\theta_0=1\)</span>, <span class="math inline">\(\theta_j=0\)</span>, para <span class="math inline">\(j&gt;q\)</span> e <span class="math inline">\(\psi_j=0\)</span> para <span class="math inline">\(j&lt;0\)</span>. Daí,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align}
     \gamma(h)&amp;=\begin{cases}
     \sigma^2\sum_{j=0}^{q-|h|}\theta_j\theta_{j+|h|}, &amp; \text{ para } |h|\le q;\\
     0, &amp; \text{ para } |h|&gt;q.
     \end{cases}
-  \end{align}
-&lt;/div&gt;
+  \end{align}\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
 
----
-class: animated, fadeInLeft
-
-### Função de autocovariância - I
-
-&lt;b&gt;&lt;span style="color:rgba(0, 114,4, 1)"&gt;Exercício.&lt;/span&gt;&lt;/b&gt; Considere
-`\(\{X_t\}\)` e `\(\{Y_t\}\)` dois processos com as seguintes representações, 
-respectivamente:
-&lt;div class='math'&gt;
-  \begin{align}
-  X_t&amp;=Z_t+\theta Z_{t-1};\\
-  Y_t&amp;=W_t+\frac1\theta W_{t-1},
-  \end{align}
-&lt;/div&gt;
-
-onde `\(0&lt;|\theta|&lt;1\)`, `\(\{Z_t\}\)` e `\(\{W_t\}\)` são processo de ruído branco 
-com média `\(0\)` e variâncias `\(\sigma^2\)` e `\(\sigma^2\theta^2\)`, respectivamente. Mostre que as
-funções de autocorrelação para `\(\{X_t\}\)` e `\(\{Y_t\}\)` são iguais.
-
-&lt;b&gt;&lt;span style="color:rgba(0, 114,4, 1)"&gt;Exercício.&lt;/span&gt;&lt;/b&gt; Seja `\(\{X_t\}\)` um
-processo com representação MA `\(\!(1)\)` não-invertível, i.e. `\(X_t=Z_t + \theta Z_{t-1}\)`,
-onde `\(|\theta|&gt;1\)` e `\(\{Z_t\}\)` um processo de ruído branco com média `\(0\)` e
-variância `\(\sigma^2\)`. Defina um novo processo `\(\{W_t\}\)` com representação
-`$$W_t=\sum_{j=0}^\infty(-\theta)^{-j}X_{t-j}.$$`
-Mostre que `\(\{W_t\}\)` é um processo de ruído branco com média `\(0\)` e variância `\(\sigma_W^2\)`. 
-Calcule `\(\sigma_W^2\)` em termos de `\(\theta\)` e `\(\sigma^2\)`.
-
----
-class: animated, fadeInDown
-
-### Função de autocovariância - II
-
-* **Método 2**: Considere a equação
-
-`$$X_t-\phi_1X_{t-1}-\cdots\phi_pX_{t-p}=Z_t+\theta_1 Z_{t-1}+\cdots+\theta_q Z_{t-q}.$$`
-Multiplicando em ambos os lados por `\(X_{t-k}\)`, para `\(k=0,1,2,\ldots\)` e
-aplicando o operador valor esperado, temos que
-
-&lt;div class="math"&gt;
-  \begin{align*}
-    \mathbb{E}\left[X_tX_{t-k}\right]-\phi_1\mathbb{E}\left[X_{t-1}X_{t-k}\right]-\cdots\phi_p\mathbb{E}\left[X_{t-p}X_{t-k}\right]&amp;=\mathbb{E}\left[Z_tX_{t-k}\right]+\theta_1 \mathbb{E}\left[Z_{t-1}X_{t-k}\right]+\cdots+\theta_q \mathbb{E}\left[Z_{t-q}X_{t-k}\right]\\
+<h3 id="função-de-autocovariância-2">Função de autocovariância</h3>
+<ul>
+<li><strong>Método 2</strong>: Considere a equação</li>
+</ul>
+<p><span class="math display">\[X_t-\phi_1X_{t-1}-\cdots\phi_pX_{t-p}=Z_t+\theta_1 Z_{t-1}+\cdots+\theta_q Z_{t-q}.\]</span> Multiplicando em ambos os lados por <span class="math inline">\(X_{t-k}\)</span>, para <span class="math inline">\(k=0,1,2,\ldots\)</span> e aplicando o operador valor esperado, temos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \mathbb{E}\left[X_tX_{t-k}\right]-\phi_1\mathbb{E}\left[X_{t-1}X_{t-k}\right]&amp;-\cdots\phi_p\mathbb{E}\left[X_{t-p}X_{t-k}\right]\\
+    &amp;=\mathbb{E}\left[Z_tX_{t-k}\right]+\theta_1 \mathbb{E}\left[Z_{t-1}X_{t-k}\right]+\cdots+\theta_q \mathbb{E}\left[Z_{t-q}X_{t-k}\right]
+  \end{align*}\]</span></p>
+</div>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
     \gamma(k)-\phi_1\gamma(k-1)-\cdots-\phi_p\gamma(k-p)&amp;=
     \begin{cases}
       \sigma^2\sum_{j=0}^\infty\theta_{k+j}\psi_j, &amp; \text{ para } 0\le k&lt; m;\\
       0, &amp; \text{ para } k\ge m,
     \end{cases}
-  \end{align*}
-&lt;/div&gt;
+  \end{align*}\]</span></p>
+</div>
+<p>onde <span class="math inline">\(m=\max\{p,q+1\}\)</span>, <span class="math inline">\(\psi_j=0\)</span> para <span class="math inline">\(j&lt;0\)</span>, <span class="math inline">\(\theta_0=1\)</span> e <span class="math inline">\(\theta_j=0\)</span> para <span class="math inline">\(j\ne0, 1, \ldots, q\)</span>.</p>
+</section>
+<section class="slide level2">
 
-onde `\(m=\max\{p,q+1\}\)`, `\(\psi_j=0\)` para `\(j&lt;0\)`, `\(\theta_0=1\)` e `\(\theta_j=0\)`
-para `\(j\ne0, 1, \ldots, q\)`.
-
-&lt;br&gt;
-
-&gt; Observe que, para o caso `\(k\ge m\)`, temos uma equação em diferenças 
-homogênea, cuja solução foi discutida nas aulas anteriores.
-
----
-class: animated, fadeInUp
-
-### Função de autocovariância - II
-
-&lt;b&gt;&lt;span style="color:rgba(141, 0, 69, 1)"&gt;Exemplo.&lt;/span&gt;&lt;/b&gt; Considere
-um processo `\(\{X_t\}\)` com representação ARMA `\(\!(1,1)\)`, i.e. `\(X_t-\phi X_{t-1}=Z_t+\theta Z_{t-1}\)`. Se o processo é causal, então
-&lt;div class="math"&gt;
-  \begin{align*}
+<div id="exm-arma8" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 10</strong></span> Considere um processo <span class="math inline">\(\{X_t\}\)</span> com representação ARMA<span class="math inline">\((1,1)\)</span>, i.e.&nbsp; <span class="math inline">\(X_t-\phi X_{t-1}=Z_t+\theta Z_{t-1}\)</span>. Se o processo é causal, então</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
     \gamma(k)-\phi_1\gamma(k-1)&amp;=
     \begin{cases}
       \sigma^2\sum_{j=0}^\infty\theta_{k+j}\psi_j, &amp; \text{ para } 0\le k&lt; 2;\\
       0, &amp; \text{ para } k\ge 2.
     \end{cases}
-  \end{align*}
-&lt;/div&gt;
+  \end{align*}\]</span></p>
+</div>
+<ul>
+<li>Para <span class="math inline">\(k=0\)</span>, temos que <span class="math display">\[\gamma(0)-\phi\gamma(1)=\sigma^2\sum_{j=0}^\infty\theta_j\psi_j=\sigma^2\left(1+\theta\psi_1+\sum_{j=2}^\infty\theta_j\psi_j\right)=\sigma^2\left(1+\theta(\theta+\phi)\right).\]</span></li>
+</ul>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Importante</strong></p>
+</div>
+<div class="callout-content">
+<p>Lembre que, <span class="math inline">\(\psi_j=\theta_j+\sum_{k=1}^p\phi_k\psi_{j-k}, \quad j=0,1,2,\ldots,\)</span> onde <span class="math inline">\(\theta_0=1\)</span>, <span class="math inline">\(\theta_j=0\)</span> para <span class="math inline">\(j&gt;q\)</span> e <span class="math inline">\(\psi_j=0\)</span> para <span class="math inline">\(j&lt;0\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
 
-* Daí, para `\(k=0\)`, temos que
-`$$\gamma(0)-\phi\gamma(1)=\sigma^2\sum_{j=0}^\infty\theta_j\psi_j=\sigma^2\left(1+\theta\psi_1+\sum_{j=2}^\infty\theta_j\psi_j\right)=\sigma^2\left(1+\theta(\theta+\phi)\right).$$`
-
-
-&gt; Lembre que, `\(\psi_j=\theta_j+\sum_{k=1}^p\phi_k\psi_{j-k}, \quad j=0,1,2,\ldots,\)`
-onde `\(\theta_0=1\)`, `\(\theta_j=0\)` para `\(j&gt;q\)` e `\(\psi_j=0\)` para `\(j&lt;0\)`;
-
-* Para `\(k=1\)`, temos que `\(\gamma(1)-\phi\gamma(0)=\sigma^2\theta\)`; 
-
-* Em geral, temos a seguinte relação `\(\gamma(k)-\phi\gamma(k-1)=0\)` para `\(k\ge 2\)`.
-
-
-
----
-class: animated, fadeInDown
-
-### Função de autocovariância - II
-
-&gt; Para calcular `\(\gamma(0)\)`, temos que
-&lt;div class="math"&gt;
-  \begin{align*}
+<ul>
+<li><p>Para <span class="math inline">\(k=1\)</span>, temos que <span class="math inline">\(\gamma(1)-\phi\gamma(0)=\sigma^2\theta\)</span>;</p></li>
+<li><p>Em geral, temos a seguinte relação <span class="math inline">\(\gamma(k)-\phi\gamma(k-1)=0\)</span> para <span class="math inline">\(k\ge 2\)</span>.</p></li>
+</ul>
+<p>Para calcular <span class="math inline">\(\gamma(0)\)</span>, temos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
     \gamma(0)-\phi\gamma(1)&amp;=\sigma^2\left(1+\theta(\theta+\phi)\right)\\
     -\phi^2\gamma(0)+\phi\gamma(1)&amp;=\sigma^2\theta\phi
-  \end{align*}
-&lt;/div&gt;
+  \end{align*}\]</span></p>
+</div>
+<p>Daí,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+  (1-\phi^2)\gamma(0)&amp;=\sigma^2\left(1+\theta^2+2\theta\phi\right)
+  %=\sigma^2\left(1+\theta^2+2\theta\phi+\phi^2-\phi^2\right)\\
+  =\sigma^2\left[1-\phi^2+(\theta+\phi)^2\right].
+\end{align*}\]</span></p>
+</div>
+<p>Então, <span class="math display">\[\gamma(0)=\sigma^2\left[1+\frac{(\theta+\phi)^2}{1-\phi^2}\right].\]</span></p>
+</section>
+<section class="slide level2">
 
-&gt; Daí, `\((1-\phi^2)\gamma(0)=\sigma^2\left(1+\theta^2+2\theta\phi\right)=\sigma^2\left(1+\theta^2+2\theta\phi+\phi^2-\phi^2\right)=\sigma^2\left[1-\phi^2+(\theta+\phi)^2\right]\)`. Então,
-&lt;div class="math"&gt;
-  \begin{align*}
-    \gamma(0)&amp;=\sigma^2\left[1+\frac{(\theta+\phi)^2}{1-\phi^2}\right].\\
-  \end{align*}
-&lt;/div&gt;
-
-&gt; Para `\(\gamma(1)\)`, temos que
-&lt;div class="math"&gt;
-  \begin{align*}
+Para <span class="math inline">\(\gamma(1)\)</span>, temos que
+<div class="math">
+<p><span class="math display">\[\begin{align*}
     \gamma(1)&amp;=\sigma^2\theta+\phi\gamma(0)=\sigma^2\theta+\sigma^2\phi\left[1+\frac{(\theta+\phi)^2}{1-\phi^2}\right].
-  \end{align*}
-&lt;/div&gt;
+  \end{align*}\]</span></p>
+</div>
+<p>Daí, <span class="math display">\[\gamma(1)=\sigma^2\left[\theta+\phi+\frac{(\theta+\phi)^2\phi}{1-\phi^2}\right].\]</span></p>
+</section>
+<section class="slide level2">
 
-&gt; Daí, `\(\gamma(1)=\sigma^2\left[\theta+\phi+\frac{(\theta+\phi)^2\phi}{1-\phi^2}\right]\)`. 
+<div id="exm-arma9" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 11</strong></span> Considere o processo <span class="math inline">\(\{X_t\}\)</span> com a seguinte representação <span class="math inline">\((1+0.3B)X_t=(1-0.7B)Z_t\)</span>. A função de autocorrelação é dada por</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \rho(k)&amp;=\frac{\left[1+(-0.7)(-0.3)\right](-0.7-0.3)}{1+2(-0.3)(-0.7)+(-0.7)^2}(-0.3)^{k-1}=(−0.6335)(-0.3)^{k-1}, \ k=1,2,\ldots.
+  \end{align*}\]</span></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="aula3_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:20%;">
 
+</div><div class="column" style="width:40%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="aula3_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
 
----
-class: animated, fadeIn
-
-### Função de autocovariância - II
-
-&lt;b&gt;&lt;span style="color:rgba(0, 114,4, 1)"&gt;Exercício.&lt;/span&gt;&lt;/b&gt; Seguindo 
-as informações do exemplo anterior, mostre que
-`$$\gamma(k)=\frac{\sigma^2}{1-\phi^2}\phi^{k-1}(\theta+\phi)(1+\theta\phi), \quad k=1,2,3,\ldots$$`
-
-e 
-
-`$$\rho(k)=\frac{(1+\theta\phi)(\theta+\phi)}{1+2\phi\theta+\theta^2}\phi^{k-1}, \quad k=1,2,3,\ldots.$$`
-&gt; Observe que, sob a condição de estacionariedade `\(|\phi|&lt;1\)`, a função 
-de autocorrelação apresenta um decaimento exponencial para `\(0\)`.
-
-
----
-class: animated, fadeIn
-
-### Função de autocovariância - II
-
-&lt;b&gt;&lt;span style="color:rgba(141, 0, 69, 1)"&gt;Exemplo.&lt;/span&gt;&lt;/b&gt; Considere 
-o processo `\(\{X_t\}\)` com a seguinte representação `\((1+0.3B)X_t=(1-0.7B)Z_t\)`.
-A função de autocorrelação é dada por
-&lt;div class="math"&gt;
-  \begin{align*}
-    \rho(k)&amp;=\frac{\left[1+(-0.7)(-0.3)\right](-0.7-0.3)}{1+2(-0.3)(-0.7)+(-0.7)^2}(-0.3)^{k-1}=(−0.6335)(-0.3)^{k-1}, \quad k=1,2,3,\ldots.
-  \end{align*}
-&lt;/div&gt;
-
-Vide **[Figura na p. 30](https://ffajardo64.github.io/statistical_learning/cursos/STA13828/aula3.html#31)**.
-
-&lt;br&gt;
-
-&lt;b&gt;&lt;span style="color:rgba(141, 0, 69, 1)"&gt;Exemplo.&lt;/span&gt;&lt;/b&gt; Considere 
-o processo `\(\{X_t\}\)` com a seguinte representação `\((1-0.7B)X_t=(1+0.3B)Z_t\)`.
-A função de autocorrelação é dada por
-&lt;div class="math"&gt;
-  \begin{align*}
+<div id="exm-arma10" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 12</strong></span> Considere o processo <span class="math inline">\(\{X_t\}\)</span> com a seguinte representação <span class="math inline">\((1-0.7B)X_t=(1+0.3B)Z_t\)</span>. A função de autocorrelação é dada por</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
     \rho(k)&amp;=\frac{\left[1+(0.3)(0.7)\right](0.3+0.7)}{1+2(0.7)(0.3)+(0.3)^2}(0.7)^{k-1}=(0.8013)(0.7)^{k-1}, \quad k=1,2,3,\ldots.
-  \end{align*}
-&lt;/div&gt;
+  \end{align*}\]</span></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="aula3_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:20%;">
 
-Vide **[Figura na p. 31](https://ffajardo64.github.io/statistical_learning/cursos/STA13828/aula3.html#32)**.
----
-class: animated, fadeInRight
-
-### Função de autocovariância - II
-
-&lt;img src="aula3_files/figure-html/unnamed-chunk-1-1.png" width="45%" style="float:left; padding:20px" /&gt;
-
-&lt;img src="aula3_files/figure-html/unnamed-chunk-2-1.png" width="45%" style="float:right; padding:20px" /&gt;
-
----
-class: animated, fadeIn
-
-### Função de autocovariância - II
-
-&lt;img src="aula3_files/figure-html/unnamed-chunk-3-1.png" width="45%" style="float:left; padding:20px" /&gt;
-
-&lt;img src="aula3_files/figure-html/unnamed-chunk-4-1.png" width="45%" style="float:right; padding:20px" /&gt;
-
----
-class: inverse, hide-logo, middle, center
-
-### Função de densidade espectral
-
----
-class: animated, fadeInUp
-
-### Função de densidade espectral - I
-
-Seja processo `\(\{X_t; t\in\mathbb{Z}\}\)` com representação 
-ARMA `\(\!(p,q)\)` causal, com representação `\(\phi(B)X_t=\theta(B)Z_t\)`,
-onde `\(\{Z_t\}\)` é um processo de ruído branco com média `\(0\)` e variância
-`\(\sigma^2\)`, então a densidade espectral do processo `\(\{X_t\}\)` é dada 
-por
-`$$f(\lambda)=\frac{\sigma^2}{2\pi}\frac{\left|\theta\left(e^{-i\lambda}\right)\right|^2}{\left|\phi\left(e^{-i\lambda}\right)\right|^2}, \quad -\pi\le\lambda\le\pi.$$`
-
-&lt;br&gt;
-
-&lt;b&gt;&lt;span style="color:rgba(141, 0, 69, 1)"&gt;Exemplo.&lt;/span&gt;&lt;/b&gt; Considere 
-o processo de ruído branco `\(\{Z_t\}\)`. A densidade espectral é dada por
-&lt;div class="math"&gt;
-  \begin{align*}
-    f(\lambda)=\frac{\sigma^2}{2\pi}\frac{\left|\theta\left(e^{-i\lambda}\right)\right|^2}{\left|\phi\left(e^{-i\lambda}\right)\right|^2}=\frac{\sigma^2}{2\pi}, \quad -\pi\le\lambda\le\pi.
-  \end{align*}
-&lt;/div&gt;
-
-
----
-class: animated, fadeInRight
-
-### Função de densidade espectral - I
-
-&lt;b&gt;&lt;span style="color:rgba(141, 0, 69, 1)"&gt;Exemplo.&lt;/span&gt;&lt;/b&gt; Considere 
-o processo `\(\{X_t\}\)` com representação AR `\(\!(2)\)`, i.e. 
-`\((1-\phi_1B-\phi_2B^2)X_t=Z_t\)`. A densidade espectral é dada por
-&lt;div class="math"&gt;
-  \begin{align*}
-    f(\lambda)&amp;=\frac{\sigma^2}{2\pi}\frac{\left|\theta\left(e^{-i\lambda}\right)\right|^2}{\left|\phi\left(e^{-i\lambda}\right)\right|^2}=\frac{\sigma^2}{2\pi}\frac{1}{\left|1-\phi_1e^{-i\lambda}-\phi_2e^{-2i\lambda}\right|^2}, \quad -\pi\le\lambda\le\pi\\
-    &amp;=\frac{\sigma^2}{2\pi}\frac{1}{\left(1-\phi_1e^{-i\lambda}-\phi_2e^{-2i\lambda}\right)\left(1-\phi_1e^{i\lambda}-\phi_2e^{2i\lambda}\right)}\\
-    &amp;=\frac{\sigma^2}{2\pi}\frac{1}{1-\phi_1e^{-i\lambda}-\phi_2e^{-2i\lambda}-\phi_1e^{i\lambda}+\phi_1^2+\phi_1\phi_2e^{-i\lambda} -\phi_2e^{2i\lambda}+\phi_1\phi_2e^{i\lambda}+\phi_2^2}\\
-    &amp;=\frac{\sigma^2}{2\pi}\frac{1}{1-2\phi_1\cos\lambda-2\phi_2\cos2\lambda+\phi_1^2+2\phi_1\phi_2\cos\lambda+\phi_2^2}\\
-    &amp;=\frac{\sigma^2}{2\pi}\frac{1}{1-2\phi_1\cos\lambda-2\phi_2(2\cos^2\lambda-1)+\phi_1^2+2\phi_1\phi_2\cos\lambda+\phi_2^2}\\
-    &amp;=\frac{\sigma^2}{2\pi}\frac{1}{1+\phi_1^2+2\phi_2+\phi_2^2+2(\phi_1\phi_2-\phi_1)\cos\lambda-4\phi_2\cos^2\lambda}.
-  \end{align*}
-&lt;/div&gt;
-
-
----
-class: animated, fadeInDown
-
-### Função de densidade espectral - I
-
-&lt;img src="aula3_files/figure-html/unnamed-chunk-5-1.png" width="45%" style="float:left; padding:20px" /&gt;
-
-&lt;img src="aula3_files/figure-html/unnamed-chunk-6-1.png" width="45%" style="float:right; padding:20px" /&gt;
-
----
-class: animated, fadeIn
-
-### Função de densidade espectral - I
-
-&lt;b&gt;&lt;span style="color:rgba(141, 0, 69, 1)"&gt;Exemplo.&lt;/span&gt;&lt;/b&gt; Considere 
-o processo `\(\{X_t\}\)` com representação ARMA `\(\!(1,1)\)`, i.e. 
-`\((1-\phi B)X_t=(1-\theta B)Z_t\)`. A densidade espectral é dada por
-&lt;div class="math"&gt;
-  \begin{align*}
-    f(\lambda)&amp;=\frac{\sigma^2}{2\pi}\frac{\left|\theta\left(e^{-i\lambda}\right)\right|^2}{\left|\phi\left(e^{-i\lambda}\right)\right|^2}=\frac{\sigma^2}{2\pi}\frac{\left|1+\theta e^{-i\lambda}\right|^2}{\left|1-\phi e^{-i\lambda}\right|^2}, \quad -\pi\le\lambda\le\pi\\
-    &amp;=\frac{\sigma^2}{2\pi}\frac{\left(1+\theta e^{i\lambda}\right)\left(1+\theta e^{-i\lambda}\right)}{\left(1-\phi e^{i\lambda}\right)\left(1-\phi e^{-i\lambda}\right)}
-    =\frac{\sigma^2}{2\pi}\frac{1+\theta^2+2\theta\cos\lambda}{1+\phi^2-2\phi\cos\lambda}.
-  \end{align*}
-&lt;/div&gt;
-
-&lt;br&gt;
-
-&lt;b&gt;&lt;span style="color:rgba(0, 114,4, 1)"&gt;Exercício.&lt;/span&gt;&lt;/b&gt; Considere
-o processo `\(\{X_t\}\)` representado por
-`$$X_t=A\cos\left(\frac{\pi t}{3}\right)+B\,\mathrm{sen}\left(\frac{\pi t}{3}\right)+Y_t,$$`
-onde `\(Y_t=Z_t+2.5Z_{t-1}\)`, com `\(\{Z_t\}\)` um processo de ruído branco com
-média `\(0\)` e variância `\(\sigma^2\)`, `\(A\)` e `\(B\)` são variáveis aleatórias 
-não-correlacionadas, ambas com média `\(0\)` e variância `\(\eta^2\)` e `\(Z_t\)` é
-não-correlacionado com `\(A\)` e `\(B\)`, para todo `\(t\)`. Calcule a 
-autocovariância e a função de densidade espectral de `\(\{X_t\}\)`.
-
-
----
-class: animated, lightSpeedIn
-### Referências
-
-Bartlett, M. S. (1946). "On the theoretical specification and sampling
-properties of autocorrelated time series". In: _Journal of the Royal
-Statistical Society_ 8, pp. 27-41.
-
-Brockwell, P. and R. Davis (2016). _Introduction to Time Series and
-Forecasting_. 3rd. Springer Verlag.
-
-Morettin, P. and C. Toloi (2006). _Análise de Séries Temporais_.
-Editora Blucher: ABE - Projeto Fisher.
-
-Wei, W. (2005). _Time Series Analysis: Univariate and Multivariate
-Methods_. 2nd. Addison Wesley.
-
-Wold, H. (1938). _A study in the analysis of stationary time series_.
-Almqvist &amp; Wiksells Boktryckert Uppsala.
-
----
-class: animated, hide-logo, bounceInDown
-## Política de proteção aos direitos autorais
-
-&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
-o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
-exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
-e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
-A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
-**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
-caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
-É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
-conteúdo disponível na plataforma.&lt;/span&gt;
-
-.pull-left[
-&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
-]
-.pull-right[
-&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
-]
-&lt;br&gt;&lt;/br&gt;
-.center[
-[https://lecon.ufes.br](https://lecon.ufes.br/) &amp;emsp; &amp;emsp;  &amp;emsp; &amp;emsp; [https://analytics.ufes.br](https://analytics.ufes.br)
-]
-
-&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
-Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
-e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
-    </textarea>
-<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
-<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
-<script>var slideshow = remark.create({
-"ratio": "16:9",
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
-});
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
-  window.dispatchEvent(new Event('resize'));
-});
-(function(d) {
-  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
-  if (!r) return;
-  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
-  d.head.appendChild(s);
-})(document);
-
-(function(d) {
-  var el = d.getElementsByClassName("remark-slides-area");
-  if (!el) return;
-  var slide, slides = slideshow.getSlides(), els = el[0].children;
-  for (var i = 1; i < slides.length; i++) {
-    slide = slides[i];
-    if (slide.properties.continued === "true" || slide.properties.count === "false") {
-      els[i - 1].className += ' has-continuation';
-    }
-  }
-  var s = d.createElement("style");
-  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
-  d.head.appendChild(s);
-})(document);
-// delete the temporary CSS (for displaying all slides initially) when the user
-// starts to view slides
-(function() {
-  var deleted = false;
-  slideshow.on('beforeShowSlide', function(slide) {
-    if (deleted) return;
-    var sheets = document.styleSheets, node;
-    for (var i = 0; i < sheets.length; i++) {
-      node = sheets[i].ownerNode;
-      if (node.dataset["target"] !== "print-only") continue;
-      node.parentNode.removeChild(node);
-    }
-    deleted = true;
-  });
-})();
-// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
-// screen reader (see PR #262)
-(function(d) {
-  let res = {};
-  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
-    const t = tr.querySelector('td:nth-child(2)').innerText;
-    tr.querySelectorAll('td:first-child .key').forEach(key => {
-      const k = key.innerText;
-      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
-    });
-  });
-  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
-})(document);
-(function() {
-  "use strict"
-  // Replace <script> tags in slides area to make them executable
-  var scripts = document.querySelectorAll(
-    '.remark-slides-area .remark-slide-container script'
-  );
-  if (!scripts.length) return;
-  for (var i = 0; i < scripts.length; i++) {
-    var s = document.createElement('script');
-    var code = document.createTextNode(scripts[i].textContent);
-    s.appendChild(code);
-    var scriptAttrs = scripts[i].attributes;
-    for (var j = 0; j < scriptAttrs.length; j++) {
-      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
-    }
-    scripts[i].parentElement.replaceChild(s, scripts[i]);
-  }
-})();
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-// adds .remark-code-has-line-highlighted class to <pre> parent elements
-// of code chunks containing highlighted lines with class .remark-code-line-highlighted
-(function(d) {
-  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
-  const preParents = [];
-  const findPreParent = function(line, p = 0) {
-    if (p > 1) return null; // traverse up no further than grandparent
-    const el = line.parentElement;
-    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
-  };
-
-  for (let line of hlines) {
-    let pre = findPreParent(line);
-    if (pre && !preParents.includes(pre)) preParents.push(pre);
-  }
-  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
-})(document);</script>
-<style>
-.logo {
-  background-image: url(images/logo_neaest.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 1em;
-  right: 1em;
-  width: 150px;
-  height: 168px;
-  z-index: 0;
+</div><div class="column" style="width:40%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="aula3_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<!-- https://www.ime.unicamp.br/~cnaber/Material_ST_ME607_1S_2024.htm -->
+</section>
+<section id="exercícios" class="slide level2 center" data-background-color="#172a46">
+<h2>Exercícios</h2>
+<div class="cell">
+<style type="text/css">
+.center h2 {
+  text-align: center !important
 }
 </style>
+</div>
+</section>
+<section id="sugestão-de-exercícios" class="slide level2">
+<h2>Sugestão de exercícios</h2>
+<ol type="1">
+<li>Considere <span class="math inline">\(\{X_t\}\)</span> e <span class="math inline">\(\{Y_t\}\)</span> dois processos com as seguintes representações, respectivamente:
+<div class="math">
+<p><span class="math display">\[\begin{align}
+  X_t&amp;=Z_t+\theta Z_{t-1};\\
+  Y_t&amp;=W_t+\frac1\theta W_{t-1},
+  \end{align}\]</span></p>
+</div></li>
+</ol>
+<p>onde <span class="math inline">\(0&lt;|\theta|&lt;1\)</span>, <span class="math inline">\(\{Z_t\}\)</span> e <span class="math inline">\(\{W_t\}\)</span> são processo de ruído branco com média <span class="math inline">\(0\)</span> e variâncias <span class="math inline">\(\sigma^2\)</span> e <span class="math inline">\(\sigma^2\theta^2\)</span>, respectivamente. Mostre que as funções de autocorrelação para <span class="math inline">\(\{X_t\}\)</span> e <span class="math inline">\(\{Y_t\}\)</span> são iguais.</p>
+</section>
+<section class="slide level2">
 
-<script>
-document
-  .querySelectorAll(
-    '.remark-slide-content' +
-    ':not(.title-slide)' +
-    // add additional classes to exclude here, e.g.
-    // ':not(.inverse)' +
-    ':not(.hide-logo)'
-  )
-  .forEach(el => {
-    el.innerHTML += '<div class="logo"></div>';
-  });
-</script>
+<ol start="2" type="1">
+<li>Seja <span class="math inline">\(\{X_t\}\)</span> um processo com representação MA <span class="math inline">\(\!(1)\)</span> não-invertível, i.e., <span class="math display">\[X_t=Z_t + \theta Z_{t-1},\]</span> onde <span class="math inline">\(|\theta|&gt;1\)</span> e <span class="math inline">\(\{Z_t\}\)</span> um processo de ruído branco com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(\sigma^2\)</span>. Defina um novo processo <span class="math inline">\(\{W_t\}\)</span> com representação <span class="math display">\[W_t=\sum_{j=0}^\infty(-\theta)^{-j}X_{t-j}.\]</span> Mostre que <span class="math inline">\(\{W_t\}\)</span> é um processo de ruído branco com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(\sigma_W^2\)</span>. Calcule <span class="math inline">\(\sigma_W^2\)</span> em termos de <span class="math inline">\(\theta\)</span> e <span class="math inline">\(\sigma^2\)</span>.</li>
+</ol>
+</section>
+<section class="slide level2">
 
-<script>
-slideshow._releaseMath = function(el) {
-  var i, text, code, codes = el.getElementsByTagName('code');
-  for (i = 0; i < codes.length;) {
-    code = codes[i];
-    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
-      text = code.textContent;
-      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
-          /^\$\$(.|\s)+\$\$$/.test(text) ||
-          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
-        continue;
+<ol start="3" type="1">
+<li>Seguindo as informações do <a href="#/exm-arma8" class="quarto-xref">Exemplo&nbsp;10</a>, mostre que <span class="math display">\[\gamma(k)=\frac{\sigma^2}{1-\phi^2}\phi^{k-1}(\theta+\phi)(1+\theta\phi), \quad k=1,2,3,\ldots\]</span></li>
+</ol>
+<p>e</p>
+<p><span class="math display">\[\rho(k)=\frac{(1+\theta\phi)(\theta+\phi)}{1+2\phi\theta+\theta^2}\phi^{k-1}, \quad k=1,2,3,\ldots.\]</span></p>
+<p>Observe que, sob a condição de estacionariedade <span class="math inline">\(|\phi|&lt;1\)</span>, a função de autocorrelação apresenta um decaimento exponencial para <span class="math inline">\(0\)</span>.</p>
+</section>
+<section id="referências" class="slide level2 smaller scrollable">
+<h2>Referências</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-bartlett:1946" class="csl-entry" role="listitem">
+Bartlett, M. S. (1946), <span>“On the theoretical specification and sampling properties of autocorrelated time series”</span>, <em>Journal of the Royal Statistical Society</em>, 8, 27–41.
+</div>
+<div id="ref-box:jenkins:reinsel:1994" class="csl-entry" role="listitem">
+Box, G. E., Jenkins, G. M., e Reinsel, G. (1994), <em>Time Series Analysis: Forecasting and Control</em>, Prentice Hall.
+</div>
+<div id="ref-brockwell:davis:2016" class="csl-entry" role="listitem">
+Brockwell, P., e Davis, R. (2016), <em>Introduction to Time Series and Forecasting</em>, Springer Verlag.
+</div>
+<div id="ref-morettin:toloi:2006" class="csl-entry" role="listitem">
+Morettin, P., e Toloi, C. (2006), <em>Análise de Séries Temporais</em>, Editora Blucher: ABE - Projeto Fisher.
+</div>
+<div id="ref-wei:2005" class="csl-entry" role="listitem">
+Wei, W. (2005), <em>Time Series Analysis: Univariate and Multivariate Methods</em>, Addison Wesley.
+</div>
+<div id="ref-wold:1938" class="csl-entry" role="listitem">
+Wold, H. (1938), <em>A study in the analysis of stationary time series</em>, Almqvist &amp; Wiksells Boktryckert Uppsala.
+</div>
+</div>
+</section>
+<section id="política-de-proteção-aos-direitos-autorais" class="slide level2">
+<h2>Política de proteção aos direitos autorais</h2>
+<blockquote>
+<p><span style="color:grey"><font size="6">O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser o detentor dos direitos sobre o conteúdo disponível na plataforma, o <strong>LECON</strong> e o <strong>NEAEST</strong> detém direito exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5<sup>o</sup>, inciso XXVII, da Constituição Federal e os Artigos 7<sup>o</sup> e 28<sup>o</sup>, da Lei 9.610/98. A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do <strong>LECON</strong> e o <strong>NEAEST</strong>, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo caracterizar conduta criminosa, conforme Artigo 184<sup>o</sup>, §1<sup>o</sup> a 3<sup>o</sup>, do Código Penal. É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer conteúdo disponível na plataforma.</font></span></p>
+</blockquote>
+
+<img data-src="images/logo_neaest_lecon.png" class="quarto-figure quarto-figure-center r-stretch" width="1800"><p><span style="color:grey"><font size="4">Material elaborado pela equipe LECON/NEAEST: Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi e Nátaly A. Jiménez.</font></span></p>
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="images/Lecon_logo2024_transparente.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="aula3_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="aula3_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="aula3_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="aula3_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="aula3_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="aula3_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="aula3_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="aula3_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="aula3_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="aula3_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="aula3_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'fast',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
       }
-    }
-    i++;
-  }
-};
-slideshow._releaseMath(document);
-</script>
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-(function () {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
-  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
-    script.src  = script.src.replace(/^https?:/, '');
-  document.getElementsByTagName('head')[0].appendChild(script);
-})();
-</script>
-  </body>
-</html>
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copiada");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copiada");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
