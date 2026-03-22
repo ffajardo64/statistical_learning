@@ -20,6 +20,7 @@ $input-bg: #23395b;
 $link-color: #5c81cf !default;
 $selection-bg: #5c81cf;
 $exm-label:#82243a;
+$exr-label:#007204;
 
 // headings
 $presentation-heading-font: "News Cycle", Noto Sans !default;
@@ -59,6 +60,10 @@ hr {
   color: $exm-label;
 }
 
+.exercise .theorem-title strong {
+  color: $exr-label;
+}
+
 .reveal .slides section .fragment.highlight-newred, .reveal .slides section .fragment.highlight-blue, .reveal .slides section .fragment.highlight-current-blue, .reveal .slides section .fragment.highlight-current-green, .reveal .slides section .fragment.highlight-current-red, .reveal .slides section .fragment.highlight-green, .reveal .slides section .fragment.highlight-red{
   opacity: 1;
   visibility: inherit;
@@ -74,4 +79,16 @@ p {
 
 ul li {
  text-align: justify;
+}
+
+.table-grid {
+  font-family: Space Mono;
+  font-size: 16pt;
+  position: relative;
+  top: 40px;
+  left: 40px;
+  height: 400px;
+  align-content: center;
+  background-color: #eeeeee;
+  border-radius: 25px;
 }
