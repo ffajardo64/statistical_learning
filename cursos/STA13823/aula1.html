@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="LECON/DEST - UFES">
-  <title> STA17445 - Métodos computacionais para Ciência de Dados   Tipografia científica com LaTeX </title>
+  <title> STA13823 - Inferência Estatística II   Estimação Intervalar </title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -28,72 +28,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #24292e;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #24292e; } /* Normal */
-    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
-    code span.an { color: #6a737d; } /* Annotation */
-    code span.at { color: #d73a49; } /* Attribute */
-    code span.bn { color: #005cc5; } /* BaseN */
-    code span.bu { color: #d73a49; } /* BuiltIn */
-    code span.cf { color: #d73a49; } /* ControlFlow */
-    code span.ch { color: #032f62; } /* Char */
-    code span.cn { color: #005cc5; } /* Constant */
-    code span.co { color: #6a737d; } /* Comment */
-    code span.cv { color: #6a737d; } /* CommentVar */
-    code span.do { color: #6a737d; } /* Documentation */
-    code span.dt { color: #d73a49; } /* DataType */
-    code span.dv { color: #005cc5; } /* DecVal */
-    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
-    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
-    code span.fl { color: #005cc5; } /* Float */
-    code span.fu { color: #6f42c1; } /* Function */
-    code span.im { color: #032f62; } /* Import */
-    code span.in { color: #6a737d; } /* Information */
-    code span.kw { color: #d73a49; } /* Keyword */
-    code span.op { color: #24292e; } /* Operator */
-    code span.ot { color: #6f42c1; } /* Other */
-    code span.pp { color: #d73a49; } /* Preprocessor */
-    code span.re { color: #6a737d; } /* RegionMarker */
-    code span.sc { color: #005cc5; } /* SpecialChar */
-    code span.ss { color: #032f62; } /* SpecialString */
-    code span.st { color: #032f62; } /* String */
-    code span.va { color: #e36209; } /* Variable */
-    code span.vs { color: #032f62; } /* VerbatimString */
-    code span.wa { color: #ff5555; } /* Warning */
   </style>
   <link rel="stylesheet" href="aula1_files/libs/revealjs/dist/theme/quarto-99361432a01776c2ec44eb9f5125b270.css">
   <link href="aula1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -196,10 +130,10 @@
 
 <section id="title-slide" data-background-color="#172a46" data-background-opacity="number" data-background-size="contain" class="quarto-title-block center">
   <h1 class="title"></h1><h2><br>
-STA17445 - Métodos computacionais para Ciência de Dados<br>
+STA13823 - Inferência Estatística II<br>
 </h2><br>
 <h3><br>
-Tipografia científica com LaTeX<br>
+Estimação Intervalar<br>
 </h3>
   <p class="subtitle"><br><br></p>
 
@@ -209,324 +143,129 @@ Tipografia científica com LaTeX<br>
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 22 março, 2026
+            Última atualização: 23 março, 2026
           </p>
     </div>
 </div>
 
 </section>
-<section id="um-pouco-de-historia" class="slide level2">
-<h2>Um pouco de historia…</h2>
-<p>O <span class="math inline">\(\TeX\)</span> é um sistema de tipográfico produzido (desenhado e escrito) principalmente por <strong>Donald Knuth</strong>, da Universidade de Stanford, e lançado em 1978.</p>
-<div class="columns">
-<div class="column" style="width:80%;">
-<p>O <span class="math inline">\(\TeX\)</span> foi concebido sob dois pilares fundamentais:</p>
-<ul>
-<li>Permitir a produção de obras de alta qualidade com esforço reduzido; e</li>
-<li>Garantir a consistência absoluta dos resultados, independentemente do hardware ou do tempo decorrido.</li>
-</ul>
-</div><div class="column" style="width:20%;">
-<div class="quarto-figure quarto-figure-right">
-<figure>
-<p><img data-src="images/knuth.jpg" class="quarto-figure quarto-figure-right" width="250" height="300"></p>
-</figure>
-</div>
-</div></div>
-<p>Por ser um software livre, ele democratiza o acesso à tipografia de ponta. Amplamente reconhecido pela sofisticação no processamento de fórmulas matemáticas complexas, o sistema tornou-se o padrão em áreas como Estatística, Matemática, Física, Engenharias, entre outras.</p>
-</section>
-<section id="algumas-características" class="slide level2">
-<h2>Algumas características</h2>
-<ul>
-<li><strong>Codificação em Texto Plano (Plain Text)</strong>: Diferente de processadores de texto binários (como o .doc ou .docx antigos), o código-fonte do <span class="math inline">\(\TeX\)</span> é composto apenas por caracteres ASCII. Isso significa que:</li>
-</ul>
-<div class="fragment semi-fade-out" data-fragment-index="2">
-<ol type="a">
-<li>Pode ser lido e editado em qualquer editor de texto, do mais simples (Bloco de Notas, Vim, Gedit) ao mais avançado (VS Code, Texmaker);</li>
-</ol>
-</div>
-<div class="fragment fade-in" data-fragment-index="2">
-<div class="fragment semi-fade-out" data-fragment-index="3">
-<ol start="2" type="a">
-<li>O arquivo é extremamente leve e imune à corrupção de arquivos binários complexos;</li>
-</ol>
-</div>
-</div>
-<div class="fragment fade-in" data-fragment-index="3">
-<div class="fragment semi-fade-out" data-fragment-index="4">
-<ol start="3" type="a">
-<li>É ideal para sistemas de controle de versão (como o Git), pois permite visualizar exatamente o que foi alterado linha por linha.</li>
-</ol>
-</div>
-</div>
-<div class="fragment fade-in" data-fragment-index="4">
-<ul>
-<li><strong>Estabilidade Temporal e de Software</strong>: O algoritmo de quebra de parágrafos e hifenização do <span class="math inline">\(\TeX\)</span> foi projetado por <strong>Donald Knuth</strong> para ser matematicamente preciso.</li>
-</ul>
-</div>
-</section>
-<section id="algumas-características-1" class="slide level2">
-<h2>Algumas características</h2>
-<div class="fragment semi-fade-out" data-fragment-index="2">
-<ul>
-<li><strong>Reprodutibilidade</strong>: Se você processar um arquivo <span class="math inline">\(\TeX\)</span> escrito em 1982 em um computador de 2026, o posicionamento de cada letra e símbolo no arquivo final (PDF ou DVI) será rigorosamente o mesmo;</li>
-</ul>
-</div>
-<div class="fragment fade-in" data-fragment-index="2">
-<div class="fragment semi-fade-out" data-fragment-index="3">
-<ul>
-<li><strong>Consistência entre Sistemas Operacionais</strong>: Não importa se você está no Windows, Linux ou macOS; os motores de renderização (pdfTeX, XeTeX, LuaTeX) seguem as mesmas regras métricas;</li>
-</ul>
-</div>
-</div>
-<div class="fragment fade-in" data-fragment-index="3">
-<ul>
-<li><strong>A “Abstração” da Interface</strong>: Ao escrever apenas com símbolos do teclado, o autor se preocupa com a estrutura lógica (o conteúdo) e deixa a apresentação visual (o <em>layout</em>) para o compilador. Isso evita o problema comum de “objetos que se movem sozinhos” ao abrir um arquivo em computadores com versões de softwares diferentes.</li>
-</ul>
-</div>
-</section>
-<section id="latex" class="slide level2">
-<h2><span class="math inline">\(\LaTeX\)</span></h2>
-<p>Uma variante do <span class="math inline">\(\TeX\)</span> é o <span class="math inline">\(\LaTeX\)</span>, desenvolvido por <strong>Leslie Lamport</strong> em 1985.</p>
-<div class="columns">
-<div class="column" style="width:80%;">
-<p>O <span class="math inline">\(\LaTeX\)</span> consiste em um conjunto de macros ou rotinas <span class="math inline">\(\TeX\)</span> que facilitam os procedimentos de edição.</p>
-<p>Na internet:</p>
-<ul>
-<li><p>Rede mundial do <span class="math inline">\(\TeX\)</span>: CTAN - <a href="https://ctan.org/">The Comprehensive TeX Archive Network</a>;</p></li>
-<li><p>The <span class="math inline">\(\LaTeX\)</span> project: <a href="https://www.latex-project.org/">https://www.latex-project.org/</a>;</p></li>
-<li><p>MiKTeX project page: <a href="https://miktex.org/">https://miktex.org/</a>;</p></li>
-<li><p><a href="https://en.wikipedia.org/wiki/Comparison_of_TeX_editors">Alguns editores para <span class="math inline">\(\TeX\)</span></a>.</p></li>
-</ul>
-</div><div class="column" style="width:20%;">
-<div class="quarto-figure quarto-figure-right">
-<figure>
-<p><img data-src="images/lamport.jpg" class="quarto-figure quarto-figure-right" width="250" height="350"></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section class="slide level2">
-
-<div id="exr-exer1" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercício 1</strong></span> Use um editor de texto para tentar reproduzir o seguinte texto, garantindo que os símbolos fiquem exatamente iguais:</p>
-<p><br></p>
-<div class="callout callout-tip no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p>A densidade de probabilidade da distribuição normal multivariada para um vetor <span class="math inline">\(\mathbf{x} \in \mathbb{R}^k\)</span> é:</p>
-<p><span class="math display">\[\begin{equation}
-    f(\mathbf{x}) = \frac{1}{\sqrt{(2\pi)^k |\boldsymbol{\Sigma}|}} \exp\left( -\frac{1}{2} (\mathbf{x}-\boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{x}-\boldsymbol{\mu}) \right),
-\end{equation}\]</span></p>
-<p>onde a matriz de covariância <span class="math inline">\(\boldsymbol{\Sigma}\)</span> é dada por: <span class="math display">\[\begin{equation}
-    \boldsymbol{\Sigma} = \begin{bmatrix}
-        \sigma_1^2 &amp; \rho_{12}\sigma_1\sigma_2 &amp; \dots \\
-        \rho_{21}\sigma_2\sigma_1 &amp; \sigma_2^2 &amp; \dots \\
-        \vdots &amp; \vdots &amp; \ddots
-    \end{bmatrix}
-\end{equation}\]</span></p>
-</div>
-</div>
-</div>
+<section id="intervalos-de-confiança" class="slide level2">
+<h2>Intervalos de Confiança</h2>
+<div id="def-intervalo" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 1 (Intervalo de confiança)</strong></span> Seja <span class="math inline">\(X_1, X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade que envolve o parâmetro <span class="math inline">\(\theta\)</span>, <span class="math inline">\(\theta\in\Theta\)</span>. Sejam <span class="math inline">\(\tau(\theta)\)</span> uma função do parâmetro e <span class="math inline">\(T=t(X_1,\ldots,X_n)\)</span> um estimador de <span class="math inline">\(\tau(\theta)\)</span>. Um Intervalo de Confiança (IC) para <span class="math inline">\(\tau(\theta)\)</span> com coeficiente de confiança <span class="math inline">\(\alpha\)</span> é qualquer intervalo <span class="math inline">\([Li(T);Ls(T)]\)</span> tal que <span class="math display">\[
+\mathbb{P}\left[Li(T)\leq\tau(\theta)\leq
+Ls(T)\right]=1-\alpha.
+\]</span></p>
 </div>
 <p><br></p>
-<div id="exr-exer2" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercício 2</strong></span> Use um editor de texto para tentar reproduzir o texto do seguinte arquivo <a href="https://ffajardo64.github.io/statistical_learning/cursos/STA17445/pdf/computacional1.pdf">computacional1.pdf</a>.</p>
-</div>
-</section>
-<section id="estrutura-de-um-documento-latex" class="slide level2">
-<h2>Estrutura de um documento <span class="math inline">\(\LaTeX\)</span></h2>
-<p>O <em>arquivo fonte</em> pode ser criado com qualquer editor de texto, utilizando todos os caracteres de um teclado usual, excetuando os simbolos: \ { } $ % &amp; # ~ ^ _ |</p>
-
-<img data-src="images/estrutura_latex.png" class="quarto-figure quarto-figure-center r-stretch" width="1600"></section>
-<section class="slide level2">
-
-<p>O simbolo \ (<em>backslash</em>) é utilizado no inicio de TODO comando ou instrução do <span class="math inline">\(\LaTeX\)</span>, por exemplo: \S (<span class="math inline">\(\S\)</span>), \LaTeX (<span class="math inline">\(\LaTeX\)</span>), \rightarrow (<span class="math inline">\(\rightarrow\)</span>), entre outros<sup>*</sup></p>
-<div id="exm-exemplo1" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 1</strong></span> Use o <a href="https://latexeditor.lagrida.com/"><span class="math inline">\(\LaTeX\)</span> Equation Editor</a> para explorar os simbolos no seguinte texto:</p>
-<p>A função de densidade de uma variável aletória de uma população com distribuição qui-quadrado é dada por:</p>
-<p><span class="math display">\[f(x; k) = \frac{x^{k/2-1} e^{-x/2}}{2^{k/2} \Gamma(k/2)}\mathbb{I}_{(0,\infty)}(x),\]</span> onde <span class="math inline">\(\Gamma(z)=\int_0^\infty t^{z-1}e^{-t}\,dt\)</span> representa a função gamma.</p>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb1-1"><a href=""></a>A fun<span class="fu">\c</span> c<span class="fu">\~</span>ao de densidade de uma vari<span class="fu">\'</span>avel alet<span class="fu">\'</span>oria de uma popula<span class="fu">\c</span> c<span class="fu">\~</span>ao com distribui<span class="fu">\c</span> c<span class="fu">\~</span>ao </span>
-<span id="cb1-2"><a href=""></a>qui-quadrado <span class="fu">\'</span>e dada por:</span>
-<span id="cb1-3"><a href=""></a><span class="ss">$$f(x; k) = </span><span class="sc">\frac</span><span class="ss">{x^{k/2-1} e^{-x/2}}{2^{k/2} </span><span class="sc">\Gamma</span><span class="ss">(k/2)}</span><span class="sc">\mathbb</span><span class="ss">{I}_{(0,</span><span class="sc">\infty</span><span class="ss">)}(x),$$</span></span>
-<span id="cb1-4"><a href=""></a>onde <span class="ss">$</span><span class="sc">\Gamma</span><span class="ss">(z)=</span><span class="sc">\int</span><span class="ss">_0^</span><span class="sc">\infty</span><span class="ss"> t^{z-1}e^{-t}</span><span class="sc">\,</span><span class="ss">dt$</span> representa a fun<span class="fu">\c</span> c<span class="fu">\~</span>ao gamma.</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<hr>
-
-<p><font size="5"><sup>*</sup>Mais exemplos disponíveis no <a href="https://ffajardo64.github.io/statistical_learning/cursos/STA17445/pdf/cookbook.pdf"><span class="math inline">\(\LaTeX\)</span> CookBook</a> ou <a href="https://ffajardo64.github.io/statistical_learning/cursos/STA17445/pdf/symbols.pdf">The Comprehensive <span class="math inline">\(\LaTeX\)</span> Symbol List</a>.</font></p>
-</section>
-<section class="slide level2">
-
-<p>O <span class="math inline">\(\LaTeX\)</span> processa o texto do arquivo fonte basicamente em 3 modos:</p>
-<div class="fragment semi-fade-out" data-fragment-index="1">
-<ul>
-<li><strong>Modo normal ou modo de parágrafo</strong>: Essa é a forma natural. O texto é separado por linhas, parágrafos e páginas;</li>
-</ul>
-</div>
-<div class="fragment fade-in" data-fragment-index="1">
-<div class="fragment semi-fade-out" data-fragment-index="2">
-<ul>
-<li><strong>Modo LR (esquerda-direita</strong>): Parecido com o modo normal, exceto que <span class="math inline">\(\LaTeX\)</span> escreve indefinidamente de esquerda à direita e nunca começa uma nova linha;</li>
-</ul>
-</div>
-</div>
-<div class="fragment fade-in" data-fragment-index="2">
-<ul>
-<li><strong>Modo matemático</strong>: é o modo utilizado para a escrita de símbolos matemáticos. Para tal situação, requer-se o uso dos símbolos $, $$ ou \[.</li>
-</ul>
-<div id="exm-exemplo2" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 2</strong></span> &nbsp;</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href=""></a><span class="fu">\textbf</span>{Lei Fraca doa Grandes Números} </span>
-<span id="cb2-2"><a href=""></a></span>
-<span id="cb2-3"><a href=""></a>Seja <span class="ss">$X_1, X_2, </span><span class="sc">\ldots</span><span class="ss">, X_n$</span> uma sequência de vari<span class="fu">\'</span>aveis alea<span class="fu">\'</span>orias independentes </span>
-<span id="cb2-4"><a href=""></a>e identicamente distribuídas e integr<span class="fu">\'</span>aveis, com m<span class="fu">\'</span>edia <span class="ss">$</span><span class="sc">\mu</span><span class="ss">$</span>. Ent<span class="fu">\~</span>ao:</span>
-<span id="cb2-5"><a href=""></a></span>
-<span id="cb2-6"><a href=""></a><span class="ss">$$</span><span class="sc">\mathbb</span><span class="ss">{P}</span><span class="sc">\left</span><span class="ss">(</span><span class="sc">\left</span><span class="ss">|</span><span class="sc">\frac</span><span class="ss">{1}{n}</span><span class="sc">\sum</span><span class="ss">_{i=1}^nX_i-</span><span class="sc">\mu\right</span><span class="ss">|&lt;</span><span class="sc">\epsilon\right</span><span class="ss">)</span><span class="sc">\to</span><span class="ss">1,</span><span class="sc">\quad</span><span class="ss"> </span><span class="sc">\text</span>{quando }<span class="ss"> n</span><span class="sc">\to\infty</span><span class="ss">.$$</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
+<blockquote>
+<p><span class="math inline">\(Li(T)\)</span> e <span class="math inline">\(Ls(T)\)</span> são chamados limite inferior e limite superior do intervalo, respectivamente.</p>
+</blockquote>
 </section>
 <section class="slide level2">
 
 <h3 id="algumas-considerações">Algumas considerações</h3>
 <div class="fragment semi-fade-out" data-fragment-index="1">
 <ul>
-<li><strong>Espaçamento entre palavras</strong>: <span class="math inline">\(\LaTeX\)</span> ignora qualquer espaçamento seguido de um outro espaçamento, i.e., para <span class="math inline">\(\LaTeX\)</span> é igual 1 ou 10 espaços entre palavras. Existe controle automático de espaçamentos entre palavras;</li>
+<li>A probabilidade descrita na definição anterior se refere ao intervalo conter (ou cobrir) o parâmetro. A probabilidade anterior <strong>não</strong> se refere ao parâmetro pertencer ao intervalo. O parâmetro é <strong>constante</strong>, portanto não faz sentido associar probabilidades a ele;</li>
 </ul>
 </div>
 <div class="fragment fade-in" data-fragment-index="1">
 <div class="fragment semi-fade-out" data-fragment-index="2">
 <ul>
-<li><strong>Espaçamento entre parágrafos</strong>: Igual que entre palavras, para começar um novo parágrafo é necessário deixar uma linha em branco;</li>
+<li>Após observada a amostra o intervalo não é mais aleatório. Assim, a probabilidade de ele conter o parâmetro é 0 ou 1;</li>
 </ul>
 </div>
 </div>
 <div class="fragment fade-in" data-fragment-index="2">
+<div class="fragment semi-fade-out" data-fragment-index="3">
 <ul>
-<li><span class="math inline">\(\LaTeX\)</span> ignora o símbolo <span class="math inline">\(\%\)</span>, o mesmo é reservado para a inclusão de comentários no arquivo fonte;</li>
+<li>Se coletássemos várias amostras e, para cada uma, calculássemos o IC, esperaríamos que <span class="math inline">\(100\times(1-\alpha)\%\)</span> dos IC’s contivessem o parâmetro. Por esse motivo, dizemos que temos uma <strong>confiança</strong> de <span class="math inline">\((1-\alpha)\)</span>, isto é, uma interpretação frequentista;</li>
 </ul>
+</div>
 </div>
 <div class="fragment fade-in" data-fragment-index="3">
 <ul>
-<li>Os erros de sintaxe são comuns quando você escreve um arquivo fonte, os mesmos são parte da vida diária dos usuários iniciantes. Quando <span class="math inline">\(\LaTeX\)</span> encontra um erro na compilação, ele para o processo e mostra na tela uma mensagem de erro. A mesma mensagem você encontrará no arquivo <code>.log</code>. <em>A experiência acumulada permitirá corrigir os erros mais rapidamente</em>;</li>
+<li>Em outras palavras, após coletar uma amostra não saberemos se o intervalo calculado cobrirá o parâmetro. Entretanto, a construção do intervalo garante que isso ocorre em <span class="math inline">\(100\times(1-\alpha)\%\)</span> das vezes.</li>
+</ul>
+</div>
+</section>
+<section id="intervalos-de-confiança-1" class="slide level2">
+<h2>Intervalos de Confiança</h2>
+<div id="def-pivote" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 2 (Quantidade pivotal)</strong></span> Seja <span class="math inline">\(X_1,\ldots,X_n\)</span> uma amostra aleatória de uma população com função densidade conjunta que envolve o parâmetro <span class="math inline">\(\theta\)</span>. Seja <span class="math inline">\(Q_X=q(X_1,\ldots,X_n;\theta)\)</span> uma função da amostra e do parâmetro <span class="math inline">\(\theta\)</span>. <span class="math inline">\(Q_X\)</span> é chamada <em>quantidade pivotal</em>, ou <em>pivote</em>, para o parâmetro <span class="math inline">\(\theta\)</span> se a distribuição de <span class="math inline">\(Q_X\)</span> não depende de <span class="math inline">\(\theta\)</span>.</p>
+</div>
+<div id="exm-exemplo1" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 1</strong></span> &nbsp;</p>
+<ul>
+<li>A quantidade <span class="math inline">\(Q_X=\dfrac{\sqrt{n}(\overline{X}-\theta)}{\sigma}\)</span> segue uma distribuição <span class="math inline">\(N(0,1)\)</span>;</li>
+<li>A quantidade <span class="math inline">\(Q_X=\dfrac{\sqrt{n}(\overline{X}-\theta)}{S}\)</span> segue uma distribuição <span class="math inline">\(t_{(n-1)}\)</span>;</li>
+<li>A quantidade <span class="math inline">\(Q_X=\dfrac{(n-1)S^2}{\sigma^2}\)</span> segue uma distribuição <span class="math inline">\(\chi_{(n-1)}^2\)</span>.</li>
 </ul>
 </div>
 </section>
 <section class="slide level2">
 
-<h3 id="tipos-de-de-comandos">Tipos de de comandos</h3>
-<p>Todo comando de <span class="math inline">\(\LaTeX\)</span> requer o símbolo \ (backslash) seguido de uma sequência de uma ou mais letras (maiúsculas ou minúsculas).</p>
-<p><strong>Qualquer usuário pode definir seus próprios comandos</strong>, seguindo certas regras de sinstaxe. Dessa forma, podem se distinguir quatro tipos de comandos:</p>
-<ul>
-<li><p><strong>Comandos simples</strong>: São comandos da forma <code>\&lt;nome_do_comando&gt;</code> e são utilizados para produzir símbolos particulares ou efeitos diretos no texto. Por exemplo:</p>
-<ul>
-<li><code>\quad</code>: produz um espaço horizontal do tamanho da letra M (na fonte utilizada no momento);</li>
-<li><code>\qquad</code>: equivale a dois <code>\quad</code>;</li>
-<li><code>\</code>&nbsp;&nbsp;: equivale a um espaçamento médio ocupado por uma letra;</li>
-</ul></li>
-</ul>
-</section>
-<section class="slide level2">
-
-<div class="fragment semi-fade-out" data-fragment-index="1">
-<ul>
-<li><strong>Comandos com um ou mais argumentos</strong>: São comandos da forma <code>\&lt;nome_do_comando&gt;[&lt;opções&gt;]{...}{...}...{...}</code>, onde <code>{...}</code> representa os valores dos argumentos e <code>[opções]</code> as opções do comando. Um exemplo típoco é o comando <code>\documentclass[12pt,draft]{book}</code>;</li>
-</ul>
-</div>
-<div class="fragment fade-in" data-fragment-index="1">
-<div class="fragment semi-fade-out" data-fragment-index="2">
-<ul>
-<li><strong>Declarações globais</strong>: São comandos sem argumentos e limitados por chaves, por exemplo: <code>{\it &lt;texto&gt;}</code>. Quando se eliminam as chaves o comando se trona global, i.e., afetará todo o documento a partir do uso do comando. Para suspender uma declaração global é necessário usar uma declaração contrária, por exemplo <code>\large</code> (aumenta o tamanho da fonte), <code>\normalsize</code> retorna ao tamanho original da fonte;</li>
-</ul>
-</div>
-</div>
-<div class="fragment fade-in" data-fragment-index="2">
-<ul>
-<li><strong>Ambientes</strong>: São da forma <code>\begin{...}</code> <code>\end{...}</code>. Os comandos globais utilizados dentro dos ambientes só tem efeito local. Exemplo:</li>
-</ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb3-1"><a href=""></a><span class="kw">\begin</span>{<span class="ex">enumerate</span>}</span>
-<span id="cb3-2"><a href=""></a>  <span class="fu">\item</span> Primeiro item</span>
-<span id="cb3-3"><a href=""></a>  <span class="fu">\item</span> Segundo item</span>
-<span id="cb3-4"><a href=""></a><span class="kw">\end</span>{<span class="ex">enumerate</span>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="exercicios">EXERCICIOS</h3>
-<p>Use o <a href="https://latexeditor.lagrida.com/"><span class="math inline">\(\LaTeX\)</span> Equation Editor</a> para escrever as seguintes equações:</p>
+<h3 id="intervalo-de-confiança-para-mu-com-sigma2-conhecido">Intervalo de confiança para <span class="math inline">\(\mu\)</span> com <span class="math inline">\(\sigma^2\)</span> conhecido</h3>
+<p>Seja <span class="math inline">\(z_{(1-\frac{\alpha}{2})}\)</span> o número tal que <span class="math inline">\(\mathbb{P}[-z_{(1-\frac{\alpha}{2})}&lt;Z&lt;z_{(1-\frac{\alpha}{2})}]=1-\alpha\)</span>, onde <span class="math inline">\(Z\)</span> segue uma distribuição <span class="math inline">\(N(0,1)\)</span>. De fato, pelo Teorema Central do Limite, temos que:</p>
 <p><span class="math display">\[\begin{align*}
-k_{n+1} &amp;= n^2 + k_n^2 - k_{n-1} + \displaystyle\sum_{i=1}^{10} t_i &amp; &amp;P\left(A=2\middle|\frac{A^2}{B}&gt;4\right) \\
-f(n) &amp;= \sum_{\substack{
-   0&lt;i&lt;m \\
-   0&lt;j&lt;n
-  }}
-P(i,j)+ n^5\large|_{n=17} + \binom{n}{k} &amp; &amp;\left.\frac{x^3}{3}\right|_0^1\\
-x&amp;= a_0 + \cfrac{1}{a_1+ \cfrac{1}{a_2+ \cfrac{1}{a_3 + \cfrac{1}{a_4} } } } &amp; &amp;f(n) =
-  \begin{cases}
-    \frac{n}{2},   &amp; \quad \text{se } n \text{ é par};\\
-    -\frac{n+1}{2},  &amp; \quad \text{se } n \text{ é ímpar}.
-  \end{cases}
+1-\alpha&amp;=\mathbb{P}\left[-z_{(1-\frac{\alpha}{2})}&lt;Z&lt;z_{(1-\frac{\alpha}{2})}\right]\\%\approx
+%\mathbb{P}\left[-z_{(1-\frac{\alpha}{2})}&lt;Z_n&lt;z_{(1-\frac{\alpha}{2})}\right]\\
+&amp;=\mathbb{P}\left[-z_{(1-\frac{\alpha}{2})}&lt;\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}&lt;z_{(1-\frac{\alpha}{2})}\right]\\
+&amp;=\mathbb{P}\left[-z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}}&lt;\overline{X}-\mu&lt;z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}}\right]\\
+&amp;=\mathbb{P}\left[\overline{X}-z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}}&lt;\mu&lt;\overline{X}+z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}}\right].
 \end{align*}\]</span></p>
 </section>
-<section id="estrutura-base-de-um-arquivo-fonte" class="slide level2">
-<h2>Estrutura base de um arquivo fonte</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb4-1"><a href=""></a><span class="bu">\documentclass</span>[11pt, draft, a4paper]{<span class="ex">article</span>}</span>
-<span id="cb4-2"><a href=""></a></span>
-<span id="cb4-3"><a href=""></a><span class="co">% declarações e bibliotecas</span></span>
-<span id="cb4-4"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">amsmath, amsfonts, amsmath, amsthm, amssymb</span>} <span class="co">% Contém ferramentas para expressões matemáticas</span></span>
-<span id="cb4-5"><a href=""></a><span class="bu">\usepackage</span>[brazil]{<span class="ex">babel</span>}</span>
-<span id="cb4-6"><a href=""></a><span class="bu">\usepackage</span>[latin1]{<span class="ex">inputenc</span>}</span>
-<span id="cb4-7"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">color</span>}</span>
-<span id="cb4-8"><a href=""></a></span>
-<span id="cb4-9"><a href=""></a><span class="fu">\DeclareMathSymbol</span>{<span class="fu">\minus</span>}{<span class="fu">\mathord</span>}{operators}{"2D}</span>
-<span id="cb4-10"><a href=""></a><span class="fu">\DeclareMathOperator</span>{<span class="fu">\sen</span>}{sen}</span>
-<span id="cb4-11"><a href=""></a></span>
-<span id="cb4-12"><a href=""></a><span class="fu">\hyphenation</span>{me-tho-do-lo-gy}</span>
-<span id="cb4-13"><a href=""></a></span>
-<span id="cb4-14"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}  <span class="co">% Corpo do documento</span></span>
-<span id="cb4-15"><a href=""></a>   Ol<span class="fu">\'</span>a mundo no <span class="fu">\LaTeX</span>!</span>
-<span id="cb4-16"><a href=""></a>   </span>
-<span id="cb4-17"><a href=""></a>   Texto colorido em <span class="fu">\textcolor</span>{red}{vermelho}</span>
-<span id="cb4-18"><a href=""></a>   </span>
-<span id="cb4-19"><a href=""></a>   <span class="kw">\begin</span>{<span class="ex">equation</span>}</span>
-<span id="cb4-20"><a href=""></a><span class="ss">    f(x)=</span><span class="sc">\frac</span><span class="ss">{1}{2</span><span class="sc">\pi</span><span class="ss">}</span><span class="sc">\exp\{\minus\frac</span><span class="ss">{1}{2}x^2</span><span class="sc">\}\mathbb</span><span class="ss">{I}_{</span><span class="sc">\mathbb</span><span class="ss">{R}}(x).</span></span>
-<span id="cb4-21"><a href=""></a><span class="ss">   </span><span class="kw">\end</span>{<span class="ex">equation</span>}</span>
-<span id="cb4-22"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<section class="slide level2">
+
+<p>Ou seja, a probabilidade de <span class="math inline">\(\mu\)</span> pertencer ao intervalo aleatório</p>
+<p><span class="math display">\[
+\left[\overline{X}-z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}};\overline{X}+z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}}\right]
+\]</span> é <span class="math inline">\(1-\alpha\)</span>, onde <span class="math inline">\(\alpha \in (0,1)\)</span> é o chamado <em>nível de significância</em>.</p>
+<div id="exm-exemplo2" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 2</strong></span> Uma máquina estava regulada para encher pacotes de café com peso médio de <span class="math inline">\(500 g\)</span> e variância de <span class="math inline">\(196 g^2\)</span>. Uma amostra aleatória de <span class="math inline">\(49\)</span> pacotes forneceu uma média de <span class="math inline">\(485g\)</span>. O que podemos dizer sobre a verdadeira média com um nível de confiança de <span class="math inline">\(95\%\)</span>?</p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Temos que <span class="math inline">\(\overline{x}=485\)</span>, <span class="math inline">\(n=49\)</span>, <span class="math inline">\(\sigma^2=196\)</span> e <span class="math inline">\(\alpha=0.05\)</span>. Primeiramente, <span class="math inline">\(z_{(1-\frac{\alpha}{2})}= z_{0.975}=1.96\)</span>.</p>
+<div class="fragment fade-in" data-fragment-index="2">
+<p><span class="math display">\[\begin{align*}
+IC(\mu;0.95)&amp;=\left[485-1.96\times\frac{14}{7};485+1.96\times\frac{14}{7}\right]\\
+&amp;=[481.08;488.92].    
+\end{align*}\]</span></p>
 </div>
-</section>
-<section id="gerenciamento-de-referências-bibliográficas" class="slide level2">
-<h2>Gerenciamento de referências bibliográficas</h2>
-<p>Quando se trata de sistemas de gerenciamento de bibliografias, existem três opções principais em <span class="math inline">\(\LaTeX\)</span>: <strong>bibTeX</strong> , <strong>natbib</strong> e <strong>bibLaTeX</strong>. Embora os três utilizem arquivos <code>.bib</code>, eles oferecem diferentes comandos, estilos, tipos de dados e opções de atributos.</p>
-<p>O <strong>biblatex</strong> é um pacote moderno para gerenciar bibliografias no <span class="math inline">\(\LaTeX\)</span>, oferecendo maior flexibilidade e suporte para processar arquivos <code>.bib</code>. Ele simplifica a personalização de estilos (autor-data, numérico, ABNT) e facilita o manuseio de caracteres especiais. A estrutura utiliza um arquivo <code>.bib</code> separado, carregado no preâmbulo, e o comando para exibir as referências.</p>
+</div>
+</div>
 </section>
 <section class="slide level2">
 
-<p>Para referenciar um documento em um arquivo <span class="math inline">\(\LaTeX\)</span>, deve-se criar um arquivo de banco de dados bibliográficos, de extensão <code>.bib</code>. Dentro desse arquivo, as referências devem indicar seus campos obrigatórios e podem apresentar campos opcionais, caso o autor o deseje. No início de cada referência, deve-se colocar o caractere <code>@</code> (arroba), seguido do tipo de documento que se planeja referenciar:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href=""></a><span class="co">% Conteúdo do arquivo .bib</span></span>
-<span id="cb5-2"><a href=""></a>@book{mittelbach2004latex,</span>
-<span id="cb5-3"><a href=""></a>  title={The LATEX companion},</span>
-<span id="cb5-4"><a href=""></a>  author={Mittelbach, Frank and Goossens, Michel and Braams, Johannes and Carlisle, David and Rowley, Chris},</span>
-<span id="cb5-5"><a href=""></a>  year={2004},</span>
-<span id="cb5-6"><a href=""></a>  publisher={Addison-Wesley Professional}</span>
-<span id="cb5-7"><a href=""></a>}</span>
-<span id="cb5-8"><a href=""></a></span>
-<span id="cb5-9"><a href=""></a>@article{borges2016geometric,</span>
-<span id="cb5-10"><a href=""></a>  title={A geometric time series model with inflated-parameter Bernoulli counting series},</span>
-<span id="cb5-11"><a href=""></a>  author={Borges, Patrick and Molinares, Fabio Fajardo and Bourguignon, Marcelo},</span>
-<span id="cb5-12"><a href=""></a>  journal={Statistics <span class="fu">\&amp;</span> Probability Letters},</span>
-<span id="cb5-13"><a href=""></a>  volume={119},</span>
-<span id="cb5-14"><a href=""></a>  pages={264--272},</span>
-<span id="cb5-15"><a href=""></a>  year={2016},</span>
-<span id="cb5-16"><a href=""></a>  publisher={Elsevier}</span>
-<span id="cb5-17"><a href=""></a>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Dessa forma, com uma confiança de <span class="math inline">\(95\%\)</span>, podemos afirmar que a máquina está desregulada. Neste exemplo, supomos que a desregulagem afeta apenas a média com que os pacotes são preenchidos.</p>
+<p><br><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>E se afetasse a variância? Em outras palavras, e se <span class="math inline">\(\sigma^2\)</span> for <strong>desconhecido</strong>?</p>
 </div>
-<p><font size="5">Verifique o formato de saída em <a href="https://bibtex.online/">BibTeX Online Converter</a>.</font></p>
+</section>
+<section class="slide level2">
+
+<h3 id="intervalo-de-confiança-para-mu-com-sigma2-desconhecido">Intervalo de confiança para <span class="math inline">\(\mu\)</span> com <span class="math inline">\(\sigma^2\)</span> desconhecido</h3>
+<p>Temos primeiramente que <span class="math inline">\(S^2\)</span> é um estimador consistente de <span class="math inline">\(\sigma^2\)</span>. Portanto, em grandes amostras (<span class="math inline">\(n\)</span> muito grande), <span class="math inline">\(S^2\approx\sigma^2\)</span> (com prob. 1).</p>
+<p>Assim, podemos utilizar o seguinte IC para <span class="math inline">\(\mu\)</span> quando <span class="math inline">\(\sigma^2\)</span> é desconhecida: <span class="math display">\[
+IC(\mu;1-\alpha)=\left[\overline{X}-z_{(1-\frac{\alpha}{2})}\frac{S}{\sqrt{n}};\overline{X}+z_{(1-\frac{\alpha}{2})}\frac{S}{\sqrt{n}}\right].
+\]</span></p>
+<p>Se o tamanho amostral é suficientemente grande, o IC acima fornece aproximadamente confiança <span class="math inline">\((1-\alpha)\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<h3 id="intervalo-de-confiança-para-mu-com-sigma2-desconhecido-cenário-normal">Intervalo de confiança para <span class="math inline">\(\mu\)</span> com <span class="math inline">\(\sigma^2\)</span> desconhecido (cenário normal)</h3>
+<ul>
+<li>Caso o tamanho da amostra seja pequeno, o valor fornecido por <span class="math inline">\(S^2\)</span> pode estar distante de <span class="math inline">\(\sigma^2\)</span>. Portanto, a distribuição de <span class="math inline">\(\frac{\overline{X}-\mu}{S/\sqrt{n}}\)</span> pode não ser muito próxima de uma variável aleatória <span class="math inline">\(Z\)</span> com distribuição <span class="math inline">\(N(0,1)\)</span>;</li>
+</ul>
+<div class="fragment fade-in" data-fragment-index="1">
+<ul>
+<li>Entretanto, supondo que os dados são observados de uma variável alatória com distribuição normal, pode-se mostrar que a variável aleatória</li>
+</ul>
+<p><span class="math display">\[
+T=\frac{\sqrt{n}\left(\overline{X}-\mu\right)}{S}
+\]</span> segue uma distribuição t-student com <span class="math inline">\(n-1\)</span> graus de liberdade, denotado por <span class="math inline">\(t_{(n-1)}\)</span>.</p>
+</div>
 <!-- ## Referências -->
 <!-- ::: {#refs} -->
 <!-- ::: -->
