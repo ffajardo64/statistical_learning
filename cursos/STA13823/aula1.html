@@ -266,6 +266,25 @@ IC(\mu;1-\alpha)=\left[\overline{X}-z_{(1-\frac{\alpha}{2})}\frac{S}{\sqrt{n}};\
 T=\frac{\sqrt{n}\left(\overline{X}-\mu\right)}{S}
 \]</span> segue uma distribuição t-student com <span class="math inline">\(n-1\)</span> graus de liberdade, denotado por <span class="math inline">\(t_{(n-1)}\)</span>.</p>
 </div>
+</section>
+<section class="slide level2">
+
+<p>Seja <span class="math inline">\(t_{(1-\frac{\alpha}{2};n-1)}\)</span> o número tal que <span class="math inline">\(\mathbb{P}\left(-t_{(1-\frac{\alpha}{2};n-1)}&lt;T&lt;
+t_{(1-\frac{\alpha}{2};n-1)}\right)=1-\alpha\)</span>, onde <span class="math inline">\(T\)</span> segue uma distribuição <span class="math inline">\(t_{n-1}\)</span>.</p>
+<p>De fato, <span class="math display">\[\begin{align*}
+1-\alpha&amp;=\mathbb{P}\left(-t_{(1-\frac{\alpha}{2};n-1)}&lt;T&lt;t_{(1-\frac{\alpha}{2};n-1)}\right)\\
+%\mathbb{P}\left(-z_{1-\frac{\alpha}{2}}&lt;Z_n&lt;z_{1-\frac{\alpha}{2}}\right)\\
+&amp;=\mathbb{P}\left(-t_{(1-\frac{\alpha}{2};n-1)}&lt;\frac{\overline{X}-\mu}{S/\sqrt{n}}&lt;t_{(1-\frac{\alpha}{2};n-1)}\right)\\
+&amp;=\mathbb{P}\left(-t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}}&lt;\overline{X}-\mu&lt;t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}}\right)\\
+&amp;=\mathbb{P}\left(\overline{X}-t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}}&lt;\mu&lt;\overline{X}+t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}}\right).
+\end{align*}\]</span></p>
+</section>
+<section class="slide level2">
+
+<p>Logo, quando <span class="math inline">\(\sigma^2\)</span> é desconhecida e o tamanho amostral não é grande, se os dados vierem de uma v.a. normal, um IC para <span class="math inline">\(\mu\)</span> com coeficiente de confiança <span class="math inline">\((1-\alpha)\)</span> é dado por <span class="math display">\[
+IC(\mu;1-\alpha)=\left[\overline{X}-t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}};
+\overline{X}+t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}}\right].
+\]</span></p>
 <!-- ## Referências -->
 <!-- ::: {#refs} -->
 <!-- ::: -->
