@@ -209,7 +209,7 @@ Tipografia científica com LaTeX<br>
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 22 março, 2026
+            Última atualização: 24 março, 2026
           </p>
     </div>
 </div>
@@ -486,7 +486,7 @@ x&amp;= a_0 + \cfrac{1}{a_1+ \cfrac{1}{a_2+ \cfrac{1}{a_3 + \cfrac{1}{a_4} } } }
 <span id="cb4-9"><a href=""></a><span class="fu">\DeclareMathSymbol</span>{<span class="fu">\minus</span>}{<span class="fu">\mathord</span>}{operators}{"2D}</span>
 <span id="cb4-10"><a href=""></a><span class="fu">\DeclareMathOperator</span>{<span class="fu">\sen</span>}{sen}</span>
 <span id="cb4-11"><a href=""></a></span>
-<span id="cb4-12"><a href=""></a><span class="fu">\hyphenation</span>{me-tho-do-lo-gy}</span>
+<span id="cb4-12"><a href=""></a><span class="fu">\hyphenation</span>{me-tho-do-lo-gy} <span class="co">% hifenação ou hifenização</span></span>
 <span id="cb4-13"><a href=""></a></span>
 <span id="cb4-14"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}  <span class="co">% Corpo do documento</span></span>
 <span id="cb4-15"><a href=""></a>   Ol<span class="fu">\'</span>a mundo no <span class="fu">\LaTeX</span>!</span>
@@ -502,7 +502,17 @@ x&amp;= a_0 + \cfrac{1}{a_1+ \cfrac{1}{a_2+ \cfrac{1}{a_3 + \cfrac{1}{a_4} } } }
 <section id="gerenciamento-de-referências-bibliográficas" class="slide level2">
 <h2>Gerenciamento de referências bibliográficas</h2>
 <p>Quando se trata de sistemas de gerenciamento de bibliografias, existem três opções principais em <span class="math inline">\(\LaTeX\)</span>: <strong>bibTeX</strong> , <strong>natbib</strong> e <strong>bibLaTeX</strong>. Embora os três utilizem arquivos <code>.bib</code>, eles oferecem diferentes comandos, estilos, tipos de dados e opções de atributos.</p>
-<p>O <strong>biblatex</strong> é um pacote moderno para gerenciar bibliografias no <span class="math inline">\(\LaTeX\)</span>, oferecendo maior flexibilidade e suporte para processar arquivos <code>.bib</code>. Ele simplifica a personalização de estilos (autor-data, numérico, ABNT) e facilita o manuseio de caracteres especiais. A estrutura utiliza um arquivo <code>.bib</code> separado, carregado no preâmbulo, e o comando para exibir as referências.</p>
+<p>O <strong>bibTeX</strong> é uma ferramenta de gerenciamento bibliográfico projetada para a automação e padronização de listas de referências. Utilizado primordialmente em ecossistemas <span class="math inline">\(\LaTeX\)</span>, seu propósito é garantir a consistência das citações ao separar os metadados bibliográficos da sua representação visual. Essa abordagem segue a filosofia do próprio <span class="math inline">\(\LaTeX\)</span>: a distinção clara entre o conteúdo estrutural e a sua estilização final.</p>
+</section>
+<section class="slide level2">
+
+<p>O funcionamento do BibTeX baseia-se no processamento de três entradas principais:</p>
+<ul>
+<li><p>Arquivo <code>.aux</code>: gerado pelo LaTeX em uma execução prévia, contendo as chaves de citação encontradas no texto;</p></li>
+<li><p>Arquivo <code>.bst</code> (estilo): define as regras de formatação (como ABNT ou APA). É escrito em uma linguagem específica por designers de estilo para determinar a apresentação das entradas (vide <a href="https://www.bibtex.com/styles/" target="_blank">Lista de estilos</a>);</p></li>
+<li><p>Arquivo <code>.bib</code>: o banco de dados bibliográfico completo do usuário.</p></li>
+</ul>
+<p>A partir dessas informações, o <strong>BibTeX</strong> seleciona no arquivo <code>.bib</code> apenas as obras citadas (via comandos \cite ou \nocite) e gera um arquivo de saída <code>.bbl</code>. Este último contém as entradas já formatadas segundo as regras do <code>.bst</code>, sendo finalmente incorporado pelo LaTeX para renderizar a lista de referências no documento final.</p>
 </section>
 <section class="slide level2">
 
@@ -526,7 +536,42 @@ x&amp;= a_0 + \cfrac{1}{a_1+ \cfrac{1}{a_2+ \cfrac{1}{a_3 + \cfrac{1}{a_4} } } }
 <span id="cb5-16"><a href=""></a>  publisher={Elsevier}</span>
 <span id="cb5-17"><a href=""></a>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><font size="5">Verifique o formato de saída em <a href="https://bibtex.online/">BibTeX Online Converter</a>.</font></p>
+<p><font size="5">Verifique o formato de saída em <a href="https://bibtex.online/">BibTeX Online Converter</a> ou use <a href="https://www.bibtex.com/converters/">BibTeX converters and generators</a> para gerar código bixtex. </font></p>
+</section>
+<section class="slide level2">
+
+<h3 id="exemplo">Exemplo</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource latex number-lines code-with-copy"><code class="sourceCode latex"><span id="cb6-1"><a href=""></a><span class="bu">\documentclass</span>[11pt, draft, a4paper]{<span class="ex">article</span>}</span>
+<span id="cb6-2"><a href=""></a></span>
+<span id="cb6-3"><a href=""></a><span class="bu">\usepackage</span>{<span class="ex">amsmath, amsfonts, amsmath, amsthm, amssymb</span>}</span>
+<span id="cb6-4"><a href=""></a><span class="bu">\usepackage</span>[brazil]{<span class="ex">babel</span>}</span>
+<span id="cb6-5"><a href=""></a><span class="bu">\usepackage</span>[latin1]{<span class="ex">inputenc</span>}</span>
+<span id="cb6-6"><a href=""></a></span>
+<span id="cb6-7"><a href=""></a><span class="fu">\DeclareMathSymbol</span>{<span class="fu">\minus</span>}{<span class="fu">\mathord</span>}{operators}{"2D}</span>
+<span id="cb6-8"><a href=""></a><span class="fu">\DeclareMathOperator</span>{<span class="fu">\sen</span>}{sen}</span>
+<span id="cb6-9"><a href=""></a></span>
+<span id="cb6-10"><a href=""></a><span class="fu">\hyphenation</span>{me-tho-do-lo-gy} <span class="co">% hifenação ou hifenização</span></span>
+<span id="cb6-11"><a href=""></a></span>
+<span id="cb6-12"><a href=""></a><span class="fu">\title</span>{Meu primeiro documento em <span class="fu">\LaTeX</span>{}}</span>
+<span id="cb6-13"><a href=""></a><span class="fu">\author</span>{Fabio Fajardo}</span>
+<span id="cb6-14"><a href=""></a></span>
+<span id="cb6-15"><a href=""></a><span class="kw">\begin</span>{<span class="ex">document</span>}  <span class="co">% Corpo do documento</span></span>
+<span id="cb6-16"><a href=""></a></span>
+<span id="cb6-17"><a href=""></a><span class="fu">\maketitle</span></span>
+<span id="cb6-18"><a href=""></a></span>
+<span id="cb6-19"><a href=""></a>Uma referencia citada com Bibtex <span class="kw">\cite</span>{<span class="ex">borges2016geometric</span>}. </span>
+<span id="cb6-20"><a href=""></a>Mas, meu   livro favorito <span class="fu">\'</span>e <span class="kw">\cite</span>{<span class="ex">mittelbach2004latex</span>}.</span>
+<span id="cb6-21"><a href=""></a>   </span>
+<span id="cb6-22"><a href=""></a><span class="kw">\begin</span>{<span class="ex">equation</span>}</span>
+<span id="cb6-23"><a href=""></a><span class="ss">    f(x)=</span><span class="sc">\frac</span><span class="ss">{1}{2</span><span class="sc">\pi</span><span class="ss">}</span><span class="sc">\exp\{\minus\frac</span><span class="ss">{1}{2}x^2</span><span class="sc">\}\mathbb</span><span class="ss">{I}_{</span><span class="sc">\mathbb</span><span class="ss">{R}}(x).</span></span>
+<span id="cb6-24"><a href=""></a><span class="kw">\end</span>{<span class="ex">equation</span>}</span>
+<span id="cb6-25"><a href=""></a></span>
+<span id="cb6-26"><a href=""></a><span class="bu">\bibliographystyle</span>{<span class="ex">unsrt</span>} <span class="co">%Estilo BibTeX</span></span>
+<span id="cb6-27"><a href=""></a><span class="bu">\bibliography</span>{<span class="ex">ref</span>} <span class="co">% Arquivo ref.bib</span></span>
+<span id="cb6-28"><a href=""></a></span>
+<span id="cb6-29"><a href=""></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <!-- ## Referências -->
 <!-- ::: {#refs} -->
 <!-- ::: -->
