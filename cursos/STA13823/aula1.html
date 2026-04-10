@@ -6,8 +6,8 @@
 <script src="aula1_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="aula1_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="aula1_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="aula1_files/libs/quarto-html/quarto-syntax-highlighting-de84f8d6bb715db06a919283c2d1e787.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.42">
+<link href="aula1_files/libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="LECON/DEST - UFES">
   <title> STA13823 - Inferência Estatística II   Estimação Intervalar </title>
@@ -29,7 +29,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="aula1_files/libs/revealjs/dist/theme/quarto-024e1e1fed892d9c5de4270c398ef4bc.css">
+  <link rel="stylesheet" href="aula1_files/libs/revealjs/dist/theme/quarto-99361432a01776c2ec44eb9f5125b270.css">
   <link href="aula1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="aula1_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="aula1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -143,7 +143,7 @@ Estimação Intervalar<br>
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 06 abril, 2026
+            Última atualização: 08 abril, 2026
           </p>
     </div>
 </div>
@@ -198,8 +198,8 @@ Ls(T)\right]=1-\alpha.
 <div id="exm-exemplo1" class="theorem example">
 <p><span class="theorem-title"><strong>Exemplo 1</strong></span> &nbsp;</p>
 <ul>
-<li>A quantidade <span class="math inline">\(Q_X=\dfrac{\sqrt{n}(\overline{X}-\theta)}{\sigma}\)</span> segue uma distribuição <span class="math inline">\(N(0,1)\)</span>;</li>
-<li>A quantidade <span class="math inline">\(Q_X=\dfrac{\sqrt{n}(\overline{X}-\theta)}{S}\)</span> segue uma distribuição <span class="math inline">\(t_{(n-1)}\)</span>;</li>
+<li>A quantidade <span class="math inline">\(Q_X=\dfrac{\sqrt{n}(\bar{X}-\theta)}{\sigma}\)</span> segue uma distribuição <span class="math inline">\(N(0,1)\)</span>;</li>
+<li>A quantidade <span class="math inline">\(Q_X=\dfrac{\sqrt{n}(\bar{X}-\theta)}{S}\)</span> segue uma distribuição <span class="math inline">\(t_{(n-1)}\)</span>;</li>
 <li>A quantidade <span class="math inline">\(Q_X=\dfrac{(n-1)S^2}{\sigma^2}\)</span> segue uma distribuição <span class="math inline">\(\chi_{(n-1)}^2\)</span>.</li>
 </ul>
 </div>
@@ -211,21 +211,21 @@ Ls(T)\right]=1-\alpha.
 <p><span class="math display">\[\begin{align*}
 1-\alpha&amp;=\mathbb{P}\left[-z_{(1-\frac{\alpha}{2})}&lt;Z&lt;z_{(1-\frac{\alpha}{2})}\right]\\%\approx
 %\mathbb{P}\left[-z_{(1-\frac{\alpha}{2})}&lt;Z_n&lt;z_{(1-\frac{\alpha}{2})}\right]\\
-&amp;=\mathbb{P}\left[-z_{(1-\frac{\alpha}{2})}&lt;\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}&lt;z_{(1-\frac{\alpha}{2})}\right]\\
-&amp;=\mathbb{P}\left[-z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}}&lt;\overline{X}-\mu&lt;z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}}\right]\\
-&amp;=\mathbb{P}\left[\overline{X}-z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}}&lt;\mu&lt;\overline{X}+z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}}\right].
+&amp;=\mathbb{P}\left[-z_{(1-\frac{\alpha}{2})}&lt;\frac{\bar{X}-\mu}{\sigma/\sqrt{n}}&lt;z_{(1-\frac{\alpha}{2})}\right]\\
+&amp;=\mathbb{P}\left[-z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}}&lt;\bar{X}-\mu&lt;z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}}\right]\\
+&amp;=\mathbb{P}\left[\bar{X}-z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}}&lt;\mu&lt;\bar{X}+z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}}\right].
 \end{align*}\]</span></p>
 </section>
 <section class="slide level2">
 
 <p>Ou seja, a probabilidade de <span class="math inline">\(\mu\)</span> pertencer ao intervalo aleatório</p>
 <p><span class="math display">\[
-\left[\overline{X}-z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}};\overline{X}+z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}}\right]
+\left[\bar{X}-z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}};\bar{X}+z_{(1-\frac{\alpha}{2})}\frac{\sigma}{\sqrt{n}}\right]
 \]</span> é <span class="math inline">\(1-\alpha\)</span>, onde <span class="math inline">\(\alpha \in (0,1)\)</span> é o chamado <em>nível de significância</em>.</p>
 <div id="exm-exemplo2" class="theorem example">
 <p><span class="theorem-title"><strong>Exemplo 2</strong></span> Uma máquina estava regulada para encher pacotes de café com peso médio de <span class="math inline">\(500 g\)</span> e variância de <span class="math inline">\(196 g^2\)</span>. Uma amostra aleatória de <span class="math inline">\(49\)</span> pacotes forneceu uma média de <span class="math inline">\(485g\)</span>. O que podemos dizer sobre a verdadeira média com um nível de confiança de <span class="math inline">\(95\%\)</span>?</p>
 <div class="fragment fade-in" data-fragment-index="1">
-<p>Temos que <span class="math inline">\(\overline{x}=485\)</span>, <span class="math inline">\(n=49\)</span>, <span class="math inline">\(\sigma^2=196\)</span> e <span class="math inline">\(\alpha=0.05\)</span>. Primeiramente, <span class="math inline">\(z_{(1-\frac{\alpha}{2})}= z_{0.975}=1.96\)</span>.</p>
+<p>Temos que <span class="math inline">\(\bar{x}=485\)</span>, <span class="math inline">\(n=49\)</span>, <span class="math inline">\(\sigma^2=196\)</span> e <span class="math inline">\(\alpha=0.05\)</span>. Primeiramente, <span class="math inline">\(z_{(1-\frac{\alpha}{2})}= z_{0.975}=1.96\)</span>.</p>
 <div class="fragment fade-in" data-fragment-index="2">
 <p><span class="math display">\[\begin{align*}
 IC(\mu;0.95)&amp;=\left[485-1.96\times\frac{14}{7};485+1.96\times\frac{14}{7}\right]\\
@@ -248,7 +248,7 @@ IC(\mu;0.95)&amp;=\left[485-1.96\times\frac{14}{7};485+1.96\times\frac{14}{7}\ri
 <h3 id="intervalo-de-confiança-para-mu-com-sigma2-desconhecido">Intervalo de confiança para <span class="math inline">\(\mu\)</span> com <span class="math inline">\(\sigma^2\)</span> desconhecido</h3>
 <p>Temos primeiramente que <span class="math inline">\(S^2\)</span> é um estimador consistente de <span class="math inline">\(\sigma^2\)</span>. Portanto, em grandes amostras (<span class="math inline">\(n\)</span> muito grande), <span class="math inline">\(S^2\approx\sigma^2\)</span> (com prob. 1).</p>
 <p>Assim, podemos utilizar o seguinte IC para <span class="math inline">\(\mu\)</span> quando <span class="math inline">\(\sigma^2\)</span> é desconhecida: <span class="math display">\[
-IC(\mu;1-\alpha)=\left[\overline{X}-z_{(1-\frac{\alpha}{2})}\frac{S}{\sqrt{n}};\overline{X}+z_{(1-\frac{\alpha}{2})}\frac{S}{\sqrt{n}}\right].
+IC(\mu;1-\alpha)=\left[\bar{X}-z_{(1-\frac{\alpha}{2})}\frac{S}{\sqrt{n}};\bar{X}+z_{(1-\frac{\alpha}{2})}\frac{S}{\sqrt{n}}\right].
 \]</span></p>
 <p>Se o tamanho amostral é suficientemente grande, o IC acima fornece aproximadamente confiança <span class="math inline">\((1-\alpha)\)</span>.</p>
 </section>
@@ -256,14 +256,14 @@ IC(\mu;1-\alpha)=\left[\overline{X}-z_{(1-\frac{\alpha}{2})}\frac{S}{\sqrt{n}};\
 
 <h3 id="intervalo-de-confiança-para-mu-com-sigma2-desconhecido-cenário-normal">Intervalo de confiança para <span class="math inline">\(\mu\)</span> com <span class="math inline">\(\sigma^2\)</span> desconhecido (cenário normal)</h3>
 <ul>
-<li>Caso o tamanho da amostra seja pequeno, o valor fornecido por <span class="math inline">\(S^2\)</span> pode estar distante de <span class="math inline">\(\sigma^2\)</span>. Portanto, a distribuição de <span class="math inline">\(\frac{\overline{X}-\mu}{S/\sqrt{n}}\)</span> pode não ser muito próxima de uma variável aleatória <span class="math inline">\(Z\)</span> com distribuição <span class="math inline">\(N(0,1)\)</span>;</li>
+<li>Caso o tamanho da amostra seja pequeno, o valor fornecido por <span class="math inline">\(S^2\)</span> pode estar distante de <span class="math inline">\(\sigma^2\)</span>. Portanto, a distribuição de <span class="math inline">\(\frac{\bar{X}-\mu}{S/\sqrt{n}}\)</span> pode não ser muito próxima de uma variável aleatória <span class="math inline">\(Z\)</span> com distribuição <span class="math inline">\(N(0,1)\)</span>;</li>
 </ul>
 <div class="fragment fade-in" data-fragment-index="1">
 <ul>
 <li>Entretanto, supondo que os dados são observados de uma variável alatória com distribuição normal, pode-se mostrar que a variável aleatória</li>
 </ul>
 <p><span class="math display">\[
-T=\frac{\sqrt{n}\left(\overline{X}-\mu\right)}{S}
+T=\frac{\sqrt{n}\left(\bar{X}-\mu\right)}{S}
 \]</span> segue uma distribuição t-student com <span class="math inline">\(n-1\)</span> graus de liberdade, denotado por <span class="math inline">\(t_{(n-1)}\)</span>.</p>
 </div>
 </section>
@@ -274,16 +274,16 @@ t_{(1-\frac{\alpha}{2};n-1)}\right)=1-\alpha\)</span>, onde <span class="math in
 <p>De fato, <span class="math display">\[\begin{align*}
 1-\alpha&amp;=\mathbb{P}\left(-t_{(1-\frac{\alpha}{2};n-1)}&lt;T&lt;t_{(1-\frac{\alpha}{2};n-1)}\right)\\
 %\mathbb{P}\left(-z_{1-\frac{\alpha}{2}}&lt;Z_n&lt;z_{1-\frac{\alpha}{2}}\right)\\
-&amp;=\mathbb{P}\left(-t_{(1-\frac{\alpha}{2};n-1)}&lt;\frac{\overline{X}-\mu}{S/\sqrt{n}}&lt;t_{(1-\frac{\alpha}{2};n-1)}\right)\\
-&amp;=\mathbb{P}\left(-t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}}&lt;\overline{X}-\mu&lt;t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}}\right)\\
-&amp;=\mathbb{P}\left(\overline{X}-t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}}&lt;\mu&lt;\overline{X}+t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}}\right).
+&amp;=\mathbb{P}\left(-t_{(1-\frac{\alpha}{2};n-1)}&lt;\frac{\bar{X}-\mu}{S/\sqrt{n}}&lt;t_{(1-\frac{\alpha}{2};n-1)}\right)\\
+&amp;=\mathbb{P}\left(-t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}}&lt;\bar{X}-\mu&lt;t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}}\right)\\
+&amp;=\mathbb{P}\left(\bar{X}-t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}}&lt;\mu&lt;\bar{X}+t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}}\right).
 \end{align*}\]</span></p>
 </section>
 <section class="slide level2">
 
 <p>Logo, quando <span class="math inline">\(\sigma^2\)</span> é desconhecida e o tamanho amostral não é grande, se os dados vierem de um cenário normal, um IC para <span class="math inline">\(\mu\)</span> com coeficiente de confiança <span class="math inline">\((1-\alpha)\)</span> é dado por <span class="math display">\[
-IC(\mu;1-\alpha)=\left[\overline{X}-t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}};
-\overline{X}+t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}}\right].
+IC(\mu;1-\alpha)=\left[\bar{X}-t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}};
+\bar{X}+t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n}}\right].
 \]</span></p>
 </section>
 <section class="slide level2">
@@ -381,7 +381,7 @@ IC(\mu;1-\alpha)=\left[\overline{X}-t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n
 <p>Por outro lado, <span class="math inline">\(\frac{1}{\sigma^2}\sum_{i=1}^m(X_i-\bar{X}_m)^2\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(m-1)}\)</span> e <span class="math inline">\(\frac{1}{\sigma^2}\sum_{i=1}^n(Y_i-\bar{Y}_n)^2\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(n-1)}\)</span>. Assim,</p>
 <p><span class="math display">\[\frac{1}{\sigma^2}\sum_{i=1}^m(X_i-\bar{X}_m)^2+\frac{1}{\sigma^2}\sum_{i=1}^n(Y_i-\bar{Y}_n)^2\]</span> segue uma distribuição <span class="math inline">\(\chi^2_{(m+n-2)}\)</span>.</p>
 <p>Dessa forma,</p>
-<p><span class="math display">\[\frac{\bar{X}_m-\bar{Y}_n-(\mu_1-\mu_2)}{\sqrt{\frac1m+\frac1n}\sqrt{\frac{\frac{1}{\sigma^2}\sum_{i=1}^m(X_i-\bar{X}_m)^2+\frac{1}{\sigma^2}\sum_{i=1}^n(Y_i-\bar{Y}_n)^2}{m+n-2}}}\]</span></p>
+<p><span class="math display">\[\frac{\bar{X}_m-\bar{Y}_n-(\mu_1-\mu_2)}{\sqrt{\frac1m+\frac1n}\sqrt{\frac{\sum_{i=1}^m(X_i-\bar{X}_m)^2+\sum_{i=1}^n(Y_i-\bar{Y}_n)^2}{m+n-2}}}\]</span></p>
 <p>segue uma distribuição <span class="math inline">\(t_{(m+n-2)}\)</span>. Usando a quantidade pivotal acima é possível construir um intervalo de confiança para <span class="math inline">\(\mu_1-\mu_2\)</span>.</p>
 </section>
 <section class="slide level2">
@@ -397,7 +397,7 @@ IC(\mu;1-\alpha)=\left[\overline{X}-t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n
 <h3 id="intervalo-de-canfiança-para-a-variância-sob-normalidade">Intervalo de canfiança para a variância (sob normalidade)</h3>
 <p>Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span>.</p>
 <p><br></p>
-<p>O interesse está em construir um intervalo de confiança para a variÂncia da população. Para isso, considere <span class="math inline">\(\frac{1}{\sigma^2}\sum_{i=1}^n(X_i-\mu)^2\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(n)}\)</span>.</p>
+<p>O interesse está em construir um intervalo de confiança para a variância da população. Para isso, considere <span class="math inline">\(\frac{1}{\sigma^2}\sum_{i=1}^n(X_i-\mu)^2\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(n)}\)</span>.</p>
 <p><br></p>
 <p>Dessa forma</p>
 <p><span class="math display">\[\mathbb{P}\left(a\le\frac{1}{\sigma^2}\sum_{i=1}^n(X_i-\mu)^2\le b\right)=1-\alpha.\]</span></p>
@@ -644,7 +644,7 @@ IC(\mu;1-\alpha)=\left[\overline{X}-t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -709,190 +709,173 @@ IC(\mu;1-\alpha)=\left[\overline{X}-t_{(1-\frac{\alpha}{2};n-1)}\frac{S}{\sqrt{n
     </script>
 
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
           }
+          return false;
         }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copiada");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copiada");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copiada");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copiada");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
           }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
           for (const childEl of codeEl.children) {
             if (isCodeAnnotation(childEl)) {
               childEl.remove();
             }
           }
           return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
             }
           }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
           }
-        } else {
-          return undefined;
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>
