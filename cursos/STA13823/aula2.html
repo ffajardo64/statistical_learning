@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.42">
 
   <meta name="author" content="LECON/DEST - UFES">
-  <title>STA13828 - Análise de Séries Temporais I  Processos Lineares </title>
+  <title> STA13823 - Inferência Estatística II   Testes de hipóteses </title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -28,28 +28,8 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for citations */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-      margin-bottom: 0em;
-    }
-    .hanging-indent div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }  </style>
-  <link rel="stylesheet" href="aula2_files/libs/revealjs/dist/theme/quarto-bbd3fe9ba78fe19100bb54757e835c1d.css">
+  </style>
+  <link rel="stylesheet" href="aula2_files/libs/revealjs/dist/theme/quarto-024e1e1fed892d9c5de4270c398ef4bc.css">
   <link href="aula2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="aula2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="aula2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -149,9 +129,11 @@
     <div class="slides">
 
 <section id="title-slide" data-background-color="#172a46" data-background-opacity="number" data-background-size="contain" class="quarto-title-block center">
-  <h1 class="title">STA13828 - Análise de Séries Temporais I<br>
-</h1><h3><br>
-Processos Lineares<br>
+  <h1 class="title"></h1><h2><br>
+STA13823 - Inferência Estatística II<br>
+</h2><br>
+<h3><br>
+Testes de hipóteses<br>
 </h3>
   <p class="subtitle"><br><br></p>
 
@@ -161,282 +143,338 @@ Processos Lineares<br>
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 06 outubro, 2025
+            Última atualização: 13 abril, 2026
           </p>
     </div>
 </div>
 
 </section>
-<section id="alguns-resultados-preliminares" class="slide level2">
-<h2>Alguns resultados preliminares</h2>
-<div id="def-op_defasagem" class="theorem definition">
-<p><span class="theorem-title"><strong>Definição 1 (Operador de defasagem)</strong></span> Considere o processo <span class="math inline">\(\{X_t; t\in\mathbb{Z}\}\)</span>. O operador de defasagem, denotado por <span class="math inline">\(B\)</span> (<em>Backward</em>), define-se como <span class="math display">\[BX_t=X_{t-1}.\]</span></p>
-</div>
-<p>O operador de defasagem pode ser aplicado sucessivamente da seguinte forma:</p>
-<div class="math">
-<p><span class="math display">\[\begin{align}
-  B^2X_{t}&amp;=B\left(BX_{t}\right)=BX_{t-1}=X_{t-2}\\
-  B^3X_{t}&amp;=B^2\left(BX_{t}\right)=B^2X_{t-1}=X_{t-3}\\
-  &amp;\,\,\vdots\\
-  B^kX_{t}&amp;=X_{t-k}, \quad \text{ para } k=0,1,2,\ldots.
-  \end{align}\]</span></p>
-</div>
-<p><font size="6"> Como convenção, será definido <span class="math inline">\(B^0X_t=X_t\)</span>, i.e., o operador <span class="math inline">\(B^0\)</span> será considerado como um operador identidade.</font></p>
+<section id="testes-de-hipóteses" class="slide level2">
+<h2>Testes de hipóteses</h2>
+<p><strong>Ideia</strong>: A partir de um conjunto de observações <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> gostariamos verificar se é aceitável (ou não) alguma informação sobre a distribuição de probabilidade conjunta da amostra. No caso da inferência paramétrica, queremos testar a validade de alguma afirmação (hipótese) sobre os parâmetros da distribuição conjunta.</p>
+<p><br></p>
+<p>Se <span class="math inline">\(\Theta\)</span> é o espaço paramétrico, uma afirmação sobre <span class="math inline">\(\theta\)</span> pode ser representada por <span class="math inline">\(\theta\in\Theta_0\)</span>, onde <span class="math inline">\(\Theta_0\subset\Theta\)</span>. Em outras palaras, suponha que observamos <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> cuja distribuição conjunta envolve <span class="math inline">\(\theta\)</span> e queremos, a partir desta informação, testar a hipótese</p>
+<p><span class="math display">\[H_0: \theta\in\Theta_0.\]</span></p>
 </section>
 <section class="slide level2">
 
-<div id="def-op_diff" class="theorem definition">
-<p><span class="theorem-title"><strong>Definição 2 (Operador de diferenciação)</strong></span> Considere o processo <span class="math inline">\(\{X_t; t\in\mathbb{Z}\}\)</span>. O operador de diferenciação, denotado por <span class="math inline">\(\nabla=1-B\)</span>, define-se como <span class="math display">\[\nabla X_t=X_t - X_{t-1}.\]</span></p>
-</div>
-<p>Para <span class="math inline">\(d=0, 1, 2, \ldots\)</span>, temos o seguinte resultado <span class="math display">\[\nabla^d=(1-B)^d=\sum_{j=0}^d\binom{d}{j}(-1)^jB^j,\]</span> onde <span class="math inline">\(\dbinom{d}{j}=\dfrac{d!}{j!(d-j)!}=\dfrac{\Gamma(d+1)}{\Gamma(j+1)\Gamma(d-j+1)}\)</span>, onde <span class="math inline">\(\Gamma(t)=\int_{0}^\infty x^{t-1}e^{-x}\,dx\)</span>, para <span class="math inline">\(t&gt;0\)</span> e <span class="math inline">\(\Gamma(t)=\dfrac{\Gamma(1+t)}{t}\)</span>, para <span class="math inline">\(t&lt;0\)</span>.</p>
-</section>
-<section class="slide level2">
-
-<p>Em geral, para qualquer <span class="math inline">\(d\in\mathbb{R}\)</span>, com <span class="math inline">\(d&gt;-1\)</span>, temos que <span class="math display">\[\nabla^d=(1-B)^d=\sum_{j=0}^\infty \frac{\Gamma(j-d)}{\Gamma(j+1)\Gamma(-d)}B^j.\]</span></p>
-<div id="def-op_diffsazonal" class="theorem definition">
-<p><span class="theorem-title"><strong>Definição 3 (Operador de diferenciação sazonal)</strong></span> Considere o processo <span class="math inline">\(\{X_t; t\in\mathbb{Z}\}\)</span>. O operador de diferenciação sazonal, denotado por <span class="math inline">\(\nabla_d=1-B^d\)</span>, define-se como <span class="math display">\[\nabla_d X_t=X_t - X_{t-d}.\]</span></p>
-</div>
-<div id="exm-exemplo1" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 1</strong></span> Seja <span class="math inline">\(\{X_t;t\in\mathbb{Z}\}\)</span> um processo estocástico. Então, <span class="math display">\[\nabla^2X_t=\nabla(\nabla X_t)=(1-B)(1-B)X_t=(1-2B+B^2)X_t=X_t-2X_{t-1}+X_{t-2}.\]</span></p>
-</div>
-</section>
-<section class="slide level2">
-
-<div id="exm-exemplo2" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 2</strong></span> Seja <span class="math inline">\(\{X_t;t\in\mathbb{Z}\}\)</span> um processo estocástico. Então, <span class="math display">\[\nabla_6X_t=(1-B^6)X_t=X_t-X_{t-6}.\]</span></p>
-</div>
-<div id="exm-exemplo3" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 3</strong></span> Seja <span class="math inline">\(\{X_t;t\in\mathbb{Z}\}\)</span> um processo estocástico. Então,</p>
+<p>Em geral, consideramos dois conjuntos <span class="math inline">\(\Theta_0\)</span> e <span class="math inline">\(\Theta_1\)</span>, subconjuntos <span class="math inline">\(\Theta\)</span>, tal que <span class="math inline">\(\Theta_0\cap\Theta_1=\emptyset\)</span> e desejamos verificar o que parece mais razoável</p>
 <div class="math">
 <p><span class="math display">\[\begin{align*}
-\nabla\nabla_{12}X_t&amp;=(1-B)(1-B^{12})X_t=(1-B-B^{12}+B^{13})X_t\\
-&amp;=X_t-X_{t-1}-X_{t-12}+X_{t-13}.
+H_0&amp;:\theta\in\Theta_0 &amp; \mathrm{ou} &amp; &amp; H_1&amp;:\theta\in\Theta_1.
+\end{align*}\]</span></p>
+</div>
+<p>Definidas as nossas afirmações (hipóteses) a ideia é construir a partir de <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma estatística <span class="math inline">\(u(X_1,X_2,\ldots,X_n)\)</span> e uma regra de decisão <span class="math inline">\(C\)</span>, tal que se <span class="math inline">\(u(X_1,X_2,\ldots,X_n)\notin C\)</span>, então aceitaremos <span class="math inline">\(H_0\)</span>, porém se <span class="math inline">\(u(X_1,X_2,\ldots,X_n)\in C\)</span> aceitaremos <span class="math inline">\(H_1\)</span>.</p>
+<p><br></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(u(X_1,X_2,\ldots,X_n)\)</span> é chamada de estatística de teste e <span class="math inline">\(C\)</span> é chamada de região crítica. Dessa forma, construir um teste de hipótese é definir uma região crítica.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="def-hipotese" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 1 (Hipótese estatística)</strong></span> Uma hipótese estatística é quealquer afirmação sobre a distribuição de probabilidades de uma ou mais variáveis aleatórias.</p>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>No caso em que <span class="math inline">\(\Theta_0=\{\theta_0\}\)</span> dizemos que <span class="math inline">\(H_0\)</span> é simples, caso contrário, dizemos que <span class="math inline">\(H_0\)</span> é composta.</p>
+</div>
+</div>
+</div>
+<p><br></p>
+<div id="exm-hip_simples" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 1</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição <span class="math inline">\(N(\theta, 25)\)</span>. Suponha que <span class="math inline">\(H_0:\theta\le17\)</span>. <span class="math inline">\(H_0\)</span> definido dessa forma não especifica completamentea distribuição, dessa forma, <span class="math inline">\(H_0\)</span> é composta.</p>
+<p>Caso <span class="math inline">\(H_0:\theta=17\)</span>, a hipóstese é chamada de simples.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-hipotese1" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 2</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição <span class="math inline">\(N(\theta, 1)\)</span> e temos interesse em testar a hipótese</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+H_0&amp;:\theta=75 &amp; \mathrm{vs} &amp; &amp; H_1&amp;:\theta&gt;75.
+\end{align*}\]</span></p>
+</div>
+<p>Um possível teste seria baseado em <span class="math inline">\(\bar{X}_n\)</span>. Por exemplo, consideremos rejeitar <span class="math inline">\(H_0\)</span> se <span class="math inline">\(\bar{X}_n&gt;75\)</span>. Neste caso, <span class="math display">\[c=\left\{(x_1,x_2,\ldots,x_n):x_1+x_2+\cdots+x_n&gt;75n\right\}.\]</span> Daí, a probabilidade de de rejeitar <span class="math inline">\(H_0\)</span> é dada por</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathbb{P}\left[\bar{X}_n&gt;75|\theta=75\right]&amp;=
+\mathbb{P}\left[\sqrt{n}\left(\bar{X}_n-\theta\right)&gt;\sqrt{n}\left(75-\theta\right)|\theta=75\right]\\
+&amp;=\mathbb{P}\left[\sqrt{n}\left(\bar{X}_n-\theta\right)&gt;0|\theta=75\right]=\frac12.
 \end{align*}\]</span></p>
 </div>
 </div>
-<div id="exm-exemplo4" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 4</strong></span> Seja <span class="math inline">\(\{X_t;t\in\mathbb{Z}\}\)</span> um processo estocástico. Então, <span class="math display">\[\nabla_{12}^2X_t=(1-B^{12})^2X_t=(1-2B^{12}+B^{24})X_t=X_t-2X_{t-12}+X_{t-24}.\]</span></p>
-</div>
-<p><br></p>
-<hr>
+<p>Ou seja, o teste só dá uma probabilidade de <span class="math inline">\(\frac12\)</span> para aceitar <span class="math inline">\(H_0\)</span>. Parece razoável que tenhamos uma probabilidade maior de acontecer <span class="math inline">\(H_0\)</span> se ela for verdadeira.</p>
+</section>
+<section class="slide level2">
 
-<p><font size="6">Para detalhes, sugere-se <span class="citation" data-cites="brockwell:davis:2016">Brockwell e Davis (<a href="#/referências" role="doc-biblioref" onclick="">2016</a>)</span>, <span class="citation" data-cites="hamilton:1994">Hamilton (<a href="#/referências" role="doc-biblioref" onclick="">1994</a>)</span>, <span class="citation" data-cites="morettin:toloi:2006">Morettin e Toloi (<a href="#/referências" role="doc-biblioref" onclick="">2006</a>)</span> e <span class="citation" data-cites="wei:2005">Wei (<a href="#/referências" role="doc-biblioref" onclick="">2005</a>)</span>.</font></p>
-</section>
-<section id="processos-lineares" class="slide level2 center" data-background-color="#172a46">
-<h2>Processos lineares</h2>
-<div class="cell">
-<style type="text/css">
-.center h2 {
-  text-align: center !important
-}
-</style>
+<p>Uma ideia é predefinir qual é a probabilidade de aceitar <span class="math inline">\(H_0\)</span>, dado que <span class="math inline">\(H_0\)</span> é verdadeira, por exemplo, suponha que fixamos essa probabilidade em <span class="math inline">\(0.95\)</span>. Então, vamos procurar uma regra de decisão do tipo: Rejeitar <span class="math inline">\(H_0\)</span> quando <span class="math inline">\(\bar{X}_n&gt;C\)</span>.</p>
+<p>Dessa forma,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathbb{P}\left[\bar{X}_n&gt;C|\theta=75\right]&amp;=\mathbb{P}\left[Z&gt;\sqrt{n}\left(c-75\right)\right]\\
+&amp;=1-\Phi\left(\sqrt{n}(c-75)\right)=0.05,
+\end{align*}\]</span></p>
 </div>
-</section>
-<section id="processo-linear" class="slide level2">
-<h2>Processo Linear</h2>
-<div id="def-processolinear" class="theorem definition">
-<p><span class="theorem-title"><strong>Definição 4</strong></span> Um processo <span class="math inline">\(\{X_t; t\in\mathbb{Z}\}\)</span> é dito <strong>linear</strong> se a representação do processo é dada por <span class="math display">\[X_t=\sum_{j=-\infty}^\infty\psi_jZ_{t-j}, \quad \text{(com prob. 1)}\]</span> onde <span class="math inline">\(\{Z_t\}\)</span> é um processo de ruído branco com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(\sigma^2\)</span> e <span class="math inline">\(\{\psi_j\}\)</span> é uma sequência absolutamente somável de escalares, i.e. <span class="math display">\[\sum_{j=-\infty}^\infty|\psi_j|&lt;\infty.\]</span></p>
+<p>daí, <span class="math inline">\(\Phi\left(\sqrt{n}(c-75)\right)=0.95\)</span> ou <span class="math inline">\(C=75+\frac{1.645}{\sqrt{n}}\)</span>.</p>
+<p>Dessa forma, a regra de decisão é: Rejeitar <span class="math inline">\(H_0\)</span> se <span class="math inline">\(\bar{X}_n&gt;75+\frac{1.645}{\sqrt{n}}\)</span>.</p>
+<p><br></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-</section>
-<section id="algumas-considerações" class="slide level2">
-<h2>Algumas considerações</h2>
-<div class="fragment semi-fade-out" data-fragment-index="2">
-<ul>
-<li>Podemos reescrever a definição anterior em termos do operador de defasagem, assim <span class="math display">\[X_t=\psi(B)Z_t,\]</span> onde <span class="math inline">\(\psi(B)=\sum_{j=-\infty}^\infty\psi_jB^j\)</span>;</li>
-</ul>
+<p><strong>Observação</strong></p>
 </div>
-<div class="fragment fade-in" data-fragment-index="2">
-<ul>
-<li>A condição <span class="math inline">\(\sum_{j=-\infty}^\infty|\psi_j|&lt;\infty\)</span> garante que a soma infinita na representação do processo, i.e., <span class="math inline">\(X_t=\sum_{j=-\infty}^\infty\psi_jZ_{t-j}\)</span>, converge com probabilidade 1, pois, pela desigualdade de Jensen, <span class="math inline">\(\mathbb{E}|Z_t|\le\left(\mathbb{E}|Z_t|^2\right)^{\frac12}=\sigma\)</span>, e <span class="math display">\[\mathbb{E}|X_t|\le\sum_{j=-\infty}^\infty\left(|\psi_j|\, \mathbb{E}|Z_{t-j}|\right)\le\left(\sum_{j=-\infty}^\infty|\psi_j|\right)\sigma&lt;\infty.\]</span></li>
-</ul>
+<div class="callout-content">
+<p>A ideia de fixar um valor para a probabilidade de rejeitar <span class="math inline">\(H_0\)</span> é bastante utilizada na prática.</p>
+</div>
+</div>
 </div>
 </section>
 <section class="slide level2">
 
-<ul>
-<li>A condição <span class="math inline">\(\sum_{j=-\infty}^\infty|\psi_j|&lt;\infty\)</span> também garante que <span class="math inline">\(\sum_{j=-\infty}^\infty\psi_j^2&lt;\infty\)</span>. Dessa forma, o processo converge em média quadrática, i.e., <span class="math display">\[\mathbb{E}\left[X_t-\sum_{j=-n}^n\psi_jZ_{t-j}\right]^2\longrightarrow0, \quad \text{ quando } n\to\infty;\]</span></li>
-</ul>
-<p><br></p>
-<ul>
-<li>O operador <span class="math inline">\(\psi(B)\)</span> pode ser pensado como um <strong>filtro linear</strong>, que quando aplicado ao processo de ruído branco, <span class="math inline">\(\{Z_t\}\)</span> (processo de “entrada”) produz o processo <span class="math inline">\(\{X_t\}\)</span> (processo de “saída”);</li>
-</ul>
-<p><br></p>
-<ul>
-<li><span class="math inline">\(\psi(B)\)</span> também é chamado de <strong><em>Função de transferência</em></strong> do filtro linear.</li>
-</ul>
-</section>
-<section class="slide level2">
-
-<p><br><br></p>
+<div id="def-erros" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 2</strong></span> Ao realizar o teste, se denomina <em>erro tipo I</em> à decisão de rejeitar <span class="math inline">\(H_0\)</span>, sendo <span class="math inline">\(H_0\)</span> verdadeira, e <em>erro tipo II</em> à decisão de aceitar <span class="math inline">\(H_0\)</span> sendo falsa.</p>
+</div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/filtro_linear.png" class="quarto-figure quarto-figure-center" style="height:100.0%"></p>
+<p><img data-src="images/erros.png" class="quarto-figure quarto-figure-center" style="height:100.0%"></p>
 </figure>
 </div>
 </section>
 <section class="slide level2">
 
-<div id="prp-facov_proplinear" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposição 1</strong></span> Seja <span class="math inline">\(\{Y_t\}\)</span> um processo estacionário de segunda ordem com média <span class="math inline">\(0\)</span> e função de autocovariância <span class="math inline">\(\gamma_Y(\cdot)\)</span>. Se <span class="math inline">\(\sum_{j=-\infty}^\infty|\psi_j|&lt;\infty\)</span>, então o processo <span class="math inline">\(\{X_t\}\)</span>, com representação <span class="math display">\[X_t=\sum_{j=-\infty}^\infty\psi_jY_{t-j}=\psi(B)Y_t\]</span> é estacionário com média <span class="math inline">\(0\)</span> e função de autocovariância <span class="math display">\[\gamma_X(h)=\sum_{j=-\infty}^\infty\sum_{k=-\infty}^\infty\psi_j\psi_k\gamma_Y(h+k-j).\]</span></p>
-</div>
-<p>Em particular, se <span class="math inline">\(\{X_t\}\)</span> for um processo linear, então <span class="math inline">\(\gamma_X(h)=\sum_{j=-\infty}^\infty\psi_j\psi_{j+h}\sigma^2=\sum_{j=0}^\infty\psi_j\psi_{j+|h|}\sigma^2\)</span>.</p>
-</section>
-<section class="slide level2">
-
-<div class="proof">
-<p><span class="proof-title"><em>Prova</em>. </span>Primeiramente, observe que <span class="math inline">\(\psi(B)Y_t\)</span> converge absolutamente com probabilidade 1:</p>
-<div class="math">
-<p><span class="math display">\[\begin{align}
-  \mathbb{E}\left[\sum_{j=-\infty}^\infty |\psi_j||Y_{t-j}|\right]
-  &amp;=\lim_{n\to\infty}\mathbb{E}\left[\sum_{j=-n}^n |\psi_j||Y_{t-j}|\right].
-  \end{align}\]</span></p>
-</div>
-<p>Sendo <span class="math inline">\(\{Y_t\}\)</span> um processo estacionário de segunda ordem, então <span class="math inline">\(\mathbb{E}|Y_t|\le\left(\mathbb{E}|Y_t|^2\right)^{\frac12}=c\)</span>, onde <span class="math inline">\(c\)</span> é uma constante que não depende de <span class="math inline">\(t\)</span>. Dessa forma, pelo teorema de convergência monótona, temos que</p>
-<div class="math">
-<p><span class="math display">\[\begin{align}
-  \lim_{n\to\infty}\mathbb{E}\left[\sum_{j=-n}^n |\psi_j||Y_{t-j}|\right]\le\lim_{n\to\infty}\left(\sum_{j=-n}^n|\psi_j|\right)\mathbb{E}|Y_t|&lt;\infty.
-  \end{align}\]</span></p>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-<p>Daí,</p>
-<div class="math">
-<p><span class="math display">\[\begin{align}
-  \mathbb{E}X_{t}&amp;=\lim_{n\to\infty}\mathbb{E}\left[\sum_{j=-n}^n \psi_jY_{t-j}\right]=\sum_{j=-\infty}^\infty \psi_j\mathbb{E}Y_{t-j}=0.
-  \end{align}\]</span></p>
-</div>
-<div class="math">
-<p><span class="math display">\[\begin{align}
-  \mathbb{E}\left[X_{t+h}X_t\right]&amp;=\mathbb{E}\left[\left(\sum_{j=-\infty}^\infty \psi_jY_{t+h-j}\right)\left(\sum_{k=-\infty}^\infty \psi_kY_{t-k}\right)\right]\\
-  &amp;=\sum_{j=-\infty}^\infty\sum_{k=-\infty}^\infty  \psi_j\psi_k\mathbb{E}\left[Y_{t+h-j}Y_{t-k}\right]\\
-  &amp;=\sum_{j=-\infty}^\infty\sum_{k=-\infty}^\infty  \psi_j\psi_k\gamma\left(h-j+k\right).
-  \end{align}\]</span></p>
-</div>
-</section>
-<section class="slide level2">
-
-<p>Pode-se observar que, a convergência absoluta de <span class="math inline">\(\psi(B)Y_t\)</span> implica que filtros da forma <span class="math inline">\(\sum_{j=-\infty}^\infty\alpha_jB^j\)</span>, com coeficientes absolutamente somáveis, podem ser aplicados sucessivamente a um processo estacionário, para gerar um novo processo estacionário. Por exemplo: podemos considerar um novo processo <span class="math inline">\(\{W_t\}\)</span> com representação <span class="math display">\[W_t=\sum_{j=-\infty}^\infty\psi_jY_{t-j}=\psi(B)Y_t=\alpha(B)\beta(B)Y_t=\beta(B)\alpha(B)Y_t,\]</span> onde <span class="math inline">\(\alpha(B)=\sum_{j=-\infty}^\infty\alpha_jB^j\)</span> e <span class="math inline">\(\beta(B)=\sum_{j=-\infty}^\infty\beta_jB^j\)</span>.</p>
-</section>
-<section class="slide level2">
-
-<div id="exm-ar_linear" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 5</strong></span> Seja <span class="math inline">\(\{X_t; t\in\mathbb{Z}\}\)</span> um processo estocástico com representação AR(1), i.e., <span class="math inline">\(X_t=\phi X_{t-1}+Z_t\)</span> (com prob. 1), onde <span class="math inline">\(\{Z_t\}\)</span> representa um processo de ruído branco com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(\sigma^2&lt;\infty\)</span>, tal que <span class="math inline">\(Z_t\)</span> é não-correlacionado com <span class="math inline">\(X_s\)</span>, para todo <span class="math inline">\(s&lt;t\)</span> e <span class="math inline">\(\phi\)</span> um escalar, tal que <span class="math inline">\(|\phi|&lt;1\)</span>.</p>
-<p><br></p>
-<p>Em termos do operador de defasagem, o processo pode ser representado como <span class="math display">\[(1-\phi B)X_t=\Phi(B)X_t=Z_t,\]</span> ou, como <span class="math inline">\(|\phi|&lt;1\)</span>, então <span class="math inline">\(X_t=(1-\phi B)^{-1}Z_t=\sum_{j=0}^\infty\phi^jZ_{t-j}\)</span>, ou seja, um processo com representação AR(1) é <strong>linear</strong>.</p>
-<p>Pela proposição anterior, <span class="math inline">\(\mathbb{E}X_t=0\)</span> e <span class="math inline">\(\gamma_X(h)=\sum_{j=0}^\infty\phi^j\phi^{j+h}\sigma^2=\dfrac{\sigma^2}{1-\phi^2}\phi^h\)</span>, para <span class="math inline">\(h=0,1,2,3,\ldots\)</span>.</p>
-</div>
-</section>
-<section class="slide level2">
-
-<div id="exm-ar_linear2" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 6</strong></span> Considere o processo <span class="math inline">\(\{X_t; t\in\mathbb{Z}\}\)</span> como no <a href="#/exm-ar_linear" class="quarto-xref">Exemplo&nbsp;5</a>. Pode-se mostrar que <span class="math display">\[X_t=\sum_{j=0}^\infty\phi^jZ_{t-j}\]</span> é a <strong>única</strong> solução estacionária da equação <span class="math inline">\((1-\phi B)X_t=Z_t\)</span>. Para isso, considere que existe uma outra solução estacionária, tal que</p>
+<div id="def-erro_tipoI" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 3</strong></span> Suponha que um teste estatístico é da forma</p>
 <div class="math">
 <p><span class="math display">\[\begin{align*}
-  Y_t&amp;=\phi Y_{t-1}+Z_t=\phi (\phi Y_{t-2}+Z_{t-1})+Z_t=Z_t+\phi Z_{t-1}+\phi^2Y_{t-2}\\
-  &amp;=Z_t+\phi Z_{t-1}+\phi^2(\phi Y_{t-3}+Z_{t-2})=Z_t+\phi Z_{t-1}+\phi^2Z_{t-2}+\phi^3 Y_{t-3}\\
-  &amp;\ \ \vdots\\
-  &amp;=Z_t+\phi Z_{t-1}+\cdots+\phi^kZ_{t-k}+\phi^{k+1} Y_{t-k-1}
-  =\sum_{j=0}^k\phi^jZ_{t-j}+\phi^{k+1} Y_{t-k-1}.
-  \end{align*}\]</span></p>
+H_0&amp;:\theta\in\Theta_0 &amp; \mathrm{vs} &amp; &amp; H_1&amp;:\theta\in\Theta_1.
+\end{align*}\]</span></p>
+</div>
+<p>O tamanho do <em>erro tipo I</em> é definido como</p>
+<p><span class="math display">\[\alpha=\sup_{\theta\in\Theta_0}\mathbb{P}_\theta(\textrm{rejeitar } H_0),\]</span> onde <span class="math inline">\(\mathbb{P}_\theta\)</span> indica a probabilidade quando o valor é <span class="math inline">\(\theta\)</span>.</p>
+</div>
+<p><br></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(\alpha\)</span> é frequentemente chamado tamanho do teste e define-se como a maior chance de tomar uma decisão errada, assumindo verdadeiro qualquer valor do parâmetro <span class="math inline">\(\theta\)</span> associado à hipótese nula.</p>
+</div>
 </div>
 </div>
 </section>
 <section class="slide level2">
 
-Daí, <span class="math inline">\(Y_t=\sum_{j=0}^k\phi^jZ_{t-j}+\phi^{k+1} Y_{t-k-1}\)</span>. Sendo <span class="math inline">\(\{Y_t\}\)</span> um processo estacionário de segunda ordem, então <span class="math inline">\(\mathbb{E}Y_t^2&lt;\infty\)</span>, daí
-<div class="math">
-<p><span class="math display">\[\begin{align}
-  \mathbb{E}\left[Y_t-\sum_{j=0}^k\phi^jZ_{t-j}\right]^2&amp;=\phi^{2k+2}\,\mathbb{E}Y_{t-k-1}^2.
-  \end{align}\]</span></p>
+<div id="def-erro_tipoII" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 4</strong></span> O tamanho do <em>erro tipo II</em> é definido como</p>
+<p><span class="math display">\[\beta=\sup_{\theta\in\Theta_1}\mathbb{P}_\theta(\textrm{aceitar } H_0).\]</span></p>
 </div>
-<p>Dessa forma, quando <span class="math inline">\(k\to\infty\)</span>, então</p>
-<div class="math">
-<p><span class="math display">\[\begin{align}
-  \mathbb{E}\left[Y_t-\sum_{j=0}^k\phi^jZ_{t-j}\right]^2&amp;\longrightarrow0.
-  \end{align}\]</span></p>
+<p><br></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<p>Em outras palavras, <span class="math inline">\(Y_t\)</span> converge em média quadrática para <span class="math inline">\(\sum_{j=0}^\infty\phi^jZ_{t-j}\)</span>, sendo essa a mesma representação dada para o processo <span class="math inline">\(\{X_t\}\)</span>, o que confirma que <span class="math inline">\(X_t=\sum_{j=0}^\infty\phi^jZ_{t-j}\)</span> é a <strong>única</strong> solução da equação <span class="math inline">\((1-\phi B)X_t=Z_t\)</span>.</p>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>Não é possível avaliar a gravidade de cometer o <em>erro tipo I</em> ou o <em>erro tipo II</em>. O cenário permitirá as implicações de tomar uma decisão errada.</p>
+<p>Na prática, não é possível diminuir um tamanho de erro sem que aumentemos o outro.</p>
+</div>
+</div>
+</div>
+<p><br></p>
+<div id="exm-erro_tipoI" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 3</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição <span class="math inline">\(N(\theta,1)\)</span>. Suponha que queremos testar</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+H_0&amp;:\theta=0 &amp; \mathrm{vs} &amp; &amp; H_1&amp;:\theta=1.
+\end{align*}\]</span></p>
+</div>
+</div>
 </section>
 <section class="slide level2">
 
-<p>Para o caso <span class="math inline">\(|\phi|&gt;1\)</span>, <span class="math inline">\(X_t=\sum_{j=0}^\infty\phi^jZ_{t-j}\)</span> não é convergente. Nesse caso, podemos reescrever a representação do processo, tal que <span class="math display">\[X_t=-\phi^{-1}Z_{t+1}+\phi^{-1}X_{t+1}.\]</span> Iterando, podemos observar que</p>
-<div class="math">
-<p><span class="math display">\[\begin{align}
-  X_t&amp;=-\phi^{-1}Z_{t+1}+\phi^{-1}X_{t+1}=-\phi^{-1}Z_{t+1}+\phi^{-1}(-\phi^{-1}Z_{t+2}+\phi^{-1}X_{t+3})\\
-  &amp;=-\phi^{-1}Z_{t+1}-\phi^{-2}Z_{t+2}+\phi^{-2}X_{t+3}\\
-  &amp;\ \ \vdots\\
-  &amp;=-\sum_{j=1}^{k+1}\phi^{-j}Z_{t+j}+\phi^{-k-1} X_{t+k+1}.
-  \end{align}\]</span></p>
+<p>Parece razoável utilizarmos o seguinte critério: Rejeitar <span class="math inline">\(H_0\)</span> quando <span class="math inline">\(\bar{X}_n&gt;C\)</span>.</p>
+<p><br></p>
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/erro_tipoI_e_II1.png" class="fragment fade-out quarto-figure quarto-figure-center" style="height:100.0%" data-fragment-index="1"></p>
+</figure>
 </div>
-<p>Seguindo os mesmos argumento do caso anterior, <span class="math inline">\(X_t=-\sum_{j=1}^{\infty}\phi^{-j}Z_{t+j}\)</span> é a <strong>única</strong> solução estacionária de <span class="math inline">\((1-\phi B)X_t=Z_t\)</span>.</p>
-</section>
-<section id="algumas-considerações-1" class="slide level2">
-<h2>Algumas considerações</h2>
-<div class="fragment semi-fade-out" data-fragment-index="1">
-<ul>
-<li>Vale ressaltar que quando <span class="math inline">\(|\phi| &lt; 1\)</span> a solução estacionária única <span class="math inline">\(X_t=\sum_{j=0}^\infty\phi^jZ_{t-j}\)</span> pode ser encontrada imediatamente usando <span class="math inline">\(\psi(B)=\Phi(B)\pi(B)=1\)</span>, onde <span class="math inline">\(\Phi(B)=1-\phi B\)</span> e <span class="math inline">\(\pi(B)=\sum_{j=0}^\infty\phi^jB^j\)</span>;</li>
-</ul>
-</div>
-<div class="fragment fade-in" data-fragment-index="1">
-<div class="fragment semi-fade-out" data-fragment-index="2">
-<ul>
-<li>Um processo <span class="math inline">\(\{X_t\}\)</span> com representação AR(1), em termos de <span class="math inline">\(\{Z_s,s\le t\}\)</span>, será chamado de processos AR(1) <strong>causal</strong>. O termo <strong>causal</strong> faz menção a que a representação do processo não depende de termos futuros;</li>
-</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/erro_tipoI_e_II2.png" class="fragment fade-in-then-out quarto-figure quarto-figure-center" style="height:100.0%" data-fragment-index="1"></p>
+</figure>
 </div>
 </div>
-<div class="fragment fade-in" data-fragment-index="2">
-<ul>
-<li>Como observado no <a href="#/exm-ar_linear2" class="quarto-xref">Exemplo&nbsp;6</a>, um processo AR(1) não-causal pode ser reescrito para encontrar sua representação causal;</li>
-</ul>
-</div>
-<div class="fragment fade-in" data-fragment-index="2">
-<ul>
-<li>A solução <span class="math inline">\(X_t=-\sum_{j=1}^{\infty}\phi^{-j}Z_{t+j}\)</span> não apresenta uma utilidade prática, no sentido que, a variável <span class="math inline">\(X_t\)</span> é definida em função de valores futuros. Por motivos práticos, restringimos a atenção em processos AR(1) com <span class="math inline">\(|\phi|&lt;1\)</span>.</li>
-</ul>
-</div>
-</section>
-<section id="exercícios" class="slide level2 center" data-background-color="#172a46">
-<h2>Exercícios</h2>
-</section>
-<section id="sugestão-de-exercícios" class="slide level2">
-<h2>Sugestão de exercícios</h2>
-<ol type="1">
-<li><p>Encontre as expressões para <span class="math inline">\(BX_t\)</span> e <span class="math inline">\(B^2X_t\)</span>, quando <span class="math inline">\(\{X_t\}\)</span> tem as seguintes representações:</p>
-<div class="math">
-<p><span class="math display">\[\begin{align}
-  &amp;a.\, X_t=\beta_0; &amp; b.\,X_t&amp;=\beta_0+\beta_1t; \\
-  &amp;c.\,X_t=\beta_0+\beta_1Z_t+\beta_2t; &amp; d.\, X_t&amp;=\beta_1Z_t+\beta_2Y_t,\\
-  \end{align}\]</span></p>
-</div>
-<p>onde <span class="math inline">\(\beta_0, \beta_1\)</span> e <span class="math inline">\(\beta_2\)</span> são constantes e <span class="math inline">\(\{Z_t\}\)</span> e <span class="math inline">\(\{Y_t\}\)</span> são processos quaisquer;</p></li>
-<li><p>Seja <span class="math inline">\(\left\{X_t\right\}\)</span> um processo estocástico com representação polinomial, i.e., <span class="math display">\[X_t=\beta_0+\beta_1t+\beta_2t^2+\cdots+\beta_dt^d+Z_t,\]</span> onde <span class="math inline">\(\{Z_t\}\)</span> é um processo de ruído branco com média zero e variância <span class="math inline">\(\sigma^2\)</span>. Mostre que <span class="math inline">\(\{\nabla^dX_t\}\)</span> é um processo estacionário com representação <span class="math display">\[\nabla^dX_t=d!\,\beta_d+\nabla^dZ_t.\]</span></p></li>
-</ol>
 </section>
 <section class="slide level2">
 
-<ol start="3" type="1">
-<li><p>Seja <span class="math inline">\(\{Y_t\}\)</span> um processo estacionário com média <span class="math inline">\(0\)</span> e função de autocovariância <span class="math inline">\(\gamma_Y(\cdot)\)</span>. Se <span class="math inline">\(X_t=a+bt+s_t+Y_t\)</span> (com prob. 1), onde <span class="math inline">\(s_t\)</span> representa uma componente sazonal de período <span class="math inline">\(12\)</span>. Mostre que <span class="math inline">\(\{\nabla\nabla_{12}X_t\}\)</span> é um processo estacionário e calcule sua FACV em função de <span class="math inline">\(\gamma_Y(\cdot)\)</span>.</p></li>
-<li><p>No <a href="#/exm-ar_linear2" class="quarto-xref">Exemplo&nbsp;6</a>, suponha que <span class="math inline">\(\phi=\pm1\)</span> e mostre que não existe uma solução estacionária para a equação <span class="math inline">\(X_t-\phi X_{t-1}=Z_t\)</span>.</p></li>
-</ol>
+<div id="def-poder" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 5 (Poder)</strong></span> Considere um teste de hipótese sobre o parâmetro <span class="math inline">\(\theta\in\Theta\)</span>. Define-se a <strong>função poder</strong> do teste como a função</p>
+<p><span class="math display">\[\pi:\Theta\longrightarrow[0,1],\]</span> tal que, para cada <span class="math inline">\(\theta\in\Theta\)</span>, <span class="math inline">\(\pi(\theta)=\mathbb{P}_\theta(\textrm{rejeitar } H_0)\)</span>.</p>
+<p>Assim, se <span class="math inline">\(u(X_1,X_2,\ldots,X_n)\)</span> é uma estatística de teste e <span class="math inline">\(C\)</span> um região crítica, então</p>
+<p><span class="math display">\[\pi(\theta)=\mathbb{P}_\theta\left(u(X_1,X_2,\ldots,X_n)\in C\right).\]</span></p>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>O tamanho do teste ou nivel de significância ou tamanho do <em>erro tipo I</em> é dado por <span class="math inline">\(\alpha = \sup_{\theta\in\Theta}\pi(\theta)\)</span>.</p>
+<p>A função de poder ideal seria</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\pi(\theta)=
+\begin{cases}
+1, \text{ se } \theta\notin\Theta_0;\\
+0, \text{ se } \theta\in\Theta_0.
+\end{cases}
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="referências" class="slide level2 smaller scrollable">
-<h2>Referências</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-brockwell:davis:2016" class="csl-entry" role="listitem">
-Brockwell, P., e Davis, R. (2016), <em>Introduction to Time Series and Forecasting</em>, Springer Verlag.
+<section class="slide level2">
+
+<div id="exm-poder" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 4</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição <span class="math inline">\(N(\mu,\sigma^2)\)</span>, com <span class="math inline">\(\sigma^2\)</span> conhecido.</p>
+<p>Considere as hipóteses</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+H_0&amp;:\mu=0 &amp; \mathrm{vs} &amp; &amp; H_1&amp;:\mu&gt;0.
+\end{align*}\]</span></p>
 </div>
-<div id="ref-hamilton:1994" class="csl-entry" role="listitem">
-Hamilton, J. M. (1994), <em>Time Series Analysis</em>, Princeton University Press.
+<p>Suponha que rejeitamos <span class="math inline">\(H_0\)</span> se <span class="math inline">\(\bar{X}_n&gt;C\)</span>, onde <span class="math inline">\(C\)</span> é escolhido ao nivel de significância de <span class="math inline">\(5\%\)</span>. Daí, <span class="math inline">\(\mathbb{P}(\bar{X}_n&gt;C|\mu=0)=0.05\)</span> ou</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathbb{P}(\bar{X}_n&lt;C|\mu=0)&amp;=\mathbb{P}\left(\frac{\sqrt{n}\bar{X}_n}{\sigma}&lt;\frac{\sqrt{n}C}{\sigma}|\mu=0\right)\\
+&amp;=\mathbb{P}\left(Z&lt;\frac{\sqrt{n}C}{\sigma}|\mu=0\right)=0.95.
+\end{align*}\]</span></p>
 </div>
-<div id="ref-morettin:toloi:2006" class="csl-entry" role="listitem">
-Morettin, P., e Toloi, C. (2006), <em>Análise de Séries Temporais</em>, Editora Blucher: ABE - Projeto Fisher.
+<p>Daí, <span class="math inline">\(C=\frac{1.645\sigma}{\sqrt{n}}\)</span>.</p>
 </div>
-<div id="ref-wei:2005" class="csl-entry" role="listitem">
-Wei, W. (2005), <em>Time Series Analysis: Univariate and Multivariate Methods</em>, Addison Wesley.
+</section>
+<section class="slide level2">
+
+<p>Para calcular a função poder, note que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\pi(\mu)&amp;=\mathbb{P}_\mu\left(\bar{X}_n&gt;C\right)=\mathbb{P}_\mu\left(\bar{X}_n&gt;\frac{1.645\sigma}{\sqrt{n}}\right)\\
+&amp;=\mathbb{P}_\mu\left(\frac{\bar{X}_n-\mu}{\sigma/\sqrt{n}}&gt;\left(\frac{1.645\sigma}{\sqrt{n}}-\mu\right)\frac{\sqrt{n}}{\sigma}\right)\\
+&amp;=\mathbb{P}_\mu\left(Z&gt;1.645-\frac{\sqrt{n}\mu}{\sigma}\right)\\
+&amp;=1-\Phi\left(1.645-\frac{\sqrt{n}\mu}{\sigma}\right).
+\end{align*}\]</span></p>
 </div>
+<p>Dessa forma, quando <span class="math inline">\(n\longrightarrow\infty\)</span>, <span class="math inline">\(\pi(\mu)\longrightarrow1\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<div id="def-teste_unilateral" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 6</strong></span> Suponha <span class="math inline">\(\Theta\subset\mathbb{R}\)</span>. Uma hipótese <span class="math inline">\(H_0\)</span> do tipo</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+H_0&amp;:\theta&lt;\theta_0 &amp; \mathrm{ou} &amp; &amp; H_0&amp;:\theta&gt;\theta_0
+\end{align*}\]</span></p>
 </div>
+<p>é dita <em>unilateral</em>. Da mesma forma, um teste do tipo</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+H_0&amp;:\theta=\theta_0 &amp; \mathrm{vs} &amp; &amp; H_0&amp;:\theta&gt;\theta_0
+\end{align*}\]</span></p>
+</div>
+<p>dizemos que <span class="math inline">\(H_1\)</span> é uma alternativa unilateral.</p>
+</div>
+<p><br></p>
+<div id="def-teste_bilateral" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 7</strong></span> Suponha <span class="math inline">\(\Theta\subset\mathbb{R}\)</span>. Uma hipótese <span class="math inline">\(H_0\)</span> do tipo</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+H_0&amp;:\theta=\theta_0 &amp; \mathrm{vs} &amp; &amp; H_1&amp;:\theta\ne\theta_0
+\end{align*}\]</span></p>
+</div>
+<p>é dita <em>bilateral</em>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-bilateral" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 5</strong></span> Suponha que temos interesse em testar as hipóteses</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+H_0&amp;:\mu=\mu_0 &amp; \mathrm{vs} &amp; &amp; H_1&amp;:\mu\ne\mu_0,
+\end{align*}\]</span></p>
+</div>
+<p>onde <span class="math inline">\(\mu_0\)</span> é algum valor pré-especificado. Neste caso, uma regra de decisão razoável parece ser a de rejeitar <span class="math inline">\(H_0\)</span> se <span class="math inline">\(\left|\bar{X}_n-\mu_0\right|&gt;d\)</span>, onde <span class="math inline">\(d\)</span> deve ser escolhido de acordo com o tamanho do teste.</p>
+<p>Por exemplo, ao nivel de <span class="math inline">\(\%5\)</span>, <span class="math inline">\(\mathbb{P}\left(\left|\bar{X}_n-\mu_0\right|&gt;d\right)=0.05\)</span> ou <span class="math inline">\(\mathbb{P}\left(\left|\bar{X}_n-\mu_0\right|&lt;d\right)=0.95\)</span>.</p>
+<p>Daí,</p>
+<p><span class="math display">\[\mathbb{P}\left(\frac{\sqrt{n}}{\sigma}\left|\bar{X}_n-\mu_0\right|&lt;d\frac{\sqrt{n}}{\sigma}\right)=\mathbb{P}\left(\left|Z\right|&lt;d\frac{\sqrt{n}}{\sigma}\right).\]</span> Então, <span class="math inline">\(d=\frac{1.96\sigma}{\sqrt{n}}\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Portanto, ao nivel de <span class="math inline">\(\%5\)</span>, rejeitamos <span class="math inline">\(H_0\)</span> se <span class="math inline">\(\left|\bar{X}_n-\mu_0\right|&gt;\frac{1.96\sigma}{\sqrt{n}}\)</span>. Isso significa que não rejeitamos <span class="math inline">\(H_0\)</span> se</p>
+<p><span class="math display">\[\left|\bar{X}_n-\mu_0\right|&lt;\frac{1.96\sigma}{\sqrt{n}}.\]</span> Dessa forma,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+-1.96\frac{\sigma}{\sqrt{n}}\le\bar{X}_n-&amp;\mu_0\le1.96\frac{\sigma}{\sqrt{n}}\\
+\bar{X}_n-1.96\frac{\sigma}{\sqrt{n}}\le&amp;\mu_0\le\bar{X}_n+1.96\frac{\sigma}{\sqrt{n}}
+\end{align*}\]</span></p>
+</div>
+<p>ou seja, não rejeitamos <span class="math inline">\(H_0\)</span> se</p>
+<p><span class="math display">\[\mu_0\in\left[\bar{X}_n-1.96\frac{\sigma}{\sqrt{n}};\bar{X}_n+1.96\frac{\sigma}{\sqrt{n}}
+\right].\]</span></p>
+</section>
+<section class="slide level2">
+
+<p>Portanto, a regra de decisão pode ser definida como verificar se o valor sob teste pertence ao intervalo de confiança para o parâmetro. Ainda, a confiança do intervalo é igual <span class="math inline">\(1-\)</span>tamanho do teste.</p>
+<p>Da mesma forma, se <span class="math inline">\(\sigma\)</span> é desconhecido, podemos testar</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+H_0&amp;:\mu=\mu_0 &amp; \mathrm{vs} &amp; &amp; H_1&amp;:\mu\ne\mu_0.
+\end{align*}\]</span></p>
+</div>
+<p>Neste cenário, verificamos se <span class="math inline">\(\mu_0\)</span> pertence ao intervalo</p>
+<p><span class="math display">\[\mu_0\in\left[\bar{X}_n-t_{n-1,\frac\alpha2}\frac{\hat\sigma}{\sqrt{n}};\bar{X}_n+t_{n-1, \frac\alpha2}\frac{\hat\sigma}{\sqrt{n}}
+\right],\]</span></p>
+<p>onde <span class="math inline">\(\hat\sigma=\sqrt{\frac{\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2}{n-1}}\)</span>.</p>
+<!-- ## Referências -->
+<!-- ::: {#refs} -->
+<!-- ::: -->
 </section>
 <section id="política-de-proteção-aos-direitos-autorais" class="slide level2">
 <h2>Política de proteção aos direitos autorais</h2>
