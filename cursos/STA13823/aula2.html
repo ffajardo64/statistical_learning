@@ -143,7 +143,7 @@ Testes de hipóteses<br>
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 13 abril, 2026
+            Última atualização: 15 abril, 2026
           </p>
     </div>
 </div>
@@ -343,7 +343,7 @@ H_0&amp;:\theta=0 &amp; \mathrm{vs} &amp; &amp; H_1&amp;:\theta=1.
 <p><span class="theorem-title"><strong>Definição 5 (Poder)</strong></span> Considere um teste de hipótese sobre o parâmetro <span class="math inline">\(\theta\in\Theta\)</span>. Define-se a <strong>função poder</strong> do teste como a função</p>
 <p><span class="math display">\[\pi:\Theta\longrightarrow[0,1],\]</span> tal que, para cada <span class="math inline">\(\theta\in\Theta\)</span>, <span class="math inline">\(\pi(\theta)=\mathbb{P}_\theta(\textrm{rejeitar } H_0)\)</span>.</p>
 <p>Assim, se <span class="math inline">\(u(X_1,X_2,\ldots,X_n)\)</span> é uma estatística de teste e <span class="math inline">\(C\)</span> um região crítica, então</p>
-<p><span class="math display">\[\pi(\theta)=\mathbb{P}_\theta\left(u(X_1,X_2,\ldots,X_n)\in C\right).\]</span></p>
+<p><span class="math display">\[\pi(\theta)=\mathbb{P}_\theta\left(u(X_1,X_2,\ldots,X_n)\in C\right)=1-\beta.\]</span></p>
 </div>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -472,6 +472,181 @@ H_0&amp;:\mu=\mu_0 &amp; \mathrm{vs} &amp; &amp; H_1&amp;:\mu\ne\mu_0.
 <p><span class="math display">\[\mu_0\in\left[\bar{X}_n-t_{n-1,\frac\alpha2}\frac{\hat\sigma}{\sqrt{n}};\bar{X}_n+t_{n-1, \frac\alpha2}\frac{\hat\sigma}{\sqrt{n}}
 \right],\]</span></p>
 <p>onde <span class="math inline">\(\hat\sigma=\sqrt{\frac{\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2}{n-1}}\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<div id="exm-poisson" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 6</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_{10}\)</span> uma amostra aleatória de uma população com distribuição Poisson com parâmetro <span class="math inline">\(\theta\)</span> e suponha que queremos testar</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+H_0&amp;:\theta=0.1 &amp; \mathrm{vs} &amp; &amp; H_1&amp;:\theta&gt;0.1.
+\end{align*}\]</span></p>
+</div>
+<p>Suponha que usamos como estatística de teste <span class="math inline">\(Y=X_1+X_2+\cdots+X_{10}\)</span>. Neste caso, <span class="math inline">\(Y\)</span> segue uma distribuição Poisson com parâmetro <span class="math inline">\(10\theta\)</span>. Daí, se <span class="math inline">\(H_0\)</span> for verdadeira, então <span class="math inline">\(Y\)</span> segue uma distribuição Poisson com parâmetro <span class="math inline">\(1\)</span>.</p>
+<p>Note que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathbb{P}\left[Y\ge3\right]&amp;=\sum_{j=3}^\infty\frac{e^{-1}}{j!}=0.08\\
+\mathbb{P}\left[Y\ge4\right]&amp;=\sum_{j=4}^\infty\frac{e^{-1}}{j!}=0.019
+\end{align*}\]</span></p>
+</div>
+<p>Neste cenário, não é possível ter um tamanho de teste entre <span class="math inline">\(0.08\)</span> e <span class="math inline">\(0.019\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="testes-assintóticos">Testes assintóticos</h3>
+<p>Em algumas ocasiões, para uma determinada estatística de teste <span class="math inline">\(U=u(X_1,X_2,\ldots,X_n)\)</span> e um tamanho pré-fixado <span class="math inline">\(\alpha\)</span>, pode ser difícil obter uma região <span class="math inline">\(C\)</span>, tal que <span class="math inline">\(\mathbb{P}\left[U\in C\right]=\alpha\)</span>.</p>
+<p>Isto porque <span class="math inline">\(u(X_1,X_2,\ldots,X_n)\)</span> pode ter uma distribuição difícil de ser encontrada ou manipulada. Porém, se conseguirmos uma distribuição <span class="math inline">\(V\)</span>, tal que,</p>
+<p><span class="math display">\[u(X_1,X_2,\ldots,X_n)\overset{d}{\longrightarrow}V\]</span> podemos obter um teste de tamanho aproximado <span class="math inline">\(\alpha\)</span> e determinar uma região crítica <span class="math inline">\(C'\)</span>, tal que</p>
+<p><span class="math display">\[\mathbb{P}\left[V\in C'\right]=\alpha.\]</span></p>
+<p>Se <span class="math inline">\(n\)</span> for suficientemente grande, esperamos que</p>
+<p><span class="math display">\[\mathbb{P}\left[u(X_1,X_2,\ldots,X_n)\in C'\right]\approx\alpha.\]</span></p>
+</section>
+<section class="slide level2">
+
+<div id="exm-bilateral" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 7</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição Bernoulli com parâmetro <span class="math inline">\(p\in(0,1)\)</span> desconhecido.</p>
+<p>Suponha que queremos testar</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+H_0&amp;:p=p_0 &amp; \mathrm{vs} &amp; &amp; H_1&amp;:p&lt;p_0.
+\end{align*}\]</span></p>
+</div>
+<p>Pelo teorema central do limite, temos que</p>
+<p><span class="math display">\[\sqrt{n}\left(\bar{X}_n-p_0\right)\overset{d}{\longrightarrow}N(0,1).\]</span> Netse caso, para <span class="math inline">\(n\)</span> suficientemente grande, podemos definir um teste de tamanho aproximadamente <span class="math inline">\(0.05\)</span>, da forma: Rejeitar <span class="math inline">\(H_0\)</span> quando <span class="math inline">\(\frac{\sqrt{n}\left(\bar{X}_n-p_0\right)}{\sqrt{p_0(1-p_0)}{}}&lt;1.645.\)</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="def-pvalor" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 8 (Valor p)</strong></span> Suponha, para exemplificar, que um determinado teste é realizado a partir da estatística <span class="math inline">\(u(X_1,X_2,\ldots,X_n)\)</span> e que rejeitamos a hipótese <span class="math inline">\(H_0\)</span> se <span class="math inline">\(u(X_1,X_2,\ldots,X_n)\ge C\)</span>, onde <span class="math inline">\(C\)</span> é um determinado valor crítico.</p>
+<p>O <strong>valor p</strong> correspondente ao teste é calculado como</p>
+<p><span class="math display">\[\mathbb{P}\left[u(X_1,X_2,\ldots,X_n)\ge u(x_1,x_2,\ldots,x_n); H_0\right],\]</span> onde <span class="math inline">\(H_0\)</span> é a hipótese a ser testada.</p>
+<p>Por exemplo, se <span class="math inline">\(H_0:\theta=\theta_0\)</span>, então o valor p é</p>
+<p><span class="math display">\[\mathbb{P}_\theta\left[u(X_1,X_2,\ldots,X_n)\ge u(x_1,x_2,\ldots,x_n)\right].\]</span></p>
+<p><br></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>Por exemplo, se o valor p é igual a <span class="math inline">\(0.02\)</span> rejeitamos <span class="math inline">\(H_0\)</span> ao <span class="math inline">\(5\%\)</span>, ou seja, se o valor p é menor que o tamanho <span class="math inline">\(\alpha\)</span> pré-fixado, então rejeitamos <span class="math inline">\(H_0\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="teste-chi2-de-pearson">Teste <span class="math inline">\(\chi^2\)</span> de Pearson</h3>
+<p>Suponha que observamos <span class="math inline">\(n\)</span> resultados de experimentos independentes e considere que cada resultado pode pertencer a <span class="math inline">\(k\)</span> classes disjuntas <span class="math inline">\(A_1,A_2,\ldots,A_k\)</span>.</p>
+<p>Seja <span class="math inline">\(x_j\)</span> com <span class="math inline">\(j=1,2,\ldots,k\)</span> o número de resultados na classe <span class="math inline">\(j\)</span>, de tal forma que <span class="math inline">\(x_1+x_2+\cdots+x_k=n\)</span>.</p>
+<p>Suponha que queremos testar a hipótese de que as probabilidade das classes são</p>
+<p><span class="math display">\[\mathbb{P}(A_1)=p_1, \mathbb{P}(A_2)=p_2, \ldots, \mathbb{P}(A_k)=p_k,\]</span></p>
+<p>onde <span class="math inline">\(0\le p_i\le1\)</span>, <span class="math inline">\(i=1,2,\ldots,k\)</span> e <span class="math inline">\(\sum_{i=1}^kp_i=1\)</span>.</p>
+<p>Seja <span class="math inline">\(Q\)</span> a estatística de teste, dada por</p>
+<p><span class="math display">\[Q=\sum_{j=1}^k\frac{(x_j-np_j)^2}{np_j}\overset{d}{\longrightarrow}\chi^2_{(k-1)}.\]</span></p>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>A ideia é usar a estatística de Pearson como a estatística de um teste assintótico. Se <span class="math inline">\(n\)</span> é suficientemente grande, comparamos o valor de <span class="math inline">\(Q\)</span> com o valor crítico de uma distribuição <span class="math inline">\(\chi^2_{(k-1)}\)</span>.</p>
+<p>Dessa forma, rejeitamos a hipótese conjunta</p>
+<p><span class="math display">\[\mathbb{P}(A_1)=p_1, \mathbb{P}(A_2)=p_2, \ldots, \mathbb{P}(A_k)=p_k\]</span></p>
+<p>se o valor da estatística de teste <span class="math inline">\(Q\)</span> ultrapassar o valor crítico.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-chisqr" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 8</strong></span> Suponha que queremos testar se um dado é equilibrado. Jogamos o dado <span class="math inline">\(60\)</span> vezes e obtemos os seguintes resultados</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Valor</th>
+<th style="text-align: right;">Ocorrências</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">60</td>
+</tr>
+</tbody>
+</table>
+<p>Temos interesse em testar se todas as possibilidades são <span class="math inline">\(\frac16\)</span>. Então,</p>
+<p><span class="math display">\[Q=\frac{(13-10)^2}{10}+\frac{(19-10)^2}{10}+\cdots+\frac{(4-10)^2}{10}=15.6.\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Então, <span class="math inline">\(\mathbb{P}\left[\chi^2_{(5)}&gt;11.1\right]=0.05\)</span> e <span class="math inline">\(\mathbb{P}\left[\chi^2_{(5)}&gt;15.1\right]=0.01\)</span>. Dessa forma, rejeitamos <span class="math inline">\(H_0\)</span> ao nivel menor que <span class="math inline">\(1\%\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<div id="thm-neymanpearson" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 1 (Neyman-Pearson)</strong></span> Seja <span class="math inline">\(X=(X_1,X_2,\ldots,X_n)\)</span> uma amostra aleatória de tamanho <span class="math inline">\(n\)</span>, cuja distribuição envolve o parâmetro <span class="math inline">\(\theta\in\Omega\)</span>. Suponha que <span class="math inline">\(\Omega=\{\theta_0,\theta_1\}\)</span> e seja <span class="math inline">\(L(\theta;X)\)</span> a função de verossimilhança associada a <span class="math inline">\(X\)</span>.</p>
+<p>Seja <span class="math inline">\(\varkappa\)</span> o conjunto de todos os possíveis valores de <span class="math inline">\(X\)</span>. Defina <span class="math inline">\(C\in\varkappa\)</span> da forma</p>
+<p><span class="math display">\[C=\left\{x\in\varkappa:L(\theta_0;x)\le kL(\theta_1;x)\right\},\]</span> para <span class="math inline">\(k&gt;0\)</span>.</p>
+<p>Se <span class="math inline">\(\mathbb{P}\left[x\in C;\theta_0\right]=\alpha\)</span> então temos que <span class="math inline">\(C\)</span> é a melhor região crítica de tamanho <span class="math inline">\(\alpha\)</span> para as hipóteses <span class="math inline">\(H_0:\theta=\theta_0\)</span> vs <span class="math inline">\(H_1:\theta=\theta_1\)</span>.</p>
+</div>
+<p><br></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>Sejam <span class="math inline">\(L_0=L(\theta_0;x)\)</span> e <span class="math inline">\(L_1=L(\theta_1;x)\)</span>. Se <span class="math inline">\(L_1\)</span> é muito maior que <span class="math inline">\(L_0\)</span> se rejeita <span class="math inline">\(H_0\)</span>. Dessa forma, a melhor região crítica é do tipo</p>
+<p><span class="math display">\[\frac{L(\theta_1;x)}{L(\theta_0;x)}\ge\frac1k.\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
 <!-- ## Referências -->
 <!-- ::: {#refs} -->
 <!-- ::: -->
