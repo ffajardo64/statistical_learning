@@ -6,8 +6,8 @@
 <script src="aula2_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="aula2_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="aula2_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="aula2_files/libs/quarto-html/quarto-syntax-highlighting-de84f8d6bb715db06a919283c2d1e787.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.42">
+<link href="aula2_files/libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="LECON/DEST - UFES">
   <title> STA13823 - Inferência Estatística II   Testes de hipóteses </title>
@@ -29,7 +29,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="aula2_files/libs/revealjs/dist/theme/quarto-024e1e1fed892d9c5de4270c398ef4bc.css">
+  <link rel="stylesheet" href="aula2_files/libs/revealjs/dist/theme/quarto-99361432a01776c2ec44eb9f5125b270.css">
   <link href="aula2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="aula2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="aula2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -143,7 +143,7 @@ Testes de hipóteses<br>
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 15 abril, 2026
+            Última atualização: 11 maio, 2026
           </p>
     </div>
 </div>
@@ -234,8 +234,8 @@ H_0&amp;:\theta=75 &amp; \mathrm{vs} &amp; &amp; H_1&amp;:\theta&gt;75.
 &amp;=1-\Phi\left(\sqrt{n}(c-75)\right)=0.05,
 \end{align*}\]</span></p>
 </div>
-<p>daí, <span class="math inline">\(\Phi\left(\sqrt{n}(c-75)\right)=0.95\)</span> ou <span class="math inline">\(C=75+\frac{1.645}{\sqrt{n}}\)</span>.</p>
-<p>Dessa forma, a regra de decisão é: Rejeitar <span class="math inline">\(H_0\)</span> se <span class="math inline">\(\bar{X}_n&gt;75+\frac{1.645}{\sqrt{n}}\)</span>.</p>
+<p>daí, <span class="math inline">\(\Phi\left(\sqrt{n}(c-75)\right)=0.95\)</span> ou <span class="math inline">\(C=75+\frac{1.96}{\sqrt{n}}\)</span>.</p>
+<p>Dessa forma, a regra de decisão é: Rejeitar <span class="math inline">\(H_0\)</span> se <span class="math inline">\(\bar{X}_n&gt;75+\frac{1.96}{\sqrt{n}}\)</span>.</p>
 <p><br></p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -647,6 +647,262 @@ H_0&amp;:p=p_0 &amp; \mathrm{vs} &amp; &amp; H_1&amp;:p&lt;p_0.
 </section>
 <section class="slide level2">
 
+<div id="exm-np_normal" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 9</strong></span> Suponha <span class="math inline">\(X=(X_1,X_2,\ldots,X_n)\)</span> um vetor de variáveis aleatórias independentes e identicamente distribuidas, com distribuição <span class="math inline">\(N(\theta,1)\)</span>. Suponha que queremos testar</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+H_0&amp;:\theta=0 &amp; \mathrm{vs} &amp; &amp; H_1&amp;:\theta=1.
+\end{align*}\]</span></p>
+</div>
+<p>Neste caso,</p>
+<p><span class="math display">\[f(x;\theta)=\frac{1}{\sqrt{2\pi}}\exp\left\{-\frac12(x-\theta)^2\right\}\mathbb{I}_\mathbb{R}(x),\]</span> dessa forma</p>
+<p><span class="math display">\[L(\theta,x)=(2\pi)^{-\frac{n}{2}}\exp\left\{-\frac12\sum_{i=1}^n(x_i-\theta)^2\right\}.\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\frac{L(\theta_1,x)}{L(\theta_0,x)}&amp;=\frac{(2\pi)^{-\frac{n}{2}}\exp\left\{-\frac12\sum_{i=1}^n(x_i-\theta_1)^2\right\}}{(2\pi)^{-\frac{n}{2}}\exp\left\{-\frac12\sum_{i=1}^n(x_i-\theta_0)^2\right\}}\\
+&amp;=\exp\left\{\frac12\sum_{i=1}^n(x_i-\theta_0)^2-\frac12\sum_{i=1}^n(x_i-\theta_1)^2\right\}\\
+&amp;=\exp\left\{\frac12\left(n\theta_0^2-2n\theta_0\bar{x}_n\right)-\frac12\left(n\theta_1^2-2n\theta_1\bar{x}_n\right)\right\}\\
+&amp;=\exp\left\{\frac{n}{2}\left(\theta_0^2-\theta_1^2\right)+n\bar{x}_n(\theta_1-\theta_0)\right\}\\
+&amp;=\exp\left\{n(\theta_1-\theta_0)\left[\bar{x}_n-\frac{\theta_1+\theta_0}{2}\right]\right\}.
+\end{align*}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma, a melhor região crítica de tamanho <span class="math inline">\(\alpha\)</span> é do tipo</p>
+<p><span class="math display">\[\frac{L(\theta_1;x)}{L(\theta_0;x)}&gt;\frac1k,\]</span></p>
+<p>daí,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\exp\left\{n(\theta_1-\theta_0)\left[\bar{x}_n-\frac{\theta_1+\theta_0}{2}\right]\right\}&amp;\ge\frac1k\\
+n(\theta_1-\theta_0)\left[\bar{x}_n-\frac{\theta_1+\theta_0}{2}\right]&amp;\ge\log k^{-1}\\
+\bar{x}_n-\frac{\theta_1+\theta_0}{2}&amp;\ge\frac{\log k^{-1}}{n(\theta_1-\theta_0)}\\
+\bar{x}_n&amp;\ge\frac{\log k^{-1}}{n(\theta_1-\theta_0)}+\frac{\theta_1+\theta_0}{2}.
+\end{align*}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma, a melhor região crítica de tamanho <span class="math inline">\(\alpha\)</span> é do tipo <span class="math inline">\(\bar{x}_n\ge C\)</span>, i.e., <span class="math inline">\(\mathbb{P}\left[\bar{X}_n\ge C;\theta_0\right]=\alpha\)</span>.</p>
+<p><br></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>Na utilização do Teorema de Neyman-Pearson é necessário supor que as hipóteses são simples.</p>
+</div>
+</div>
+</div>
+<p><br></p>
+<div id="exm-np_poisson" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 10</strong></span> Suponha <span class="math inline">\(X_1,X_2,\ldots,X_n)\)</span> uma sequência de variáveis aleatórias independentes com distribuição comum cujo suporte é o conjunto de inteiros não-negativos. Suponha que queremos testar</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+H_0&amp;:f\ \text{ segue uma distribuição } Poisson(1)\\
+H_1&amp;:f\ \text{ segue uma distribuição } Geometrica(0.5).
+\end{align*}\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Considere a obtenção da melhor região crítica para testar para o teste. Dessa forma, as verossimilhanças são dada por</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+L_0&amp;=\prod_{i=1}^n\frac{e^{-1}1^{x_i}}{x_i!}=e^{-n}\prod_{i=1}^n\frac{1}{x_i!}=\frac{e^{-n}}{\prod_{i=1}^nx_i!}\\
+L_1&amp;=\prod_{i=1}^n\left(\frac12\right)\left(\frac12\right)^{x_i}=\left(\frac12\right)^{n}\left(\frac12\right)^{n\bar{x}_n}.
+\end{align*}\]</span></p>
+</div>
+<p><br></p>
+<p>A razão de verossimilhança é dada por</p>
+<p><span class="math display">\[\frac{L_1}{L_0}=\frac{\left(\frac12\right)^{n}\left(\frac12\right)^{n\bar{x}_n}}{\frac{e^{-n}}{\prod_{i=1}^nx_i!}}=\left(\frac{e}{2}\right)^n\frac{\prod_{i=1}^nx_i!}{2^{n\bar{x}_n}}.\]</span></p>
+</section>
+<section class="slide level2">
+
+<p>A melhor região crítica de tamanho <span class="math inline">\(\alpha\)</span>, se existir, será da forma: Rejeitar <span class="math inline">\(H_0\)</span> se <span class="math display">\[\prod_{i=1}^nx_i!\ge k2^{n\bar{x}_n},\]</span></p>
+<p>onde o valor de <span class="math inline">\(k\)</span> é escolhido para que</p>
+<p><span class="math display">\[\mathbb{P}\left[\left.\prod_{i=1}^nX_i!\ge k2^{n\bar{X}_n}\right|H_0\right]=\alpha.\]</span></p>
+<p>em particular, para <span class="math inline">\(n=1\)</span>, temos que a região crítica é do tipo <span class="math inline">\(x_i!\ge k2^{x}\)</span> ou <span class="math inline">\(\frac{2^{x}}{x_i!}\ge C\)</span>, onde <span class="math inline">\(C=\frac1k\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<p>Assim, para os primeiros valores de <span class="math inline">\(x\)</span> temos que</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(x\)</span></th>
+<th></th>
+<th style="text-align: right;"><span class="math inline">\(\frac{2^{x}}{x_i!}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0</td>
+<td></td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td></td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td></td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td></td>
+<td style="text-align: right;">4/3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td></td>
+<td style="text-align: right;">2/3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\vdots\)</span></td>
+<td></td>
+<td style="text-align: right;"><span class="math inline">\(\vdots\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Observe que se <span class="math inline">\(x&gt;1\)</span>, então <span class="math inline">\(x+1&gt;2\)</span>. Daí, <span class="math inline">\(\frac{2}{x+1}&lt;1\)</span> ou <span class="math inline">\(\frac{2}{x+1}\frac{2^x}{x!}&lt;\frac{2^x}{x!}\)</span>. Daí, <span class="math inline">\(\frac{2^{x+1}}{(x+1)!}&lt;\frac{2^x}{x!}\)</span> decresce a partir de <span class="math inline">\(2\)</span>. Portanto, <span class="math inline">\(\frac{2^x}{x!}\)</span> é decrescente para <span class="math inline">\(x&gt;1\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<p>Então, para <span class="math inline">\(\alpha\)</span> suficientemente pequeno, <span class="math inline">\(\frac{2^x}{x!}\le C\)</span> é equivalente a <span class="math inline">\(x\ge x_0\)</span>, para um certo <span class="math inline">\(x_0\)</span>.</p>
+<p>Assim, por exemplo, se <span class="math inline">\(H_0\)</span> é verdadeira</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathbb{P}[X&gt;2]&amp;=1-\mathbb{P}[X\le2]=1-\sum_{x=0}^2e^{-1}\frac{1^x}{x!}=1-e^{-1}-e^{-1}-\frac{e^{-1}}{2}\\
+&amp;=1-2e^{-1}-\frac{e^{-1}}{2}=0.0803\\
+\mathbb{P}[X&gt;3]&amp;=0.019\\
+\mathbb{P}[X&gt;4]&amp;=0.004.
+\end{align*}\]</span></p>
+</div>
+<p>Suponha que escolhemos <span class="math inline">\(\alpha=0.019\)</span>, então, para esse tamanho a região crítica é do tipo</p>
+<p><span class="math display">\[C=\{4,5,6,7,\ldots\}.\]</span></p>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>Os erros Tipo I e II são, respectivamente,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\alpha&amp;=\int_CL(\theta_0,x)\,dx &amp; \beta&amp;=1-\int_CL(\theta_1,x)\,dx.
+\end{align*}\]</span></p>
+</div>
+<p>Considere a combinação linear <span class="math inline">\(p\alpha+q\beta\)</span>, i.e.,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+p\alpha+q\beta&amp;=\int_CpL(\theta_0,x)\,dx+q-1-\int_CqL(\theta_1,x)\,dx\\
+&amp;=q+\int_C\left[pL(\theta_0,x)-qL(\theta_1,x)\right]\,dx.
+\end{align*}\]</span></p>
+</div>
+<p>Para minimizar <span class="math inline">\(p\alpha+q\beta\)</span>, minimiza-se <span class="math inline">\(\int_C\left[pL(\theta_0,x)-qL(\theta_1,x)\right]\,dx\)</span>.</p>
+<p>Assim, a integral é minimizada escolhendo-se <span class="math inline">\(C\)</span> como <span class="math inline">\(C=\left\{x:pL(\theta_0,x)-qL(\theta_1,x)&lt;0\right\}\)</span>, ou seja</p>
+<p><span class="math display">\[C=\left\{x:\frac{L(\theta_1,x)}{L(\theta_0,x)}&lt;\frac{p}{q}\right\}.\]</span> Portanto, a região crítica terá a forma de uma razão de verossimilhança.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-np_normal2" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 11</strong></span> Suponha <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição <span class="math inline">\(N(\theta,1)\)</span>, i.e.</p>
+<p><span class="math display">\[f(x;\theta)=\frac{1}{\sqrt{2\pi}}\exp\left\{-\frac12(x-\theta)^2\right\}\mathbb{I}_\mathbb{R}(x).\]</span></p>
+<p>Suponha que queremos testar</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+H_0&amp;:\theta=0 &amp; \text{ vs }&amp; &amp;H_1&amp;:\theta=1.
+\end{align*}\]</span></p>
+</div>
+<p><br></p>
+<p>Dessa forma, temos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\frac{L_0}{L_1}&amp;=\frac{\left(2\pi\right)^{-\frac{n}{2}}\exp\left\{-\frac12\sum_{i=1}^n(x_i-\theta_0)^2\right\}}{\left(2\pi\right)^{-\frac{n}{2}}\exp\left\{-\frac12\sum_{i=1}^n(x_i-\theta_1)^2\right\}}
+=\frac{\exp\left\{-\frac12\sum_{i=1}^nx_i^2\right\}}{\exp\left\{-\frac12\sum_{i=1}^n(x_i-1)^2\right\}}
+\end{align*}\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\frac{L_0}{L_1}&amp;=\exp\left\{-\frac12\sum_{i=1}^nx_i^2+\frac12\sum_{i=1}^n(x_i-1)^2\right\}
+=\exp\left\{-\sum_{i=1}^nx_i^2+\frac12\sum_{i=1}^n(x_i-1)^2\right\}\\
+&amp;=\exp\left\{-\sum_{i=1}^nx_i+\frac{n}{2}\right\}\le k.
+\end{align*}\]</span></p>
+</div>
+<p>Se <span class="math inline">\(k&gt;0\)</span>, o conjunto de todos os pontos <span class="math inline">\(x_1,x_2,\ldots,x_n\)</span>, tal que</p>
+<p><span class="math display">\[\exp\left\{-\sum_{i=1}^nx_i+\frac{n}{2}\right\}\le k\]</span> representa a melhor região crítica.</p>
+</section>
+<section class="slide level2">
+
+<p>Equivalentemente,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+-\sum_{i=1}^nx_i+\frac{n}{2}&amp;\le \log k\\
+\sum_{i=1}^nx_i\ge \frac{n}{2}- \log k=c,
+\end{align*}\]</span></p>
+</div>
+<p>ou seja, a melhor região crítica é dada por</p>
+<p><span class="math display">\[C=\left\{(x_1,x_2,\ldots,x_n): \sum_{i=1}^nx_i\ge c\right\}=\left\{(x_1,x_2,\ldots,x_n): \bar{x}_i\ge c\right\}.\]</span></p>
+</section>
+<section class="slide level2">
+
+<div id="exm-np_normal2" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 12</strong></span> Considere <span class="math inline">\(X_1,X_2\)</span> uma amostra aleatória de uma população com distribuição <span class="math inline">\(f(x,\lambda)=\lambda e^{-\lambda x}\mathbb{I}_{(0,\infty)}(x)\)</span>.</p>
+<p>Suponha que queremos testar</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+H_0&amp;:\lambda=\frac12 &amp; \text{ vs }&amp; &amp;H_1&amp;:\lambda=a, \text{ com } a&lt;\frac12.
+\end{align*}\]</span></p>
+</div>
+<p><br></p>
+<p>A função de verossimilhança <span class="math inline">\(L(\lambda,x)=\lambda^2\exp\left\{-\lambda\sum_{i=1}^2x_i\right\}\)</span>.</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\frac{L_0}{L_1}&amp;=\frac{a^2\exp\left\{-a\sum_{i=1}^2x_i\right\}}{\frac14\exp\left\{-\frac12\sum_{i=1}^2x_i\right\}}=4a^2\exp\left\{\left(\frac12-a\right)\sum_{i=1}^2x_i\right\}.
+\end{align*}\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma, a melhor região crítica de tamanho <span class="math inline">\(\alpha\)</span> é da forma</p>
+<p><span class="math display">\[\frac{L_0}{L_1}=4a^2\exp\left\{\left(\frac12-a\right)\sum_{i=1}^2x_i\right\}\ge k.\]</span></p>
+<p>Rejeita-se <span class="math inline">\(H_0\)</span> se <span class="math inline">\(4a^2\exp\left\{\left(\frac12-a\right)\sum_{i=1}^2x_i\right\}\ge k\)</span>, ou <span class="math inline">\(\left(\frac12-a\right)\sum_{i=1}^2x_i\ge \log\frac{k}{4a^2}\)</span>.</p>
+<p>Daí,</p>
+<p><span class="math display">\[\sum_{i=1}^2x_i\ge \frac{\log\frac{k}{4a^2}}{\left(\frac12-a\right)},\]</span> para <span class="math inline">\(a&lt;\frac12\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<p>Então, a região crítica é da forma <span class="math inline">\(x_1+x_2&gt;c\)</span>, onde <span class="math inline">\(C\)</span> é obtido a partir de <span class="math inline">\(\alpha\)</span>. Daí, sob <span class="math inline">\(H_0\)</span>, <span class="math inline">\(X_1\)</span> segue uma distribuição <span class="math inline">\(f(x)=\frac12e^{-\frac12x}\mathbb{I}_{(0,\infty)}(x)\)</span>, i.e., <span class="math inline">\(\chi^2_{(2)}\)</span>. Da mesma forma <span class="math inline">\(X_2\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(2)}\)</span>, então <span class="math inline">\(X_1+X_2\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(4)}\)</span>. Daí,</p>
+<p><span class="math display">\[\mathbb{P}\left[\sum_{i=1}^2X_i\ge9.49\right]=0.05.\]</span> Assim, a melhor região crítica ao nivel de <span class="math inline">\(5\%\)</span> é</p>
+<p><span class="math display">\[C=\left\{(x_1,x_2):x_1+x_2&gt;9.49\right\}.\]</span></p>
+<p>Observe que a mesma região crítica será obtida, sem importar o valor de <span class="math inline">\(a\)</span>, é claro, desde <span class="math inline">\(a&lt;\frac12\)</span>.</p>
 <!-- ## Referências -->
 <!-- ::: {#refs} -->
 <!-- ::: -->
@@ -852,7 +1108,7 @@ H_0&amp;:p=p_0 &amp; \mathrm{vs} &amp; &amp; H_1&amp;:p&lt;p_0.
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -917,190 +1173,173 @@ H_0&amp;:p=p_0 &amp; \mathrm{vs} &amp; &amp; H_1&amp;:p&lt;p_0.
     </script>
 
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
           }
+          return false;
         }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copiada");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copiada");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copiada");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copiada");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
           }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
           for (const childEl of codeEl.children) {
             if (isCodeAnnotation(childEl)) {
               childEl.remove();
             }
           }
           return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
             }
           }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
           }
-        } else {
-          return undefined;
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>
