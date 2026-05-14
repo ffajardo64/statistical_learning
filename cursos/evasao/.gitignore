@@ -546,7 +546,6 @@ vignettes/*.pdf
 *.Rmd
 
 # Temporary files created by R Quarto
-*.qmd
 *.utf8.qmd
 *.knit.qmd
 *.qmd
