@@ -503,6 +503,9 @@ dmypy.json
 cython_debug/
 
 ### R ###
+# R Script
+*.R
+
 # History files
 .Rhistory
 .Rapp.history
@@ -543,6 +546,7 @@ vignettes/*.pdf
 *.Rmd
 
 # Temporary files created by R Quarto
+*.qmd
 *.utf8.qmd
 *.knit.qmd
 *.qmd
