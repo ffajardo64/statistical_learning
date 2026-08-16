@@ -503,6 +503,8 @@ dmypy.json
 cython_debug/
 
 ### R ###
+# Script files
+.R
 # History files
 .Rhistory
 .Rapp.history
@@ -524,6 +526,7 @@ cython_debug/
 
 # RStudio files
 .Rproj.user/
+*.Rproj
 
 # produced vignettes
 vignettes/*.html
@@ -540,6 +543,12 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 *.Rmd
+
+# Temporary files created by R Quarto
+*.utf8.qmd
+*.knit.qmd
+*.qmd
+/.quarto/
 
 # R Environment Variables
 .Renviron
@@ -960,6 +969,11 @@ FodyWeavers.xsd
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# Drawio
+*.drawio
+*.drawio.bkp
+*.xcf
 
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio

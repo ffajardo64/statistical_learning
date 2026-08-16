@@ -1,614 +1,1979 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
-  <head>
-    <title>STA13820 - Inferência Estatística I</title>
-    <meta charset="utf-8" />
-    <meta name="author" content="  " />
-    <script src="libs/header-attrs/header-attrs.js"></script>
-    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
-  </head>
-  <body>
-    <textarea id="source">
-class: center, middle, inverse, title-slide
+<html lang="pt-BR"><head>
+<script src="aula1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="aula1_files/libs/quarto-html/tabby.min.js"></script>
+<script src="aula1_files/libs/quarto-html/popper.min.js"></script>
+<script src="aula1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="aula1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="aula1_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="aula1_files/libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
-# STA13820 - Inferência Estatística I
-## Amostragem e distribuições amostrais
-### <br/><br/>
-### LECON/DEST - UFES
-### Vitória. ES - 05/02/2022
+  <meta name="author" content="LECON/DEST - UFES">
+  <title> STA13820 - Inferência Estatística I   Amostragem e distribuições amostrais </title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="aula1_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="aula1_files/libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="aula1_files/libs/revealjs/dist/theme/quarto-c9c4e882fc2dd0b2b0565851b88a3cd5.css">
+  <link href="aula1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="aula1_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="aula1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="aula1_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="aula1_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="aula1_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
 
----
+<section id="title-slide" data-background-color="#172a46" data-background-opacity="number" data-background-size="contain" class="quarto-title-block center">
+  <h1 class="title"></h1><h2><br>
+STA13820 - Inferência Estatística I<br>
+</h2><br>
+<h3><br>
+Amostragem e distribuições amostrais<br>
+</h3>
+  <p class="subtitle"><br><br></p>
 
-[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/extra-awesome-xaringan/intro/index.html#1)
-[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html)
-[//]: &lt;&gt; (https://www.biostatistics.dk/talks/CopenhagenRuseRs-2019/index.html#1)
-[//]: &lt;&gt; (https://rstudio-education.github.io/sharing-short-notice/#1)
-[//]: &lt;&gt; (https://www.kirenz.com/slides/xaringan-demo-slides.html#1)
-[//]: &lt;&gt; (https://github.com/yihui/xaringan/issues/26)
-class: animated, fadeIn
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+LECON/DEST - UFES 
+</div>
+        <p class="quarto-title-affiliation">
+            Última atualização: 16 agosto, 2026
+          </p>
+    </div>
+</div>
 
+</section>
+<section class="slide level2">
 
+<h3 id="section"></h3>
+<h3 id="algumas-definições-básicas">Algumas definições básicas</h3>
+<p><br></p>
+<div id="def-populacao" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 1 (População alvo)</strong></span> A população alvo é o conjunto de unidade experimentais.</p>
+</div>
+<p><br></p>
+<div id="def-amostra" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 2 (Amostra aleatória)</strong></span> Uma <em>amostra aleatória</em> define-se como uma sequência de variáveis aleatórias <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> independentes e identicamente distribuidas.</p>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>Se as variáveis aleatórias (va’s) <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> são contínuas e sua função de densidade conjunta é dada por <span class="math display">\[f_X(x_1,x_2,\ldots,x_n)=f(x_1)f(x_2)\cdots f(x_n)=\prod_{i=1}^nf(x_i),\]</span> então <span class="math inline">\(f(\cdot)\)</span> é a função de densidade marginal para cada <span class="math inline">\(X_i\)</span>, onde <span class="math inline">\(i=1,2,3,\ldots,n\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
 
+<div id="def-distribuicao" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 3</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de tamanho <span class="math inline">\(n\)</span>. A <em>distribuição da amostra</em> define-se como a distribuição conjunta da sequência de variáveis aleatórias.</p>
+</div>
+<p><br></p>
+<div id="exm-exemplo1" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 1</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com densidade <span class="math inline">\(f(\cdot)\)</span> e seja <span class="math inline">\(X_1,X_2\)</span> uma amostra aleatória de tamanho <span class="math inline">\(2\)</span>. Por definição, a distribuição conjunta de <span class="math inline">\(X_1,X_2\)</span> é dada por <span class="math display">\[f_{X_1,X_2}(x_2,x_2)=f(x_1)f(x_2).\]</span></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Suponha que <span class="math inline">\(X\)</span> é uma variável aleatória de uma população com distribuição Bernoulli com parâmetro <span class="math inline">\(p\)</span>, ou seja <span class="math display">\[\mathbb{P}\left[X=x\right]=p^x(1-p)^{1-x}\mathbb{I}_{\{0,1\}}(x).\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
 
-&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+<p>Dessa forma,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \mathbb{P}\left[X_1=x_1,X_2=x_2\right]&amp;=\mathbb{P}[X_1=x_1]\mathbb{P}[X_2=x_2]\\
+    &amp;=p^{x_1}(1-p)^{1-x_1}p^{x_2}(1-p)^{1-x_2}\mathbb{I}_{\{0,1\}}(x_1)\mathbb{I}_{\{0,1\}}(x_2)\\
+    &amp;=p^{x_1+x_2}(1-p)^{2-x_1-x_2}\mathbb{I}_{\{0,1\}}(x_1)\mathbb{I}_{\{0,1\}}(x_2). \quad\blacksquare
+  \end{align*}\]</span></p>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>Note que a distribuição da amostra é diferente da distribuição do número de sucessos, i.e., a natureza probabilística de <span class="math inline">\(Y=X_1+X_2\)</span> é dada por <span class="math display">\[\mathbb{P}[Y=y]=\binom{2}{y}p^y(1-p)^{2-y}\mathbb{I}_{\{0,1,2\}}(y).\]</span> Observe que, no primeiro caso, <span class="math inline">\(\mathbb{P}[X_1=x_1, X_2=x_2]\)</span> representa a distribuição da amostra na ordem da coleta, i.e., <span class="math inline">\(\mathbb{P}[X_1=0,X_2=1]\)</span> é a probabilidade de coletar primeiro <span class="math inline">\(0\)</span> e depois <span class="math inline">\(1\)</span>.</p>
+</div>
+</div>
+</div>
+<p><br></p>
+<hr>
 
-### Algumas definições básicas - I
+<p><font size="4">Para detalhes, sugere-se <span class="citation" data-cites="mood:graybill:boes:1974">Mood et al. (<a href="#/referências" role="doc-biblioref" onclick="">1974</a>)</span>, <span class="citation" data-cites="dudewicz:mishra:1988">Dudewicz e Mishra (<a href="#/referências" role="doc-biblioref" onclick="">1988</a>)</span>, <span class="citation" data-cites="severini:2005">Severini (<a href="#/referências" role="doc-biblioref" onclick="">2005</a>)</span>, <span class="citation" data-cites="balakrishnan:nevzorov:2003">Balakrishnan e Nevzorov (<a href="#/referências" role="doc-biblioref" onclick="">2003</a>)</span>.</font></p>
+</div>
+</section>
+<section class="slide level2">
 
-* **Definição 1.** *População alvo* é o conjunto de unidade experimentais.
+<div id="def-indicadora" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 4 (Função indicadora)</strong></span> Seja <span class="math inline">\(\Omega\)</span> qualquer conjunto com elementos <span class="math inline">\(\omega\)</span> e <span class="math inline">\(A\)</span> um subconjunto de <span class="math inline">\(\Omega\)</span>. A <em>Função Indicadora</em> de um conjunto <span class="math inline">\(A\)</span> define-se tal que</p>
+<p><span class="math display">\[\mathbb{I}_A(\omega)=\begin{cases}1, &amp; \text{se } \omega\in A;\\
+  0, &amp; \text{se } \omega\notin A. \end{cases}\]</span></p>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Algumas propriedades</strong></p>
+</div>
+<div class="callout-content">
+<p>Seja <span class="math inline">\(\Omega\)</span> qualquer conjunto com elementos <span class="math inline">\(\omega\)</span> e <span class="math inline">\(A, A_1,A_2,\ldots,A_n\)</span> uma sequência de subconjuntos de <span class="math inline">\(\Omega\)</span>. Temos que:</p>
+<ul>
+<li><p><span class="math inline">\(\mathbb{I}_A^n(\omega)=\mathbb{I}_A(\omega)\)</span>, onde <span class="math inline">\(n\in\mathbb{N}-\{0\}\)</span>;</p></li>
+<li><p><span class="math inline">\(\mathbb{I}_A(\omega)=1-\mathbb{I}_{A^c}(\omega)\)</span>, onde <span class="math inline">\(A^c\)</span> é o complementar de <span class="math inline">\(A\)</span>;</p></li>
+<li><p><span class="math inline">\(\mathbb{I}_{\cap_{i=1}^nA_i}(\omega)=\mathbb{I}_{A_1}(\omega)\mathbb{I}_{A_2}(\omega)\cdots\mathbb{I}_{A_n}(\omega)\)</span>. Em particular, temos que <span class="math inline">\(\mathbb{I}_{A_1\cap A_2}(\omega)=\min\{\mathbb{I}_{A_1}(\omega),\mathbb{I}_{A_2}(\omega)\}\)</span>;</p></li>
+<li><p><span class="math inline">\(\mathbb{I}_{\cup_{i=1}^n A_i}=\max\left\{\mathbb{I}_{A_1}(\omega),\mathbb{I}_{A_2}(\omega),\cdots,\mathbb{I}_{A_n}(\omega)\right\}\)</span>. Em particular, para <span class="math inline">\(n=2\)</span>, temos a seguinte relação <span class="math inline">\(\mathbb{I}_{A_1\cup A_2}(\omega)=\max\{\mathbb{I}_{A_1}(\omega),\mathbb{I}_{A_2}(\omega)\}=\mathbb{I}_{A_1}(\omega)+\mathbb{I}_{A_2}(\omega)-\mathbb{I}_{A_1}(\omega)\mathbb{I}_{A_2}(\omega)\)</span>;</p></li>
+<li><p><span class="math inline">\(\mathbb{I}_{A_1\Delta A_2}(\omega)=\left(\mathbb{I}_{A_1}(\omega)-\mathbb{I}_{A_2}(\omega)\right)^2\)</span>, onde <span class="math inline">\(A_1\Delta A_2\)</span> representa a diferença simétrica entre <span class="math inline">\(A_1\)</span> e <span class="math inline">\(A_2\)</span>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<p><font size="5"><sup><span class="math inline">\(\dagger\)</span></sup><strong><span style="color:#8f0e04">Exercício.</span></strong> Verifique todas as propiedades acima.</font></p>
+</div>
+</section>
+<section class="slide level2">
 
-* **Definição 2.** Uma *amostra aleatória* define-se como uma sequência 
-de variáveis aleatórias `\(X_1,X_2,\ldots,X_n\)` independentes e 
-identicamente distribuidas.
+<div id="exm-exemplo2" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 2</strong></span> Seja <span class="math inline">\(\Omega\)</span> qualquer conjunto com elementos <span class="math inline">\(\omega\)</span> e <span class="math inline">\(A\)</span> um subconjunto de <span class="math inline">\(\Omega\)</span>. Prove que <span class="math inline">\(\mathbb{I}_{A_1\cup A_2}(\omega)=\mathbb{I}_{A_1}(\omega)+\mathbb{I}_{A_2}(\omega)-\mathbb{I}_{A_1}(\omega)\mathbb{I}_{A_2}(\omega)\)</span>.</p>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Note que, <span class="math inline">\(A_1\cup A_2=\left(A_1\cup(A_1^c\cap A_2)\right)\)</span> e <span class="math inline">\(A_2=\left(A_1\cap A_2\right)\cup\left(A_1^c\cap A_2\right)\)</span>. Então,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+  \mathbb{I}_{A_2}(\omega)&amp;=\mathbb{I}_{A_1\cap A_2}(\omega)+\mathbb{I}_{A_1^c\cap A_2}(\omega)\\
+  \mathbb{I}_{A_1^c\cap A_2}(\omega)&amp;=\mathbb{I}_{A_2}(\omega)-\mathbb{I}_{A_1\cap A_2}(\omega).
+  \end{align*}\]</span></p>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="2">
+<p>Dessa forma,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathbb{I}_{A_1\cup A_2}(\omega)&amp;=\mathbb{I}_{\left(A_1\cup(A_1^c\cap A_2)\right)}(\omega)=\mathbb{I}_{A_1}(\omega)+\mathbb{I}_{A_1^c\cap A_2}(\omega)\\
+&amp;=\mathbb{I}_{A_1}(\omega)+\mathbb{I}_{A_2}(\omega)-\mathbb{I}_{A_1\cap A_2}(\omega)
+=\mathbb{I}_{A_1}(\omega)+\mathbb{I}_{A_2}(\omega)-\mathbb{I}_{A_1}(\omega)\mathbb{I}_{A_2}(\omega). \quad\blacksquare
+  \end{align*}\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
 
-&gt; **Observação**: Se as variáveis aleatórias (va's) `\(X_1,X_2,\ldots,X_n\)`
-são contínuas e sua função de densidade conjunta é dada por
-`$$f_X(x_1,x_2,\ldots,x_n)=f(x_1)f(x_2)\cdots f(x_n)=\prod_{i=1}^nf(x_i),$$`
-então `\(f(\cdot)\)` é a função de densidade marginal para cada `\(X_i\)`, onde
-`\(i=1,2,3,\ldots,n\)`.
-
-* **Definição 3.** Seja `\(X_1,X_2,\ldots,X_n\)` uma amostra aleatória de 
-tamanho `\(n\)`. A *distribuição da amostra* define-se como a distribuição 
-conjunta da sequência de variáveis aleatórias.
-
-
----
-class: animated, slideInRight
-
-### Algumas definições básicas - I
-
-**Exemplo 1.** Seja `\(X\)` uma variável aleatória de uma população com densidade `\(f(\cdot)\)`
-e se seja `\(X_1,X_2\)` uma amostra aleatória de tamanho `\(2\)`.
-Por definição, a distribuição conjunta de `\(X_1,X_2\)` é dada por
-`$$f_{X_1,X_2}(x_2,x_2)=f(x_1)f(x_2).$$`
-Suponha que `\(X\)` é uma variável aleatória de uma população com 
-distribuição Bernoulli com parâmetro `\(p\)`, ou seja
-`$$\mathbb{P}\left[X=x\right]=p^x(1-p)^{1-x}\mathbb{I}_{\{0,1\}}(x).$$`
-Dessa forma,
-
-&lt;div class="math"&gt;
-  \begin{align*}
-    \mathbb{P}\left[X_1=x_1,X_2=x_2\right]&amp;=\mathbb{P}[X_1=x_1]\mathbb{P}[X_2=x_2]
-    =p^{x_1}(1-p)^{1-x_1}p^{x_2}(1-p)^{1-x_2}\mathbb{I}_{\{0,1\}}(x_1)\mathbb{I}_{\{0,1\}}(x_2)\\
-    &amp;=p^{x_1+x_2}(1-p)^{2-x_1-x_2}\mathbb{I}_{\{0,1\}}(x_1)\mathbb{I}_{\{0,1\}}(x_2).
-  \end{align*}
-&lt;/div&gt;
-
----
-class: animated, fadeIn
-
-### Algumas definições básicas - I
-  
-&gt; **Observação**: Note que a distribuição da amostra é diferente da 
-distribuição do número de sucessos, i.e., a natureza probabilística
-de `\(Y=X_1+X_2\)` é dada por
-`$$\mathbb{P}[Y=y]=\binom{2}{y}p^y(1-p)^{2-y}\mathbb{I}_{\{0,1,2\}}(y).$$`
-Observe que, no primeiro caso, `\(\mathbb{P}[X_1=x_1, X_2=x_2]\)` representa
-a distribuição da amostra na ordem da coleta, i.e., 
-`\(\mathbb{P}[X_1=0,X_2=1]\)` é a probabilidade de coletar primeiro `\(0\)` e
-depois `\(1\)`.
-
----
-class: animated, slideInRight
-
-### Algumas definições básicas - II
-
-* **Definição 4.** Seja `\(\Omega\)` qualquer conjunto com elementos 
-`\(\omega\)` e `\(A\)` um subconjunto de `\(\Omega\)`. A *Função Indicadora* de 
-um conjunto `\(A\)` define-se tal que 
-
-  $$\mathbb{I}_A(\omega)=\begin{cases}1, &amp; \text{se } \omega\in A;\\\
-  0, &amp; \text{se } \omega\notin A. \end{cases}$$ 
- - **Propriedades.** Seja `\(\Omega\)` qualquer conjunto com elementos 
-`\(\omega\)` e `\(A, A_1,A_2,\ldots,A_n\)` uma sequência de subconjuntos de `\(\Omega\)`.
-Temos que:
-      - `\(\mathbb{I}_A^2(\omega)=\mathbb{I}_A(\omega)\)`;
-      - `\(\mathbb{I}_A(\omega)=1-\mathbb{I}_{A^c}(\omega)\)`, onde `\(A^c\)` é
-      o complementar de `\(A\)`;
-      - `\(\mathbb{I}_{A_1\cap A_2}(\omega)=\min\{\mathbb{I}_{A_1}(\omega),\mathbb{I}_{A_2}(\omega)\}\)`. Em geral, `\(\mathbb{I}_{A_1\cap A_2\cap\cdots\cap A_n}(\omega)=\mathbb{I}_{A_1}(\omega)\mathbb{I}_{A_2}(\omega)\cdots\mathbb{I}_{A_n}(\omega)\)`;
-      - `\(\mathbb{I}_{A_1\cup A_2}(\omega)=\max\{\mathbb{I}_{A_1}(\omega),\mathbb{I}_{A_2}(\omega)\}=\mathbb{I}_{A_1}(\omega)+\mathbb{I}_{A_2}(\omega)-\mathbb{I}_{A_1}(\omega)\mathbb{I}_{A_2}(\omega)\)`. Em geral, temos que `\(\mathbb{I}_{A_1\cup A_2\cup\cdots\cup A_n}(\omega)=\max\left\{\mathbb{I}_{A_1}(\omega),\mathbb{I}_{A_2}(\omega),\cdots,\mathbb{I}_{A_n}(\omega)\right\}\)`;
-      - `\(\mathbb{I}_{A_1\Delta A_2}(\omega)=\left(\mathbb{I}_{A_1}(\omega)-\mathbb{I}_{A_2}(\omega)\right)^2\)`, onde `\(A_1\Delta A_2\)` representa a diferença simétrica entre `\(A_1\)` e `\(A_2\)`.
-
-&gt; **&lt;span style="color:#8f0e04"&gt;Exercício.&lt;/span&gt;** Verifique todas 
-as propiedades acima.
-
----
-class: animated, fadeIn
-
-### Algumas definições básicas - II
-
-**Exemplo 2.** Seja `\(f(\cdot)\)` dada por 
-`\(f(x)=\begin{cases}0, &amp; \text{ para } x\le0; \\ x, &amp; \text{ para } 0&lt;x\le1; \\ 2-x, &amp; \text{ para } 1&lt;x\le2; \\ , 0 &amp; \text{ para } 2&lt;x. \end{cases}\)`
-
-Usando a função indicadora, `\(f(x)\)` pode ser escrita como
-
-&lt;div class="math"&gt;
-  \begin{align*}
-    f(x)&amp;=x\mathbb{I}_{(0,1]}(x)+(2-x)\mathbb{I}_{(1,2]}(x)=(1-|1-x|)\mathbb{I}_{(0,2]}(x).
-  \end{align*}
-&lt;/div&gt;
-
---
-
-**Exemplo 3.** Seja `\((\Omega,\cal{F}, \mathbb{P})\)` um espaço de 
-probabilidade. Considere os eventos `\(A\in\cal{F}\)` e `\(B\in\cal{F}\)`, 
-então, a função indicadora do evento `\(A\)` é uma variável aleatória 
-definida como
-
-&lt;div class="math"&gt;
- \begin{align*}
+<div id="exm-exemplo3" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 3</strong></span> Seja <span class="math inline">\(f(\cdot)\)</span> dada por <span class="math inline">\(f(x)=\begin{cases}0, &amp; \text{ para } x\le0; \\ x, &amp; \text{ para } 0&lt;x\le1; \\ 2-x, &amp; \text{ para } 1&lt;x\le2; \\ 0, &amp; \text{ para } 2&lt;x. \end{cases}\)</span></p>
+<p>Usando a função indicadora, <span class="math inline">\(f(x)\)</span> pode ser escrita como:</p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    f(x)&amp;=x\mathbb{I}_{(0,1]}(x)+(2-x)\mathbb{I}_{(1,2]}(x)=(1-|1-x|)\mathbb{I}_{(0,2]}(x). \quad\blacksquare
+  \end{align*}\]</span></p>
+</div>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="2">
+<div id="exm-exemplo4" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 4</strong></span> Seja <span class="math inline">\((\Omega,\cal{F}, \mathbb{P})\)</span> um espaço de probabilidade. Considere os eventos <span class="math inline">\(A\in\cal{F}\)</span> e <span class="math inline">\(B\in\cal{F}\)</span>, então, a função indicadora do evento <span class="math inline">\(A\)</span> é uma variável aleatória definida como</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
     \mathbb{I}_A(\omega)=\begin{cases}
-    1, &amp; \text{ se } \omega\in A; \\ 
+    1, &amp; \text{ se } \omega\in A; \\
     0, &amp; \text{ se } \omega\notin A.
     \end{cases}
- \end{align*}
-&lt;/div&gt;
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
 
-Dessa forma, temos que  `\(\mathbb{E}\left[\mathbb{I}_A(\omega)\right]=\mathbb{P}\left[A\right]\)`,
-`\(\mathrm{var}\left[\mathbb{I}_A(\omega)\right]=\mathbb{P}\left[A\right](1-\mathbb{P}\left[A\right])\)` e `\(\mathrm{cov}\left[\mathbb{I}_A(\omega), \mathbb{I}_B(\omega)\right]=\mathbb{P}\left[A\cap B\right]-\mathbb{P}\left[A\right]\mathbb{P}\left[B\right]\)`.
+<p>Dessa forma, temos que:</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \mathbb{E}\left[\mathbb{I}_A(\omega)\right]&amp;=1\cdot\mathbb{P}[A]+0\cdot\mathbb{P}[A^c]
+    =\mathbb{P}\left[A\right] \\ \\
+    \mathrm{var}\left[\mathbb{I}_A(\omega)\right]&amp;=\mathbb{E}\left[\mathbb{I}^2_A(\omega)\right]-\mathbb{E}\left[\mathbb{I}_A(\omega)\right]^2
+    =\mathbb{E}\left[\mathbb{I}_A(\omega)\right]-\mathbb{E}\left[\mathbb{I}_A(\omega)\right]^2\\
+    &amp;=\mathbb{P}\left[A\right]-\left[\mathbb{P}\left[A\right]\right]^2=\mathbb{P}\left[A\right](1-\mathbb{P}\left[A\right])\\ \\
+    \mathrm{cov}\left[\mathbb{I}_A(\omega), \mathbb{I}_B(\omega)\right]&amp;=\mathbb{P}\left[A\cap B\right]-\mathbb{P}\left[A\right]\mathbb{P}\left[B\right]. \quad\blacksquare
+  \end{align*}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
 
+<div id="exm-exemplo5" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 5</strong></span> Seja <span class="math inline">\((\Omega,\cal{F}, \mathbb{P})\)</span> um espaço de probabilidade. Considere os eventos <span class="math inline">\(A\in\cal{F}\)</span> e <span class="math inline">\(B\in\cal{F}\)</span>. Sabemos que,</p>
+<p><span class="math display">\[\mathbb{I}_{A_1\cup A_2}(\omega)=\mathbb{I}_{A_1}(\omega)+\mathbb{I}_{A_2}(\omega)-\mathbb{I}_{A_1}(\omega)\mathbb{I}_{A_2}(\omega).\]</span> Então,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \mathbb{E}\left[\mathbb{I}_{A_1\cup A_2}(\omega)\right]&amp;=\mathbb{E}\left[\mathbb{I}_{A_1}(\omega)\right]+\mathbb{E}\left[\mathbb{I}_{A_2}(\omega)\right]-\mathbb{E}\left[\mathbb{I}_{A_1}(\omega)\mathbb{I}_{A_2}(\omega)\right]\\
+    &amp;=\mathbb{P}\left[A_1\right]+\mathbb{P}\left[A_2\right]-\mathbb{P}\left[A_1\cap A_2\right]. \quad\blacksquare
+\end{align*}\]</span></p>
+</div>
+</div>
+</section>
+<section id="momentos-populacionais" class="slide level2 center" data-background-color="#172a46">
+<h2>Momentos populacionais</h2>
+</section>
+<section class="slide level2">
 
----
-class: animated, slideInRight
+<div id="def-momento_populacional" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 5</strong></span> Se <span class="math inline">\(X\)</span> é uma variável aleatória, o <span class="math inline">\(r\)</span>-ésimo momento de <span class="math inline">\(X\)</span> define-se como <span class="math inline">\(\mathbb{E}[X^r]=\mu_r'\)</span>, se existe. Também pode-se definir o <span class="math inline">\(r\)</span>-ésimo momento central como <span class="math inline">\(\mathbb{E}[(X-\mu_X)^r]=\mu_r\)</span>, onde <span class="math inline">\(\mu_X=\mathbb{E}[X]=\mu_1'\)</span>.</p>
+</div>
+<p><br></p>
+<div id="def-assimetria" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 6 (Assimetria)</strong></span> O coeficiente de assimetria de uma variável aleatória <span class="math inline">\(X\)</span> define-se como</p>
+<p><span class="math display">\[\alpha_3 = \frac{\mathbb{E}[(X-\mu)^3]}{\sigma^3}=\frac{\mu_3}{\sigma^3}.\]</span></p>
+</div>
+<p><br></p>
+<div id="def-curtose" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 7 (Curtose)</strong></span> O coeficiente de curtose de uma variável aleatória <span class="math inline">\(X\)</span> define-se como</p>
+<p><span class="math display">\[\alpha_4 = \frac{\mathbb{E}[(X-\mu)^4]}{\sigma^4}=\frac{\mu_4}{\sigma^4}.\]</span></p>
+</div>
+</section>
+<section class="slide level2">
 
-### Algumas definições básicas - III
+<div id="exm-r_momento_gamma" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 6</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição <span class="math inline">\(Gama(r,\lambda)\)</span>. Calcule a média e a variância da distribuição de <span class="math inline">\(X\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que, se a distribuição de <span class="math inline">\(X\)</span> é <span class="math inline">\(Gama(r,\lambda)\)</span>, então</p>
+<p><br></p>
+<p><span class="math display">\[f(x)=\frac{\lambda^r}{\Gamma\left(r\right)}x^{r-1}e^{-\lambda x}\mathbb{I}_{(0,\infty)}(x), \quad r&gt;0, \ \lambda&gt;0.\]</span></p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Função Gama</strong></p>
+</div>
+<div class="callout-content">
+<p>A função gama, representada por <span class="math inline">\(\Gamma(\cdot)\)</span>, é uma extensão do factorial para inteiros positivos. Define-se como: <span class="math display">\[\Gamma(t)=\int_0^\infty x^{t-1}e^{-x}\, dx=(t-1)\Gamma(t-1).\]</span> Em particular, <span class="math inline">\(k\in\mathbb{Z}^+\)</span>, tem-se <span class="math inline">\(\Gamma(k+1)=k!\)</span>.</p>
+<p>Um resultado de interesse em algumas aplicações é dado por <span class="math inline">\(\Gamma\left(\frac12\right)=\sqrt\pi\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
 
-#### Tipos de convergência
+<p>Então,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}X&amp;=\int_0^\infty x\frac{\lambda^r}{\Gamma\left(r\right)}x^{r-1}e^{-\lambda x}\,dx
+  =\frac{r}{\lambda}\int_0^\infty \frac{\lambda^{r+1}}{r\Gamma\left(r\right)}x^{r}e^{-\lambda x}\,dx\\
+  &amp;=\frac{r}{\lambda}\int_0^\infty \frac{\lambda^{r+1}}{\Gamma\left(r+1\right)}x^{r}e^{-\lambda x}\,dx
+  =\frac{r}{\lambda}.
+\end{align*}\]</span>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Por outro lado, tem-se que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}X^2&amp;=\int_0^\infty x^2\frac{\lambda^r}{\Gamma\left(r\right)}x^{r-1}e^{-\lambda x}\,dx
+  =\int_0^\infty \frac{\lambda^r}{\Gamma\left(r\right)}x^{(r+2)-1}e^{-\lambda x}\,dx\\
+  &amp;=\int_0^\infty \frac{1}{\lambda^2}\frac{\lambda^{r+2}}{\Gamma\left(r\right)}x^{(r+2)-1}e^{-\lambda x}\,dx
+   =\int_0^\infty \frac{r(r+1)}{\lambda^2}\frac{\lambda^{r+2}}{\Gamma\left(r+2\right)}x^{(r+2)-1}e^{-\lambda x}\,dx\\
+   &amp;=\frac{r(r+1)}{\lambda^2}.
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
 
-* **Definição 5.** Uma sequência `\(X_1,X_2,\ldots,X_n\)` de variáveis 
-aleatórias *converge em probabilidade* para uma variável aleatória `\(X\)` 
-se, para todo `\(\epsilon&gt;0\)`,
-`$$\lim_{n\to\infty}\mathbb{P}\left[\left|X_n-X\right|\ge0\right]=0.$$`
-Denotamos `\(X_n\overset{p}{\longrightarrow}X.\)`
+<p>Dessa forma,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathrm{var}[X]&amp;=\mathbb{E}X^2-\left[\mathbb{E}X\right]^2
+  =\frac{r(r+1)}{\lambda^2} - \frac{r^2}{\lambda^2} =\frac{r}{\lambda^2}. \quad\blacksquare
+\end{align*}\]</span>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Distribuição qui-quadrado</strong></p>
+</div>
+<div class="callout-content">
+<p>A distribuição qui-quadrado é um caso particular da distribuição gama quando <span class="math inline">\(r=\frac{k}{2}\)</span> e <span class="math inline">\(\lambda=\frac12\)</span>, i.e.,</p>
+<p><span class="math display">\[f(x)=\frac{1}{\Gamma\left(\frac{k}{2}\right)}\left(\frac12\right)^{k/2}x^{k/2-1}e^{-\frac12x}\mathbb{I}_{(0,\infty)}(x), \quad k&gt;0.\]</span></p>
+<p>Daí, &nbsp;<span class="math inline">\(\mathbb{E}X=k\)</span> &nbsp;e &nbsp;<span class="math inline">\(\mathrm{var}[X]=2k\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<p><br><br><br></p>
+<hr>
 
-**Teorema 1.** Seja `\(g:\mathbb{R}^k\longrightarrow\mathbb{R}^m\)` uma 
-função contínua em cada ponto `\(a\in C\)`, tal que `\(\mathbb{P}[X\in C]=1\)`.
-Se `\(X_n\overset{p}{\longrightarrow}X\)`, então `\(g\left(X_n\right)\overset{p}{\longrightarrow}g\left(X\right).\)`
+<p><font size="4">Mais relações podem ser verificadas em <a href="https://www.math.wm.edu/~leemis/chart/UDR/UDR.html" target="_blank">Univariate Distribution Relationships</a>.</font></p>
+</section>
+<section class="slide level2">
 
-&lt;/br&gt;
+<div id="exm-r_momento_chisq" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 7</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição qui-quadrado com <span class="math inline">\(k\)</span> graus de liberdade. Encontre uma expressão para o <span class="math inline">\(r\)</span>-ésimo momento para a distribuição de <span class="math inline">\(X\)</span>. O <span class="math inline">\(r\)</span>-ésimo momento existe para todos os valores de <span class="math inline">\(r\)</span>?</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que, se a distribuição de <span class="math inline">\(X\)</span> é qui-quadrado, então <span class="math display">\[f(x)=\frac{1}{\Gamma\left(\frac{k}{2}\right)}\left(\frac12\right)^{k/2}x^{k/2-1}e^{-\frac12x}\mathbb{I}_{(0,\infty)}(x), \quad k&gt;0.\]</span></p>
+<p>Dessa forma, temos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}[X^r]&amp;=\int_0^\infty x^r\frac{1}{\Gamma\left(\frac{k}{2}\right)}\left(\frac12\right)^{k/2}x^{k/2-1}e^{-\frac12x}\,dx
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
 
-&gt; &lt;span style="color:gray"&gt;Uma outra notação que será usada para sequências de 
-variáveis aleatórias é `\(\{X_n; n=1,2,3,\ldots\}\)` ou 
-simplesmente `\(\{X_n\}\)`.&lt;/span&gt;
+<p>Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}[X^r]&amp;=\int_0^\infty x^r\frac{1}{\Gamma\left(\frac{k}{2}\right)}\left(\frac12\right)^{k/2}x^{k/2-1}e^{-\frac12x}\,dx \\
+  &amp;=\frac{1}{\Gamma\left(\frac{k}{2}\right)}\left(\frac12\right)^{k/2}\int_0^\infty x^rx^{k/2-1}e^{-\frac12x}\,dx \\
+  &amp;=\frac{1}{\Gamma\left(\frac{k}{2}\right)}\left(\frac12\right)^{k/2}\frac{\Gamma\left(\frac{k}{2}+r\right)}{\left(\frac12\right)^{k/2+r}}\,dx
+  =\frac{\Gamma\left(\frac{k}{2}+r\right)}{\Gamma\left(\frac{k}{2}\right)}2^r, \quad r&gt;-\frac{k}{2}. \quad\blacksquare
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
 
----
-class: animated, slideInRight
+<div id="exm-curtose_chisq" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 8</strong></span> Seja <span class="math inline">\(X_1,X_2, \ldots, X_n\)</span> uma sequência de variáveis aleatórias independentes função de distribuição <span class="math inline">\(F_i(x_i)\)</span>, com <span class="math inline">\(i=1,2,3,,\ldots,k\)</span>. Considere a variável aleatória <span class="math inline">\(Z=-2\sum_{i=1}^k\log\left(1-F_i(X_i)\right)\)</span>. Qual o valor da curtose de <span class="math inline">\(Z\)</span>?</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Seja <span class="math inline">\(U_i=F_i(X_i)\)</span> e considere <span class="math inline">\(k=1\)</span>, então <span class="math inline">\(Z=-2\log(1-U_1)\)</span>. Dessa forma, temos que <span class="math display">\[F_Z(z)=\mathbb{P}[Z\le z]=\mathbb{P}\left[-2\log(1-U_1)\le z\right]=\mathbb{P}\left[U_1\le 1-e^{-\frac12z}\right]=1-e^{-\frac12z}.\]</span> Do <a href="#/exm-r_momento_chisq" class="quarto-xref">Exemplo&nbsp;7</a>, sabemos que <span class="math inline">\(Z\)</span> é uma variável aleatória de uma população com distribuição qui-quadrado com <span class="math inline">\(2\)</span> graus de liberdade, i.e., <span class="math inline">\(\chi^2_{(2)}\)</span>. Portanto, <span class="math inline">\(Z=-2\sum_{i=1}^k\log\left(1-U_i\right)\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(2k)}\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
 
-### Algumas definições básicas - III
+<p>Por outra parte, sabemos que a curtose é definida como <span class="math display">\[K=\dfrac{\mathbb{E}\left[Z-\mathbb{E}Z\right]^4}{\left(\mathbb{E}\left[Z-\mathbb{E}Z\right]^2\right)^2}=\dfrac{\mathbb{E}\left[Z-\mathbb{E}Z\right]^4}{\left(\mathrm{var}[Z]\right)^2}.\]</span></p>
+<p>Desse modo,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}[Z]&amp;=k;\\ \\
+  \mathbb{E}\left[Z^2\right]&amp;=k(k+2);\\
+  \mathbb{E}\left[Z^3\right]&amp;=2k(k+2)\left(\frac{k}{2}+2\right)=k(k+2)(k+4);\\
+  \mathbb{E}\left[Z^4\right]&amp;=2k(k+2)(k+4)\left(\frac{k}{2}+3\right)=k(k+2)(k+4)(k+6).
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
 
-#### Tipos de convergência
+<p>Seguindo os resultados acima, temos que <span class="math display">\[\mathrm{var}[Z]=\mathbb{E}Z^2-\left[\mathbb{E}Z\right]^2=k(k+2)-k^2=2k.\]</span></p>
+<p>Ainda,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}\left[Z-\mathbb{E}Z\right]^4&amp;=\mathbb{E}\left[Z-k\right]^4
+  =\mathbb{E}Z^4-4k\mathbb{E}Z^3+6k^2\mathbb{E}Z^2-4k^3\mathbb{E}Z+k^4\\
+  &amp;=k(k+2)(k+4)(k+6)-4k^2(k+2)(k+4)+6k^2k(k+2)-3k^4\\
+  &amp;=-3k(k^2-4)(k+4)+3k^3(k+4)=12k(k+4).
+\end{align*}\]</span>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Assim, <span class="math display">\[K=\dfrac{\mathbb{E}\left[Z-\mathbb{E}Z\right]^4}{\left(\mathrm{var}[Z]\right)^2}=\dfrac{12k(k+4)}{4k^2}=3+\frac{12}{k}.  \quad\blacksquare\]</span></p>
+<hr>
 
-**Corolario 1.** Se `\(X_n\overset{p}{\longrightarrow}X\)` e 
-`\(Y_n\overset{p}{\longrightarrow}Y\)`, então
+<p><font size="5"> Para mostrar que <span class="math inline">\(Z=-2\sum_{i=1}^k\log\left(1-U_i\right)\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(2k)}\)</span>, o leitor pode aplicar o <a href="#/thm-fgm_independencia" class="quarto-xref">Teorema&nbsp;2</a>.</font></p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-r_momento_beta" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 9</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição <span class="math inline">\(Beta(a,b)\)</span>, i.e.,</p>
+<p><span class="math display">\[f(x;a,b)=\frac{1}{\mathrm{B}(a,b)}x^{a-1}(1-x)^{b-1}\mathbb{I}_{(0,1)}(x), \quad a&gt;0, \quad b&gt;0,\]</span></p>
+<p>onde <span class="math inline">\(\mathrm{B}(a,b)=\int_0^1x^{a-1}(1-x)^{b-1}\,dx=\frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}\)</span> é a chamada função beta. Calcule o <span class="math inline">\(r\)</span>-ésimo momento populacional da distribuição de <span class="math inline">\(X\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Note que,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}\left[X^r\right]&amp;=\frac{1}{\mathrm{B}(a,b)}\int_0^1 x^r x^{a-1}(1-x)^{b-1}\,dx
+  =\frac{1}{\mathrm{B}(a,b)}\int_0^1 x^{a+r-1}(1-x)^{b-1}\,dx.
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}\left[X^r\right]&amp;=\frac{\mathrm{B}(a+r,b)}{\mathrm{B}(a,b)}
+  =\frac{\frac{\Gamma(a+r)\Gamma(b)}{\Gamma(a+r+b)}}{\frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}}
+  = \frac{\Gamma(a+r)\Gamma(b)\Gamma(a+b)}{\Gamma(a+r+b)\Gamma(a)\Gamma(b)}\\
+  &amp;=\frac{\Gamma(a+r)\Gamma(a+b)}{\Gamma(a+r+b)\Gamma(a)}.
+\end{align*}\]</span>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<ul>
+<li>Para <span class="math inline">\(k=1\)</span>,</li>
+</ul>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}\left[X\right]&amp;=\frac{\Gamma(a+1)\Gamma(a+b)}{\Gamma(a+1+b)\Gamma(a)}
+  =\frac{a\Gamma(a)\Gamma(a+b)}{(a+b)\Gamma(a+b)\Gamma(a)}=\frac{a}{a+b}.
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Para <span class="math inline">\(k=2\)</span>,</li>
+</ul>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}\left[X^2\right]&amp;=\frac{\Gamma(a+2)\Gamma(a+b)}{\Gamma(a+2+b)\Gamma(a)}
+  =\frac{(a+1)a\Gamma(a)\Gamma(a+b)}{(a+b+1)(a+b)\Gamma(a+b)\Gamma(a)}\\ \\
+  &amp;=\frac{(a+1)a}{(a+b+1)(a+b)}.
+\end{align*}\]</span>
+</div>
+<p>Dessa forma,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathrm{var}\left[X\right]&amp;=\frac{(a+1)a}{(a+b+1)(a+b)}-\frac{a^2}{(a+b)^2}
+  =\frac{(a+1)a(a+b)-a^2(a+b+1))}{(a+b+1)(a+b)^2}\\
+  &amp;=\frac{ab}{(a+b+1)(a+b)^2}. \quad\blacksquare
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-r_momento_normal" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 10</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(1\)</span>. Mostre que o <span class="math inline">\(r+1\)</span>-ésimo momento da distribuição de <span class="math inline">\(X\)</span> é dado por <span class="math display">\[\mathbb{E}X^{r+1}=\mu\mathbb{E}X^r-\frac{\partial}{\partial\mu}\mathbb{E}X^r.\]</span></p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que <span class="math display">\[\mathbb{E}X^r=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty x^re^{-\frac12(x-\mu)^2}\,dx.\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+    \frac{\partial}{\partial \mu}\mathbb{E}X^r&amp;=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \frac{\partial}{\partial\mu}\left(x^re^{-\frac12(x-\mu)^2}\right)\,dx
+    =\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty x^re^{-\frac12(x-\mu)^2}(\mu-x)\,dx\\
+    &amp;=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \mu x^re^{-\frac12(x-\mu)^2}\,dx-\underbrace{\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty x^{r+1}e^{-\frac12(x-\mu)^2}\,dx}_{\mathbb{E}X^{r+1}}.
+  \end{align*}\]</span>
+</div>
+<p>Portanto, <span class="math display">\[\mathbb{E}X^{r+1}=\mu\mathbb{E}X^r-\frac{\partial}{\partial\mu}\mathbb{E}X^r.\quad\blacksquare\]</span></p>
+</section>
+<section class="slide level2">
+
+<div id="def-fgm" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 8 (Função geradora de momentos)</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com função de distribuição <span class="math inline">\(F_X\)</span>. A <em>função geradora de momentos</em> (FGM) de <span class="math inline">\(F_X\)</span>, define-se como <span class="math display">\[M_X(t)=\mathbb{E}\left[e^{tX}\right],\]</span> se existe para todo <span class="math inline">\(t\)</span>, tal que <span class="math inline">\(-h&lt;t&lt;h\)</span>, para algum <span class="math inline">\(h&gt;0\)</span>.</p>
+</div>
+<p><br><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="box">
+<div id="thm-r_momento" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 1</strong></span> Seja <span class="math inline">\(M_X(t)\)</span> a FGM de uma distribuição <span class="math inline">\(F_X\)</span>. Se existe <span class="math inline">\(M_X(t)\)</span> para todo <span class="math inline">\(|t|&lt;h\)</span>, para algum <span class="math inline">\(h&gt;0\)</span>, então <span class="math inline">\(\mathbb{E}X^r\)</span>, <span class="math inline">\(r=1,2,\ldots\)</span>, existe e</p>
+<p><span class="math display">\[\mathbb{E}X^r=M_X^{(r)}(0)=\frac{\partial^r}{\partial t^r}M_X(t)\Biggr|_{t=0}.\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-FGM_gamma" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 11</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição gama com parâmetros <span class="math inline">\(\alpha\)</span> e <span class="math inline">\(\beta\)</span>, i.e. <span class="math display">\[f(x; \alpha, \beta)=\frac{1}{\Gamma(\alpha)}\beta^\alpha x^{\alpha-1}e^{-\beta x}\mathbb{I}_{(0,\infty)}(x).\]</span> Utilize a FGM para calcular a variância de <span class="math inline">\(X\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Pela definição <a href="#/def-fgm" class="quarto-xref">Definição&nbsp;8</a>, sabemos que <span class="math inline">\(M_X(t)=\mathbb{E}\left[e^{tX}\right]\)</span>, para todo <span class="math inline">\(t\)</span>, tal que <span class="math inline">\(|t|&lt;h\)</span>, para algum <span class="math inline">\(h&gt;0\)</span>. Dessa forma,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  M_X(t)&amp;=\int_0^\infty e^{tx}\frac{1}{\Gamma(\alpha)}\beta^\alpha x^{\alpha-1}e^{-\beta x}\,dx
+  =\frac{1}{\Gamma(\alpha)}\beta^\alpha\int_0^\infty x^{\alpha-1}e^{-(\beta-t)x}\,dx.
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Para avaliar a existência da integral, consideremos os seguintes casos:</p>
+<ul>
+<li>Se <span class="math inline">\(t=\beta\)</span>,</li>
+</ul>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  M_X(t)=\frac{1}{\Gamma(\alpha)}\beta^\alpha\int_0^\infty x^{\alpha-1}e^{-(\beta-t)x}\,dx&amp;=\frac{\beta^\alpha}{\Gamma(\alpha)}\lim_{a\to\infty}\int_0^a x^{\alpha-1}\,dx\\
+  &amp;=\frac{\beta^\alpha}{\alpha\Gamma(\alpha)}\lim_{a\to\infty} a^{\alpha}.
+\end{align*}\]</span>
+</div>
+<p>Para <span class="math inline">\(\alpha&gt;0\)</span>, <span class="math inline">\(\lim_{a\to\infty} a^{\alpha}\)</span> é infinito. Dessa forma, <span class="math inline">\(M_X(t)\)</span> <strong>não está definida</strong>.</p>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<ul>
+<li>Se <span class="math inline">\(t&gt;\beta\)</span>, a quantidade <span class="math inline">\(-(\beta-t)&gt;0\)</span>, então <span class="math inline">\(e^{-(\beta-t)x}&gt;x^{\alpha-1}\)</span>. Assim, a integral é divergente e, por conseguinte, a FGM <strong>não existe</strong>.</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Se <span class="math inline">\(t&lt;\beta\)</span>,</li>
+</ul>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  M_X(t)&amp;=\frac{1}{\Gamma(\alpha)}\beta^\alpha\int_0^\infty x^{\alpha-1}e^{-(\beta-t)x}\,dx\\ \\
+  &amp;=\frac{\beta^\alpha}{\Gamma(\alpha)}\frac{1}{(\beta-t)^\alpha}\int_0^\infty u^{\alpha-1}e^{-u}\,du, \quad \textrm{ onde } \ u=(\beta-t)x\\ \\
+  &amp;=\frac{\beta^\alpha}{\Gamma(\alpha)}\frac{1}{(\beta-t)^\alpha}\Gamma(\alpha)
+  =\frac{\beta^\alpha}{(\beta-t)^\alpha}=\left(1-\frac{t}{\beta}\right)^{-\alpha}.
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Para calcular a variância, utilizamos o resultado do <a href="#/thm-r_momento" class="quarto-xref">Teorema&nbsp;1</a>. Daí</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  M'_X(0)&amp;=\frac{\alpha}{\beta}\left(1-\frac{t}{\beta}\right)^{-\alpha-1}\Biggr|_{t=0}=\frac{\alpha}{\beta}=\mathbb{E}X\\ \\
+  M''_X(0)&amp;=\frac{\alpha(\alpha+1)}{(\beta-x)^2}\left(1-\frac{t}{\beta}\right)^{-\alpha}\Biggr|_{t=0}
+  =\frac{\alpha(\alpha+1)}{\beta^2}=\mathbb{E}X^2.
+\end{align*}\]</span>
+</div>
+<p>Dessa forma,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathrm{Var}[X]&amp;=\mathbb{E}X^2-\left(\mathbb{E}X\right)^2=\frac{\alpha(\alpha+1)}{\beta^2}-\left(\frac{\alpha}{\beta}\right)^2=\frac{\alpha}{\beta^2}.\quad\blacksquare
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-r_momento_cor" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 12</strong></span> Seja <span class="math inline">\(X_1,X_2\)</span> uma amostra aleatória de uma população com densidade conjunta dada por <span class="math display">\[f(x; a)=a^2e^{-ax_2}, \quad 0&lt;x_1&lt;x_2&lt;\infty, \quad a&gt;0.\]</span> Encontre <span class="math inline">\(\mathbb{E}X^r_1\)</span>, <span class="math inline">\(\mathbb{E}X^r_2\)</span>, para <span class="math inline">\(r=1,2,3,\ldots\)</span>, e <span class="math inline">\(\mathrm{Corr}[X_1,X_2]\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Para <span class="math inline">\(X_1\)</span>, temos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}X^r_1&amp;=\int_0^\infty\int_0^{x_2}x_1^ra^2e^{-ax_2}\,dx_1dx_2
+  =\int_0^\infty a^2e^{-ax_2}\int_0^{x_2}x_1^r\,dx_1dx_2\\
+  &amp;=\int_0^\infty a^2e^{-ax_2}\frac{x_1^{r+1}}{r+1}\Biggr|_{0}^{x_2}\,dx_2
+  =\int_0^\infty a^2e^{-ax_2}\frac{x_2^{r+1}}{r+1}\,dx_2\\
+  &amp;=\frac{\Gamma(r+1)}{a^r}=\frac{r!}{a^r}, \quad r=1,2,3,4,\ldots.
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Por outro lado,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}X^r_2&amp;=\int_0^\infty\int_0^{x_2}x_2^ra^2e^{-ax_2}\,dx_1dx_2
+  =\int_0^\infty a^2x_2^re^{-ax_2}\int_0^{x_2}\,dx_1dx_2\\ \\
+  &amp;=\int_0^\infty a^2x_2^{r+1}e^{-ax_2}\,dx_2=\frac{\Gamma(r+2)}{a^r}=\frac{(r+1)!}{a^r}, \quad r=1,2,3,4,\ldots.
+\end{align*}\]</span>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>O momento cruzado é calculado como</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}X_1X_2&amp;=\int_0^\infty\int_0^{x_2}x_1x_2a^2e^{-ax_2}\,dx_1dx_2
+  =\int_0^\infty a^2x_2e^{-ax_2}\int_0^{x_2}x_1\,dx_1dx_2\\ \\
+  &amp;=\frac{a^2}{2}\int_0^\infty x_2^3e^{-ax_2}dx_2
+  =\frac{\Gamma(4)}{2a^2}\int_0^\infty \frac{a^4}{\Gamma(4)}x_2^3e^{-ax_2}dx_2=\frac{3}{a^2}.
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma, <span class="math inline">\(\mathbb{E}X^r_1=\frac{r!}{a^r}\)</span> e <span class="math inline">\(\mathbb{E}X^r_2=\frac{(r+1)!}{a^r}\)</span> para <span class="math inline">\(r=1,2,3,4,\ldots\)</span> e <span class="math inline">\(\mathbb{E}X_1X_2=\frac{3}{a^2}\)</span>.</p>
+<ul>
+<li><p>Para <span class="math inline">\(r=1\)</span>, <span class="math inline">\(\mathbb{E}X_1=\frac{1}{a}\)</span>&nbsp;e &nbsp;<span class="math inline">\(\mathbb{E}X_2=\frac{2}{a}\)</span>;</p></li>
+<li><p>Para <span class="math inline">\(r=2\)</span>, <span class="math inline">\(\mathbb{E}X^2_1=\frac{2}{a^2}\)</span> &nbsp;e &nbsp;<span class="math inline">\(\mathbb{E}X^2_2=\frac{6}{a^2}\)</span>.</p></li>
+<li><p><span class="math inline">\(\mathrm{var}[X_1]=\mathbb{E}X^2_1-\left[\mathbb{E}X_1\right]^2=\frac{2}{a^2}-\frac{1}{a^2}=\frac{1}{a^2}\)</span> &nbsp;e &nbsp;<span class="math inline">\(\mathrm{var}[X_2]=\frac{6}{a^2}-\frac{4}{a^2}=\frac{2}{a^2}\)</span>.</p></li>
+</ul>
+<p><br></p>
+<p>Daí, a correlação é dada por</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathrm{Corr}[X_1,X_2]&amp;=\frac{\mathbb{E}X_1X_2-\mathbb{E}X_1\mathbb{E}X_2}{\sqrt{\mathrm{var}[X_1]\mathrm{var}[X_2]}}
+  =\frac{\frac{3}{a^2}-\frac1a\frac2a}{\sqrt{\frac{1}{a^2}\frac{2}{a^2}}}=\frac{1}{\sqrt{2}}. \quad\blacksquare
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-fgm_pareto" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 13</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição Pareto com parâmetros <span class="math inline">\(\alpha&gt;0\)</span> e <span class="math inline">\(\beta&gt;0\)</span>, i.e. <span class="math display">\[f(x;\alpha,\beta)=\beta\frac{\alpha^\beta}{x^{\beta+1}}\mathbb{I}_{[\alpha,\infty)}(x).\]</span> Utilize a FGM da distribuição de <span class="math inline">\(X\)</span> para calcular a sua variância.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Pela <a href="#/def-fgm" class="quarto-xref">Definição&nbsp;8</a>, temos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  M_X(t)&amp;=\beta\alpha^\beta\int_\alpha^\infty\frac{e^{tx}}{x^{\beta+1}}\,dx.
+\end{align*}\]</span>
+</div>
+<p>Note que, quando <span class="math inline">\(x\to\infty\)</span>, <span class="math inline">\(\frac{e^{tx}}{x^{\beta+1}}\to\infty\)</span> fazendo com que a FGM <strong>não exista</strong>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>No entanto, pode-se observar que, para alguns valores específicos de <span class="math inline">\(\beta\)</span>, alguns momentos da distribuição de <span class="math inline">\(X\)</span> <strong>podem existir</strong>.</p>
+<p><br></p>
+<p>Por exemplo, considere-se o caso <span class="math inline">\(\beta&gt;r\)</span>, daí</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}X^r&amp;=\beta\alpha^\beta\int_\alpha^\infty \frac{x^r}{x^{\beta+1}}\,dx
+  =\beta\alpha^\beta\int_\alpha^\infty x^{r-\beta-1}\,dx\\
+  &amp;=-\beta\alpha^\beta\frac{x^{-\beta+r}}{\beta-r}\Biggr|_\alpha^\infty=\frac{\beta\alpha^r}{\beta-r}.
+\end{align*}\]</span>
+</div>
+<p>Em particular, se <span class="math inline">\(\beta&gt;2\)</span>, temos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}X&amp;=\frac{\beta\alpha}{\beta-1} &amp; &amp;\mathrm{ e } &amp;  \mathbb{E}X^2&amp;=\frac{\beta\alpha^2}{\beta-2}.
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma, a variância de <span class="math inline">\(X\)</span> é dada por</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+\mathrm{Var}[X]&amp;=\mathbb{E}X^2-\left[\mathbb{E}X\right]^2=\frac{\beta\alpha^2}{\beta-2}-\left(\frac{\beta\alpha}{\beta-1}\right)^2\\ \\
+&amp;=\frac{\alpha\beta^2}{(\beta-1)^2(\beta-2)}. \quad\blacksquare
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="thm-fgm_independencia" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 2 (Independência)</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de distribuição <span class="math inline">\(F\)</span>. Seja <span class="math inline">\(Y=\sum_{i=1}^na_iX_i\)</span>, com <span class="math inline">\(a_1,a_2,\ldots,a_n\)</span> constantes. A FGM da distribuição de <span class="math inline">\(Y\)</span> é dada por <span class="math display">\[M_{Y}(t)=\prod_{i=1}^nM_{X_1}(a_it),\]</span> para todo <span class="math inline">\(|t|&lt;h\)</span>, para algum <span class="math inline">\(h&gt;0\)</span>. Se <span class="math inline">\(a_1=a_2=\cdots=a_n\)</span>, então <span class="math inline">\(M_Y(t)=\left[M_{X_1}(a_it)\right]^n\)</span>.</p>
+</div>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="proof">
+<p><span class="proof-title"><em>Prova</em>. </span>O resultado é consequência da <a href="#/def-fgm" class="quarto-xref">Definição&nbsp;8</a> e do fato que as variáveis aleatórias <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> são independentes e identicamente distribuídas. Assim,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  M_Y(t)&amp;=\mathbb{E}\left[e^{tY}\right]=\mathbb{E}\left[e^{t\sum_{i=1}^na_iX_i}\right]
+  =\mathbb{E}\left[\prod_{i=1}^ne^{a_itX_i}\right]\\
+  &amp;=\prod_{i=1}^n\mathbb{E}\left[e^{a_itX_i}\right]=\prod_{i=1}^nM_{X_1}(a_it).\quad\blacksquare
+\end{align*}\]</span>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-FGM_xbar_normal" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 14</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span>. Mostre que <span class="math inline">\(\bar{X}_n\)</span> tem distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\frac{\sigma^2}{n}\)</span>.</p>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Aplicando o resultado do <a href="#/thm-fgm_independencia" class="quarto-xref">Teorema&nbsp;2</a>, temos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  M_{\bar{X}_n}(t)&amp;=\mathbb{E}\left[e^{t\frac1n\sum_{i=1}^nX_i}\right]
+  =\left[M_{X_1}\left(\frac{t}{n}\right)\right]^n\\ \\
+  &amp;=\left[\exp\left\{\frac{\mu}{n}t+\frac12\left(\frac{\sigma t}{n}\right)^2\right\}\right]^n\\ \\
+  &amp;=\exp\left\{\mu t+\frac{1}{2n}\left(\sigma t\right)^2\right\}, \quad t\in\mathbb{R}.\quad\blacksquare
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="thm-fgm_unicidade" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 3 (Unicidade)</strong></span> Sejam <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span> duas variáveis aleatórias com FGM <span class="math inline">\(M_{X}(t)\)</span> e <span class="math inline">\(M_{Y}(t)\)</span>, respectivamente. Se existe <span class="math inline">\(h&gt;0\)</span>, tal que <span class="math inline">\(M_{X}(t)=M_{Y}(t)\)</span>, para todo <span class="math inline">\(|t|&lt;h\)</span>, então <span class="math inline">\(F_X(u)=F_Y(u)\)</span> para todo <span class="math inline">\(u\in\mathbb{R}\)</span>.</p>
+</div>
+</div>
+<p><br><br></p>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Problema dos momentos</strong></p>
+</div>
+<div class="callout-content">
+<p><em>Seja</em> <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição <span class="math inline">\(F(x)\)</span>. Suponha que todos os momentos de <span class="math inline">\(F(x)\)</span> existem, i.e. <span class="math inline">\(\mathbb{E}X\)</span>, <span class="math inline">\(\mathbb{E}X^2\)</span>, <span class="math inline">\(\mathbb{E}X^3\ldots\)</span> existem. A distribuição de <span class="math inline">\(X\)</span> pode ser determinada de forma única pelos seus momentos?</p>
+<p>Muitas vezes refere-se a esse questionamento como <em>Problema dos momentos de Hausdorff</em>, em honor ao matemático alemão Felix Hausdorff (1868-1942). Em <span class="math inline">\(1921\)</span>, Hausdorff mostrou as condições necessárias e suficientes para determinar de forma única a distribuição de uma variável aleatória a partir dos seus momentos populacionais em torno de zero. Na literatura, muitos autores discutem amplamente os detalhes desse problema e as propostas para sua solução. Sugere-se a leitura, e.g., <span class="citation" data-cites="dudewicz:mishra:1988">Dudewicz e Mishra (<a href="#/referências" role="doc-biblioref" onclick="">1988</a>)</span> [pp.&nbsp;261], <span class="citation" data-cites="shohat:tamarkin:1970">Shohat e Tamarkin (<a href="#/referências" role="doc-biblioref" onclick="">1970</a>)</span> e <span class="citation" data-cites="feller:1971">Feller (<a href="#/referências" role="doc-biblioref" onclick="">1971</a>, pp.&nbsp;224)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="tipos-de-convergência" class="slide level2 center" data-background-color="#172a46">
+<h2>Tipos de convergência</h2>
+</section>
+<section class="slide level2">
+
+<div id="def-conv_prob" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 9 (Convergência em probabilidade)</strong></span> Uma sequência <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> de variáveis aleatórias <em>converge em probabilidade</em> para uma variável aleatória <span class="math inline">\(X\)</span> se, para todo <span class="math inline">\(\epsilon&gt;0\)</span>, <span class="math display">\[\lim_{n\to\infty}\mathbb{P}\left[\left|X_n-X\right|\le\epsilon\right]=1.\]</span> Denotamos <span class="math inline">\(X_n\overset{p}{\longrightarrow}X.\)</span></p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="box">
+<div id="thm-conv_prob1" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 4</strong></span> Seja <span class="math inline">\(g:\mathbb{R}^k\longrightarrow\mathbb{R}^m\)</span> uma função contínua em cada ponto <span class="math inline">\(a\in C\)</span>, tal que <span class="math inline">\(\mathbb{P}[X\in C]=1\)</span>. Se <span class="math inline">\(X_n\overset{p}{\longrightarrow}X\)</span>, então <span class="math inline">\(g\left(X_n\right)\overset{p}{\longrightarrow}g\left(X\right).\)</span></p>
+</div>
+</div>
+<p><br></p>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Importante</strong></p>
+</div>
+<div class="callout-content">
+<p>A notação que será usada para sequências de variáveis aleatórias é <span class="math inline">\(\{X_n; n=1,2,3,\ldots\}\)</span> ou simplesmente <span class="math inline">\(\{X_n\}\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="cor-indicadora" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corolário 1</strong></span> Se <span class="math inline">\(X_n\overset{p}{\longrightarrow}X\)</span> e <span class="math inline">\(Y_n\overset{p}{\longrightarrow}Y\)</span>, então</p>
+<ul>
+<li><span class="math inline">\(X_n\pm W_n\overset{p}{\longrightarrow}X\pm W\)</span>;</li>
+<li><span class="math inline">\(X_n W_n\overset{p}{\longrightarrow}X W\)</span>;</li>
+<li><span class="math inline">\(aX_n\pm bW_n\overset{p}{\longrightarrow}aX\pm bW\)</span>, com <span class="math inline">\(a,b\)</span> constantes;</li>
+<li><span class="math inline">\(\frac{X_n}{W_n}\overset{p}{\longrightarrow}\frac{X}{W}\)</span>, com <span class="math inline">\(\mathbb{P}[W_n\ne0]=\mathbb{P}[W\ne0]=1\)</span>;</li>
+<li><span class="math inline">\(X_n^2\overset{p}{\longrightarrow}X^2\)</span>;</li>
+<li><span class="math inline">\(\frac{1}{X_n}\overset{p}{\longrightarrow}\frac{1}{X}\)</span>, com <span class="math inline">\(\mathbb{P}[X_n\ne0]=\mathbb{P}[X\ne0]=1.\)</span></li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-exemplo6" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 15</strong></span> Seja <span class="math inline">\(X_1, X_2, X_3, \cdots\)</span> uma sequência de variáveis aleatórias de uma população com distribuição Exponencial com parâmetro <span class="math inline">\(n\)</span>. Mostre que <span class="math inline">\(X_n \overset{p}{\longrightarrow} X\)</span>, onde <span class="math inline">\(X\)</span> é uma variável aleatória nula.</p>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Temos que,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \lim_{n \rightarrow \infty} P\big(|X_n-0| \geq \epsilon \big) &amp;=\lim_{n \rightarrow \infty} P\left(X_n     \geq \epsilon \right)=\lim_{n \rightarrow \infty} e^{-n\epsilon}=0. \quad\blacksquare
+  \end{align*}\]</span></p>
+</div>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="2">
+<div id="exm-exemplo7" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 16</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória e seja <span class="math inline">\(X_n=X+Y_n\)</span>, onde <span class="math inline">\(\mathbb{E}Y_n=\frac{1}{n}\)</span> e <span class="math inline">\(\mathrm{Var}(Y_n)=\frac{\sigma^2}{n}\)</span>, com <span class="math inline">\(\sigma&gt;0\)</span>. Prove que <span class="math inline">\(X_n \overset{p}{\longrightarrow} X\)</span>.</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Sejam <span class="math inline">\(a=Y_n-\mathbb{E}Y_n\)</span> e <span class="math inline">\(b=\mathbb{E}Y_n=\frac1n\)</span>, daí</p>
+<p><span class="math display">\[|Y_n| \leq \left|Y_n-\mathbb{E}Y_n\right|+\frac{1}{n}\]</span> Dessa forma, para qualquer <span class="math inline">\(\epsilon&gt;0\)</span>, temos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    P\left(|X_n-X| \geq \epsilon \right)&amp;=P\left(|Y_n| \geq \epsilon \right)
+    \leq P\left(\left|Y_n-EY_n\right|+\frac{1}{n} \geq \epsilon \right)\\
+    &amp; = P\left(\left|Y_n-EY_n\right|\geq \epsilon-\frac{1}{n} \right)
+     \leq \frac{\mathrm{Var}(Y_n)}{\left(\epsilon-\frac{1}{n} \right)^2} \\
+    &amp;= \frac{\sigma^2}{n \left(\epsilon-\frac{1}{n} \right)^2}\longrightarrow 0, \quad n\rightarrow \infty.   
+    \end{align*}\]</span></p>
+</div>
+<p>Daí, <span class="math inline">\(X_n\overset{p}{\longrightarrow} X\)</span>.<span class="math inline">\(\quad\blacksquare\)</span></p>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="thm-lgn" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 5 (Lei (fraca) dos grande números)</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> umas amostra aleatória, tal que <span class="math inline">\(\mathbb{E}[X_i]=\mu\)</span> e <span class="math inline">\(\mathrm{var}[X_i]=\sigma^2&lt;\infty\)</span>, para <span class="math inline">\(i=1,2,3,\ldots,n\)</span>. Então,</p>
+<p><span class="math display">\[\bar{X}_n\overset{p}{\longrightarrow} \mu.\]</span></p>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="proof">
+<p><span class="proof-title"><em>Prova</em>. </span>Sabemos que</p>
+<div class="math">
+<span class="math display">\[\begin{split}
+\mathbb{E}\left[\bar{X}_n\right]=\mathbb{E}\left[\frac{1}{n} \sum_{i=1}^{n} X_i \right]
+= \frac{1}{n} \sum_{i=1}^{n} \mathbb{E}X_i= \frac{1}{n} n \mathbb{E}X= \mu
+\end{split}\]</span>
+</div>
+<p>e</p>
+<div class="math">
+<span class="math display">\[\begin{split}
+\mathrm{var}\left[\bar{X}_n\right]= \mathrm{var}\left[\frac{1}{n} \sum_{i=1}^{n} X_i \right]
+= \frac{1}{n^2} \mathrm{var}\left[\sum_{i=1}^{n} X_i \right]
+= \frac{1}{n^2} \sum_{i=1}^{n} \mathrm{var}\left[X_i\right]= \frac{\sigma^2}{n}.
+\end{split}\]</span>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Pela desigualdade de Tchebyshev, tem-se que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+\mathbb{P}\left[\left| \bar{X}_n - \mathbb{E}[\bar{X}_n] \right| \ge \epsilon \right] &amp;=
+\mathbb{P}\left[\left|\bar{X}_n - \mu\right| \ge \epsilon  \right]
+\le \frac{\mathrm{var}(\bar{X})}{x^2}= \frac{\sigma^2}{n \epsilon^2}.
+\end{align*}\]</span>
+</div>
+<p>Quando <span class="math inline">\(n\longrightarrow\infty\)</span>,</p>
+<p><span class="math display">\[\lim_{n\to\infty}\mathbb{P}\left[\left|\bar{X}_n - \mu\right| \ge \epsilon  \right]=0.\quad\blacksquare\]</span></p>
+<p><br><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>A <strong>Lei dos Grandes Números</strong> afirma que, a medida que aumentamos o número de repetições de um experimento, a média dos resultados ficará mais próxima do valor esperado.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="def-conv_qc" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 10</strong></span> Uma sequência <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> de variáveis aleatórias <em>converge quase-certamente</em> para uma variável aleatória <span class="math inline">\(X\)</span> se <span class="math display">\[\mathbb{P}\left[\lim_{n\to\infty} X_n=X\right]=1.\]</span> Denotamos <span class="math inline">\(X_n\overset{q.c}{\longrightarrow}X.\)</span></p>
+</div>
+<p><br></p>
+<div id="exm-exemplo8" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 17 (convergência quase-certa)</strong></span> Seja <span class="math inline">\(\{X_n\}\)</span> uma sequência de variáveis aleatórias definidas por</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    X_n&amp;=\begin{cases}
+      0, &amp; \textrm{ com prob. } 1-\frac{1}{2^n};\\
+      1, &amp; \textrm{ com prob. } \frac{1}{2^n},
+    \end{cases}.
+  \end{align*}\]</span></p>
+</div>
+<p>para <span class="math inline">\(n=1,2,3,\ldots\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Sabemos que <span class="math inline">\(\mathbb{E}X_n=\mathbb{E}X_n^2=\frac{1}{2^n}\)</span> e <span class="math inline">\(\mathrm{var}[X_n]=\frac{1}{2^n}-\frac{1}{2^{2n}}=\frac{2^{2n}-1}{2^{2n}}\)</span>.</p>
+<p><br></p>
+<p>Pela desigualdade de Tchebyshev, temos que <span class="math display">\[\mathbb{P}[X_n\ge\epsilon]\le\frac{\mathbb{E}X_n^2}{\epsilon^2}=\frac{1}{2^n\epsilon^2}.\]</span> Daí, <span class="math inline">\(\lim_{n\to\infty}\mathbb{P}[X_n\ge\epsilon]=0\)</span>, ou seja <span class="math inline">\(X_n\overset{p}{\longrightarrow}0\)</span>. Ainda, <span class="math inline">\(\mathbb{P}\left[\lim_{n\to\infty}X_n=0\right]=1\)</span>, então <span class="math inline">\(X_n\overset{q.c}{\longrightarrow}0\)</span>.<span class="math inline">\(\quad\blacksquare\)</span></p>
+<p><br></p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Desigualdade de Tchebyshev</strong></p>
+</div>
+<div class="callout-content">
+<p>Seja <span class="math inline">\(X\)</span> uma variável aleatória com média <span class="math inline">\(\mu\)</span> e variância 0&lt;^2&lt;. Para qualquer <span class="math inline">\(k&gt;0\)</span>,</p>
+<p><span class="math display">\[\mathbb{P}\left[|X-\mu|\ge k\sigma\right]\ge\frac{1}{k^2}.\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="def-conv_dist" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 11</strong></span> Uma sequência <span class="math inline">\(X_1,X_2,\ldots\)</span> de variáveis aleatórias <em>converge em distribuição</em> para uma variável aleatória <span class="math inline">\(X\)</span> se <span class="math display">\[\lim_{n\to\infty}F_n(x)=F(x),\]</span> para todo <span class="math inline">\(x\in\mathbb{R}\)</span> no qual <span class="math inline">\(F\)</span> é contínua. As funções <span class="math inline">\(F_n\)</span> e <span class="math inline">\(F\)</span> são as funções de distribuição acumulada das variáveis aleatórias <span class="math inline">\(X_n\)</span> e <span class="math inline">\(X\)</span>, respectivamente. Denotamos <span class="math inline">\(X_n\overset{d}{\longrightarrow}X.\)</span></p>
+</div>
+<p><br></p>
+<div id="exm-exemplo9" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 18</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots\)</span> uma sequência de variáveis aleatórias independentes e identicamente distribuidas (i.i.d.), com <span class="math inline">\(\mathbb{E}[X_n]=p\)</span> e <span class="math inline">\(\mathrm{var}[X_n]=p(1-p)\)</span>. Então,</p>
+<p><span class="math display">\[\frac{\sqrt{n}(X_n-p)}{\left[p(1-p)\right]^{1/2}}\overset{d}{\longrightarrow}{\cal N}(0,1).\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="thm-tcl" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 6 (Teorema Central do Limite)</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots, X_n\)</span> uma amostra aleatória de uma população com função de densidade <span class="math inline">\(f\left(\cdot; \mu, \sigma^2\right)\)</span>, com <span class="math inline">\(0&lt;\sigma^2&lt;\infty\)</span>. A variável aleatória <span class="math inline">\(Z_n=\frac{\sqrt{n}\left(\bar{X}_n-\mu\right)}{\sigma}\)</span> converge em distribuição para uma variável aleatória com distribuição <span class="math inline">\({\cal N}(0,1)\)</span>.</p>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="proof">
+<p><span class="proof-title"><em>Prova</em>. </span>Sabemos que, se <span class="math inline">\(X\)</span> é uma variável aleatória com função de densidade <span class="math display">\[f(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac12x^2}\mathbb{I}_\mathbb{R}(x),\]</span> então, a função geradora de momentos de <span class="math inline">\(X\)</span> é dada por</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    M_X(t)=\mathbb{E}\left[e^{tX}\right]&amp;=\int_{-\infty}^\infty e^{tx}\frac{1}{\sqrt{2\pi}}e^{-\frac12x^2}\,dx
+    =\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\left\{tx-\frac12x^2\right\}\,dx.
+  \end{align*}\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \mathbb{E}\left[e^{tX}\right]&amp;=\int_{-\infty}^\infty e^{tx}\frac{1}{\sqrt{2\pi}}e^{-\frac12x^2}\,dx
+    =\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\left\{tx-\frac12x^2\right\}\,dx\\
+    &amp;=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\left\{-\frac12\left(x^2-2tx+t^2-t^2\right)\right\}\,dx\\
+    &amp;=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\left\{-\frac12\left(x-t\right)^2+\frac12t^2\right\}\,dx
+    =e^{\frac12t^2}, \quad t\in\mathbb{R}.
+  \end{align*}\]</span></p>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Por outro lado, para a variável <span class="math inline">\(Z_n\)</span>, temos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \mathbb{E}\left[e^{tZ_n}\right]&amp;=\mathbb{E}\left[\exp\left\{t\frac{\sqrt{n}\left(\bar{X}_n-\mu\right)}{\sigma}\right\}\right]
+    =\mathbb{E}\left[\exp\left\{\frac{t\sqrt{n}}{\sigma}\frac1n\sum_{i=1}^n\left(X_i-\mu\right)\right\}\right]\\
+    &amp;=\mathbb{E}\left[\exp\left\{\frac{t}{n}\sum_{i=1}^n\left(\frac{X_i-\mu}{\sigma/\sqrt{n}}\right)\right\}\right]
+    =\mathbb{E}\left[\prod_{i=1}^n\exp\left\{\frac{t}{n}\left(\frac{X_i-\mu}{\sigma/\sqrt{n}}\right)\right\}\right].
+  \end{align*}\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \mathbb{E}\left[e^{tZ_n}\right]&amp;=\mathbb{E}\left[\prod_{i=1}^n\exp\left\{\frac{t}{n}\left(\frac{X_i-\mu}{\sigma/\sqrt{n}}\right)\right\}\right]=\prod_{i=1}^n\mathbb{E}\left[\exp\left\{\frac{t}{n}\left(\frac{X_i-\mu}{\sigma/\sqrt{n}}\right)\right\}\right]\\
+    &amp;=\left(\mathbb{E}\left[\exp\left\{\frac{t}{\sqrt{n}\sigma}\left(X-\mu\right)\right\}\right]\right)^n, \quad -h&lt;t&lt;h.
+  \end{align*}\]</span></p>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Expansão em série de Taylor</strong></p>
+</div>
+<div class="callout-content">
+<p>Lembre que, para uma função <span class="math inline">\(f(x)\)</span>, em torno de <span class="math inline">\(x=a\)</span>, temos que</p>
+<p><span class="math display">\[f(x)=f(a)+\frac{f'(a)}{1!}(x-a)+\frac{f''(a)}{2!}(x-a)^2+\frac{f'''(a)}{3!}(x-a)^3+\cdots+\frac{f^{(n)}(a)}{n!}(x-a)^n+\cdots.\]</span> Se <span class="math inline">\(a=0\)</span>, a expansão é conhecida como série de McClaurin. Por exemplo, a função <span class="math inline">\(f(x)=e^x\)</span>, com <span class="math inline">\(a=0\)</span>, pode ser representada como</p>
+<p><span class="math display">\[e^x=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\frac{x^4}{4!}+\cdots=\sum_{i=0}^\infty\frac{x^i}{i!}.\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Seja <span class="math inline">\(Z =\frac{X-\mu}{\sigma}\)</span>, então</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    M_Z\left(\frac{t}{\sqrt{n}}\right)&amp;=\mathbb{E}\left[\exp\left\{\frac{t}{\sqrt{n}}Z\right\}\right]=
+    \mathbb{E}\left[1+\frac{t}{\sqrt{n}}Z+\frac{1}{2!}\left(\frac{t}{\sqrt{n}}\right)^2Z^2\right.\\
+    &amp;\qquad\qquad\qquad\qquad\qquad\qquad\left.+\frac{1}{3!}\left(\frac{t}{\sqrt{n}}\right)^3Z^3
+    +\frac{1}{4!}\left(\frac{t}{\sqrt{n}}\right)^4Z^4+\cdots\right]\\ \\
+    &amp;=\mathbb{E}\left[1+\frac{t}{\sqrt{n}}Z+\frac{1}{2!}\left(\frac{t}{\sqrt{n}}\right)^2Z^2+\frac{t^2}{n}h\left(\frac{t}{\sqrt{n}}\right)\right],
+  \end{align*}\]</span></p>
+</div>
+<p>onde <span class="math inline">\(h\left(\frac{t}{\sqrt{n}}\right)\to0\)</span> quando <span class="math inline">\(\frac{t}{\sqrt{n}}\to0\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    M_Z\left(\frac{t}{\sqrt{n}}\right)&amp;=\mathbb{E}\left[1+\frac{t}{\sqrt{n}}Z+\frac{1}{2!}\left(\frac{t}{\sqrt{n}}\right)^2Z^2+\frac{t^2}{n}h\left(\frac{t}{\sqrt{n}}\right)\right]\\
+  &amp;=1+\frac{1}{2}\frac{t^2}{n}+\frac{t^2}{n}h\left(\frac{t}{\sqrt{n}}\right).
+  \end{align*}\]</span></p>
+</div>
+<p>Daí, pelo <a href="#/thm-fgm_independencia" class="quarto-xref">Teorema&nbsp;2</a> e, lembrando que, <span class="math inline">\(\lim_{x\to\infty}\left(1+\frac{a}{x}\right)^x=e^a\)</span>, para <span class="math inline">\(a&gt;0\)</span>, temos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \mathbb{E}\left[e^{tZ_n}\right]&amp;=\left[M_Z\left(\frac{t}{\sqrt{n}}\right)\right]^n
+    =\left[1+\frac{1}{2}\frac{t^2}{n}+\frac{t^2}{n}h\left(\frac{t}{\sqrt{n}}\right)\right]^n\longrightarrow e^{\frac{t^2}{2}},
+  \end{align*}\]</span></p>
+</div>
+<p>quando <span class="math inline">\(n\to \infty\)</span>. <span class="math inline">\(\quad\blacksquare\)</span></p>
+</section>
+<section class="slide level2">
+
+<div id="exm-xbar_gamma" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 19</strong></span> Seja <span class="math inline">\(X_,X_2,\ldots, X_n\)</span> uma amostra aleatória de uma população com função de densidade <span class="math inline">\(f(x;\theta)=\theta e^{-\theta x}\mathbb{I}_{(0,\infty)}(x)\)</span>. Qual a distribuição de <span class="math inline">\(\bar{X}_n\)</span>?</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que <span class="math inline">\(Y=\sum_{i=1}^nX_i\)</span> é uma variável aleatória com distribuição Gama<span class="math inline">\((n,\theta)\)</span>, i.e.,</p>
+<p><span class="math display">\[f(y;n,\theta)=\frac{1}{\Gamma(n)}y^{n-1}\theta^ne^{-\theta y}\mathbb{I}_{(0,\infty)}(y),\]</span> onde <span class="math inline">\(\Gamma(t)=\int_0^\infty x^{t-1}e^{-x}\, dx\)</span> (vide, <a href="#/exm-r_momento_cor" class="quarto-xref">Exemplo&nbsp;12</a>).</p>
+<p><br></p>
+<p>Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{P}[Y\le y]&amp;=\int_0^y \frac{1}{\Gamma(n)}z^{n-1}\theta^ne^{-\theta z}\,dz
+  = \mathbb{P}\left[\frac{Y}{n}\le \frac{y}{n}\right].
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>De outra forma,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{P}\left[\frac{Y}{n}\le \frac{y}{n}\right]
+  &amp;=\mathbb{P}\left[\bar{X}_n\le nx\right]=\int_0^{nx}\frac{1}{\Gamma(n)}z^{n-1}\theta^ne^{-\theta z}\,dz.
+\end{align*}\]</span>
+</div>
+<p>Sendo, <span class="math inline">\(z=nx\)</span>, tem-se que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{P}\left[\bar{X}_n\le z\right]&amp;=\int_0^{z}\frac{1}{\Gamma(n)}(nx)^{n-1}\theta^ne^{-n\theta x}n\,dx.
+\end{align*}\]</span>
+</div>
+<p>Daí, <span class="math inline">\(\bar{X}_n\)</span> segue uma distribuição Gama<span class="math inline">\((n,n\theta)\)</span>.<span class="math inline">\(\quad\blacksquare\)</span></p>
+</section>
+<section id="momentos-amostrais" class="slide level2 center" data-background-color="#172a46">
+<h2>Momentos Amostrais</h2>
+</section>
+<section class="slide level2">
+
+<h3 id="momentos-amostrais-1">Momentos amostrais</h3>
+<p><br></p>
+<p>O estudo de populações com densidade <span class="math inline">\(f(\cdot;\theta)\)</span>, onde a forma analítica da densidade é conhecida, mas depende de um <strong>parâmetro</strong> desconhecido, é um problema muito comum na <strong>Estatística</strong>.</p>
+<p><br></p>
+<p>Um caminho para solucionar o problema é coletar uma amotra de tamanho <span class="math inline">\(n\)</span> e encontrar uma função da amostra que permita aproximar ou estimar o verdadeiro valor do parâmetro <span class="math inline">\(\theta\)</span>.</p>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<center>
+<span style="color:#82243a"><font size="10"> Nosso interesse é determinar a “melhor” função que permita <b>estimar</b> o parâmetro <span class="math inline">\(\theta\)</span>, usando a informação proporcionada pela amostra. </font></span>
+</center>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="def-conv_dist" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 12 (Estatística)</strong></span> Uma <strong>Estatística</strong> é uma função de variáveis aleatórias (observáveis), a qual é variável aleatória e não depende de parâmetros desconhecidos.</p>
+</div>
+<p><br></p>
+<div id="exm-exemplo10" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 20</strong></span> Sendo <span class="math inline">\(X, X_1,X_2,\ldots,X_n\)</span> variáveis aleatórias, então <span class="math display">\[X,\, X^2,\, X+ 3,\, X+\log X,\, \frac1n\sum_{i=1}^nX_i,\, \min\{X_1,X_2,\ldots,X_n\}\]</span> são <em>Estatísticas</em>.</p>
+</div>
+<p><br></p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Dica</strong></p>
+</div>
+<div class="callout-content">
+<p>Funções do tipo <span class="math inline">\(X-\mu, \, \frac{X}{\sigma}, \,X+\log \theta\,\)</span> <strong>não são consideradas <em>Estatísticas</em></strong>.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="def-momento_amostral" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 13</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade de probabilidade (ou função de probabilidade de massa), denotada por <span class="math inline">\(f(\cdot;\theta)\)</span><sup><font size="5">1</font></sup>.</p>
+<p>O <span class="math inline">\(r\)</span>-ésimo momento amostral em torno de zero define-se como:</p>
+<p><span class="math display">\[M_r'=\frac1n\sum_{i=1}^nX_i^r.\]</span></p>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Momento amostral em torno da média</strong></p>
+</div>
+<div class="callout-content">
+<p>O <span class="math inline">\(r\)</span>-ésimo momento amostral em torno da média amostral define-se como</p>
+<p><span class="math display">\[M_r=\frac1n\sum_{i=1}^n\left(X_i-M_1'\right)^r=\frac1n\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^r.\]</span></p>
+</div>
+</div>
+</div>
+<hr>
+
+<p><font size="4"><sup>1</sup>Tanto para o caso contínuo, quanto para o caso discreto usaremos a mesma notação, pois as definições podem ser aplicadas da mesma forma em ambos contextos.</font></p>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="thm-esperado_momentos" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 7</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade de probabilidade <span class="math inline">\(f(\cdot;\theta)\)</span>. O valor esperado do <span class="math inline">\(r\)</span>-ésimo momento amostral (em torno de zero) é igual ao <span class="math inline">\(r\)</span>-ésimo momento populacional (se existe), ou seja</p>
+<p><span class="math display">\[\mathbb{E}M_r'=\mathbb{E}\left[\frac1n\sum_{i=1}^nX_i^r\right]=\frac1n\sum_{i=1}^n\mathbb{E}\left[X_i^r\right]=\mathbb{E}\left[X^r\right]=\mu_r'.\]</span></p>
+<p>No caso da variância, tem-se a seguinte forma analítica</p>
+<p><span class="math display">\[\mathrm{var}\left[M_r'\right]=\mathrm{var}\left[\frac1n\sum_{i=1}^nX_i^r\right]=\frac{1}{n^2}\sum_{i=1}^n\mathrm{var}\left[X_i^r\right]=\frac1n\left[\mathbb{E}X^{2r}-\left(\mathbb{E}X^r\right)^2\right].\]</span></p>
+</div>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="box">
+<div id="cor-esperado_momentos" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corolário 2</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade de probabilidade <span class="math inline">\(f(\cdot;\theta)\)</span>. Seja <span class="math inline">\(\bar{X}_n=\frac1n\sum_{i=1}^nX_i\)</span> a média amostral, então <span class="math inline">\(\mathbb{E}\bar{X}_n=\mathbb{E}X=\mu\)</span> e</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+    \mathrm{var}\left[\bar{X}_n\right]&amp;=\frac1n\left[\mathbb{E}X^2-\left(\mathbb{E}X\right)^2\right]=\frac1n\sigma^2.
+  \end{align*}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="thm-conv_momentos" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 8</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população cujo momento <span class="math inline">\(\mu_{2r}\)</span> existe. Então,</p>
+<p><span class="math display">\[M'_r\overset{p}{\longrightarrow}\mu'_r,\]</span> onde <span class="math inline">\(M'_r\)</span> e <span class="math inline">\(\mu'_r\)</span> são apresentadas na <a href="#/def-momento_amostral" class="quarto-xref">Definição&nbsp;13</a> e <a href="#/def-momento_populacional" class="quarto-xref">Definição&nbsp;5</a>, respectivamente.</p>
+</div>
+</div>
+<p><br></p>
+<div class="proof">
+<p><span class="proof-title"><em>Prova</em>. </span>O resultado é consequência do <a href="#/thm-lgn" class="quarto-xref">Teorema&nbsp;5</a> e deixa-se como exercício.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="def-variancia" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 14 (Variância amostral)</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade de probabilidade <span class="math inline">\(f(\cdot;\theta)\)</span>. A <em>variância amostral</em> define-se como: <span class="math display">\[S_n^2=\frac{1}{n-1}\sum_{i=1}^n\left(X_i-\bar{X}\right)^2, \quad n&gt;1.\]</span></p>
+</div>
+<p><br></p>
+<div class="box2">
+<div id="exr-exercicio1" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercício 1</strong></span> Mostre que <span class="math inline">\(\mathbb{E}\left[S_n^2\right]=\sigma^2\)</span> e<br>
+<span class="math display">\[\mathrm{var}\left[S_n^2\right]=\frac1n\left(\mu_4-\frac{n-3}{n-1}\sigma^4\right), \quad n&gt;1,\]</span> onde <span class="math inline">\(\mu_r = \mathbb{E}[X-\mu]^r\)</span>.</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="thm-fgm_distr_chisq" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 9</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_k\)</span> uma sequência de variáveis aleatórias independentes com distribuição normal com média <span class="math inline">\(\mu_i\)</span> e variância <span class="math inline">\(\sigma^2_i\)</span>, para <span class="math inline">\(i=1,2,\ldots, k\)</span>. Então <span class="math display">\[U=\sum_{i=1}^k\left(\frac{X_i-\mu_i}{\sigma_i}\right)^2,\]</span> segue uma distribuição <span class="math inline">\(\chi^2_{(k)}\)</span>.</p>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="box">
+<div id="cor-thm-fgm_distr_chisq" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corolário 3</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_k\)</span> uma amostra aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span>. Então, <span class="math display">\[U=\sum_{i=1}^k\left(\frac{X_i-\mu}{\sigma}\right)^2\]</span> é uma variável aleatória de uma população com distribição <span class="math inline">\(\chi^2_{(k)}\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="proof">
+<p><span class="proof-title"><em>Prova</em>. </span>Seja <span class="math inline">\(Z_i=\frac{X_i-\mu_i}{\sigma_i}\)</span>. Dessa forma, a sequência <span class="math inline">\(Z_1,Z_2,\ldots,Z_n\)</span> configura uma amostra aleatória de uma população com distribuição normal padrão. Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}\left[e^{tZ^2_1}\right]&amp;=\int_{-\infty}^\infty e^{tz^2}\frac{1}{\sqrt{2\pi}}e^{-\frac12z^2}\,dz
+  = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty e^{-\frac12(1-2t)z^2}\,dz\\
+  &amp;= \frac{1}{\sqrt{2\pi}}\frac{\sqrt{1-2t}}{\sqrt{1-2t}}\int_{-\infty}^\infty e^{-\frac12(1-2t)z^2}\,dz
+  = \frac{1}{\sqrt{1-2t}}, \quad t&lt;\frac12.
+\end{align*}\]</span>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Pelo <a href="#/thm-fgm_independencia" class="quarto-xref">Teorema&nbsp;2</a>, a FGM da distribuição de <span class="math inline">\(U\)</span> é dada por</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  M_U(t)&amp;=\left(\frac{1}{\sqrt{1-2t}}\right)^k, \quad t&lt;\frac12.
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Por outro lado, seguindo o resultado do <a href="#/exm-FGM_gamma" class="quarto-xref">Exemplo&nbsp;11</a>, se <span class="math inline">\(\alpha=\frac{k}{2}\)</span> e <span class="math inline">\(\beta=\frac12\)</span>, tem-se que <span class="math display">\[M_X(t)=\left(1-2t\right)^{-\frac{k}{2}}, \quad t&lt;\frac12.\]</span> Sendo a FGM de uma variável aleatória com distribuição <span class="math inline">\(\chi^2_{(k)}\)</span>. Dessa forma, pelo <a href="#/thm-fgm_unicidade" class="quarto-xref">Teorema&nbsp;3</a>, a distribuição da variável aleatória <span class="math inline">\(U\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(k)}\)</span>. <span class="math inline">\(\quad\blacksquare\)</span></p>
+<p><br><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div id="exm-dist_s2" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 21</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span>. Sejam <span class="math inline">\(\bar{X}_n=\frac1n\sum_{i=1}^nX_i\)</span> e <span class="math inline">\(S^2_n=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X}_n)^2\)</span>. Mostre que <span class="math inline">\(\frac{(n-1)S^2_n}{\sigma^2}\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(n-1)}\)</span>.</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Sabemos que <span class="math inline">\(S^2_n=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X}_n)^2\)</span>, daí</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  (n-1)S^2_n&amp;=\sum_{i=1}^n(X_i-\bar{X}_n)^2=\sum_{i=1}^{n-1}(X_i-\bar{X}_n)^2+(X_n-\bar{X}_n)^2\\ \\
+  &amp;=\sum_{i=1}^{n-1}(X_i-\bar{X}_{n-1}+\bar{X}_{n-1}-\bar{X}_n)^2+(X_n-\bar{X}_n)^2\\ \\
+  &amp;=\sum_{i=1}^{n-1}(X_i-\bar{X}_{n-1})^2+\sum_{i=1}^{n-1}(\bar{X}_{n-1}-\bar{X}_n)^2\\
+  &amp;\qquad\qquad\qquad\qquad+2(\bar{X}_{n-1}-\bar{X}_n)\underbrace{\sum_{i=1}^{n-1}(X_i-\bar{X}_{n-1})}_{0}+(X_n-\bar{X}_n)^2
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="math">
+<span class="math display">\[\begin{align*}
+  (n-1)S^2_n&amp;=\sum_{i=1}^{n-1}(X_i-\bar{X}_{n-1})^2+(n-1)(\bar{X}_{n-1}-\bar{X}_n)^2+(X_n-\bar{X}_n)^2\\ \\
+  &amp;=(n-2)S^2_{n-1}+(n-1)\left(\frac{n}{n(n-1)}\sum_{i=1}^{n-1}X_i-\frac{n-1}{n(n-1)}\sum_{i=1}^{n}X_i\right)^2\\
+  &amp;\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad+(X_n-\bar{X}_n)^2\\ \\
+    &amp;=(n-2)S^2_{n-1}+\frac{1}{n^2(n-1)}\left(nX_n-\sum_{i=1}^{n}X_i\right)^2+(X_n-\bar{X}_n)^2
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="math">
+<span class="math display">\[\begin{align*}
+  (n-1)S^2_n&amp;=(n-2)S^2_{n-1}+\frac{1}{n^2(n-1)}\left(nX_n-\sum_{i=1}^{n}X_i\right)^2+(X_n-\bar{X}_n)^2\\ \\
+    &amp;=(n-2)S^2_{n-1}+\frac{1}{n-1}\left(X_n-\bar{X}_n\right)^2+(X_n-\bar{X}_n)^2 \\ \\
+    &amp;=(n-2)S^2_{n-1}+\frac{n}{n-1}\left(X_n-\bar{X}_n\right)^2\\ \\
+  &amp;=(n-2)S^2_{n-1}+\frac{n-1}{n}\left(X_n-\bar{X}_{n-1}\right)^2, \quad n&gt;1.
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma, aplicando indução matemática, temos que:</p>
+<p><br></p>
+<ul>
+<li>Para <span class="math inline">\(n=2\)</span>, temos que <span class="math inline">\(S^2_2=\frac{1}{2}\left(X_2-X_1\right)^2\)</span>. Sendo <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span>, então <span class="math inline">\(X_2-X_1\)</span> segue uma distribuição normal com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(2\sigma^2\)</span>. Daí, <span class="math inline">\(\frac{\left(X_2-X_1\right)^2}{2\sigma^2}=\frac{S_2^2}{\sigma^2}\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(1)}\)</span>;</li>
+</ul>
+<p><br></p>
+<ul>
+<li>Suponha que, para <span class="math inline">\(n=k\)</span>, <span class="math inline">\(\frac{(k-1)S^2_k}{\sigma^2}\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(k-1)}\)</span> (Hipótese de indução);</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Provemos para <span class="math inline">\(n=k+1\)</span>,</li>
+</ul>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \frac{kS^2_{k+1}}{\sigma^2}&amp;=\frac{(k-1)S^2_{k}}{\sigma^2}+\frac{1}{\sigma^2}\frac{k}{k+1}\left(X_{k+1}-\bar{X}_{k}\right)^2.
+\end{align*}\]</span>
+</div>
+<p>Observe que, <span class="math inline">\(X_{k+1}-\bar{X}_{k}\)</span> segue uma distribuição normal com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(\left(\frac{k+1}{k}\right)\sigma^2\)</span>. Daí, <span class="math inline">\(\frac{k}{k+1}\frac{(X_{k+1}-\bar{X}_{k})^2}{\sigma^2}\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(1)}\)</span>. Pelo <a href="#/thm-fgm_distr_chisq" class="quarto-xref">Teorema&nbsp;9</a>, <span class="math inline">\(\frac{kS^2_{k+1}}{\sigma^2}\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(k)}\)</span>.<span class="math inline">\(\quad\blacksquare\)</span></p>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="thm-covariancia" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 10</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade de probabilidade simétrica. Então,</p>
+<p><span class="math display">\[\mathrm{cov}\left[\bar{X}_n,S^2_n\right]=0.\]</span></p>
+</div>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="proof">
+<p><span class="proof-title"><em>Prova</em>. </span>FABIO</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>==== JACOBIANO ====</p>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="thm-xb_e_s2" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 11</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span>. Sejam <span class="math inline">\(\bar{X}_n=\frac1n\sum_{i=1}^nX_i\)</span> e <span class="math inline">\(S^2_n=\frac{1}{n-1}\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2\)</span>, então</p>
+<ol type="1">
+<li><p><span class="math inline">\(\bar{X}_n\)</span> segue uma distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\frac{\sigma^2}{n}\)</span>;</p></li>
+<li><p><span class="math inline">\(\frac{(n-1)S^2_n}{\sigma^2}\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(n-1)}\)</span>;</p></li>
+<li><p><span class="math inline">\(\bar{X}_n\)</span> e <span class="math inline">\(S^2_n\)</span> são variáveis aleatórias independentes.</p>
+</li>
+</ol>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="proof">
+<p><span class="proof-title"><em>Prova</em>. </span></p>
+<ol type="1">
+<li>Vide <a href="#/thm-esperado_momentos" class="quarto-xref">Teorema&nbsp;7</a> e <a href="#/exm-FGM_xbar_normal" class="quarto-xref">Exemplo&nbsp;14</a>;</li>
+</ol>
+<p><br></p>
+<ol start="2" type="1">
+<li>Vide <a href="#/exm-dist_s2" class="quarto-xref">Exemplo&nbsp;21</a>;</li>
+</ol>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<ol start="3" type="1">
+<li>Note que</li>
+</ol>
+<div class="math">
+<span class="math display">\[\begin{align*}
+S^2_n&amp;=\frac{1}{n-1}\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2
+=\frac{1}{n-1}\left[(X_1-\bar{X}_n)+\sum_{i=2}^n\left(X_i-\bar{X}_n\right)^2\right]\\ \\
+&amp;=\frac{1}{n-1}\left\{\left[\sum_{i=1}^n(X_i-\bar{X}_n)-(X_1-\bar{X}_n)\right]^2+\sum_{i=2}^n\left(X_i-\bar{X}_n\right)^2\right\}\\ \\
+&amp;=\frac{1}{n-1}\left\{\left[\sum_{i=2}^n(X_i-\bar{X}_n)\right]^2+\sum_{i=2}^n\left(X_i-\bar{X}_n\right)^2\right\}.
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Daí, <span class="math inline">\(S^2_n\)</span> pode ser escrito em função de <span class="math inline">\(X_2-\bar{X}_n, X_3-\bar{X}_n, \ldots, X_n-\bar{X}_n\)</span>. Dessa forma, se as variáveis aleatórias <span class="math inline">\(X_2-\bar{X}_n, X_3-\bar{X}_n,\ldots,X_n-\bar{X}_n\)</span> são independentes de <span class="math inline">\(\bar{X}_n\)</span>, obtem-se o resultado requerido.</p>
+<p><br><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Para isso, calcula-se a densidade conjunta das variáveis aleatórias <span class="math inline">\(\bar{X}_n\)</span>, <span class="math inline">\(X_2-\bar{X}_n, X_3-\bar{X}_n,\ldots,X_n-\bar{X}_n\)</span> para verificar se a mesma pode ser escrita como produto das densidades de <span class="math inline">\(\bar{X}_n\)</span> e <span class="math inline">\(X_2-\bar{X}_n, X_3-\bar{X}_n,\ldots,X_n-\bar{X}_n\)</span>. Dessa maneira, para usar o <strong>método do jacobiano</strong>, considere <span class="math inline">\(y_1=\bar{x}_n\)</span> e <span class="math inline">\(y_i=x_i-\bar{x}_n\)</span> para <span class="math inline">\(i=2,3,\ldots,n\)</span>. Então,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+    x_1&amp;=y_1-\sum_{i=2}^ny_i; &amp; x_i&amp;=y_i+y_1, \quad i=2,3,4,\ldots.
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p><br><br></p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+    \frac{\partial x_1}{\partial y_1}&amp;=1; &amp; \frac{\partial x_2}{\partial y_1}&amp;=1; &amp; \frac{\partial x_3}{\partial y_1}&amp;=1; &amp; \cdots &amp; &amp; \frac{\partial x_n}{\partial y_1}&amp;=1;\\
+    \frac{\partial x_1}{\partial y_2}&amp;=-1; &amp; \frac{\partial x_2}{\partial y_2}&amp;=1; &amp; \frac{\partial x_3}{\partial y_2}&amp;=0; &amp; \cdots &amp; &amp; \frac{\partial x_n}{\partial y_2}&amp;=0;\\
+    \frac{\partial x_1}{\partial y_3}&amp;=-1; &amp; \frac{\partial x_2}{\partial y_3}&amp;=0; &amp; \frac{\partial x_3}{\partial y_3}&amp;=1; &amp; \cdots &amp; &amp; \frac{\partial x_n}{\partial y_3}&amp;=0;\\
+    &amp;\,\,\,\vdots &amp;&amp;\,\,\,\vdots &amp;&amp;\,\,\,\vdots &amp; &amp; &amp;&amp;\,\,\,\vdots\\
+    \frac{\partial x_1}{\partial y_3}&amp;=-1; &amp; \frac{\partial x_2}{\partial y_3}&amp;=0; &amp; \frac{\partial x_3}{\partial y_3}&amp;=0; &amp; \cdots &amp; &amp; \frac{\partial x_n}{\partial y_3}&amp;=1.
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Assim sendo,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+    |J|&amp;=\begin{vmatrix}
+     1 &amp; 1 &amp; 1 &amp; \cdots &amp; 1\\
+    -1 &amp; 1 &amp; 0 &amp; \cdots &amp; 0\\
+    -1 &amp; 0 &amp; 1 &amp; \cdots &amp; 0\\
+    \vdots &amp;  &amp;  &amp; \ddots &amp; \vdots \\
+    -1 &amp; 0 &amp; 0 &amp; \cdots &amp; 1\\
+    \end{vmatrix}=n.
+\end{align*}\]</span>
+</div>
+<p><br></p>
+<p>Por otro lado, sabemos que a função de densidade conjunta de <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> é dada por</p>
+<p><span class="math display">\[f(x_1,x_2,\ldots,x_n)=(2\pi)^{-n/2}e^{-\frac12\sum_{i=1}^nx_i}, \quad x_i\in\mathbb{R}.\]</span></p>
+</section>
+<section class="slide level2">
+
+<p>Portanto,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+    f(y_1,y_2,\ldots,y_n)&amp;=\frac{n}{(2\pi)^{-n/2}}e^{-\frac12(y_1-\sum_{i=2}^ny_i)^2}e^{-\frac12\sum_{i=2}^n(y_i+y_1)^2}\\
+    &amp;=\frac{1}{(2\pi n^{-1})^{\frac12}}e^{-\frac12ny_1^2}\frac{1}{(2\pi )^{\frac{n-1}{2}}n^{-1/2}}e^{\left[-\frac12\sum_{i=2}^ny_i^2+(\sum_{i=2}^ny_i)^2\right]}.
+\end{align*}\]</span>
+</div>
+<p>Então, <span class="math inline">\(Y_1\)</span> é independente de <span class="math inline">\(Y_2,Y_3,\ldots,Y_n. \quad \blacksquare\)</span></p>
+</section>
+<section id="referências" class="slide level2 smaller scrollable">
+<h2>Referências</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-balakrishnan:nevzorov:2003" class="csl-entry" role="listitem">
+Balakrishnan, N., e Nevzorov, V. (2003), <em>A primer on statistical distributions</em>, John Wiley &amp; Sons.
+</div>
+<div id="ref-dudewicz:mishra:1988" class="csl-entry" role="listitem">
+Dudewicz, E., e Mishra, S. (1988), <em>Modern mathematical statistics</em>, John Wiley &amp; Sons.
+</div>
+<div id="ref-feller:1971" class="csl-entry" role="listitem">
+Feller, W. (1971), <em>An introduction to probability theory and its applications</em>, Wiley.
+</div>
+<div id="ref-mood:graybill:boes:1974" class="csl-entry" role="listitem">
+Mood, A., Graybill, F., e Boes, D. (1974), <em>Introduction to the theory of statistics</em>, McGraw-Hill Higher Education.
+</div>
+<div id="ref-severini:2005" class="csl-entry" role="listitem">
+Severini, T. (2005), <em>Elements of Distribution Theory</em>, Cambridge University Press.
+</div>
+<div id="ref-shohat:tamarkin:1970" class="csl-entry" role="listitem">
+Shohat, J. A., e Tamarkin, J. D. (1970), <em>The problem of moments</em>, American Mathematical Society.
+</div>
+</div>
+</section>
+<section id="política-de-proteção-aos-direitos-autorais" class="slide level2">
+<h2>Política de proteção aos direitos autorais</h2>
+<blockquote>
+<p><span style="color:grey"><font size="6">O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser o detentor dos direitos sobre o conteúdo disponível na plataforma, o <strong>LECON</strong> e o <strong>NEAEST</strong> detém direito exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5<sup>o</sup>, inciso XXVII, da Constituição Federal e os Artigos 7<sup>o</sup> e 28<sup>o</sup>, da Lei 9.610/98. A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do <strong>LECON</strong> e o <strong>NEAEST</strong>, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo caracterizar conduta criminosa, conforme Artigo 184<sup>o</sup>, §1<sup>o</sup> a 3<sup>o</sup>, do Código Penal. É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer conteúdo disponível na plataforma.</font></span></p>
+</blockquote>
+
+<img data-src="images/logo_neaest_lecon.png" class="quarto-figure quarto-figure-center r-stretch" width="1800"><p><span style="color:grey"><font size="4">Material elaborado pela equipe LECON/NEAEST: Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi e Nátaly A. Jiménez.</font></span></p>
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="images/Lecon_logo2024_transparente.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="aula1_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="aula1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="aula1_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="aula1_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="aula1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="aula1_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="aula1_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
-  - `\(X_n\pm W_n\overset{p}{\longrightarrow}X\pm W\)`;
-  - `\(X_n W_n\overset{p}{\longrightarrow}X W\)`;
-  - `\(aX_n\pm bW_n\overset{p}{\longrightarrow}aX\pm bW\)`, com `\(a,b\)` constantes;
-  - `\(\frac{X_n}{W_n}\overset{p}{\longrightarrow}\frac{X}{W}\)`, com `\(\mathbb{P}[W_n\ne0]=\mathbb{P}[W\ne0]=1\)`;
-  - `\(X_n^2\overset{p}{\longrightarrow}X^2\)`;
-  - `\(\frac{1}{X_n}\overset{p}{\longrightarrow}\frac{1}{X}\)`, com `\(\mathbb{P}[X_n\ne0]=\mathbb{P}[X\ne0]=1.\)`
-  
 
----
-class: animated, fadeIn
+  <script src="aula1_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="aula1_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="aula1_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="aula1_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
-### Algumas definições básicas - III
+  <script>
 
-* **Definição 6.** Uma sequência `\(X_1,X_2,\ldots,X_n\)` de variáveis 
-aleatórias *converge quase-certamente* para uma variável aleatória `\(X\)` 
-se 
-`$$\mathbb{P}\left[\lim_{n\to\infty} X_n=X\right]=1.$$`
-Denotamos `\(X_n\overset{q.c}{\longrightarrow}X.\)`
-
-**Exemplo 4.** (*convergência quase-certa*) Seja `\(\{X_n\}\)` uma 
-sequência de variáveis aleatórias definidas por
-
-  &lt;div class="math"&gt;
-    \begin{align*}
-      X_n&amp;=\begin{cases}
-        0, &amp; \text{ com probabilidade } 1-\frac{1}{2^n};\\
-        1, &amp; \text{ com probabilidade } \frac{1}{2^n},
-      \end{cases}.
-    \end{align*}
-  &lt;/div&gt;
-  
-para `\(n=1,2,3,\ldots\)`.
-
-Sabemos que `\(\mathbb{E}X_n=\mathbb{E}X_n^2=\frac{1}{2^n}\)` e 
-`\(\mathrm{var}[X_n]=\frac{1}{2^n}-\frac{1}{2^{2n}}=\frac{2^{2n}-1}{2^{2n}}\)`.
-
---
-Pela desigualdade de Tchebyshev, temos que
-`$$\mathbb{P}[X_n\ge\epsilon]\le\frac{\mathbb{E}X_n^2}{\epsilon^2}=\frac{1}{2^n\epsilon^2}.$$`
-Daí, `\(\lim_{n\to\infty}\mathbb{P}[X_n\ge\epsilon]=0\)`, ou seja 
-`\(X_n\overset{p}{\longrightarrow}0\)`. Ainda, 
-`\(\mathbb{P}\left[\lim_{n\to\infty}X_n=0\right]=1\)`, então `\(X_n\overset{q.c}{\longrightarrow}0\)`.
-
----
-class: animated, slideInRight
-
-### Algumas definições básicas - III
-
-#### Tipos de convergência
-
-* **Definição 7.** Uma sequência `\(X_1,X_2,\ldots\)` de variáveis 
-aleatórias *converge em distribuição* para uma variável aleatória `\(X\)` 
-se
-`$$\lim_{n\to\infty}F_n(x)=F(x),$$`
-para todo `\(x\in\mathbb{R}\)` no qual `\(F\)` é contínua. As funções `\(F_n\)` e 
-`\(F\)` são as funções de distribuição acumulada das variáveis aleatórias
-`\(X_n\)` e `\(X\)`, respectivamente. Denotamos `\(X_n\overset{d}{\longrightarrow}X.\)`
-
----
-class: inverse, hide-logo, middle, center
-
-# Estatísticas e Momentos Amostrais
-
-
----
-class: animated, fadeIn
-
-###  Momentos amostrais - I
-No estudo de populações com densidade `\(f(\cdot;\theta)\)`, onde a forma
-analítica da densidade é conhecida, mas depende de um parâmetro 
-desconhecido, é um problema muito comum na **Estatística**.
-
-Um caminho para solucionar o problema é coletar uma smotra de tamanho
-`\(n\)` e encontrar uma função da amostra que permita aproximar ou estimar 
-o verdadeiro valor do parâmetro `\(\theta\)`.
-
---
-
-&gt; **Objetivo:** Nosso interesse é determinar a "melhor" função que permita &lt;b&gt;estimar&lt;/b&gt;
-o parâmetro `\(\theta\)`, usando a informação proporcionada pela amostra.
-
---
-
-* **Definição 8.** Uma **Estatística** é uma função de variáveis 
-aleatórias (observáveis), a qual é variável aleatória e não depende de
-parâmetros desconhecidos.
-
-  **Exemplos:** Sendo `\(X, X_1,X_2,\ldots,X_n\)` variáveis aleatórias, então
-  `$$X,\, X^2,\, X+ 3,\, X+\log X,\, \frac1n\sum_{i=1}^nX_i,\, \min\{X_1,X_2,\ldots,X_n\},$$`
-  são *Estatísticas*.
-
-  &gt; Funções do tipo `\(X-\mu, \, \frac{X}{\sigma}, \,X+\log \theta\,\)` **não
-  são consideradas *Estatísticas***.
-
-
----
-class: animated, slideInRight
-
-### Momentos amostrais - II
-* **Definição 9.** Seja `\(X_1,X_2,\ldots,X_n\)` uma amostra aleatória
-de uma população com função de densidade de probabilidade (ou função
-de probabilidade de massa),
-denotada por `\(f(\cdot;\theta)\)`&lt;sup&gt;&lt;font size="3"&gt;1&lt;/font&gt;&lt;/sup&gt;.
-
-  O `\(r\)`-ésimo momento amostral em torno de zero define-se como
-
-`$$M_r'=\frac1n\sum_{i=1}^nX_i^r.$$`
-&gt; O `\(r\)`-ésimo momento amostral em torno da média amostral define-se como
-
-`$$M_r=\frac1n\sum_{i=1}^n\left(X_i-M_1'\right)^r=\frac1n\sum_{i=1}^n\left(X_i-\bar{X}\right)^r.$$`
-
-***
-
-&lt;font size="3"&gt;&lt;sup&gt;1&lt;/sup&gt;Tanto para o caso contínuo, quanto para o caso discreto
-usaremos a mesma notação, pois as definições podem ser aplicadas da 
-mesma em ambos contextos.&lt;/font&gt;
-
----
-class: animated, fadeIn
-
-### Momentos amostrais - III
-
-* **Teorema 1.** Seja `\(X_1,X_2,\ldots,X_n\)` uma amostra aleatória
-de uma população com função de densidade de probabilidade `\(f(\cdot;\theta)\)`.
-O valor esperado do `\(r\)`-ésimo momento amostral (em torno de zero) é 
-igual ao `\(r\)`-ésimo momento populacional (se existe), ou seja
-
-`$$\mathbb{E}M_r'=\mathbb{E}\left[\frac1n\sum_{i=1}^nX_i^r\right]=\frac1n\sum_{i=1}^n\mathbb{E}\left[X_r'\right]=\mathbb{E}\left[X_r'\right]=\mu_r'.$$`
-&gt; **Observação:** No caso da variância, a mesma tem a seguinte forma
-analítica
-
-`$$\mathrm{var}\left[M_r'\right]=\mathrm{var}\left[\frac1n\sum_{i=1}^nX_i^r\right]=\frac{1}{n^2}\sum_{i=1}^n\mathrm{var}\left[X_i^r\right]=\frac1n\left[\mathbb{E}X^{2r}-\left(\mathbb{E}X^r\right)^2\right].$$`
-* **Corolario 1.** Seja `\(X_1,X_2,\ldots,X_n\)` uma amostra aleatória
-de uma população com função de densidade de probabilidade `\(f(\cdot;\theta)\)`.
-Seja `\(\bar{X}_n=\bar{X}=\frac1n\sum_{i=1}^nX_i\)` a média amostral, então
-`\(\mathbb{E}\bar{X}=\mathbb{E}X=\mu\)` e 
-
-&lt;div class="math"&gt;
-  \begin{align*}
-    \mathrm{var}\left[\bar{X}\right]&amp;=\frac1n\left[\mathbb{E}X^2-\left(\mathbb{E}X\right)^2\right]=\frac1n\sigma^2.
-  \end{align*}
-&lt;/div&gt;
-
----
-class: animated, fadeIn
-
-### Momentos amostrais - IV
-* **Definição 10.** Seja `\(X_1,X_2,\ldots,X_n\)`  uma amostra aleatória
-de uma população com função de densidade de probabilidade `\(f(\cdot;\theta)\)`.
-A *variância amostral* define-se como:
-`$$S^2=\frac{1}{n-1}\sum_{i=1}^n\left(X_i-\bar{X}\right)^2, \quad n&gt;1.$$`
-
-&gt; **&lt;span style="color:#8f0e04"&gt;Exercício.&lt;/span&gt;** Mostre que 
-`\(\mathbb{E}\left[S^2\right]=\sigma^2\)` e 
-`$$\mathrm{var}\left[S^2\right]=\frac1n\left(\mu_4-\frac{n-3}{n-1}\sigma^4\right), \quad n&gt;1,$$`
-onde `\(\mu_r = \mathbb{E}[X-\mu]^r\)`.
-
----
-class: animated, fadeIn
-
-### Exemplo II
-Considere um estudo cujo objetivo é avaliar como a distância com que motoristas 
-conseguem distinguir um determinado objeto varia com a idade. 
-Nesse caso, a variável &lt;ins&gt;resposta&lt;/ins&gt; é a distância e a variável 
-&lt;ins&gt;explicativa&lt;/ins&gt; é a idade. (Tomado de: Morettin &amp; Singer(2020) 
-[*Introdução à Ciência de Dados: Fundamentos e aplicações*.](https://bityli.com/ahLca)).
-
-.pull-left[
-* O gráfico de dispersão sugere uma tendência decrescente da distância com a idade;
-
-* Como a resposta para motoristas com a mesma idade (ou com idades bem
-próximas) varia, o foco da análise é a estimação de uma tendência média;
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
  
-* O objetivo da análise de regressão é quantificar essa tendência.
-]
+        // Display controls in the bottom right corner
+        controls: false,
 
----
-class: animated, slideInRight
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
 
-### Recursos computacionais 
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
 
-Ao longo da disciplina usaremos preferencialmente a linguagem `R`. O repositório
-de pacotes está disponível no site do [projeto R](ohttp://CRAN.R-project.org).
-Dentre os pacotes estatı́sticos disponı́veis na linguagem R, aqueles mais
-utilizados neste texto são: `car`, `stats`, `MASS`, `e1071`, `forecast`, `ggplot2`, 
-`caret`, `robust`, `glmnet`, `Lars`, entre outros. As funções de cada pacote 
-necessárias para a realização das análises serão indicadas ao longo da disciplina.
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
 
-&lt;img src="https://www.r-project.org/Rlogo.png" width="25%" style="display: block; margin: auto;" /&gt;
+        // Display a presentation progress bar
+        progress: true,
 
-&gt; Sugere-se a leitura do livro [Fox and Weisberg (2019) An R Companion to Applied Regression. 3rd Edition](https://bityli.com/gTnsQ).
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
 
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
 
----
-class: animated, fadeIn
-### Termo de erro (ou perturbação estocástica) - II
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
 
-* *Princípio da parcimônia*: Este princípio sugere que 
-**modelos mais simples devem ser escolhidos** em detrimento dos mais complexos,
-desde que a qualidade do ajuste seja similar. É claro que devemos evitar excluir 
-variáveis importantes apenas para manter um modelo simples.
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
 
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
 
-&lt;img src="images/overfitting.png" width="70%" style="display: block; margin: auto;" /&gt;
+        // Push each slide change to the browser history
+        history: true,
 
-&gt; Quando avaliamos a qualidade de um ajuste, a utilização exclusiva do termo de 
-erro pode levar a resultados enganosos. Um "bom" modelo não pode sofrer de 
-_underfitting_ (subajuste) nem de overfitting (sobreajuste). Nesse último, o
-modelo se ajusta muito bem aos dados, mas o seu desempenho para previsão é ruim.
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
 
+        // Enable the slide overview mode
+        overview: true,
 
----
-class: animated, fadeIn
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
 
-###  Termo de erro (ou perturbação estocástica) - III
-.pull-left[
-#### Underfitting
+        // Vertical centering of slides
+        center: false,
 
-Neste cenário o desempenho do modelo já é &lt;ins&gt;ruim&lt;/ins&gt; no próprio treinamento. 
-O modelo não consegue encontrar relações entre as variáveis e o teste nem precisa 
-acontecer. Este modelo já pode ser **descartado**, pois não terá utilidade.
-&lt;img src="images/underfitting.png" width="50%" style="display: block; margin: auto;" /&gt;
-]
+        // Enables touch navigation on devices with touch input
+        touch: true,
 
---
+        // Loop the presentation
+        loop: false,
 
-.pull-right[
-#### Overfitting
-Neste cenário, o modelo tem um desempenho excelente com os dados de *treino*, 
-porém quando utilizamos os dados de *teste* o resultado é &lt;ins&gt;ruim&lt;/ins&gt;. 
-É comum ouvirmos que neste cenário o modelo *treinado* não tem capacidade de 
-*generalização*.
-&lt;img src="images/overfitting2.png" width="50%" style="display: block; margin: auto;" /&gt;
+        // Change the presentation direction to be RTL
+        rtl: false,
 
-]
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
 
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
 
----
-class: animated, lightSpeedIn
-# Referências
+        // Turns fragments on and off globally
+        fragments: true,
 
-Chollet, F. (2018). _Deep learning with R_. 1st
-edition. Shelter Island, NY: Manning Publications.
-ISBN: 1-61729-554-X.
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
 
-Fox, J. and S. Weisberg (2019). _An R Companion to
-Applied Regression_. 3rd edition. Sage publications.
-ISBN: 978-1-5443-3647-3.
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
 
-Searle, S. and A. Khuri (2017). _Matrix Algebra Useful
-for Statistics_. 2nd edition. Wiley.
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
 
----
-class: animated, hide-logo, bounceInDown
-## Política de proteção aos direitos autorais
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
 
-&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
-o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
-exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
-e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
-A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
-**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
-caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
-É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
-conteúdo disponível na plataforma.&lt;/span&gt;
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
 
-.pull-left[
-&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
-]
-.pull-right[
-&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
-]
-&lt;br&gt;&lt;/br&gt;
-.center[
-[https://lecon.ufes.br](https://lecon.ufes.br/) &amp;emsp; &amp;emsp;  &amp;emsp; &amp;emsp; [https://analytics.ufes.br](https://analytics.ufes.br)
-]
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
 
-&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
-Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
-e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
-    </textarea>
-<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
-<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
-<script>var slideshow = remark.create({
-"ratio": "16:9",
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
-});
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
-  window.dispatchEvent(new Event('resize'));
-});
-(function(d) {
-  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
-  if (!r) return;
-  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
-  d.head.appendChild(s);
-})(document);
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
 
-(function(d) {
-  var el = d.getElementsByClassName("remark-slides-area");
-  if (!el) return;
-  var slide, slides = slideshow.getSlides(), els = el[0].children;
-  for (var i = 1; i < slides.length; i++) {
-    slide = slides[i];
-    if (slide.properties.continued === "true" || slide.properties.count === "false") {
-      els[i - 1].className += ' has-continuation';
-    }
-  }
-  var s = d.createElement("style");
-  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
-  d.head.appendChild(s);
-})(document);
-// delete the temporary CSS (for displaying all slides initially) when the user
-// starts to view slides
-(function() {
-  var deleted = false;
-  slideshow.on('beforeShowSlide', function(slide) {
-    if (deleted) return;
-    var sheets = document.styleSheets, node;
-    for (var i = 0; i < sheets.length; i++) {
-      node = sheets[i].ownerNode;
-      if (node.dataset["target"] !== "print-only") continue;
-      node.parentNode.removeChild(node);
-    }
-    deleted = true;
-  });
-})();
-(function() {
-  "use strict"
-  // Replace <script> tags in slides area to make them executable
-  var scripts = document.querySelectorAll(
-    '.remark-slides-area .remark-slide-container script'
-  );
-  if (!scripts.length) return;
-  for (var i = 0; i < scripts.length; i++) {
-    var s = document.createElement('script');
-    var code = document.createTextNode(scripts[i].textContent);
-    s.appendChild(code);
-    var scriptAttrs = scripts[i].attributes;
-    for (var j = 0; j < scriptAttrs.length; j++) {
-      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
-    }
-    scripts[i].parentElement.replaceChild(s, scripts[i]);
-  }
-})();
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-// adds .remark-code-has-line-highlighted class to <pre> parent elements
-// of code chunks containing highlighted lines with class .remark-code-line-highlighted
-(function(d) {
-  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
-  const preParents = [];
-  const findPreParent = function(line, p = 0) {
-    if (p > 1) return null; // traverse up no further than grandparent
-    const el = line.parentElement;
-    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
-  };
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
 
-  for (let line of hlines) {
-    let pre = findPreParent(line);
-    if (pre && !preParents.includes(pre)) preParents.push(pre);
-  }
-  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
-})(document);</script>
-<style>
-.logo {
-  background-image: url(images/logo_neaest.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 1em;
-  right: 1em;
-  width: 150px;
-  height: 168px;
-  z-index: 0;
-}
-</style>
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
 
-<script>
-document
-  .querySelectorAll(
-    '.remark-slide-content' +
-    ':not(.title-slide)' +
-    // add additional classes to exclude here, e.g.
-    // ':not(.inverse)' +
-    ':not(.hide-logo)'
-  )
-  .forEach(el => {
-    el.innerHTML += '<div class="logo"></div>';
-  });
-</script>
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
 
-<script>
-slideshow._releaseMath = function(el) {
-  var i, text, code, codes = el.getElementsByTagName('code');
-  for (i = 0; i < codes.length;) {
-    code = codes[i];
-    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
-      text = code.textContent;
-      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
-          /^\$\$(.|\s)+\$\$$/.test(text) ||
-          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
-        continue;
-      }
-    }
-    i++;
-  }
-};
-slideshow._releaseMath(document);
-</script>
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-(function () {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
-  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
-    script.src  = script.src.replace(/^https?:/, '');
-  document.getElementsByTagName('head')[0].appendChild(script);
-})();
-</script>
-  </body>
-</html>
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'fast',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copiada");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copiada");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
