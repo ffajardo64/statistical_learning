@@ -166,7 +166,7 @@ Amostragem e distribuições amostrais<br>
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 16 agosto, 2026
+            Última atualização: 17 agosto, 2026
           </p>
     </div>
 </div>
@@ -478,9 +478,9 @@ LECON/DEST - UFES
 <p>Daí,</p>
 <div class="math">
 <span class="math display">\[\begin{align*}
-  \mathbb{E}[X^r]&amp;=\int_0^\infty x^r\frac{1}{\Gamma\left(\frac{k}{2}\right)}\left(\frac12\right)^{k/2}x^{k/2-1}e^{-\frac12x}\,dx \\
-  &amp;=\frac{1}{\Gamma\left(\frac{k}{2}\right)}\left(\frac12\right)^{k/2}\int_0^\infty x^rx^{k/2-1}e^{-\frac12x}\,dx \\
-  &amp;=\frac{1}{\Gamma\left(\frac{k}{2}\right)}\left(\frac12\right)^{k/2}\frac{\Gamma\left(\frac{k}{2}+r\right)}{\left(\frac12\right)^{k/2+r}}\,dx
+  \mathbb{E}[X^r]&amp;=\int_0^\infty x^r\frac{1}{\Gamma\left(\frac{k}{2}\right)}\left(\frac12\right)^{k/2}x^{k/2-1}e^{-\frac12x}\,dx \\ \\
+  &amp;=\frac{1}{\Gamma\left(\frac{k}{2}\right)}\left(\frac12\right)^{k/2}\int_0^\infty x^rx^{k/2-1}e^{-\frac12x}\,dx \\ \\
+  &amp;=\frac{1}{\Gamma\left(\frac{k}{2}\right)}\left(\frac12\right)^{k/2}\frac{\Gamma\left(\frac{k}{2}+r\right)}{\left(\frac12\right)^{k/2+r}}
   =\frac{\Gamma\left(\frac{k}{2}+r\right)}{\Gamma\left(\frac{k}{2}\right)}2^r, \quad r&gt;-\frac{k}{2}. \quad\blacksquare
 \end{align*}\]</span>
 </div>
@@ -488,7 +488,7 @@ LECON/DEST - UFES
 <section class="slide level2">
 
 <div id="exm-curtose_chisq" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 8</strong></span> Seja <span class="math inline">\(X_1,X_2, \ldots, X_n\)</span> uma sequência de variáveis aleatórias independentes função de distribuição <span class="math inline">\(F_i(x_i)\)</span>, com <span class="math inline">\(i=1,2,3,,\ldots,k\)</span>. Considere a variável aleatória <span class="math inline">\(Z=-2\sum_{i=1}^k\log\left(1-F_i(X_i)\right)\)</span>. Qual o valor da curtose de <span class="math inline">\(Z\)</span>?</p>
+<p><span class="theorem-title"><strong>Exemplo 8</strong></span> Seja <span class="math inline">\(X_1,X_2, \ldots, X_k\)</span> uma sequência de variáveis aleatórias independentes função de distribuição <span class="math inline">\(F_i(x_i)\)</span>, com <span class="math inline">\(i=1,2,3,,\ldots,k\)</span>. Considere a variável aleatória <span class="math inline">\(Z=-2\sum_{i=1}^k\log\left(1-F_i(X_i)\right)\)</span>. Qual o valor da curtose de <span class="math inline">\(Z\)</span>?</p>
 </div>
 <p><br></p>
 <div class="fragment fade-in" data-fragment-index="1">
@@ -593,7 +593,7 @@ LECON/DEST - UFES
 <section class="slide level2">
 
 <div id="exm-r_momento_normal" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 10</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(1\)</span>. Mostre que o <span class="math inline">\(r+1\)</span>-ésimo momento da distribuição de <span class="math inline">\(X\)</span> é dado por <span class="math display">\[\mathbb{E}X^{r+1}=\mu\mathbb{E}X^r-\frac{\partial}{\partial\mu}\mathbb{E}X^r.\]</span></p>
+<p><span class="theorem-title"><strong>Exemplo 10</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(1\)</span>. Mostre que o <span class="math inline">\((r+1)\)</span>-ésimo momento da distribuição de <span class="math inline">\(X\)</span> é dado por <span class="math display">\[\mathbb{E}X^{r+1}=\mu\mathbb{E}X^r-\frac{\partial}{\partial\mu}\mathbb{E}X^r.\]</span></p>
 </div>
 <p><br></p>
 <div class="fragment fade-in" data-fragment-index="1">
@@ -611,6 +611,9 @@ LECON/DEST - UFES
   \end{align*}\]</span>
 </div>
 <p>Portanto, <span class="math display">\[\mathbb{E}X^{r+1}=\mu\mathbb{E}X^r-\frac{\partial}{\partial\mu}\mathbb{E}X^r.\quad\blacksquare\]</span></p>
+</section>
+<section id="funções-geradoras" class="slide level2 center" data-background-color="#172a46">
+<h2>Funções geradoras</h2>
 </section>
 <section class="slide level2">
 
@@ -737,19 +740,33 @@ LECON/DEST - UFES
 </section>
 <section class="slide level2">
 
-<p>Dessa forma, <span class="math inline">\(\mathbb{E}X^r_1=\frac{r!}{a^r}\)</span> e <span class="math inline">\(\mathbb{E}X^r_2=\frac{(r+1)!}{a^r}\)</span> para <span class="math inline">\(r=1,2,3,4,\ldots\)</span> e <span class="math inline">\(\mathbb{E}X_1X_2=\frac{3}{a^2}\)</span>.</p>
+<p>Dessa forma, <span class="math inline">\(\mathbb{E}X^r_1=\frac{r!}{a^r}\)</span> e <span class="math inline">\(\mathbb{E}X^r_2=\frac{(r+1)!}{a^r}\)</span> para <span class="math inline">\(r=1,2,3,4,\ldots\)</span> &nbsp;e &nbsp;<span class="math inline">\(\mathbb{E}X_1X_2=\frac{3}{a^2}\)</span>.</p>
+<div class="fragment fade-in" data-fragment-index="1">
 <ul>
-<li><p>Para <span class="math inline">\(r=1\)</span>, <span class="math inline">\(\mathbb{E}X_1=\frac{1}{a}\)</span>&nbsp;e &nbsp;<span class="math inline">\(\mathbb{E}X_2=\frac{2}{a}\)</span>;</p></li>
-<li><p>Para <span class="math inline">\(r=2\)</span>, <span class="math inline">\(\mathbb{E}X^2_1=\frac{2}{a^2}\)</span> &nbsp;e &nbsp;<span class="math inline">\(\mathbb{E}X^2_2=\frac{6}{a^2}\)</span>.</p></li>
-<li><p><span class="math inline">\(\mathrm{var}[X_1]=\mathbb{E}X^2_1-\left[\mathbb{E}X_1\right]^2=\frac{2}{a^2}-\frac{1}{a^2}=\frac{1}{a^2}\)</span> &nbsp;e &nbsp;<span class="math inline">\(\mathrm{var}[X_2]=\frac{6}{a^2}-\frac{4}{a^2}=\frac{2}{a^2}\)</span>.</p></li>
+<li>Para <span class="math inline">\(r=1\)</span>, <span class="math inline">\(\quad\mathbb{E}X_1=\frac{1}{a}\)</span>&nbsp;e &nbsp;<span class="math inline">\(\mathbb{E}X_2=\frac{2}{a}\)</span>;</li>
 </ul>
+</div>
 <p><br></p>
+<div class="fragment fade-in" data-fragment-index="2">
+<ul>
+<li>Para <span class="math inline">\(r=2\)</span>, <span class="math inline">\(\quad\mathbb{E}X^2_1=\frac{2}{a^2}\)</span> &nbsp;e &nbsp;<span class="math inline">\(\mathbb{E}X^2_2=\frac{6}{a^2}\)</span>.</li>
+</ul>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="3">
+<ul>
+<li><span class="math inline">\(\mathrm{var}[X_1]=\mathbb{E}X^2_1-\left[\mathbb{E}X_1\right]^2=\frac{2}{a^2}-\frac{1}{a^2}=\frac{1}{a^2}\)</span> &nbsp;e &nbsp;<span class="math inline">\(\mathrm{var}[X_2]=\frac{6}{a^2}-\frac{4}{a^2}=\frac{2}{a^2}\)</span>.</li>
+</ul>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="4">
 <p>Daí, a correlação é dada por</p>
 <div class="math">
 <span class="math display">\[\begin{align*}
   \mathrm{Corr}[X_1,X_2]&amp;=\frac{\mathbb{E}X_1X_2-\mathbb{E}X_1\mathbb{E}X_2}{\sqrt{\mathrm{var}[X_1]\mathrm{var}[X_2]}}
   =\frac{\frac{3}{a^2}-\frac1a\frac2a}{\sqrt{\frac{1}{a^2}\frac{2}{a^2}}}=\frac{1}{\sqrt{2}}. \quad\blacksquare
 \end{align*}\]</span>
+</div>
 </div>
 </section>
 <section class="slide level2">
@@ -795,6 +812,23 @@ LECON/DEST - UFES
 \mathrm{Var}[X]&amp;=\mathbb{E}X^2-\left[\mathbb{E}X\right]^2=\frac{\beta\alpha^2}{\beta-2}-\left(\frac{\beta\alpha}{\beta-1}\right)^2\\ \\
 &amp;=\frac{\alpha\beta^2}{(\beta-1)^2(\beta-2)}. \quad\blacksquare
 \end{align*}\]</span>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="box2">
+<div id="exr-r_esimo_normal" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercício 1</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição normal padrão. Mostre que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}X^r=&amp;
+  \begin{cases}
+  2^{r/2}\frac{\Gamma\left(\frac{r+1}{2}\right)}{\Gamma\left(\frac12\right)}, &amp; r \text{ par};\\
+  0, &amp; r \text{ ímpar}.
+  \end{cases}
+\end{align*}\]</span>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section class="slide level2">
@@ -857,13 +891,414 @@ LECON/DEST - UFES
 </div>
 </div>
 </section>
+<section class="slide level2">
+
+<div id="def-fgmf" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 9 (Função geradora de momentos fatoriais)</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com função de distribuição <span class="math inline">\(F_X\)</span>. A <em>função geradora de momentos fatoriais</em> (FGMF) de <span class="math inline">\(F_X\)</span>, denotada por <span class="math inline">\(\mathcal{M}_X(t)\)</span>, se existe, define-se como</p>
+<p><span class="math display">\[\mathcal{M}_X(t)=M_X(\log t)=\mathbb{E}\left[t^{X}\right],\]</span></p>
+<p>para todo <span class="math inline">\(t\in\mathbb{R}\)</span>.</p>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Se <span class="math inline">\(\mathcal{M}_X(t)\)</span> existe em uma vizinhança de <span class="math inline">\(t = 1\)</span>, o <span class="math inline">\(r\)</span>-ésimo momento fatorial é dado por <span class="math display">\[\mathbb{E}\left[(X)_r\right]=\mathbb{E}\left[X(X-1)(X-2)\cdots (X-r+1)\right]=\Biggr.\frac{\partial^r}{\partial t^r}\mathcal{M}_X(t)\Biggr|_{t=1}.\]</span></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>Seja <span class="math inline">\(Y=a+bX\)</span>, onde <span class="math inline">\(X\)</span> é uma variável aleatória, <span class="math inline">\(a\)</span> e <span class="math inline">\(b\)</span> constantes, então <span class="math inline">\(\mathcal{M}_Y(t)=t^a\mathcal{M}_X(t^b)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-FGMF_binomial" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 15</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição Binomial com parâmetros <span class="math inline">\(n\)</span> e <span class="math inline">\(p\)</span>, i.e., <span class="math inline">\(\mathbb{P}[X=x]=\binom{n}{x}p^x(1-p)^{n-x}\mathbb{I}_{\{0,1,2,\ldots,n\}}(x)\)</span>. Utilize a FGMF para calcular o <span class="math inline">\(r\)</span>-ésimo momento fatorial da distribuição de <span class="math inline">\(X\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>A FGMF é dada por</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathcal{M}_X(t)&amp;=\mathbb{E}\left[t^{X}\right]=\sum_{j=0}^n t^j \binom{n}{j}p^j(1-p)^{n-j}\\
+  &amp;=\sum_{j=0}^n \binom{n}{j}(tp)^j(1-p)^{n-j}=[(1-p)+tp]^n, \quad t\in\mathbb{R}.
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}\left[X\right]&amp;=\frac{\partial}{\partial t}\mathcal{M}_X(t)\Biggr|_{t=1}=n[(1-p)+tp]^{n-1}p\Biggr|_{t=1}=np;\\ \\
+  \mathbb{E}\left[(X)_2\right]&amp;=\frac{\partial^2}{\partial t^2}\mathcal{M}_X(t)\Biggr|_{t=1}=n(n-1)p^2[(1-p)+tp]^{n-2}\Biggr|_{t=1}=n(n-1)p^2;\\ \\
+  &amp;\,\,\,\,\vdots \\ \\
+  \mathbb{E}\left[(X)_r\right]&amp;=\frac{\partial^r}{\partial t^r}\mathcal{M}_X(t)\Biggr|_{t=1}=n(n-1)\cdots(n-r+1)p^r=\frac{n!}{(n-r)!}p^r=(n)_r\,p^r. \quad\blacksquare
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-fgmf_poisson" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 16</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição Poisson com parâmetro <span class="math inline">\(\lambda\)</span>, i.e. <span class="math inline">\(\mathbb{P}[X=x]=\frac{e^{-\lambda}\lambda^x}{x!}\mathbb{I}_{\{0,1,2,\ldots\}}(x)\)</span>. Utilize a FGMF para calcular o <span class="math inline">\(r\)</span>-ésimo momento fatorial da distribuição de <span class="math inline">\(X\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>A FGMF é dada por</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathcal{M}_X(t)&amp;=\mathbb{E}\left[t^{X}\right]=\sum_{j=0}^\infty t^j \frac{e^{-\lambda}\lambda^j}{\lambda!}=e^{-\lambda}\sum_{j=0}^\infty  \frac{(t\lambda)^j}{\lambda!}=e^{-\lambda}e^{t\lambda}=e^{(t-1)\lambda}, \quad t\in\mathbb{R}.
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}\left[X\right]&amp;=e^{(t-1)\lambda}\,\lambda\Biggr|_{t=1}=\lambda;\\ \\
+  \mathbb{E}\left[(X)_2\right]&amp;=e^{(t-1)\lambda}\,\lambda^2\Biggr|_{t=1}=\lambda^2;\\ \\
+  &amp;\,\,\,\,\vdots \\ \\
+  \mathbb{E}\left[(X)_r\right]&amp;=\frac{\partial^r}{\partial t^r}\mathcal{M}_X(t)\Biggr|_{t=1}=e^{(t-1)\lambda}\,\lambda^r\Biggr|_{t=1}=\lambda^r. \quad\blacksquare
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-FGMF_binomial_negativa" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 17</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição Binomial negativa com parâmetros <span class="math inline">\(n\)</span> e <span class="math inline">\(p\)</span>, i.e., <span class="math display">\[\mathbb{P}[X=x]=\binom{x+n-1}{x}p^n(1-p)^{x}\mathbb{I}_{\{0,1,2,\ldots\}}(x).\]</span> Calcule a FGMF da distribuição de <span class="math inline">\(X\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>A FGMF é dada por</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathcal{M}_X(t)&amp;=\mathbb{E}\left[t^{X}\right]=\sum_{j=0}^\infty t^j \binom{j+n-1}{j}p^n(1-p)^{j}=\sum_{j=0}^\infty \binom{j+n-1}{j}p^n[t(1-p)]^{j}
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathcal{M}_X(t)&amp;=p^n\sum_{j=0}^\infty \binom{j+n-1}{j}[t(1-p)]^{j}\\
+  &amp;=p^n[1-(1-p)t]^{-n}=\left[\frac{p}{1-(1-p)t}\right]^n,  \quad |t|&lt;\frac{1}{1-p}. \quad\blacksquare
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Função geradora de probabilidades</strong></p>
+</div>
+<div class="callout-content">
+<p>Se <span class="math inline">\(X\)</span> é uma variável aleatória discreta com valores em <span class="math inline">\(\{0,1,2,\ldots\}\)</span>, então <span class="math inline">\(\mathcal{M}_X(t)\)</span> é chamada de <strong>função geradora de probabilidades</strong> (FGP). Nesse caso, <span class="math inline">\(\mathcal{M}_X(t)\)</span> existe para todo <span class="math inline">\(|t|\le1\)</span>.</p>
+<p>A <span class="math inline">\(r\)</span>-ésima probabilidade de massa de <span class="math inline">\(X\)</span> calcula-se como <span class="math display">\[\mathbb{P}\left[X=r\right]=\frac{1}{k!}\frac{\partial^r}{\partial t^r}\mathcal{M}_X(t)\Biggr|_{t=0}.\]</span></p>
+</div>
+</div>
+</div>
+<p><br> <br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div id="exm-FGP_binomial" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 18</strong></span> Considere o cenário do <a href="#/exm-FGMF_binomial" class="quarto-xref">Exemplo&nbsp;15</a>. Utilize a FGP da distribuição de <span class="math inline">\(X\)</span> para calcular a <span class="math inline">\(r\)</span>-ésima probabilidade de massa.</p>
+</div>
+<p>Sabemos que a FGP é dada por <span class="math inline">\(\mathcal{M}_X(t)=[(1-p)+tp]^n\)</span>. Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{P}\left[X=0\right]&amp;=[(1-p)+tp]^n\Biggr|_{t=0}=(1-p)^n;
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{P}\left[X=1\right]&amp;=\frac{\partial}{\partial t}\mathcal{M}_X(t)\Biggr|_{t=0}=np(1-p)^{n-1}; \\ \\
+  &amp;\,\,\,\,\vdots \\ \\
+  \mathbb{P}\left[X=r\right]&amp;=\frac{1}{r!}\frac{\partial^r}{\partial t^r}\mathcal{M}_X(t)\Biggr|_{t=0}=\frac{n(n-1)\cdots(n-r+1)}{r!}p^r(1-p)^{n-r}\\
+  &amp;=\frac{n!}{(n-r)!r!}p^r(1-p)^{n-r}=\binom{n}{r}p^r(1-p)^{n-r}. \quad\blacksquare
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="def-fgc" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 10 (Função geradora de cumulantes)</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com função de distribuição <span class="math inline">\(F_X\)</span>. A <em>função geradora de cumulantes</em> (FGC) de <span class="math inline">\(F_X\)</span>, define-se como</p>
+<p><span class="math display">\[K_X(t)=\log M_X(t)=\sum_{j=1}^\infty\kappa_n\frac{t^j}{j!},\]</span></p>
+<p>onde <span class="math inline">\(M_X(t)\)</span> representa a FGM de <span class="math inline">\(F_X\)</span>, <span class="math inline">\(|t|&lt;h\)</span>, <span class="math inline">\(h&gt;0\)</span>. As constantes <span class="math inline">\(\kappa_1,\kappa_2,\kappa_3,\ldots\)</span> são chamados de <em>cumulantes</em> da distribuição <span class="math inline">\(F_X\)</span>.</p>
+</div>
+<p><br></p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Dica</strong></p>
+</div>
+<div class="callout-content">
+<p>Os cumulantes são funções dos momentos e podem ser obtidos diferenciando a função <span class="math inline">\(K_X(t)\)</span></p>
+<p><span class="math display">\[\kappa_j=K'_X(0)=\frac{\partial^j}{\partial t^j}K_X(t)\Biggr|_{t=0},\]</span> para <span class="math inline">\(j=1,2,3,\ldots\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="box2">
+<div id="exr-fgc_independentes" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercício 2</strong></span> Sejam <span class="math inline">\(X,Y\)</span> variáveis aleatórias independentes. Mostre que <span class="math display">\[K_{X+Y}(t)=K_X(t)+K_Y(t).\]</span></p>
+</div>
+</div>
+<p><br><br></p>
+<div id="exm-fgc_bernoulli" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 19</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição Bernoulli com parâmetro <span class="math inline">\(p\)</span>. Utilize a FGC para calcular o <span class="math inline">\(r\)</span>-ésimo cumulante da distribuição de <span class="math inline">\(X\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Pelo <a href="#/exm-FGMF_binomial" class="quarto-xref">Exemplo&nbsp;15</a>, sabemos que a FGMF de uma variável aleatória com distribuição binomial é dada por <span class="math inline">\(\mathcal{M}_X(t)=[(1-p)+tp]^n\)</span>, com <span class="math inline">\(t\in\mathbb{R}\)</span>. Assim, a FGM de uma variável aleatória com distribuição Bernoulli é dada por <span class="math inline">\(M_X(t)=(1-p)+e^tp\)</span>, com <span class="math inline">\(t\in\mathbb{R}\)</span>. Daí, <span class="math inline">\(K_{X}(t)=\log M_X(t)=\log[(1-p)+e^tp]\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  K'_{X}(0)=\kappa_1&amp;=\frac{e^tp}{(1-p)+e^tp}\Biggr|_{t=0}=p\\ \\
+  K''_{X}(0)=\kappa_2&amp;=e^tp\frac{(1-p)+e^tp-e^tp}{((1-p)+e^tp)^2}\Biggr|_{t=0}=p(1-p)\\ \\
+  K'''_{X}(0)=\kappa_3&amp;=\frac{[(1-p)+e^tp]^2p(1-p)e^t-2p(1-p)e^t(e^tp+p(1-p)e^t)}{((1-p)+e^tp)^4}\Biggr|_{t=0}\\
+  &amp;=p(1-p)(1-2p)\\
+  &amp;\,\,\,\,\vdots \\
+  K^{(r)}_X(0)=\kappa_r&amp;=\frac{\partial^r}{\partial t^r}K_X(t)\Biggr|_{t=0}.
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Para calcular a <span class="math inline">\(r\)</span>-ésima derivada de <span class="math inline">\(K_X(t)\)</span>, note que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \frac{\partial\kappa_r}{\partial p}&amp;=\frac{\partial}{\partial p}\left[\frac{\partial^r}{\partial t^r}\log[(1-p)+e^tp]\Biggr|_{t=0}\right]
+  =\frac{\partial^r}{\partial t^r}\left[\frac{\partial}{\partial p}\log[(1-p)+e^tp]\Biggr|_{t=0}\right]\\
+  &amp;=\frac{\partial^r}{\partial t^r}\left[\frac{e^t-1}{(1-p)+e^tp}\Biggr|_{t=0}\right].
+\end{align*}\]</span>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Por outra parte,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \kappa_{r+1}&amp;=\frac{\partial^{r+1}}{\partial t^{n+1}}K_X(t)\Biggr|_{t=0}
+  =\frac{\partial^r}{\partial t^r}\left[\frac{\partial}{\partial t}K_X(t)\Biggr|_{t=0}\right]\\
+  &amp;=\frac{\partial^r}{\partial t^r}\left[\frac{e^tp}{(1-p)+e^tp}\Biggr|_{t=0}\right].
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \kappa_{r+1}-p(1-p)\frac{\partial\kappa_r}{\partial p}&amp;=\frac{\partial^r}{\partial t^r}\left[\frac{e^tp}{(1-p)+e^tp}-p(1-p)\frac{e^t-1}{(1-p)+e^tp}\Biggr|_{t=0}\right]\\
+  &amp;=\frac{\partial^r}{\partial t^r}\left[\frac{e^tp^2+p(1-p)}{(1-p)+e^tp}\Biggr|_{t=0}\right]=\frac{\partial^r}{\partial t^r}p=0.
+\end{align*}\]</span>
+</div>
+<p><br></p>
+<p>Dessa forma, para <span class="math inline">\(r&gt;1\)</span> <span class="math display">\[\kappa_{r+1}=p(1-p)\frac{\partial}{\partial p}\kappa_r. \quad\blacksquare\]</span></p>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>Da <a href="#/def-fgm" class="quarto-xref">Definição&nbsp;8</a>, sabemos que <span class="math inline">\(M_X(t)=\mathbb{E}\left[e^{tX}\right]\)</span> existe para todo <span class="math inline">\(|t|&lt;h\)</span>, para algum <span class="math inline">\(h&gt;0\)</span>. Se <span class="math inline">\(\mathbb{E}X^r\)</span> existe para todo <span class="math inline">\(r=1,2,\ldots\)</span>, então</p>
+<p><span class="math display">\[M_X(t)=\sum_{r=0}^\infty \frac{t^r}{r!}\mathbb{E}X^r, \quad |t|&lt;h.\]</span> Dessa forma,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  K_X(t)&amp;=\log M_X(t)=\log\left[\sum_{r=0}^\infty \frac{t^r}{r!}\mathbb{E}X^r\right]
+  =\log\left[1+\sum_{r=1}^\infty \frac{t^r}{r!}\mathbb{E}X^r\right]\\
+  &amp;=\mathbb{E}[X]\, t+\frac{1}{2!}\left[\mathbb{E}X^2-(\mathbb{E}X)^2\right]t^2
+  +\frac{1}{3!}\left[\mathbb{E}X^3-\mathbb{E}X\mathbb{E}X^2-2\left(\mathbb{E}X^2-(\mathbb{E}X)^2\right)\mathbb{E}X\right]t^3+\cdots.
+\end{align*}\]</span>
+</div>
+<p>Daí, <span class="math inline">\(\kappa_1=\mathbb{E}X\)</span>, <span class="math inline">\(\kappa_2=\mathbb{E}X^2-(\mathbb{E}X)^2\)</span>, <span class="math inline">\(\kappa_3=\mathbb{E}X^3-\mathbb{E}X\mathbb{E}X^2-2\left(\mathbb{E}X^2-(\mathbb{E}X)^2\right)\mathbb{E}X=\mathbb{E}\left[(X-\mathbb{E}X)^3\right]\)</span>, <span class="math inline">\(\kappa_4=\mathbb{E}\left[(X-\mathbb{E}X)^4\right]-3\kappa_2^2\)</span>, etc.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="def-fgm_conjunta" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 11 (Função geradora de momentos conjunta)</strong></span> Seja <span class="math inline">\(\mathbf{X}=(X_1,X_2,\ldots,X_n)^\intercal\)</span> uma vetor aleatório de tamanho <span class="math inline">\(n\times1\)</span>. A <em>função geradora de momentos conjunta</em> (FGMC) define-se, como</p>
+<p><span class="math display">\[M_{\mathbf{X}}(\mathbf{t})=\mathbb{E}\left[e^{\mathbf{t}^{\intercal}\mathbf{X}}\right]=\mathbb{E}\left[e^{\sum_{i=1}^nt_iX_i}\right],\]</span> se existe para todos os vetores reais <span class="math inline">\(\mathbf{t}=(t_1,t_2,\ldots,t_n)^{\intercal}\)</span> que pertencem a um retângulo fechado <span class="math inline">\(H\)</span>, tal que</p>
+<p><span class="math display">\[H=[-h_1,h_1]\times[-h_2,h_2]\times\cdots\times[-h_n,h_n]\subset\mathbb{R}^n,\]</span> com <span class="math inline">\(h_i&gt;0\)</span> para todo <span class="math inline">\(i=1,2,3,\ldots, n\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-fgmc_exponencial" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 20</strong></span> Seja <span class="math inline">\(\mathbf{X}=(X_1,X_2)^{\intercal}\)</span> um vetor aleatório de uma população com função de densidade conjunta dada por</p>
+<p><span class="math display">\[f(x_1,x_2)=e^{-(x_1+x_2)}, \quad x_1&gt;0, x_2&gt;0.\]</span></p>
+<p>Calcule a FGMC da distribuição de <span class="math inline">\(\mathbf{X}=(X_1,X_2)^{\intercal}\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Pela <a href="#/def-fgm_conjunta" class="quarto-xref">Definição&nbsp;11</a>, sabemos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  M_{\mathbf{X}}(\mathbf{t}) &amp;= \mathbb{E}\left[e^{\mathbf{t}^{\intercal}\mathbf{X}}\right]
+  = \mathbb{E}[e^{t_1X_1+t_2X_2}] = \int_{0}^\infty \int_{0}^\infty  e^{t_1x_1+t_2x_2}e^{-(x_1+x_2)}\,dx_1dx_2 \\
+  &amp;= \int_{0}^\infty \int_{0}^\infty e^{(t_1-1)x_1}e^{(t_2-1)x_2}\,dx_1dx_2
+  = \int_{0}^\infty e^{(t_1-1)x_1}\,dx_1 \int_{0}^\infty e^{(t_2-1)x_2}\,dx_2\\
+  &amp;= \frac{1}{(1-t_1)(1-t_2)}. \quad\blacksquare
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-fgmc_chisq" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 21</strong></span> Seja <span class="math inline">\(X_1,X_2\)</span> uma amostra aleatória de uma população com distribuição normal padrão. Encontre as distribuições de <span class="math inline">\(2X_1X_2\)</span> e <span class="math inline">\(X_2^2-X_1^2\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que <span class="math inline">\(X_1\)</span> e <span class="math inline">\(X_2\)</span> são variáveis aleatórias independentes e identicamente distribuidas com distribuição <span class="math inline">\(N(0,1)\)</span>. Seja <span class="math inline">\(U=2X_1X_2\)</span>, então</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}\left[e^{tU}\right]&amp;=\mathbb{E}\left[e^{2tX_1X_2}\right]=
+      \frac{1}{2\pi}\int_{-\infty}^\infty\int_{-\infty}^\infty e^{2tx_1x_2}e^{-\frac12(x_1^2+x_2^2)}\,dx_1dx_2\\ \\
+      &amp;=\frac{1}{2\pi}\int_{-\infty}^\infty e^{-\frac12x_2^2}\int_{-\infty}^\infty e^{-\frac12x_1^2}e^{2tx_1x_2}\,dx_1dx_2\\ \\
+      &amp;=\frac{1}{2\pi}\int_{-\infty}^\infty \exp\left\{-\frac12x_2^2\right\}\exp\left\{2t^2x_2^2\right\}\int_{-\infty}^\infty \exp\left\{-\frac12\left(x_1-2tx_2\right)^2\right\}\,dx_1dx_2
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \mathbb{E}\left[e^{tU}\right]&amp;=\frac{1}{2\pi}\int_{-\infty}^\infty \exp\left\{-\frac12x_2^2\right\}\exp\left\{2t^2x_2^2\right\}\int_{-\infty}^\infty \exp\left\{-\frac12\left(x_1-2tx_2\right)^2\right\}\,dx_1dx_2\\ \\
+      &amp;=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\left\{-\frac12\left(1-4t^2\right)x_ 2^2\right\}\,dx_2\\ \\
+      &amp;=\left(1-4t^2\right)^{-\frac12}, \quad t^2&lt;\frac14 \text{ ou } |t|&lt;\frac12. \quad\checkmark
+\end{align*}\]</span>
+</div>
+<p>Considerando <span class="math inline">\(t^*=t^2\)</span>, então <span class="math inline">\(\mathbb{E}\left[e^{t^*U}\right]=\left(1-4t^*\right)^{-\frac12}\)</span>, com <span class="math inline">\(t^*&lt;\frac{1}{4}\)</span>, i.e., a função geradora de momentos de uma <span class="math inline">\(Gama(\frac12,\frac14)\)</span>. Dessa forma, <span class="math inline">\(2X_1X_2\)</span> tem distribuição <span class="math inline">\(2\chi_{(1)}^2\)</span> ou <span class="math inline">\(Gama\left(\frac12,\frac14\right)\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<p>Por outro lado, seja <span class="math inline">\(V=X_2^2-X_1^2\)</span>, então</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+      \mathbb{E}\left[e^{tV}\right]&amp;=\mathbb{E}\left[e^{t\left(X_2^2-X_1^2\right)}\right]=\mathbb{E}\left[e^{tX_2^2}\right]\mathbb{E}\left[e^{- tX_1^2}\right]=\left(1-2t\right)^{-\frac12}\left(1+2t\right)^{-\frac12}\\
+      &amp;=\left[\left(1-2t\right)\left(1+2t\right)\right]^{-\frac12}=\left(1-4t^2\right)^{-\frac12}, \quad t^2&lt;\frac14 \text{ ou } |t|&lt;\frac12.
+\end{align*}\]</span>
+</div>
+<p>Pelo <a href="#/thm-fgm_unicidade" class="quarto-xref">Teorema&nbsp;3</a>, temos que <span class="math inline">\(U\)</span> e <span class="math inline">\(V\)</span> seguem a mesma distribuição <span class="math inline">\(2\chi_{(1)}^2\)</span> ou <span class="math inline">\(gama(\frac12,\frac14)\quad\blacksquare\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<div id="exm-fgmc_normalp" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 22</strong></span> Seja <span class="math inline">\(X_1,X_2\)</span> uma amostra aleatória de uma população com distribuição normal padrão. Calcule a FGMC do vetor <span class="math inline">\((Y,Z)\)</span>, onde <span class="math inline">\(Y=X_1+X_2\)</span> e <span class="math inline">\(Z=X_1^2+X_2^2\)</span>. As variáveis <span class="math inline">\(Y\)</span> e <span class="math inline">\(Z\)</span> são correlacionadas?</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+      M(t_1,t_2)&amp;=\mathbb{E}\left[e^{t_1Y+t_2Z}\right]=\mathbb{E}\left[e^{t_1(X_1+X_2)+t_2\left(X_1^2+X_2^2\right)}\right]\\ \\
+      &amp;=\mathbb{E}\left[\exp\left\{t_1X_1+t_1X_2+t_2X_1^2+t_2X_2^2\right\}\right]\\ \\
+      &amp;=\mathbb{E}\left[\exp\left\{t_1X_1+t_2X_1^2\right\}\right]\mathbb{E}\left[\exp\left\{t_1X_2+t_2X_2^2\right\}\right].
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Por outra parte, temos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+      \mathbb{E}\left[e^{t_1X_1+t_2X_1^2}\right]&amp;=\int_{-\infty}^\infty e^{t_1x_1+t_2x_1^2}\frac{1}{\sqrt{2\pi}} e^{-\frac12x_1^2}\,dx_1\\ \\
+      &amp;=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\left\{t_1x_1+\left(t_2-\frac12\right)x_1^2\right\}\,dx_1\\ \\
+      &amp;=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\left\{-\frac12(1-2t_2)\left(x_1^2-\frac{2t_1}{1-2t_2}x_1\right)\right\}\,dx_1,\\ \\
+\end{align*}\]</span>
+</div>
+<p>onde <span class="math inline">\(t_1\in\mathbb{R}\)</span> e <span class="math inline">\(t_2\in\left(-\infty,\frac12\right)\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<div class="math">
+<span class="math display">\[\begin{align*}
+      \mathbb{E}\left[e^{t_1X_1+t_2X_1^2}\right]&amp;=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\left\{-\frac12(1-2t_2)\left(x_1^2-\frac{2t_1}{1-2t_2}x_1\right)\right\}\,dx_1\\ \\
+      &amp;=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\left\{-\frac12(1-2t_2)\left[\left(x_1-\frac{t_1}{1-2t_2}\right)^2\right.\right.\\
+      &amp;\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\left.\left.-\frac{t_1^2}{(1-2t_2)^2}\right]\right\}\,dx_1\\ \\
+      &amp;=\frac{1}{\sqrt{1-2t_2}}\exp\left\{\frac12\frac{t_1^2}{1-2t_2}\right\}. \quad \checkmark
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+      M(t_1,t_2)&amp;=\mathbb{E}\left[\exp\left\{t_1X_1+t_2X_1^2\right\}\right]\mathbb{E}\left[\exp\left\{t_1X_2+t_2X_2^2\right\}\right]\\ \\
+      &amp;=\left(\frac{1}{\sqrt{1-2t_2}}\exp\left\{\frac12\frac{t_1^2}{1-2t_2}\right\}\right)^2\\ \\
+      &amp;=\frac{1}{1-2t_2}\exp\left\{\frac{t_1^2}{1-2t_2}\right\}, \quad t_1\in\mathbb{R}, t_2\in\left(-\infty,\frac12\right). \quad\checkmark
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma, temos que:</p>
+<ul>
+<li>Observe que, <span class="math inline">\(M(t_1,0)=M(t_1)=e^{t_1^2}\)</span>, para <span class="math inline">\(t_1\in\mathbb{R}\)</span>, i.e. <span class="math inline">\(Y\)</span> é uma variável aleatória de uma população com distribuição normal com média <span class="math inline">\(0\)</span> e variância <span class="math inline">\(2\)</span>.</li>
+</ul>
+<p><br></p>
+<ul>
+<li>Por otro lado, <span class="math inline">\(M(0,t_2)=M(t_2)=\frac{1}{1-2t_2}\)</span>, para <span class="math inline">\(-\infty&lt;t_2&lt;\frac12\)</span>, i.e., <span class="math inline">\(Z\)</span> é uma variável aleatória de uma população com distribuição qui-quadrado com <span class="math inline">\(2\)</span> graus de liberdade.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p>Para verificar se <span class="math inline">\(Y\)</span> e <span class="math inline">\(Z\)</span> são correlacionadas, calcula-se a correlação entre as duas variáveis aleatórias. Assim,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+      \mathbb{E}YZ=\frac{\partial^2}{\partial t_1\partial t_2}M(t_1,t_2)\Biggr|_{(t_1,t_2)=(0,0)}
+      &amp;=\frac{\partial}{\partial t_1}\left[\frac{\partial}{\partial t_2}M(t_1,t_2)\right]\Biggr|_{(t_1,t_2)=(0,0)}\\       &amp;=\frac{4t_1\exp\left\{\frac{t^2_1}{1-2t_2}\right\}(-4t_2+t_1^2+2)}{(1-2t_2)^4}\Biggr|_{(t_1,t_2)=(0,0)}\\
+      &amp;=0.
+\end{align*}\]</span>
+</div>
+<p>Daí, <span class="math inline">\(\mathrm{Cov}[Y,Z]=\mathbb{E}YZ-\mathbb{E}Y\mathbb{E}Z=0\)</span>, i.e., as variáveis <span class="math inline">\(Y\)</span> e <span class="math inline">\(Z\)</span> são não-correlacionadas.<span class="math inline">\(\quad\blacksquare\)</span></p>
+</section>
 <section id="tipos-de-convergência" class="slide level2 center" data-background-color="#172a46">
 <h2>Tipos de convergência</h2>
 </section>
 <section class="slide level2">
 
 <div id="def-conv_prob" class="theorem definition">
-<p><span class="theorem-title"><strong>Definição 9 (Convergência em probabilidade)</strong></span> Uma sequência <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> de variáveis aleatórias <em>converge em probabilidade</em> para uma variável aleatória <span class="math inline">\(X\)</span> se, para todo <span class="math inline">\(\epsilon&gt;0\)</span>, <span class="math display">\[\lim_{n\to\infty}\mathbb{P}\left[\left|X_n-X\right|\le\epsilon\right]=1.\]</span> Denotamos <span class="math inline">\(X_n\overset{p}{\longrightarrow}X.\)</span></p>
+<p><span class="theorem-title"><strong>Definição 12 (Convergência em probabilidade)</strong></span> Uma sequência <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> de variáveis aleatórias <em>converge em probabilidade</em> para uma variável aleatória <span class="math inline">\(X\)</span> se, para todo <span class="math inline">\(\epsilon&gt;0\)</span>, <span class="math display">\[\lim_{n\to\infty}\mathbb{P}\left[\left|X_n-X\right|\le\epsilon\right]=1.\]</span> Denotamos <span class="math inline">\(X_n\overset{p}{\longrightarrow}X.\)</span></p>
 </div>
 <p><br></p>
 <div class="fragment fade-in" data-fragment-index="1">
@@ -905,7 +1340,7 @@ LECON/DEST - UFES
 <section class="slide level2">
 
 <div id="exm-exemplo6" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 15</strong></span> Seja <span class="math inline">\(X_1, X_2, X_3, \cdots\)</span> uma sequência de variáveis aleatórias de uma população com distribuição Exponencial com parâmetro <span class="math inline">\(n\)</span>. Mostre que <span class="math inline">\(X_n \overset{p}{\longrightarrow} X\)</span>, onde <span class="math inline">\(X\)</span> é uma variável aleatória nula.</p>
+<p><span class="theorem-title"><strong>Exemplo 23</strong></span> Seja <span class="math inline">\(X_1, X_2, X_3, \cdots\)</span> uma sequência de variáveis aleatórias de uma população com distribuição Exponencial com parâmetro <span class="math inline">\(n\)</span>. Mostre que <span class="math inline">\(X_n \overset{p}{\longrightarrow} X\)</span>, onde <span class="math inline">\(X\)</span> é uma variável aleatória nula.</p>
 <p><br></p>
 <div class="fragment fade-in" data-fragment-index="1">
 <p>Temos que,</p>
@@ -919,7 +1354,7 @@ LECON/DEST - UFES
 <p><br></p>
 <div class="fragment fade-in" data-fragment-index="2">
 <div id="exm-exemplo7" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 16</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória e seja <span class="math inline">\(X_n=X+Y_n\)</span>, onde <span class="math inline">\(\mathbb{E}Y_n=\frac{1}{n}\)</span> e <span class="math inline">\(\mathrm{Var}(Y_n)=\frac{\sigma^2}{n}\)</span>, com <span class="math inline">\(\sigma&gt;0\)</span>. Prove que <span class="math inline">\(X_n \overset{p}{\longrightarrow} X\)</span>.</p>
+<p><span class="theorem-title"><strong>Exemplo 24</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória e seja <span class="math inline">\(X_n=X+Y_n\)</span>, onde <span class="math inline">\(\mathbb{E}Y_n=\frac{1}{n}\)</span> e <span class="math inline">\(\mathrm{Var}(Y_n)=\frac{\sigma^2}{n}\)</span>, com <span class="math inline">\(\sigma&gt;0\)</span>. Prove que <span class="math inline">\(X_n \overset{p}{\longrightarrow} X\)</span>.</p>
 </div>
 </div>
 </section>
@@ -999,11 +1434,11 @@ LECON/DEST - UFES
 <section class="slide level2">
 
 <div id="def-conv_qc" class="theorem definition">
-<p><span class="theorem-title"><strong>Definição 10</strong></span> Uma sequência <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> de variáveis aleatórias <em>converge quase-certamente</em> para uma variável aleatória <span class="math inline">\(X\)</span> se <span class="math display">\[\mathbb{P}\left[\lim_{n\to\infty} X_n=X\right]=1.\]</span> Denotamos <span class="math inline">\(X_n\overset{q.c}{\longrightarrow}X.\)</span></p>
+<p><span class="theorem-title"><strong>Definição 13</strong></span> Uma sequência <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> de variáveis aleatórias <em>converge quase-certamente</em> para uma variável aleatória <span class="math inline">\(X\)</span> se <span class="math display">\[\mathbb{P}\left[\lim_{n\to\infty} X_n=X\right]=1.\]</span> Denotamos <span class="math inline">\(X_n\overset{q.c}{\longrightarrow}X.\)</span></p>
 </div>
 <p><br></p>
 <div id="exm-exemplo8" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 17 (convergência quase-certa)</strong></span> Seja <span class="math inline">\(\{X_n\}\)</span> uma sequência de variáveis aleatórias definidas por</p>
+<p><span class="theorem-title"><strong>Exemplo 25 (convergência quase-certa)</strong></span> Seja <span class="math inline">\(\{X_n\}\)</span> uma sequência de variáveis aleatórias definidas por</p>
 <div class="math">
 <p><span class="math display">\[\begin{align*}
     X_n&amp;=\begin{cases}
@@ -1039,11 +1474,11 @@ LECON/DEST - UFES
 <section class="slide level2">
 
 <div id="def-conv_dist" class="theorem definition">
-<p><span class="theorem-title"><strong>Definição 11</strong></span> Uma sequência <span class="math inline">\(X_1,X_2,\ldots\)</span> de variáveis aleatórias <em>converge em distribuição</em> para uma variável aleatória <span class="math inline">\(X\)</span> se <span class="math display">\[\lim_{n\to\infty}F_n(x)=F(x),\]</span> para todo <span class="math inline">\(x\in\mathbb{R}\)</span> no qual <span class="math inline">\(F\)</span> é contínua. As funções <span class="math inline">\(F_n\)</span> e <span class="math inline">\(F\)</span> são as funções de distribuição acumulada das variáveis aleatórias <span class="math inline">\(X_n\)</span> e <span class="math inline">\(X\)</span>, respectivamente. Denotamos <span class="math inline">\(X_n\overset{d}{\longrightarrow}X.\)</span></p>
+<p><span class="theorem-title"><strong>Definição 14</strong></span> Uma sequência <span class="math inline">\(X_1,X_2,\ldots\)</span> de variáveis aleatórias <em>converge em distribuição</em> para uma variável aleatória <span class="math inline">\(X\)</span> se <span class="math display">\[\lim_{n\to\infty}F_n(x)=F(x),\]</span> para todo <span class="math inline">\(x\in\mathbb{R}\)</span> no qual <span class="math inline">\(F\)</span> é contínua. As funções <span class="math inline">\(F_n\)</span> e <span class="math inline">\(F\)</span> são as funções de distribuição acumulada das variáveis aleatórias <span class="math inline">\(X_n\)</span> e <span class="math inline">\(X\)</span>, respectivamente. Denotamos <span class="math inline">\(X_n\overset{d}{\longrightarrow}X.\)</span></p>
 </div>
 <p><br></p>
 <div id="exm-exemplo9" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 18</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots\)</span> uma sequência de variáveis aleatórias independentes e identicamente distribuidas (i.i.d.), com <span class="math inline">\(\mathbb{E}[X_n]=p\)</span> e <span class="math inline">\(\mathrm{var}[X_n]=p(1-p)\)</span>. Então,</p>
+<p><span class="theorem-title"><strong>Exemplo 26</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots\)</span> uma sequência de variáveis aleatórias independentes e identicamente distribuidas (i.i.d.), com <span class="math inline">\(\mathbb{E}[X_n]=p\)</span> e <span class="math inline">\(\mathrm{var}[X_n]=p(1-p)\)</span>. Então,</p>
 <p><span class="math display">\[\frac{\sqrt{n}(X_n-p)}{\left[p(1-p)\right]^{1/2}}\overset{d}{\longrightarrow}{\cal N}(0,1).\]</span></p>
 </div>
 </section>
@@ -1149,7 +1584,7 @@ LECON/DEST - UFES
 <section class="slide level2">
 
 <div id="exm-xbar_gamma" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 19</strong></span> Seja <span class="math inline">\(X_,X_2,\ldots, X_n\)</span> uma amostra aleatória de uma população com função de densidade <span class="math inline">\(f(x;\theta)=\theta e^{-\theta x}\mathbb{I}_{(0,\infty)}(x)\)</span>. Qual a distribuição de <span class="math inline">\(\bar{X}_n\)</span>?</p>
+<p><span class="theorem-title"><strong>Exemplo 27</strong></span> Seja <span class="math inline">\(X_,X_2,\ldots, X_n\)</span> uma amostra aleatória de uma população com função de densidade <span class="math inline">\(f(x;\theta)=\theta e^{-\theta x}\mathbb{I}_{(0,\infty)}(x)\)</span>. Qual a distribuição de <span class="math inline">\(\bar{X}_n\)</span>?</p>
 </div>
 <p><br></p>
 <div class="fragment fade-in" data-fragment-index="1">
@@ -1202,11 +1637,11 @@ LECON/DEST - UFES
 <section class="slide level2">
 
 <div id="def-conv_dist" class="theorem definition">
-<p><span class="theorem-title"><strong>Definição 12 (Estatística)</strong></span> Uma <strong>Estatística</strong> é uma função de variáveis aleatórias (observáveis), a qual é variável aleatória e não depende de parâmetros desconhecidos.</p>
+<p><span class="theorem-title"><strong>Definição 15 (Estatística)</strong></span> Uma <strong>Estatística</strong> é uma função de variáveis aleatórias (observáveis), a qual é variável aleatória e não depende de parâmetros desconhecidos.</p>
 </div>
 <p><br></p>
 <div id="exm-exemplo10" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 20</strong></span> Sendo <span class="math inline">\(X, X_1,X_2,\ldots,X_n\)</span> variáveis aleatórias, então <span class="math display">\[X,\, X^2,\, X+ 3,\, X+\log X,\, \frac1n\sum_{i=1}^nX_i,\, \min\{X_1,X_2,\ldots,X_n\}\]</span> são <em>Estatísticas</em>.</p>
+<p><span class="theorem-title"><strong>Exemplo 28</strong></span> Sendo <span class="math inline">\(X, X_1,X_2,\ldots,X_n\)</span> variáveis aleatórias, então <span class="math display">\[X,\, X^2,\, X+ 3,\, X+\log X,\, \frac1n\sum_{i=1}^nX_i,\, \min\{X_1,X_2,\ldots,X_n\}\]</span> são <em>Estatísticas</em>.</p>
 </div>
 <p><br></p>
 <div class="callout callout-tip callout-titled callout-style-default">
@@ -1226,7 +1661,7 @@ LECON/DEST - UFES
 <section class="slide level2">
 
 <div id="def-momento_amostral" class="theorem definition">
-<p><span class="theorem-title"><strong>Definição 13</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade de probabilidade (ou função de probabilidade de massa), denotada por <span class="math inline">\(f(\cdot;\theta)\)</span><sup><font size="5">1</font></sup>.</p>
+<p><span class="theorem-title"><strong>Definição 16</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade de probabilidade (ou função de probabilidade de massa), denotada por <span class="math inline">\(f(\cdot;\theta)\)</span><sup><font size="5">1</font></sup>.</p>
 <p>O <span class="math inline">\(r\)</span>-ésimo momento amostral em torno de zero define-se como:</p>
 <p><span class="math display">\[M_r'=\frac1n\sum_{i=1}^nX_i^r.\]</span></p>
 </div>
@@ -1276,7 +1711,7 @@ LECON/DEST - UFES
 <div class="box">
 <div id="thm-conv_momentos" class="theorem">
 <p><span class="theorem-title"><strong>Teorema 8</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população cujo momento <span class="math inline">\(\mu_{2r}\)</span> existe. Então,</p>
-<p><span class="math display">\[M'_r\overset{p}{\longrightarrow}\mu'_r,\]</span> onde <span class="math inline">\(M'_r\)</span> e <span class="math inline">\(\mu'_r\)</span> são apresentadas na <a href="#/def-momento_amostral" class="quarto-xref">Definição&nbsp;13</a> e <a href="#/def-momento_populacional" class="quarto-xref">Definição&nbsp;5</a>, respectivamente.</p>
+<p><span class="math display">\[M'_r\overset{p}{\longrightarrow}\mu'_r,\]</span> onde <span class="math inline">\(M'_r\)</span> e <span class="math inline">\(\mu'_r\)</span> são apresentadas na <a href="#/def-momento_amostral" class="quarto-xref">Definição&nbsp;16</a> e <a href="#/def-momento_populacional" class="quarto-xref">Definição&nbsp;5</a>, respectivamente.</p>
 </div>
 </div>
 <p><br></p>
@@ -1287,12 +1722,12 @@ LECON/DEST - UFES
 <section class="slide level2">
 
 <div id="def-variancia" class="theorem definition">
-<p><span class="theorem-title"><strong>Definição 14 (Variância amostral)</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade de probabilidade <span class="math inline">\(f(\cdot;\theta)\)</span>. A <em>variância amostral</em> define-se como: <span class="math display">\[S_n^2=\frac{1}{n-1}\sum_{i=1}^n\left(X_i-\bar{X}\right)^2, \quad n&gt;1.\]</span></p>
+<p><span class="theorem-title"><strong>Definição 17 (Variância amostral)</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade de probabilidade <span class="math inline">\(f(\cdot;\theta)\)</span>. A <em>variância amostral</em> define-se como: <span class="math display">\[S_n^2=\frac{1}{n-1}\sum_{i=1}^n\left(X_i-\bar{X}\right)^2, \quad n&gt;1.\]</span></p>
 </div>
 <p><br></p>
 <div class="box2">
 <div id="exr-exercicio1" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercício 1</strong></span> Mostre que <span class="math inline">\(\mathbb{E}\left[S_n^2\right]=\sigma^2\)</span> e<br>
+<p><span class="theorem-title"><strong>Exercício 3</strong></span> Mostre que <span class="math inline">\(\mathbb{E}\left[S_n^2\right]=\sigma^2\)</span> e<br>
 <span class="math display">\[\mathrm{var}\left[S_n^2\right]=\frac1n\left(\mu_4-\frac{n-3}{n-1}\sigma^4\right), \quad n&gt;1,\]</span> onde <span class="math inline">\(\mu_r = \mathbb{E}[X-\mu]^r\)</span>.</p>
 </div>
 </div>
@@ -1342,7 +1777,7 @@ LECON/DEST - UFES
 <p><br><br></p>
 <div class="fragment fade-in" data-fragment-index="1">
 <div id="exm-dist_s2" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 21</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span>. Sejam <span class="math inline">\(\bar{X}_n=\frac1n\sum_{i=1}^nX_i\)</span> e <span class="math inline">\(S^2_n=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X}_n)^2\)</span>. Mostre que <span class="math inline">\(\frac{(n-1)S^2_n}{\sigma^2}\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(n-1)}\)</span>.</p>
+<p><span class="theorem-title"><strong>Exemplo 29</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span>. Sejam <span class="math inline">\(\bar{X}_n=\frac1n\sum_{i=1}^nX_i\)</span> e <span class="math inline">\(S^2_n=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X}_n)^2\)</span>. Mostre que <span class="math inline">\(\frac{(n-1)S^2_n}{\sigma^2}\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(n-1)}\)</span>.</p>
 </div>
 </div>
 </section>
@@ -1444,7 +1879,7 @@ LECON/DEST - UFES
 </ol>
 <p><br></p>
 <ol start="2" type="1">
-<li>Vide <a href="#/exm-dist_s2" class="quarto-xref">Exemplo&nbsp;21</a>;</li>
+<li>Vide <a href="#/exm-dist_s2" class="quarto-xref">Exemplo&nbsp;29</a>;</li>
 </ol>
 </div>
 </div>
