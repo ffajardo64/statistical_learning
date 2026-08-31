@@ -166,7 +166,7 @@ Amostragem e distribuições amostrais<br>
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 18 agosto, 2026
+            Última atualização: 31 agosto, 2026
           </p>
     </div>
 </div>
@@ -700,7 +700,7 @@ LECON/DEST - UFES
 <section class="slide level2">
 
 <div id="exm-r_momento_cor" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 12</strong></span> Seja <span class="math inline">\(X_1,X_2\)</span> uma amostra aleatória de uma população com densidade conjunta dada por <span class="math display">\[f(x; a)=a^2e^{-ax_2}, \quad 0&lt;x_1&lt;x_2&lt;\infty, \quad a&gt;0.\]</span> Encontre <span class="math inline">\(\mathbb{E}X^r_1\)</span>, <span class="math inline">\(\mathbb{E}X^r_2\)</span>, para <span class="math inline">\(r=1,2,3,\ldots\)</span>, e <span class="math inline">\(\mathrm{Corr}[X_1,X_2]\)</span>.</p>
+<p><span class="theorem-title"><strong>Exemplo 12</strong></span> Seja <span class="math inline">\(X_1,X_2\)</span> duas variáveis aleatórias de uma população com densidade conjunta dada por <span class="math display">\[f(x; a)=a^2e^{-ax_2}, \quad 0&lt;x_1&lt;x_2&lt;\infty, \quad a&gt;0.\]</span> Encontre <span class="math inline">\(\mathbb{E}X^r_1\)</span>, <span class="math inline">\(\mathbb{E}X^r_2\)</span>, para <span class="math inline">\(r=1,2,3,\ldots\)</span>, e <span class="math inline">\(\mathrm{Corr}[X_1,X_2]\)</span>.</p>
 </div>
 <p><br></p>
 <div class="fragment fade-in" data-fragment-index="1">
@@ -1346,7 +1346,7 @@ LECON/DEST - UFES
 <p>Temos que,</p>
 <div class="math">
 <p><span class="math display">\[\begin{align*}
-    \lim_{n \rightarrow \infty} P\big(|X_n-0| \geq \epsilon \big) &amp;=\lim_{n \rightarrow \infty} P\left(X_n     \geq \epsilon \right)=\lim_{n \rightarrow \infty} e^{-n\epsilon}=0. \quad\blacksquare
+    \lim_{n \rightarrow \infty} \mathbb{P}\big(|X_n-0| \geq\epsilon\big) &amp;=\lim_{n \rightarrow \infty} \mathbb{P}\left(X_n\geq\epsilon\right)=\lim_{n\rightarrow\infty} e^{-n\epsilon}=0. \quad\blacksquare
   \end{align*}\]</span></p>
 </div>
 </div>
@@ -1354,20 +1354,20 @@ LECON/DEST - UFES
 <p><br></p>
 <div class="fragment fade-in" data-fragment-index="2">
 <div id="exm-exemplo7" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 24</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória e seja <span class="math inline">\(X_n=X+Y_n\)</span>, onde <span class="math inline">\(\mathbb{E}Y_n=\frac{1}{n}\)</span> e <span class="math inline">\(\mathrm{Var}(Y_n)=\frac{\sigma^2}{n}\)</span>, com <span class="math inline">\(\sigma&gt;0\)</span>. Prove que <span class="math inline">\(X_n \overset{p}{\longrightarrow} X\)</span>.</p>
+<p><span class="theorem-title"><strong>Exemplo 24</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória e seja <span class="math inline">\(X_n=X+Y_n\)</span>, onde <span class="math inline">\(\mathbb{E}Y_n=\frac{1}{n}\)</span> e <span class="math inline">\(\mathrm{var}(Y_n)=\frac{\sigma^2}{n}\)</span>, com <span class="math inline">\(\sigma&gt;0\)</span>. Prove que <span class="math inline">\(X_n \overset{p}{\longrightarrow} X\)</span>.</p>
 </div>
 </div>
 </section>
 <section class="slide level2">
 
 <p>Sejam <span class="math inline">\(a=Y_n-\mathbb{E}Y_n\)</span> e <span class="math inline">\(b=\mathbb{E}Y_n=\frac1n\)</span>, daí</p>
-<p><span class="math display">\[|Y_n| \leq \left|Y_n-\mathbb{E}Y_n\right|+\frac{1}{n}\]</span> Dessa forma, para qualquer <span class="math inline">\(\epsilon&gt;0\)</span>, temos que</p>
+<p><span class="math display">\[|Y_n| \leq \left|Y_n-\mathbb{E}Y_n\right|+\frac{1}{n}.\]</span> Dessa forma, para qualquer <span class="math inline">\(\epsilon&gt;0\)</span>, temos que</p>
 <div class="math">
 <p><span class="math display">\[\begin{align*}
-    P\left(|X_n-X| \geq \epsilon \right)&amp;=P\left(|Y_n| \geq \epsilon \right)
-    \leq P\left(\left|Y_n-EY_n\right|+\frac{1}{n} \geq \epsilon \right)\\
-    &amp; = P\left(\left|Y_n-EY_n\right|\geq \epsilon-\frac{1}{n} \right)
-     \leq \frac{\mathrm{Var}(Y_n)}{\left(\epsilon-\frac{1}{n} \right)^2} \\
+    \mathbb{P}\left(|X_n-X| \geq \epsilon \right)&amp;=\mathbb{P}\left(|Y_n| \geq \epsilon \right)
+    \leq \mathbb{P}\left(\left|Y_n-\mathbb{E}Y_n\right|+\frac{1}{n} \geq \epsilon \right)\\
+    &amp; = \mathbb{P}\left(\left|Y_n-\mathbb{E}Y_n\right|\geq \epsilon-\frac{1}{n} \right)
+     \leq \frac{\mathrm{var}(Y_n)}{\left(\epsilon-\frac{1}{n} \right)^2} \\
     &amp;= \frac{\sigma^2}{n \left(\epsilon-\frac{1}{n} \right)^2}\longrightarrow 0, \quad n\rightarrow \infty.   
     \end{align*}\]</span></p>
 </div>
@@ -1465,7 +1465,7 @@ LECON/DEST - UFES
 <p><strong>Desigualdade de Tchebyshev</strong></p>
 </div>
 <div class="callout-content">
-<p>Seja <span class="math inline">\(X\)</span> uma variável aleatória com média <span class="math inline">\(\mu\)</span> e variância 0&lt;^2&lt;. Para qualquer <span class="math inline">\(k&gt;0\)</span>,</p>
+<p>Seja <span class="math inline">\(X\)</span> uma variável aleatória com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(0&lt;\sigma^2&lt;\infty\)</span>. Para qualquer <span class="math inline">\(k&gt;0\)</span>,</p>
 <p><span class="math display">\[\mathbb{P}\left[|X-\mu|\ge k\sigma\right]\ge\frac{1}{k^2}.\]</span></p>
 </div>
 </div>
@@ -1584,7 +1584,7 @@ LECON/DEST - UFES
 <section class="slide level2">
 
 <div id="exm-xbar_gamma" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 27</strong></span> Seja <span class="math inline">\(X_,X_2,\ldots, X_n\)</span> uma amostra aleatória de uma população com função de densidade <span class="math inline">\(f(x;\theta)=\theta e^{-\theta x}\mathbb{I}_{(0,\infty)}(x)\)</span>. Qual a distribuição de <span class="math inline">\(\bar{X}_n\)</span>?</p>
+<p><span class="theorem-title"><strong>Exemplo 27</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots, X_n\)</span> uma amostra aleatória de uma população com função de densidade <span class="math inline">\(f(x;\theta)=\theta e^{-\theta x}\mathbb{I}_{(0,\infty)}(x)\)</span>. Qual a distribuição de <span class="math inline">\(\bar{X}_n\)</span>?</p>
 </div>
 <p><br></p>
 <div class="fragment fade-in" data-fragment-index="1">
