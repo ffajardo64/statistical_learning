@@ -166,7 +166,7 @@ Amostragem e distribuições amostrais<br>
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 31 agosto, 2026
+            Última atualização: 21 setembro, 2026
           </p>
     </div>
 </div>
@@ -1855,13 +1855,85 @@ LECON/DEST - UFES
 </section>
 <section class="slide level2">
 
-<p>==== Método do JACOBIANO ====</p>
+<div class="box">
+<div id="thm-jacobiano" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 11</strong></span> Seja <span class="math inline">\(X_1, X_2,\ldots,X_n\)</span> uma sequência de variáveis aleatórias contínuas com função de densidade <span class="math inline">\(f_{X_1, X_2,\ldots,X_n}(x_1,x_2,\ldots, x_n):=f(x_1,x_2,\ldots, x_n)\)</span>. Seja <span class="math inline">\(\varkappa=\left\{(x_1,x_2,\ldots,x_n)\in \mathbb{R}^n:\right.\)</span> <span class="math inline">\(\left.f(x_1,x_2,\ldots, x_n)&gt;0\right\}\)</span>. Suponha que o conjunto <span class="math inline">\(\varkappa\)</span> pode ser particionado nos subconjuntos <span class="math inline">\(\varkappa_1, \varkappa_2, \ldots, \varkappa_m\)</span>, tal que <span class="math inline">\(y_1=g_2(x_1,\ldots,x_n), y_2=g_2(x_1,\ldots,x_n), \ldots, y_n=g_n(x_1,\ldots,x_n)\)</span> é uma transformação <span class="math inline">\(1-1\)</span> de <span class="math inline">\(\varkappa_i\)</span> em <span class="math inline">\(\cal{D}\)</span>, para <span class="math inline">\(i=1,2,\ldots, m\)</span>. Seja <span class="math inline">\(x_1=g_{1i}^{-1}(y_1,y_2,\ldots,y_n), x_2=g_{2i}^{-1}(y_1,y_2,\ldots,y_n), \ldots, x_n=g_{ni}^{-1}(y_1,y_2,\ldots,y_n)\)</span> a transformação inversa de <span class="math inline">\(\cal{D}\)</span> em <span class="math inline">\(\varkappa_i\)</span>, para <span class="math inline">\(i=1,2,\ldots, m\)</span>. Então,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+f_{Y_1,Y_2,\ldots,Y_n}(y_1,y_2,\ldots,y_n)&amp;=
+\sum_{i=1}^mf_{X_1,X_2,\ldots,X_n}(g_{1i}^{-1}(y_1,y_2,\ldots,y_n), g_{2i}^{-1}(y_1,y_2,\ldots,y_n), \ldots,\\
+&amp;\hspace{15cm}g_{ni}^{-1}(y_1,y_2,\ldots,y_n))\left|J_i\right|,
+\end{align*}\]</span>
+</div>
+<p>para <span class="math inline">\((y_1,y_2,\ldots,y_n)\in\cal{D}\)</span>, onde, para <span class="math inline">\(i=1,2,\ldots,m\)</span>, <span class="math inline">\(\left|J_i\right|\)</span> representa o módulo do determinante da matriz:</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div class="math">
+<span class="math display">\[\begin{align*}
+J_i&amp;=
+\begin{vmatrix}
+\frac{\partial g_{1i}^{-1}}{\partial y_1} &amp; \frac{\partial g_{1i}^{-1}}{\partial y_2} &amp; \cdots &amp; \frac{\partial g_{1i}^{-1}}{\partial y_n}\\
+\frac{\partial g_{2i}^{-1}}{\partial y_1} &amp; \frac{\partial g_{2i}^{-1}}{\partial y_2} &amp; \cdots &amp; \frac{\partial g_{2i}^{-1}}{\partial y_n}\\
+\frac{\partial g_{3i}^{-1}}{\partial y_1} &amp; \frac{\partial g_{3i}^{-1}}{\partial y_2} &amp; \cdots &amp; \frac{\partial g_{3i}^{-1}}{\partial y_n} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+\frac{\partial g_{ni}^{-1}}{\partial y_1} &amp; \frac{\partial g_{ni}^{-1}}{\partial y_2} &amp; \cdots &amp; \frac{\partial g_{ni}^{-1}}{\partial y_n}
+\end{vmatrix}
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-jacobiano1" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 30</strong></span> Sejam <span class="math inline">\(X_1\)</span> e <span class="math inline">\(X_2\)</span> variáveis aleatórias independentes com distribuição normal padrão. Sejam <span class="math inline">\(Y_1=X_1+X_2\)</span> e <span class="math inline">\(Y_2=\frac{X_1}{X_2}\)</span>. Quais as distribuições de <span class="math inline">\(Y_1\)</span> e <span class="math inline">\(Y_2\)</span>?</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sejam <span class="math inline">\(g_1(x_1,x_2)=x_1+x_2=y_1\)</span> e <span class="math inline">\(g_2(x_1,x_2)=\frac{x_1}{x_2}=y_2\)</span>. Daí, <span class="math inline">\(x_2=\frac{y_1}{1+y_2}\)</span> e <span class="math inline">\(x_1=y_1-x_2=y_1-\frac{y_1}{1+y_2}=\frac{y_1y_2}{1+y_2}\)</span>. Dessa forma, <span class="math inline">\(x_1=g_1^{-1}(y_1, y_2)=\frac{y_1y_2}{1+y_2}\)</span> e <span class="math inline">\(x_2=g_2^{-1}(y_1, y_2)=\frac{y_1}{1+y_2}\)</span>.</p>
+<p>O jacobiano é calculado como</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+|J|&amp;=
+\begin{vmatrix}
+\frac{\partial x_1}{\partial y_1} &amp; \frac{\partial x_1}{\partial y_2}\\
+\frac{\partial x_2}{\partial y_1} &amp; \frac{\partial x_2}{\partial y_2}
+\end{vmatrix}=
+\begin{vmatrix}
+\frac{y_2}{1+y_2} &amp; \frac{y_1}{(1+y_2)^2}\\
+\frac{1}{1+y_2} &amp; -\frac{y_1}{(1+y_2)^2}
+\end{vmatrix}=-\frac{y_1}{(1+y_2)^2}.
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+f_{Y_1,Y_2}(y_1,y_2)&amp;=f_{X_1,X_2}\left(g_1^{-1}(y_1,y_2), g_2^{-1}(y_1,y_2)\right)\\ \\
+&amp;=\frac{1}{2\pi}\exp\left\{-\frac12\left[\left(\frac{y_1y_2}{1+y_2}\right)^2+\left(\frac{y_1}{1+y_2}\right)^2\right]\right\}\frac{|y_1|}{(1+y_2)^2}\\ \\
+&amp;=\frac{1}{2\pi}\frac{|y_1|}{(1+y_2)^2}\exp\left\{-\frac12\left[\frac{y_1^2y_2^2}{(1+y_2)^2}+\frac{y_1^2}{(1+y_2)^2}\right]\right\}\\ \\
+&amp;=\frac{1}{2\pi}\frac{|y_1|}{(1+y_2)^2}\exp\left\{-\frac12\left[\frac{y_1^2(1+y_2^2)}{(1+y_2)^2}\right]\right\}.
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Para encontrar a distribuição marginal de <span class="math inline">\(Y_2\)</span>, temos que</p>
+<p><span class="math display">\[f_{Y_2}(y_2)=\int_{-\infty}^\infty f_{Y_1,Y_2}(y_1,y_2)\,dy_1=\int_{-\infty}^\infty \frac{1}{2\pi}\frac{|y_1|}{(1+y_2)^2}\exp\left\{-\frac12\left[\frac{y_1^2(1+y_2^2)}{(1+y_2)^2}\right]\right\}\,dy_1.\]</span></p>
+<p>Seja <span class="math inline">\(u=\frac12\frac{1+y_2^2}{(1+y_2)^2}y_1^2\)</span>, então <span class="math inline">\(du=\frac{1+y_2^2}{(1+y_2)^2}y_1\,dy_1\)</span>. Daí,</p>
+<p><span class="math display">\[f_{Y_2}(y_2)=\frac{1}{2\pi}\frac{2}{(1+y_2)^2}\frac{(1+y_2)^2}{1+y_2^2}\int_0^\infty e^{-u}\,du=\frac{1}{\pi}\frac{1}{1+y_2^2},\]</span> que representa a função de densidade de probabilidade de uma variável aleatória de uma população cauchy padrão.</p>
 </section>
 <section class="slide level2">
 
 <div class="box">
 <div id="thm-xb_e_s2" class="theorem">
-<p><span class="theorem-title"><strong>Teorema 11</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span>. Sejam <span class="math inline">\(\bar{X}_n=\frac1n\sum_{i=1}^nX_i\)</span> e <span class="math inline">\(S^2_n=\frac{1}{n-1}\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2\)</span>, então</p>
+<p><span class="theorem-title"><strong>Teorema 12</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span>. Sejam <span class="math inline">\(\bar{X}_n=\frac1n\sum_{i=1}^nX_i\)</span> e <span class="math inline">\(S^2_n=\frac{1}{n-1}\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2\)</span>, então</p>
 <ol type="1">
 <li><p><span class="math inline">\(\bar{X}_n\)</span> segue uma distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\frac{\sigma^2}{n}\)</span>;</p></li>
 <li><p><span class="math inline">\(\frac{(n-1)S^2_n}{\sigma^2}\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(n-1)}\)</span>;</p></li>
