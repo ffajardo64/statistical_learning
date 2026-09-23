@@ -166,7 +166,7 @@ Amostragem e distribuições amostrais<br>
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 21 setembro, 2026
+            Última atualização: 22 setembro, 2026
           </p>
     </div>
 </div>
@@ -1853,11 +1853,100 @@ LECON/DEST - UFES
 </div>
 </div>
 </section>
+<section id="transformação-de-variáveis-aleatórias" class="slide level2 center" data-background-color="#172a46">
+<h2>Transformação de variáveis aleatórias</h2>
+</section>
 <section class="slide level2">
 
+<h3 id="método-da-transformação-integral-da-probabilidade">Método da Transformação Integral da Probabilidade</h3>
+<div class="box">
+<div id="thm-inversa" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 11</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória com função de distribuição acumulada contínua <span class="math inline">\(F_X(x)\)</span> e seja <span class="math inline">\(Y\)</span> uma variável aleatória, tal que <span class="math inline">\(Y=F_X(X)\)</span>. Então, <span class="math inline">\(Y\)</span> é uniformemente distribuída no intervalo <span class="math inline">\((0,1)\)</span>.</p>
+</div>
+</div>
+<p><br></p>
+<div id="exm-inversa_exp" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 30</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição uniforme no intervalo <span class="math inline">\((0,1)\)</span>. Qual a distribuição da variável aleatória <span class="math inline">\(Y=-\log X\)</span>?</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que a função de densidade de probabilidade de <span class="math inline">\(X\)</span> é dada por <span class="math inline">\(f(x)=\mathbb{I}_{(0,1)}(x)\)</span>, daí <span class="math inline">\(F_X(x)=\mathbb{P}[X\le x]=x\)</span>.</p>
+<p>Por outra parte, temos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+F_Y(y)&amp;=\mathbb{P}[Y\le y]=\mathbb{P}[-\log X\le y]=\mathbb{P}[\log X\ge y]
+=\mathbb{P}[X\ge e^y]\\
+&amp;=1-\mathbb{P}[X\le e^y]=1-e^y, \quad y&gt;0. \quad\blacksquare
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-inversa_cauchy" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 31</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição uniforme no intervalo <span class="math inline">\((0,1)\)</span>. Qual a distribuição da variável aleatória <span class="math inline">\(Y=\tan\left(\pi\left(X-\frac12\right)\right)\)</span>?</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que a função de densidade de probabilidade de <span class="math inline">\(X\)</span> é dada por <span class="math inline">\(f(x)=\mathbb{I}_{(0,1)}(x)\)</span>, daí <span class="math inline">\(F_X(x)=\mathbb{P}[X\le x]=x\)</span>.</p>
+<p>Dessa forma, temos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+F_Y(y)&amp;=\mathbb{P}[Y\le y]=\mathbb{P}[\tan\left(\pi(X-0.5)\right)\le y]=\mathbb{P}[\pi(X-0.5)\le\arctan y]\\
+&amp;=\mathbb{P}\left[X\le\frac1\pi\arctan y+0.5\right]=\frac1\pi\arctan y+\frac12, \quad y\in\mathbb{R}. \quad\blacksquare
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-inversa_kumaraswamy" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 32</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição uniforme no intervalo <span class="math inline">\((0,1)\)</span>. Qual a distribuição da variável aleatória <span class="math inline">\(Y=\left(1-(1-X)^{1/b}\right)^{1/a}\)</span>, com <span class="math inline">\(a&gt;0\)</span> e <span class="math inline">\(b&gt;0\)</span>?</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que a função de densidade de probabilidade de <span class="math inline">\(X\)</span> é dada por <span class="math inline">\(f(x)=\mathbb{I}_{(0,1)}(x)\)</span>, daí <span class="math inline">\(F_X(x)=\mathbb{P}[X\le x]=x\)</span>.</p>
+<p>Dessa forma, temos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+F_Y(y)&amp;=\mathbb{P}[Y\le y]=\mathbb{P}\left[\left(1-(1-X)^{1/b}\right)^{1/a}\le y\right]\\
+&amp;=\mathbb{P}\left[(1-X)^{1/b}\ge 1-y^a\right]=\mathbb{P}[1-X\ge (1-y^a)^b]\\
+&amp;=\mathbb{P}[X\le 1-(1-y^a)^b]=1-(1-y^a)^b, \quad y\in(0,1). \quad\blacksquare
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-F_chisq" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 33</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição normal padrão. Qual a distribuição da variável aleatória <span class="math inline">\(Y=X^2\)</span>?</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+F_Y(y)&amp;=\mathbb{P}[Y\le y]=\mathbb{P}\left[X^2\le y\right]=\mathbb{P}\left[-\sqrt{y}\le X\le \sqrt{y}\right]\\
+&amp;=\Phi\left(\sqrt{y}\right)-\Phi\left(-\sqrt{y}\right)
+=2\int_0^{\sqrt y}\frac{1}{\sqrt{2\pi}}e^{-\frac12z^2}\,dz\\
+&amp;=\frac{2}{\sqrt{2\pi}}\int_0^y\frac{1}{2\sqrt{u}}e^{-\frac12u}\,du
+\end{align*}\]</span>
+</div>
+<p>Pelo <a href="#/exm-r_momento_gamma" class="quarto-xref">Exemplo&nbsp;6</a>, temos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+\frac{2}{\sqrt{2\pi}}\int_0^y\frac{1}{2\sqrt{u}}e^{-\frac12u}\,du&amp;=
+\frac{1}{\Gamma\left(\frac12\right)}\int_0^y\frac{1}{2\sqrt{u}}e^{-\frac12u}\,du, \quad u&gt;0. \quad\blacksquare
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="método-do-jacobiano">Método do Jacobiano</h3>
 <div class="box">
 <div id="thm-jacobiano" class="theorem">
-<p><span class="theorem-title"><strong>Teorema 11</strong></span> Seja <span class="math inline">\(X_1, X_2,\ldots,X_n\)</span> uma sequência de variáveis aleatórias contínuas com função de densidade <span class="math inline">\(f_{X_1, X_2,\ldots,X_n}(x_1,x_2,\ldots, x_n):=f(x_1,x_2,\ldots, x_n)\)</span>. Seja <span class="math inline">\(\varkappa=\left\{(x_1,x_2,\ldots,x_n)\in \mathbb{R}^n:\right.\)</span> <span class="math inline">\(\left.f(x_1,x_2,\ldots, x_n)&gt;0\right\}\)</span>. Suponha que o conjunto <span class="math inline">\(\varkappa\)</span> pode ser particionado nos subconjuntos <span class="math inline">\(\varkappa_1, \varkappa_2, \ldots, \varkappa_m\)</span>, tal que <span class="math inline">\(y_1=g_2(x_1,\ldots,x_n), y_2=g_2(x_1,\ldots,x_n), \ldots, y_n=g_n(x_1,\ldots,x_n)\)</span> é uma transformação <span class="math inline">\(1-1\)</span> de <span class="math inline">\(\varkappa_i\)</span> em <span class="math inline">\(\cal{D}\)</span>, para <span class="math inline">\(i=1,2,\ldots, m\)</span>. Seja <span class="math inline">\(x_1=g_{1i}^{-1}(y_1,y_2,\ldots,y_n), x_2=g_{2i}^{-1}(y_1,y_2,\ldots,y_n), \ldots, x_n=g_{ni}^{-1}(y_1,y_2,\ldots,y_n)\)</span> a transformação inversa de <span class="math inline">\(\cal{D}\)</span> em <span class="math inline">\(\varkappa_i\)</span>, para <span class="math inline">\(i=1,2,\ldots, m\)</span>. Então,</p>
+<p><span class="theorem-title"><strong>Teorema 12</strong></span> Seja <span class="math inline">\(X_1, X_2,\ldots,X_n\)</span> uma sequência de variáveis aleatórias contínuas com função de densidade <span class="math inline">\(f_{X_1, X_2,\ldots,X_n}(x_1,x_2,\ldots, x_n):=f(x_1,x_2,\ldots, x_n)\)</span>. Seja <span class="math inline">\(\varkappa=\left\{(x_1,x_2,\ldots,x_n)\in \mathbb{R}^n:\right.\)</span> <span class="math inline">\(\left.f(x_1,x_2,\ldots, x_n)&gt;0\right\}\)</span>. Suponha que o conjunto <span class="math inline">\(\varkappa\)</span> pode ser particionado nos subconjuntos <span class="math inline">\(\varkappa_1, \varkappa_2, \ldots, \varkappa_m\)</span>, tal que <span class="math inline">\(y_1=g_2(x_1,\ldots,x_n), y_2=g_2(x_1,\ldots,x_n), \ldots, y_n=g_n(x_1,\ldots,x_n)\)</span> é uma transformação <span class="math inline">\(1-1\)</span> de <span class="math inline">\(\varkappa_i\)</span> em <span class="math inline">\(\cal{D}\)</span>, para <span class="math inline">\(i=1,2,\ldots, m\)</span>. Seja <span class="math inline">\(x_1=g_{1i}^{-1}(y_1,y_2,\ldots,y_n), x_2=g_{2i}^{-1}(y_1,y_2,\ldots,y_n), \ldots, x_n=g_{ni}^{-1}(y_1,y_2,\ldots,y_n)\)</span> a transformação inversa de <span class="math inline">\(\cal{D}\)</span> em <span class="math inline">\(\varkappa_i\)</span>, para <span class="math inline">\(i=1,2,\ldots, m\)</span>. Então,</p>
 <div class="math">
 <span class="math display">\[\begin{align*}
 f_{Y_1,Y_2,\ldots,Y_n}(y_1,y_2,\ldots,y_n)&amp;=
@@ -1885,11 +1974,18 @@ J_i&amp;=
 \end{align*}\]</span>
 </div>
 </div>
+<p><br></p>
+<div class="box">
+<div id="cor-jacobiano" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corolário 4</strong></span> Para <span class="math inline">\(X\)</span> uma variável aleatória de uma população com função de densidade <span class="math inline">\(f_X(\cdot)\)</span> e <span class="math inline">\(\varkappa=\left\{x:f_X(x)&gt;0\right\}\)</span>, i.e.&nbsp;<span class="math inline">\(n=m=1\)</span>, temos que</p>
+<p><span class="math display">\[f_Y(y)=f_X\left(g^{-1}(y)\right)\left|\frac{\partial}{\partial y}g^{-1}(y)\right|\mathbb{I}_{\cal D}(y).\]</span></p>
+</div>
+</div>
 </section>
 <section class="slide level2">
 
 <div id="exm-jacobiano1" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 30</strong></span> Sejam <span class="math inline">\(X_1\)</span> e <span class="math inline">\(X_2\)</span> variáveis aleatórias independentes com distribuição normal padrão. Sejam <span class="math inline">\(Y_1=X_1+X_2\)</span> e <span class="math inline">\(Y_2=\frac{X_1}{X_2}\)</span>. Quais as distribuições de <span class="math inline">\(Y_1\)</span> e <span class="math inline">\(Y_2\)</span>?</p>
+<p><span class="theorem-title"><strong>Exemplo 34</strong></span> Sejam <span class="math inline">\(X_1\)</span> e <span class="math inline">\(X_2\)</span> variáveis aleatórias independentes com distribuição normal padrão. Sejam <span class="math inline">\(Y_1=X_1+X_2\)</span> e <span class="math inline">\(Y_2=\frac{X_1}{X_2}\)</span>. Quais as distribuições de <span class="math inline">\(Y_1\)</span> e <span class="math inline">\(Y_2\)</span>?</p>
 </div>
 <p><br></p>
 <div class="fragment fade-in" data-fragment-index="1">
@@ -1931,9 +2027,68 @@ f_{Y_1,Y_2}(y_1,y_2)&amp;=f_{X_1,X_2}\left(g_1^{-1}(y_1,y_2), g_2^{-1}(y_1,y_2)\
 </section>
 <section class="slide level2">
 
+<div id="exm-jacobiano2" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 35</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição <span class="math inline">\(Beta(a,b)\)</span>. Qual a distribuição de <span class="math inline">\(Y=-log X\)</span>?</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Seja <span class="math inline">\(y=g(x)=-\log x\)</span>, daí <span class="math inline">\(x=g^{-1}(y)=e^{-y}\)</span>. Dessa forma, pelo <a href="#/exm-r_momento_beta" class="quarto-xref">Exemplo&nbsp;9</a>, temos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+f_Y(y)&amp;=f_X\left(g^{-1}(y)\right)\left|\frac{\partial}{\partial y}g^{-1}(y)\right|\mathbb{I}_{\cal D}(y)\\
+&amp;=\frac{1}{B(a,b)}\left(e^{-y}\right)^{a-1}\left(1-e^{-y}\right)^{b-1}e^{-y}\mathbb{I}_{(0,\infty)}(y)\\
+&amp;=\frac{1}{B(a,b)}e^{-ay}\left(1-e^{-y}\right)^{b-1}\mathbb{I}_{(0,\infty)}(y).\quad\blacksquare
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-jacobiano3" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 36</strong></span> Mostre que <span class="math inline">\(\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty e^{-\frac12x^2}\,dx=1\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Considere</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+\left(\int_0^\infty e^{-\frac12x^2}\,dx\right)^2&amp;=\int_0^\infty e^{-\frac12t^2}\,dy \cdot \int_0^\infty e^{-\frac12u^2}\,du\\
+&amp;=\int_0^\infty\int_0^\infty e^{-\frac12(t^2+u^2)}\,dtdu.
+\end{align*}\]</span>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="2">
+<p>Seja <span class="math inline">\(t=r\cos\theta\)</span> e <span class="math inline">\(u=r\sin\theta\)</span>, então <span class="math inline">\(t^2+u^2=r^2\)</span>. Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+|J|&amp;=
+\begin{vmatrix}
+\frac{\partial t}{\partial r} &amp; \frac{\partial u}{\partial r}\\
+\frac{\partial t}{\partial \theta} &amp; \frac{\partial u}{\partial \theta}
+\end{vmatrix}=\begin{vmatrix}
+\cos\theta &amp; \sin\theta\\
+-r\cos\theta &amp; r\cos\theta
+\end{vmatrix}=r.
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+\int_0^\infty\int_0^\infty e^{-\frac12(t^2+u^2)}\,dtdu&amp;=\int_0^{\frac\pi2}\int_0^\infty e^{-\frac12r^2}r\,drd\theta\\
+=\int_0^{\frac\pi2}\,d\theta=\frac\pi2.\quad\blacksquare
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
 <div class="box">
 <div id="thm-xb_e_s2" class="theorem">
-<p><span class="theorem-title"><strong>Teorema 12</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span>. Sejam <span class="math inline">\(\bar{X}_n=\frac1n\sum_{i=1}^nX_i\)</span> e <span class="math inline">\(S^2_n=\frac{1}{n-1}\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2\)</span>, então</p>
+<p><span class="theorem-title"><strong>Teorema 13</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span>. Sejam <span class="math inline">\(\bar{X}_n=\frac1n\sum_{i=1}^nX_i\)</span> e <span class="math inline">\(S^2_n=\frac{1}{n-1}\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2\)</span>, então</p>
 <ol type="1">
 <li><p><span class="math inline">\(\bar{X}_n\)</span> segue uma distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\frac{\sigma^2}{n}\)</span>;</p></li>
 <li><p><span class="math inline">\(\frac{(n-1)S^2_n}{\sigma^2}\)</span> segue uma distribuição <span class="math inline">\(\chi^2_{(n-1)}\)</span>;</p></li>
