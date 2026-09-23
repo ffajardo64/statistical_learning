@@ -6,8 +6,8 @@
 <script src="aula1_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="aula1_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="aula1_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="aula1_files/libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.38">
+<link href="aula1_files/libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="LECON/DEST - UFES">
   <title> STA13820 - Inferência Estatística I   Amostragem e distribuições amostrais </title>
@@ -20,10 +20,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -163,10 +166,10 @@ Amostragem e distribuições amostrais<br>
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-LECON/DEST - UFES 
+LECON/DEST - UFES
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 22 setembro, 2026
+            Última atualização: 23 setembro, 2026
           </p>
     </div>
 </div>
@@ -1875,8 +1878,8 @@ LECON/DEST - UFES
 <div class="math">
 <span class="math display">\[\begin{align*}
 F_Y(y)&amp;=\mathbb{P}[Y\le y]=\mathbb{P}[-\log X\le y]=\mathbb{P}[\log X\ge y]
-=\mathbb{P}[X\ge e^y]\\
-&amp;=1-\mathbb{P}[X\le e^y]=1-e^y, \quad y&gt;0. \quad\blacksquare
+=\mathbb{P}[X\ge e^{-y}]\\
+&amp;=1-\mathbb{P}[X\le e^{-y}]=1-e^{-y}, \quad y&gt;0. \quad\blacksquare
 \end{align*}\]</span>
 </div>
 </div>
@@ -1936,7 +1939,7 @@ F_Y(y)&amp;=\mathbb{P}[Y\le y]=\mathbb{P}\left[X^2\le y\right]=\mathbb{P}\left[-
 <div class="math">
 <span class="math display">\[\begin{align*}
 \frac{2}{\sqrt{2\pi}}\int_0^y\frac{1}{2\sqrt{u}}e^{-\frac12u}\,du&amp;=
-\frac{1}{\Gamma\left(\frac12\right)}\int_0^y\frac{1}{2\sqrt{u}}e^{-\frac12u}\,du, \quad u&gt;0. \quad\blacksquare
+\frac{1}{\Gamma\left(\frac12\right)}\int_0^y\frac{1}{\sqrt{2u}}e^{-\frac12u}\,du, \quad u&gt;0. \quad\blacksquare
 \end{align*}\]</span>
 </div>
 </div>
@@ -1946,7 +1949,7 @@ F_Y(y)&amp;=\mathbb{P}[Y\le y]=\mathbb{P}\left[X^2\le y\right]=\mathbb{P}\left[-
 <h3 id="método-do-jacobiano">Método do Jacobiano</h3>
 <div class="box">
 <div id="thm-jacobiano" class="theorem">
-<p><span class="theorem-title"><strong>Teorema 12</strong></span> Seja <span class="math inline">\(X_1, X_2,\ldots,X_n\)</span> uma sequência de variáveis aleatórias contínuas com função de densidade <span class="math inline">\(f_{X_1, X_2,\ldots,X_n}(x_1,x_2,\ldots, x_n):=f(x_1,x_2,\ldots, x_n)\)</span>. Seja <span class="math inline">\(\varkappa=\left\{(x_1,x_2,\ldots,x_n)\in \mathbb{R}^n:\right.\)</span> <span class="math inline">\(\left.f(x_1,x_2,\ldots, x_n)&gt;0\right\}\)</span>. Suponha que o conjunto <span class="math inline">\(\varkappa\)</span> pode ser particionado nos subconjuntos <span class="math inline">\(\varkappa_1, \varkappa_2, \ldots, \varkappa_m\)</span>, tal que <span class="math inline">\(y_1=g_2(x_1,\ldots,x_n), y_2=g_2(x_1,\ldots,x_n), \ldots, y_n=g_n(x_1,\ldots,x_n)\)</span> é uma transformação <span class="math inline">\(1-1\)</span> de <span class="math inline">\(\varkappa_i\)</span> em <span class="math inline">\(\cal{D}\)</span>, para <span class="math inline">\(i=1,2,\ldots, m\)</span>. Seja <span class="math inline">\(x_1=g_{1i}^{-1}(y_1,y_2,\ldots,y_n), x_2=g_{2i}^{-1}(y_1,y_2,\ldots,y_n), \ldots, x_n=g_{ni}^{-1}(y_1,y_2,\ldots,y_n)\)</span> a transformação inversa de <span class="math inline">\(\cal{D}\)</span> em <span class="math inline">\(\varkappa_i\)</span>, para <span class="math inline">\(i=1,2,\ldots, m\)</span>. Então,</p>
+<p><span class="theorem-title"><strong>Teorema 12</strong></span> Seja <span class="math inline">\(X_1, X_2,\ldots,X_n\)</span> uma sequência de variáveis aleatórias contínuas com função de densidade <span class="math inline">\(f_{X_1, X_2,\ldots,X_n}(x_1,x_2,\ldots, x_n):=f(x_1,x_2,\ldots, x_n)\)</span>. Seja <span class="math inline">\(\varkappa=\left\{(x_1,x_2,\ldots,x_n)\in \mathbb{R}^n:\right.\)</span> <span class="math inline">\(\left.f(x_1,x_2,\ldots, x_n)&gt;0\right\}\)</span>. Suponha que o conjunto <span class="math inline">\(\varkappa\)</span> pode ser particionado nos subconjuntos <span class="math inline">\(\varkappa_1, \varkappa_2, \ldots, \varkappa_m\)</span>, tal que <span class="math inline">\(y_1=g_2(x_1,\ldots,x_n), y_2=g_2(x_1,\ldots,x_n), \ldots, y_n=g_n(x_1,\ldots,x_n)\)</span> é uma transformação <span class="math inline">\(1-1\)</span> de <span class="math inline">\(\varkappa_i\)</span> em <span class="math inline">\(\cal{D}\)</span>, para <span class="math inline">\(i=1,2,\ldots, m\)</span>. Seja <span class="math inline">\(x_1=g_{1i}^{-1}(y_1,y_2,\ldots,y_n), x_2=g_{2i}^{-1}(y_1,y_2,\ldots,y_n), \ldots, x_n=g_{ni}^{-1}(y_1,y_2,\ldots,y_n)\)</span> a transforma-ção inversa de <span class="math inline">\(\cal{D}\)</span> em <span class="math inline">\(\varkappa_i\)</span>, para <span class="math inline">\(i=1,2,\ldots, m\)</span>. Então,</p>
 <div class="math">
 <span class="math display">\[\begin{align*}
 f_{Y_1,Y_2,\ldots,Y_n}(y_1,y_2,\ldots,y_n)&amp;=
