@@ -169,7 +169,7 @@ Amostragem e distribuições amostrais<br>
 LECON/DEST - UFES
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 23 setembro, 2026
+            Última atualização: 27 setembro, 2026
           </p>
     </div>
 </div>
@@ -2182,6 +2182,545 @@ S^2_n&amp;=\frac{1}{n-1}\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2
 \end{align*}\]</span>
 </div>
 <p>Então, <span class="math inline">\(Y_1\)</span> é independente de <span class="math inline">\(Y_2,Y_3,\ldots,Y_n. \quad \blacksquare\)</span></p>
+</section>
+<section class="slide level2">
+
+<div id="exm-ordem_min_max" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 37</strong></span> Sejam <span class="math inline">\(U\)</span> e <span class="math inline">\(V\)</span> variáveis aleatórias independentes com distribuição qui-quadrado com <span class="math inline">\(m\)</span> e <span class="math inline">\(n\)</span> graus de liberdade, respectivamente. Qual a distribuição de <span class="math inline">\(\frac{U/m}{V/n}\)</span>?</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Pelo <a href="#/exm-r_momento_gamma" class="quarto-xref">Exemplo&nbsp;6</a>, sabemos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+f_{U,V}(u,v)&amp;=\frac{1}{\Gamma\left(\frac{m}{2}\right)\Gamma\left(\frac{n}{2}\right)}\left(\frac12\right)^{\frac{m+n}{2}}u^{\frac{m}{2}-1}v^{\frac{m}{2}-1}e^{-\frac12(u+v)}\mathbb{I}_{(0,\infty)}(u)\mathbb{I}_{(0,\infty)}(v).
+\end{align*}\]</span>
+</div>
+<p><br><br></p>
+<p>Sejam <span class="math inline">\(X=\frac{U/m}{V/n}\)</span> e <span class="math inline">\(Y=V\)</span>, qual a distribuição conjunta de <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>?</p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Seja <span class="math inline">\(x=\frac{n}{m}\frac{u}{v}\)</span>, então <span class="math inline">\(u=u=\frac{m}{n}xy\)</span>. Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \frac{\partial u}{\partial x}&amp;=\frac{m}{n}y &amp; \frac{\partial v}{\partial x}&amp;=0\\
+  \frac{\partial u}{\partial y}&amp;=\frac{m}{n}x &amp; \frac{\partial v}{\partial y}&amp;=1.
+\end{align*}\]</span>
+</div>
+<p>Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+f_{X,Y}(x,y)&amp;=\frac{m}{n}y\frac{1}{\Gamma\left(\frac{m}{2}\right)\Gamma\left(\frac{n}{2}\right)}\left(\frac12\right)^{\frac{m+n}{2}}\left(\frac{m}{n}xy\right)^{\frac{m}{2}-1}y^{\frac{m}{2}-1}e^{-\frac12\left(\frac{m}{n}xy+y\right)},
+\end{align*}\]</span>
+</div>
+<p>para <span class="math inline">\(0&lt;x&lt;\infty\)</span> e <span class="math inline">\(0&lt;y&lt;\infty\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+f(x)&amp;=\int_0^\infty f_{X,Y}(x,y)\,dy\\ \\
+&amp;=\frac{1}{\Gamma\left(\frac{m}{2}\right)\Gamma\left(\frac{n}{2}\right)}\left(\frac12\right)^{\frac{m+n}{2}}\left(\frac{m}{n}\right)^{\frac{m}{2}}x^{\frac{m}{2}-1}\int_0^\infty y^{\frac{m+n}{2}-1}e^{-\frac12\left(\frac{m}{n}x+1\right)y}\,dy\\ \\
+&amp;=\frac{\Gamma\left(\frac{m+n}{2}\right)}{\Gamma\left(\frac{m}{2}\right)\Gamma\left(\frac{n}{2}\right)}\left(\frac{m}{n}\right)^{\frac{m}{2}}\frac{x^{\frac{m}{2}-1}}{\left(\frac{m}{n}x+1\right)^{\frac{m+n}{2}}}\mathbb{I}_{(0,\infty)}(x)\\ \\
+&amp;=\frac{1}{B\left(\frac{m}{2},\frac{n}{2}\right)}\left(\frac{m}{n}\right)^{\frac{m}{2}}\frac{x^{\frac{m}{2}-1}}{\left(\frac{m}{n}x+1\right)^{\frac{m+n}{2}}}\mathbb{I}_{(0,\infty)}(x).
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Daí, a variável aleatória <span class="math inline">\(X=\frac{U/m}{V/n}\)</span> segue uma distribuição <span class="math inline">\(F\)</span> de Fisher-Snedecor com <span class="math inline">\(m\)</span> graus de liberdade no numerador e <span class="math inline">\(n\)</span> graus de liberdade no denominador.</p>
+<p><br></p>
+<p>O valor esperado de <span class="math inline">\(X\)</span> é dado por</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+\mathbb{E}[X]&amp;=\frac{n}{m}\mathbb{E}[U]\,\mathbb{E}\left[\frac1V\right]
+=\frac{n}{m}m\mathbb{E}\left[\frac1V\right]=n\mathbb{E}\left[\frac1V\right].
+\end{align*}\]</span>
+</div>
+<p>Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+n\mathbb{E}\left[\frac1V\right]&amp;=n\int_0^\infty\frac{1}{v}\frac{1}{\Gamma\left(\frac{n}{2}\right)}\left(\frac12\right)^{\frac{n}{2}}v^{\frac{n}{2}-1}e^{-\frac12v}\,dv\\
+&amp;=n\frac{1}{\Gamma\left(\frac{n}{2}\right)}\left(\frac12\right)^{\frac{n}{2}}\Gamma\left(\frac{n-2}{2}\right)\left(\frac12\right)^{-\frac{n-2}{2}}=\frac{n}{n-2}.
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Para calcular a variância, temos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+\mathbb{E}\left[\frac{1}{V^2}\right]&amp;=\int_0^\infty\frac{1}{v^2}\frac{1}{\Gamma\left(\frac{n}{2}\right)}\left(\frac12\right)^{\frac{n}{2}}v^{\frac{n}{2}-1}e^{-\frac12v}\,dv\\
+&amp;=\frac{1}{\Gamma\left(\frac{n}{2}\right)}\left(\frac12\right)^{\frac{n}{2}}\Gamma\left(\frac{n}{2}-2\right)\left(\frac12\right)^{-\frac{n}{2}+2}\\
+&amp;=\frac14\frac{1}{\left(\frac{n}{2}-2\right)\left(\frac{n}{2}-1\right)}
+=\frac{1}{(n-4)(n-2)}.
+\end{align*}\]</span>
+</div>
+<p>Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+\mathbb{E}[X^2]&amp;=\frac{n^2}{m^2}\mathbb{E}U^2\,\mathbb{E}\left[\frac{1}{V^2}\right]=\frac{n^2}{m^2}m(m+2)\frac{1}{(n-4)(n-2)}\\
+&amp;=\frac{m+2}{m}\frac{n^2}{(n-4)(n-2)}.
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma, a variância de <span class="math inline">\(X\)</span> é dada por</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+\mathrm{var}[X]&amp;=\mathbb{E}X^2-\left(\mathbb{E}X\right)^2
+=\frac{m+2}{m}\frac{n^2}{(n-4)(n-2)}-\frac{n^2}{(n-2)^2}\\ \\
+&amp;=n^2\frac{(m+2)(n-2)-m(n-4)}{m(n-4)(n-2)^2}=\frac{2n^2(m+n-2)}{m(n-4)(n-2)^2}. \quad\blacksquare
+\end{align*}\]</span>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="box2">
+<div id="exr-f_to_beta" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercício 4</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição <span class="math inline">\(F_{m,n}\)</span>. Mostre que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+W=\frac{mX/n}{1+mX/n}
+\end{align*}\]</span>
+</div>
+<p>segue uma distribuição beta com parâmateros <span class="math inline">\(a=\frac{m}{2}\)</span> e <span class="math inline">\(b=\frac{n}{2}\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-distr_t" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 38</strong></span> Sejam <span class="math inline">\(Z\)</span> uma variável aleatória de uma população com distribuição normal padrão e seja <span class="math inline">\(U\)</span> uma variável aleatória de uma população com distribuição qui-quadrado com <span class="math inline">\(k\)</span> graus de liberdade. Sejam <span class="math inline">\(Z\)</span> e <span class="math inline">\(U\)</span> independentes. Qual a distribuição de <span class="math inline">\(\frac{Z}{\sqrt{V/k}}\)</span>?</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+f_{Z,U}(z,u)\frac{1}{\sqrt{2\pi}}e^{-\frac12z^2}\frac{1}{\Gamma\left(\frac{k}{2}\right)}\left(\frac12\right)^{\frac{k}{2}}u^{\frac{k}{2}-1}e^{-\frac12u}\mathbb{I}_{(0,\infty)}(u).
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Sejam <span class="math inline">\(X=\frac{Z}{\sqrt{V/k}}\)</span> e <span class="math inline">\(Y=U\)</span>, então <span class="math inline">\(z=x\sqrt{\frac{y}{k}}\)</span>. Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \frac{\partial z}{\partial x}&amp;=\sqrt{\frac{y}{k}} &amp; \frac{\partial u}{\partial x}&amp;=0\\
+  \frac{\partial z}{\partial y}&amp;=\frac12\frac{x}{\sqrt{k}}y^{-\frac12} &amp; \frac{\partial u}{\partial y}&amp;=1.
+\end{align*}\]</span>
+</div>
+<p>Dessa forma,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+f_{X,Y}(x,y)\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2k}x^2y}\frac{1}{\Gamma\left(\frac{k}{2}\right)}\left(\frac12\right)^{\frac{k}{2}}y^{\frac{k}{2}-1}e^{-\frac12y}\sqrt{\frac{y}{k}}\mathbb{I}_{(0,\infty)}(y).
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Assim,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+f_X(x)&amp;=\int_{-\infty}^\infty f_{X,Y}(x,y)\,dy=\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2k}x^2y}\frac{1}{\Gamma\left(\frac{k}{2}\right)}\left(\frac12\right)^{\frac{k}{2}}y^{\frac{k}{2}-1}e^{-\frac12y}\sqrt{\frac{y}{k}}\\
+&amp;=\frac{1}{\sqrt{2\pi k}}\frac{1}{\Gamma\left(\frac{k}{2}\right)}\left(\frac12\right)^{\frac{k}{2}}
+\Gamma\left(\frac{k+1}{2}\right)\frac{1}{\left[\frac12\left(\frac{x^2}{k}+1\right)\right]^{\frac{k+1}{2}}}\\
+&amp;=\frac{1}{\sqrt{\pi k}}\frac{\Gamma\left(\frac{k+1}{2}\right)}{\Gamma\left(\frac{k}{2}\right)}
+\frac{1}{\left(\frac{x^2}{k}+1\right)^{\frac{k+1}{2}}}\mathbb{I}_\mathbb{R}(x).
+\end{align*}\]</span>
+</div>
+<p>Então, <span class="math inline">\(X\)</span> segue uma distribuição <span class="math inline">\(t\)</span> de Student com <span class="math inline">\(k\)</span> graus de liberdade e <span class="math inline">\(\mathbb{E}X=0\)</span> e <span class="math inline">\(\mathrm{var}[X]=\frac{k}{k-2}\)</span>, <span class="math inline">\(k&gt;2\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<div class="box2">
+<div id="exr-t_to_beta" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercício 5</strong></span> Seja <span class="math inline">\(X\)</span> uma variável aleatória de uma população com distribuição <span class="math inline">\(t_{k}\)</span>. Mostre que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+W=\frac{1}{1+X^2/k}
+\end{align*}\]</span>
+</div>
+<p>segue uma distribuição beta com parâmateros <span class="math inline">\(a=\frac{k}{2}\)</span> e <span class="math inline">\(b=\frac{1}{2}\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="estatísticas-de-ordem" class="slide level2 center" data-background-color="#172a46">
+<h2>Estatísticas de ordem</h2>
+</section>
+<section class="slide level2">
+
+<div id="def-est_atistica_ordem" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 18 (Estatísticas de ordem)</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição <span class="math inline">\(F\)</span>. As variáveis aleatórias ordenadas em ordem crescente, i.e. <span class="math inline">\(X_{(1)},X_{(2)},\ldots,X_{(n)}\)</span>, tal que <span class="math inline">\(X_{(1)}\le X_{(2)}\le\ldots\le X_{(n)}\)</span> são chamadas de <em>estatísticas de ordem</em> da amostra <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span>.</p>
+</div>
+<p><br><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Notação</strong></p>
+</div>
+<div class="callout-content">
+<p>Na literatura é comum encontrar várias formas para denotar as estatísticas de ordem de uma amostra aleatória, na <a href="#/def-est_atistica_ordem" class="quarto-xref">Definição&nbsp;18</a>, e.g., foi apresentada a seguinte notação: <span class="math inline">\(X_{(1)},X_{(2)},\ldots,X_{(n)}\)</span>. Outras notações encontradas são as seguintes: <span class="math inline">\(X_{1:n},X_{2:n},\ldots,X_{n:n}\)</span> ou simplesmente <span class="math inline">\(Y_1,Y_2,\ldots, Y_n\)</span>, onde <span class="math inline">\(Y_1\le Y_2\le \cdots\le Y_n\)</span>, i.e., <span class="math inline">\(Y_1=\min\{X_1,X_2,\ldots,X_n\}\)</span> e <span class="math inline">\(Y_n=\max\{X_1,X_2,\ldots,X_n\}\)</span>. Ao longo da disciplina, adotaremos a notação <span class="math inline">\(Y_1,Y_2, \ldots, Y_n\)</span> para representar as estatísticas de ordem da amostra <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span>, por ser esta mais simples.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="thm-dist_ordem" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 14</strong></span> Sejam <span class="math inline">\(Y_1,Y_2,\ldots, Y_n\)</span> as estatísticas de ordem de uma amostra aleatória <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> com distribuição <span class="math inline">\(F\)</span>. A distribuição acumulada marginal de <span class="math inline">\(Y_\alpha\)</span>, onde <span class="math inline">\(\alpha=1,2,\ldots, n\)</span>, é dada por</p>
+<p><span class="math display">\[F_{Y_\alpha}(y)=\sum_{j=\alpha}^n\binom{n}{j}\left[F(y)\right]^j\left[1-F(y)\right]^{n-j}.\]</span></p>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="proof">
+<p><span class="proof-title"><em>Prova</em>. </span>Para <span class="math inline">\(y\)</span> fixo, seja <span class="math inline">\(Z_i=\mathbb{I}_{(-\infty,y]}(X_i)\)</span>, então <span class="math inline">\(\sum_{i=1}^nZ_i\)</span> representa o número de eventos <span class="math inline">\(X_i\le y\)</span>. Daí, <span class="math inline">\(\sum_{i=1}^nZ_i\)</span> segue uma distribuição binomial com parâmetros <span class="math inline">\(n\)</span> e <span class="math inline">\(F(y)\)</span>.</p>
+<p>Dessa forma,</p>
+<p><span class="math display">\[F_{Y_\alpha}(y)=\mathbb{P}[Y_\alpha\le y]=\mathbb{P}\left[\sum_{i=1}^nZ_i\ge \alpha\right] =\sum_{j=\alpha}^n\binom{n}{j}\left[F(y)\right]^j\left[1-F(y)\right]^{n-j}. \quad\blacksquare\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="cor-thm-dist_ordem" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corolário 5</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição <span class="math inline">\(F_X\)</span> e sejam <span class="math inline">\(Y_1,Y_2,\ldots, Y_n\)</span> as estatísticas de ordem associadas à amostra. Então,</p>
+<ol type="i">
+<li><span class="math inline">\(F_{Y_n}(y)=\left[F_X(y)\right]^n\)</span> (Dist. do Máximo);</li>
+<li><span class="math inline">\(F_{Y_1}(y)=1-\left[1-F_X(y)\right]^n\)</span> (Dist. do Mínimo);</li>
+</ol>
+</div>
+</div>
+<p><br><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>A partir do resultado acima, se a amostra aleatória tem natureza contínua, então</p>
+<ul>
+<li><span class="math inline">\(f_{Y_n}(y)=n\left[F_X(y)\right]^{n-1}f_X(y)\)</span>;</li>
+<li><span class="math inline">\(f_{Y_1}(y)=n\left[1-F_X(y)\right]^{n-1}f_X(y)\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-ordem_min_max" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 39</strong></span> Sejam <span class="math inline">\(Y_1\le Y_2\le \cdots\le Y_{10}\)</span> as estatísticas de ordem associadas a uma amostra aleatória de uma população com densidade uniforme no intervalo <span class="math inline">\((0,1)\)</span>.</p>
+<ol type="a">
+<li>Qual o valor de <span class="math inline">\(\mathbb{P}[Y_{10}&lt;0.9]\)</span>?
+</li>
+<li>Qual o valor de <span class="math inline">\(k\)</span> para que <span class="math inline">\(\mathbb{P}[Y_1&gt;k]=0.5\)</span>?
+</li>
+</ol>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<ol type="a">
+<li><span class="math inline">\(F_{Y_{10}}(y)=\mathbb{P}[Y_{10}&lt;0.9]=\left[F(y)\right]^{10}=y^{10}=0.9^{10}=0.34867844;  \quad\checkmark\)</span></li>
+</ol>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="2">
+<ol start="2" type="a">
+<li>Sabemos que, <span class="math inline">\(F_{Y_{1}}(y)=\mathbb{P}[Y_1&lt;y]=1-[1-F(y)]^{10}=1-[1-y]^{10}\)</span>. <br></li>
+</ol>
+<p>Daí, <span class="math inline">\(\mathbb{P}[Y_1&gt;k]=1-\mathbb{P}[Y_1\le k]=(1-k)^{10}=0.5\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Então, a questão se reduz a encontrar as raízes do seguinte polinômio:</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  k^{10}-10k^9+45k^8-120k^7+210k^6&amp;-252k^5\\
+  &amp;+210k^4-120k^3+45k^2-10k+0.5=0;
+\end{align*}\]</span>
+</div>
+<p>Dessa forma, as únicas raizes reais são <span class="math inline">\(k=0.066967\)</span> e <span class="math inline">\(k=1.93303\)</span>, sendo esses os possíveis valores de <span class="math inline">\(k. \quad\blacksquare\)</span></p>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="thm-densidade_ordem" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 15</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de distribuição <span class="math inline">\(F\)</span> e função de densidade de probabilidade <span class="math inline">\(f\)</span>. Sejam <span class="math inline">\(Y_1,Y_2,\ldots, Y_n\)</span> as estatísticas de ordem da amostra aleatória. Então,</p>
+<ol type="1">
+<li><span class="math inline">\(f_{Y_\alpha}(y)=\frac{n!}{(\alpha-1)!(n-\alpha)!}[F(y)]^{\alpha-1}[1-F(y)]^{n-\alpha}f(y)\)</span>;</li>
+<li><span class="math inline">\(f_{Y_\alpha Y_\beta}(x,y)=\frac{n!}{(\alpha-1)!(\beta-\alpha-1)!(n-\beta)!}[f(x)]^{\alpha-1}[F(y)-F(x)]^{\beta-\alpha-1}[1-F(y)]^{n-\beta}f(x)f(y)\mathbb{I}_{(x,\infty)}(y)\)</span>;</li>
+<li><span class="math inline">\(f_{Y_1,Y_2,\ldots, Y_n}(y_1,y_2,\ldots,y_n)=n!f(y_1)f(y_2)\ldots f(y_n)\)</span>, para <span class="math inline">\(y_1&lt;y_2&lt;\cdots&lt;y_n\)</span>.</li>
+</ol>
+</div>
+</div>
+<p><br></p>
+<div class="proof">
+<p><span class="proof-title"><em>Prova</em>. </span></p>
+<ol type="1">
+<li>Sabemos que</li>
+</ol>
+<p><span class="math display">\[\mathbb{P}[X\ge k]=\sum_{j=k}^n\binom{n}{j}p^j(1-p)^{n-j}=\frac{1}{B(k,n-k+1)}\int_0^pu^{k-1}(1-u)^{n-k}\,du.\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+    F_{Y_\alpha}(y)=\sum_{j=\alpha}^n\binom{n}{j}[F(y)]^j[1-F(y)]^{n-j}=\alpha\binom{n}{\alpha}\int_0^{F(y)}t^{\alpha-1}(1-t)^{n-\alpha}\,dt.
+\end{align*}\]</span>
+</div>
+<p>Daí, <span class="math inline">\(\frac{\partial}{\partial y}F_{Y\alpha}(y)=\alpha\binom{n}{\alpha}[F(y)]^{\alpha-1}[1-F(y)]^{n-\alpha}f(y)\)</span>. <span class="math inline">\(\quad\checkmark\)</span></p>
+<p><br><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p><strong>Outra forma de provar:</strong> Sabemos que,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+    f_{Y_\alpha}(y)=\lim_{h\to0}\frac{F_{Y_\alpha}(y+h)-F_{Y_\alpha}(y)}{h}=\lim_{h\to0}\frac{\mathbb{P}[y\le Y_\alpha\le y+h]}{h}.
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Por outra parte, observe que o evento <span class="math inline">\([y\le Y_\alpha\le y+h]\)</span> é equivalente ao evento <span class="math inline">\(A(h):\)</span> “<span class="math inline">\(\alpha-1\)</span> observações menores que <span class="math inline">\(y\)</span>, uma observação em <span class="math inline">\([y,y+h]\)</span> e <span class="math inline">\(n-\alpha\)</span> observações menores que <span class="math inline">\(y+h\)</span>”.</p>
+<p>Assim,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+    \mathbb{P}[A(h)]=\frac{n!}{(\alpha-1)!1!(n-\alpha)!}[F(y)]^{\alpha-1}[F(y+h)-F(y)][1-F(y+h)]^{n-\alpha}.
+\end{align*}\]</span>
+</div>
+<p>Dessa forma,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+    f_{Y_\alpha}(y)&amp;=\lim_{h\to0}\frac{n!}{(\alpha-1)!1!(n-\alpha)!}\frac{[F(y)]^{\alpha-1}[F(y+h)-F(y)][1-F(y+h)]^{n-\alpha}}{h}\\
+    &amp;=\frac{n!}{(\alpha-1)!1!(n-\alpha)!}[F(y)]^{\alpha-1}[1-F(y+h)]^{n-\alpha}f(y)\\
+    &amp;=\alpha\binom{n}{\alpha}[F(y)]^{\alpha-1}[1-F(y+h)]^{n-\alpha}f(y). \quad\checkmark
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<ol start="2" type="a">
+<li>Sabemos que,</li>
+</ol>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  &amp;f_{Y_\alpha Y_\beta}(x,y)\\&amp;=\lim_{h\to0}\lim_{t\to0}\frac{F_{Y_\alpha Y_\beta}(x+h,y+t)-F_{Y_\alpha Y_\beta}(x,y+t)-F_{Y_\alpha Y_\beta}(x+h,y)+F_{Y_\alpha Y_\beta}(x,y))}{ht}\\ \\
+  &amp;=\lim_{h\to0}\lim_{t\to0}\frac{\mathbb{P}[x\le Y_\alpha\le x+h;y\le Y_\beta\le y+t]}{ht}
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="column quarto-layout-cell" style="flex-basis: 62.5%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="./images/est_ordem1.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div><div class="column quarto-layout-cell" style="flex-basis: 37.5%;justify-content: flex-start;">
+<div class="math">
+<span class="math display">\[\begin{align*}
+  &amp;\mathbf{Intervalo} &amp; &amp; \mathbf{Probabilidade}\\
+  I_1 &amp; = (-\infty,x] &amp; &amp; F(x)\\
+  I_2 &amp; = (x,x+h] &amp; &amp; F(x+h)-F(x)\\
+  I_3 &amp; = (x+h,y] &amp; &amp; F(y)-F(x+h)\\
+  I_4 &amp; = (y,y+t] &amp; &amp; F(y+t)-F(y)\\
+  I_5 &amp; = (y+t,\infty) &amp; &amp; 1-F(y+t)\\
+\end{align*}\]</span>
+</div>
+<p><br></p>
+<p>Dessa forma, define-se o evento:</p>
+<p><span class="math inline">\(A(h,t):\)</span> “<span class="math inline">\(\alpha-1\)</span> observações pertencem ao intervalo <span class="math inline">\(I_1\)</span>, <span class="math inline">\(1\)</span> observação pertence ao intervalo <span class="math inline">\(I_2\)</span>, <span class="math inline">\(1\)</span> observação pertence ao intervalo <span class="math inline">\(I_4\)</span>, <span class="math inline">\(n-\beta\)</span> observações pertencem ao intervalo <span class="math inline">\(I_5\)</span> e <span class="math inline">\(\beta-\alpha-1\)</span> observações pertencem ao intervalo <span class="math inline">\(I_3\)</span>”.</p>
+</div></div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  &amp;f_{Y_\alpha Y_\beta}(x,y)\\
+  &amp;=\lim_{h\to0}\lim_{t\to0}\frac{\mathbb{P}[A(h,t)]}{ht}\\
+  &amp;=\lim_{h\to0}\lim_{t\to0}\frac{n!}{(\alpha-1)!1!(\beta-\alpha-1)!1!(n-\beta)!}[F(x)]^{\alpha-1}\\
+  &amp;\hspace{2cm}\times[F(x+h)-F(x)][F(y)-F(x+h)]^{\beta-\alpha-1}[F(y+h)-F(y)][1-F(y+t)]^{n-\beta}\\ \\
+  &amp;=\frac{n!}{(\alpha-1)!(\beta-\alpha-1)!(n-\beta)!}[F(x)]^{\alpha-1}[F(y)-F(x+h)]^{\beta-\alpha-1}\\
+  &amp;\hspace{28cm}\times[1-F(y+t)]^{n-\beta}f(x)f(y),
+\end{align*}\]</span>
+<p>para <span class="math inline">\(x&lt;y\)</span>. <span class="math inline">\(\quad\checkmark\)</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<ol start="3" type="a">
+<li>Em geral, temos que</li>
+</ol>
+<div class="math">
+<span class="math display">\[\begin{align*}
+&amp;f_{Y_1,Y_2,\ldots, Y_n}(y_1,y_2,\ldots,y_n)\\&amp;=\lim_{h_1\to0}\lim_{h_2\to0}\cdots\lim_{h_n\to0}
+\frac{\mathbb{P}\left[\cap_{i=1}^n[y_i\le Y_i\le y_i+h_i]\right]}{\prod_{i=1}^nh_i}\\ \\
+&amp;=\prod_{i=1}^n\lim_{h_i\to0}
+\frac{\mathbb{P}\left[\text{um } X_i\in[y_1, y_1+h_1], \text{um } X_i\in[y_2, y_2+h_2],\ldots, \text{um } X_i\in[y_n, y_n+h_n]\right]}{\prod_{i=1}^nh_i}\\ \\
+&amp;=n!f(y_1)f(y_2)\cdots f(y_n)=n!\prod_{i=1}^nf(y_i), \quad y_1&lt;y_2&lt;\cdots&lt;y_n. \quad\blacksquare
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-semi_amplitude" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 40</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com densidade <span class="math inline">\(f\)</span> e função de distribuição acumulada <span class="math inline">\(F\)</span>. Sejam <span class="math inline">\(Y_1\le Y_2\le \cdots\le Y_n\)</span> as estatísticas de ordem asssociadas à amostra. Sejam <span class="math inline">\(R=Y_n-Y_1\)</span> e <span class="math inline">\(T=\frac{Y_1+Y_n}{2}\)</span>. Qual a distribuição de <span class="math inline">\(T\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Considere <span class="math inline">\(r=y_n-y_1\)</span> e <span class="math inline">\(t=\frac{y_1+y_n}{2}\)</span>, então <span class="math inline">\(y_n=\frac12r+t\)</span> e <span class="math inline">\(y_1=t-\frac12r\)</span>. Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \frac{\partial y_n}{\partial r}&amp;=\frac12 &amp; \frac{\partial y_1}{\partial r}&amp;=-\frac12\\
+  \frac{\partial y_n}{\partial t}&amp;=1 &amp; \frac{\partial y_1}{\partial t}&amp;=1.
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  f_{R,T}(r,t)=\frac{n!}{(n-2)!}\left[F\left(t+\frac12r\right)-F\left(t-\frac12r\right)\right]^{n-2}f\left(t-\frac12r\right)f\left(t+\frac12r\right),
+\end{align*}\]</span>
+</div>
+<p>para <span class="math inline">\(r&gt;0\)</span>. Então,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  f_{T}(t)&amp;=\int_{-\infty}^\infty f_{R,T}(r,t)\,dt\\
+  &amp;=n(n-1)\int_{-\infty}^\infty\left[F\left(t+\frac12r\right)-F\left(t-\frac12r\right)\right]^{n-2}f\left(t-\frac12r\right)f\left(t+\frac12r\right)\,dt.  \quad\blacksquare
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-ordem_cond" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 41</strong></span> Sejam <span class="math inline">\(Y_1\le Y_2\le Y_3\le Y_4\)</span> as estatísticas de ordem associadas a uma amostra aleatória <span class="math inline">\(X_1,X_2,X_3,X_4\)</span>, de uma população com densidade <span class="math inline">\(f(x)=2x\mathbb{I}_{(0,1)}(x)\)</span>.</p>
+<ol type="a">
+<li><p>Qual a densidade conjunta de <span class="math inline">\((Y_3, Y_4)\)</span>;</p></li>
+<li><p>Calcule a densidade condicional de <span class="math inline">\(Y_3\)</span> dado <span class="math inline">\(Y_4=y_4\)</span> e <span class="math inline">\(\mathbb{E}[Y_3|Y_4=y_4]\)</span>.</p></li>
+</ol>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<ol type="a">
+<li>Pelo <a href="#/thm-dist_ordem" class="quarto-xref">Teorema&nbsp;14</a>, sabemos que <span class="math inline">\(f_{Y_1, Y_2, Y_3, Y_4}(y_1,y_2,y_3,y_4)=4!(2y_1)(2y_2)(2y_3)(2y_4),  0&lt;y_1\le y_2\le y_3\le y_4&lt;1\)</span>. Dessa forma,</li>
+</ol>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  f_{Y_3,Y_4}(y_3, y_4)&amp;=\int_{y_2=0}^{y_3}\int_{y_1=0}^{y_2}4!(2y_1)(2y_2)(2y_3)(2y_4)\,dy_1dy_2
+  =48y_3^5y_4,
+\end{align*}\]</span>
+</div>
+<p>para <span class="math inline">\(\quad 0&lt;y_3\le y_4&lt;1\)</span>;</p>
+</div>
+</section>
+<section class="slide level2">
+
+<ol start="2" type="a">
+<li>Sabemos que, <span class="math inline">\(f_{Y_3|Y_4}(y_3|y_4)=\dfrac{f_{Y_3,Y_4}(y_3,y_4)}{f_{Y_4}(y_4)}=\dfrac{48y_3^5y_4}{8y_4^7}=\dfrac{6y_3^5}{y_4^6}\)</span> para <span class="math inline">\(0&lt;y_3\le y_4\)</span>.</li>
+</ol>
+<p><br></p>
+<p>Dessa forma, <span class="math display">\[\mathbb{E}[Y_3|Y_4=y_4]=\int_{0}^{y_4}\frac{6y_3^6}{y_4^6}\,dy_3=\frac67y_4,\]</span></p>
+<p>para <span class="math inline">\(0&lt;y_4&lt;1. \quad\blacksquare\)</span></p>
+</section>
+<section class="slide level2">
+
+<div id="exm-ordem_indep" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 42</strong></span> Sejam <span class="math inline">\(Y_1\le Y_2\le Y_3\)</span> as estatísticas de ordem associadas a uma amostra aleatória de tamanho <span class="math inline">\(3\)</span>, de uma população com densidade <span class="math inline">\(f(x)=2x\mathbb{I}_{(0,1)}(x)\)</span>. Mostre que <span class="math inline">\(Z_1=\frac{Y_1}{Y_2}\)</span>, <span class="math inline">\(Z_2=\frac{Y_2}{Y_3}\)</span> e <span class="math inline">\(Z_3=Y_3\)</span> são mutuamente independentes.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  f(x_1, x_2, x_3)&amp;=\prod_{i=1}^32x_i\mathbb{I}_{(0,1)}(x_i)=8x_1x_2x_3\prod_{i=1}^3\mathbb{I}_{(0,1)}(x_i).
+\end{align*}\]</span>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Considere, <span class="math inline">\(z_1=\frac{y_1}{y_2}\)</span>, <span class="math inline">\(y_2=\frac{y_2}{y_3}\)</span> e <span class="math inline">\(z_3=y_3\)</span>, então <span class="math inline">\(y_1=z_1z_2z_3\)</span>, <span class="math inline">\(y_2=z_2z_3\)</span> e <span class="math inline">\(y_3=z_3\)</span>. Daí,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  \frac{\partial y_1}{\partial z_1}&amp;=z_2z_3 &amp; \frac{\partial y_2}{\partial z_1}&amp;=0 &amp; \frac{\partial y_3}{\partial z_1}&amp;=0\\
+  \frac{\partial y_1}{\partial z_2}&amp;=z_1z_3 &amp; \frac{\partial y_2}{\partial z_2}&amp;=z_3 &amp; \frac{\partial y_3}{\partial z_2}&amp;=0\\
+  \frac{\partial y_1}{\partial z_3}&amp;=z_1z_2 &amp; \frac{\partial y_2}{\partial z_3}&amp;=z_2 &amp; \frac{\partial y_3}{\partial z_3}&amp;=1.
+\end{align*}\]</span>
+</div>
+<p>Por outro lado, sabemos que <span class="math inline">\(f(y_1,y_2,y_3)=3!(2y_1)(2y_2)(2y_3)\)</span> e o jacobiano é dado por <span class="math inline">\(z_2z_3^2\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma, temos que</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  f(z_1,z_2,z_3)&amp;=3! (2z_1z_2z_3) (2z_2z_3) (2z_3) (z_2z_3^2)=48z_1z_2^2z_3^5=(2z_1)(4z_2^3)(6z_3^5),
+\end{align*}\]</span>
+</div>
+<p>para <span class="math inline">\(0&lt;z_i&lt;1, \quad i=1,2,3\)</span>. Agora é só verificar que <span class="math inline">\(f(z_1)=2z_1\)</span>, <span class="math inline">\(f(z_2)=4z_2^3\)</span> e <span class="math inline">\(f(z_3)=6z_3^5\)</span>. Por exemplo,</p>
+<div class="math">
+<span class="math display">\[\begin{align*}
+  f(z_3)&amp;=\int_0^1\int_0^1(2z_1)(4z_2^3)(6z_3^5)\,dz_1dz_2=6z_3^5\int_0^1\int_0^1(2z_1)(4z_2^3)\,dz_1dz_2\\
+  &amp;=6z_3^5\int_0^1 4z_2^3\,dz_2= 6z_3^5. \quad\blacksquare
+\end{align*}\]</span>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-ordem_corr" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 43</strong></span> Sejam <span class="math inline">\(Y_1\le Y_2\le Y_3\)</span> as estatísticas de ordem associadas a uma amostra aleatória de tamanho <span class="math inline">\(3\)</span>, de uma população com densidade <span class="math inline">\(f(x)=2x\mathbb{I}_{(0,1)}(x)\)</span>.</p>
+<ol type="a">
+<li><p>Qual a probabilidade do mínimo ser maior que a mediana da população da amostra;</p></li>
+<li><p>Qual a correlação entre <span class="math inline">\(Y_2\)</span> e <span class="math inline">\(Y_3\)</span>?</p></li>
+</ol>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<ol type="a">
+<li>Sabemos que, <span class="math inline">\(F(x)=\mathbb{P}[X\le x]=x^2\)</span>. A mediana é o valor <span class="math inline">\(m\)</span>, tal que <span class="math inline">\(\int_0^m2x\,dx=\frac12\)</span>. Daí, <span class="math inline">\(m=\frac{\sqrt2}{2}\)</span>.</li>
+</ol>
+<p><br></p>
+<p>Pelo <a href="#/cor-thm-dist_ordem" class="quarto-xref">Corolário&nbsp;5</a>, temos que <span class="math inline">\(\mathbb{P}[Y_1&gt;m]=[1-F(m)]^3=[1-m^2]^3=\frac18. \quad\checkmark\)</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<ol start="2" type="a">
+<li>Sabemos que, <span class="math inline">\(\textrm{Corr}[Y_2,Y_3]=\frac{\textrm{Cov}[Y_2,Y_3]}{\sqrt{\textrm{Var}[Y_2]\textrm{Var}[Y_3]}}=\frac{\mathbb{E}[Y_2Y_3]-\mathbb{E}Y_2\mathbb{E}Y_3}{\sqrt{\textrm{Var}[Y_2]\textrm{Var}[Y_3]}}\)</span>.</li>
+</ol>
+<p><br></p>
+<p>Pelo <a href="#/thm-dist_ordem" class="quarto-xref">Teorema&nbsp;14</a>, temos que, <span class="math inline">\(f_{Y_2,Y_3}(y_2,y_3)=24y_2^3y_3\)</span>, para <span class="math inline">\(0&lt;y_2\le y_3&lt;1\)</span>.</p>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Desse resultado, também temos que, <span class="math inline">\(f_{Y_2}(x)=12(x^3-x^5)\)</span>, para <span class="math inline">\(0&lt;x&lt;1\)</span> e <span class="math inline">\(f_{Y_3}(y)=6y^5\)</span>, para <span class="math inline">\(0&lt;y&lt;1\)</span>.</p>
+<p><br></p>
+<p>Daí, temos que <span class="math inline">\(\mathbb{E}[Y_2Y_3]=\int_0^1\int_0^{y_3}y_2y_324y_2^3y_3\,dy_2dy_3=\frac35\)</span>, <span class="math inline">\(\mathbb{E}Y_2=\frac{24}{35}\)</span>, <span class="math inline">\(\mathrm{Var}[Y_2]=\frac12-\left(\frac{24}{35}\right)^2=\frac{73}{2450}\)</span>, <span class="math inline">\(\mathbb{E}Y_3=\frac67\)</span> e <span class="math inline">\(\mathrm{Var}[Y_3]=\frac68-\left(\frac67\right)^2=\frac{6}{392}\)</span>.</p>
+<p>Dessa forma, <span class="math display">\[\mathrm{Corr}[Y_2,Y_3]=\frac{\mathbb{E}[Y_2Y_3]-\mathbb{E}Y_2\mathbb{E}Y_3}{\sqrt{\textrm{Var}[Y_2]\textrm{Var}[Y_3]}}=\frac{\frac35-\frac{24}{35}\frac67}{\sqrt{\frac{73}{2450}\frac{6}{392}}}=0.573382179 \quad\blacksquare\]</span></p>
+</div>
 </section>
 <section id="referências" class="slide level2 smaller scrollable">
 <h2>Referências</h2>
