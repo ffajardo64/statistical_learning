@@ -169,7 +169,7 @@ Amostragem e distribuições amostrais<br>
 LECON/DEST - UFES
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 27 setembro, 2026
+            Última atualização: 06 outubro, 2026
           </p>
     </div>
 </div>
@@ -2397,7 +2397,7 @@ W=\frac{1}{1+X^2/k}
 <p><span class="theorem-title"><strong>Corolário 5</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição <span class="math inline">\(F_X\)</span> e sejam <span class="math inline">\(Y_1,Y_2,\ldots, Y_n\)</span> as estatísticas de ordem associadas à amostra. Então,</p>
 <ol type="i">
 <li><span class="math inline">\(F_{Y_n}(y)=\left[F_X(y)\right]^n\)</span> (Dist. do Máximo);</li>
-<li><span class="math inline">\(F_{Y_1}(y)=1-\left[1-F_X(y)\right]^n\)</span> (Dist. do Mínimo);</li>
+<li><span class="math inline">\(F_{Y_1}(y)=1-\left[1-F_X(y)\right]^n\)</span> (Dist. do Mínimo).</li>
 </ol>
 </div>
 </div>
@@ -2412,7 +2412,7 @@ W=\frac{1}{1+X^2/k}
 <p>A partir do resultado acima, se a amostra aleatória tem natureza contínua, então</p>
 <ul>
 <li><span class="math inline">\(f_{Y_n}(y)=n\left[F_X(y)\right]^{n-1}f_X(y)\)</span>;</li>
-<li><span class="math inline">\(f_{Y_1}(y)=n\left[1-F_X(y)\right]^{n-1}f_X(y)\)</span></li>
+<li><span class="math inline">\(f_{Y_1}(y)=n\left[1-F_X(y)\right]^{n-1}f_X(y)\)</span>.</li>
 </ul>
 </div>
 </div>
@@ -2521,7 +2521,7 @@ W=\frac{1}{1+X^2/k}
 <div class="math">
 <span class="math display">\[\begin{align*}
   &amp;f_{Y_\alpha Y_\beta}(x,y)\\&amp;=\lim_{h\to0}\lim_{t\to0}\frac{F_{Y_\alpha Y_\beta}(x+h,y+t)-F_{Y_\alpha Y_\beta}(x,y+t)-F_{Y_\alpha Y_\beta}(x+h,y)+F_{Y_\alpha Y_\beta}(x,y))}{ht}\\ \\
-  &amp;=\lim_{h\to0}\lim_{t\to0}\frac{\mathbb{P}[x\le Y_\alpha\le x+h;y\le Y_\beta\le y+t]}{ht}
+  &amp;=\lim_{h\to0}\lim_{t\to0}\frac{\mathbb{P}[x\le Y_\alpha\le x+h;y\le Y_\beta\le y+t]}{ht}.
 \end{align*}\]</span>
 </div>
 </section>
@@ -2559,7 +2559,7 @@ W=\frac{1}{1+X^2/k}
 <span class="math display">\[\begin{align*}
   &amp;f_{Y_\alpha Y_\beta}(x,y)\\
   &amp;=\lim_{h\to0}\lim_{t\to0}\frac{\mathbb{P}[A(h,t)]}{ht}\\
-  &amp;=\lim_{h\to0}\lim_{t\to0}\frac{n!}{(\alpha-1)!1!(\beta-\alpha-1)!1!(n-\beta)!}[F(x)]^{\alpha-1}\\
+  &amp;=\lim_{h\to0}\lim_{t\to0}\frac{1}{ht}\frac{n!}{(\alpha-1)!1!(\beta-\alpha-1)!1!(n-\beta)!}[F(x)]^{\alpha-1}\\
   &amp;\hspace{1cm}\times[F(x+h)-F(x)][F(y)-F(x+h)]^{\beta-\alpha-1}[F(y+h)-F(y)][1-F(y+t)]^{n-\beta}\\ \\
   &amp;=\frac{n!}{(\alpha-1)!(\beta-\alpha-1)!(n-\beta)!}[F(x)]^{\alpha-1}[F(y)-F(x+h)]^{\beta-\alpha-1}\\
   &amp;\hspace{28cm}\times[1-F(y+t)]^{n-\beta}f(x)f(y),
