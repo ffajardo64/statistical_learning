@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<script src="aula2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="aula2_files/libs/quarto-html/tabby.min.js"></script>
+<script src="aula2_files/libs/quarto-html/popper.min.js"></script>
+<script src="aula2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="aula2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="aula2_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="aula2_files/libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <meta name="author" content="LECON/DEST - UFES">
+  <title> STA13823 - Inferência Estatística I   Estimação pontual </title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="aula2_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="aula2_files/libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="aula2_files/libs/revealjs/dist/theme/quarto-c9c4e882fc2dd0b2b0565851b88a3cd5.css">
+  <link href="aula2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="aula2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="aula2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="aula2_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="aula2_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="aula2_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-color="#172a46" data-background-opacity="number" data-background-size="contain" class="quarto-title-block center">
+  <h1 class="title"></h1><h2><br>
+STA13823 - Inferência Estatística I<br>
+</h2><br>
+<h3><br>
+Estimação pontual<br>
+</h3>
+  <p class="subtitle"><br><br></p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+LECON/DEST - UFES
+</div>
+        <p class="quarto-title-affiliation">
+            Última atualização: 18 outubro, 2026
+          </p>
+    </div>
+</div>
+
+</section>
+<section class="slide level2">
+
+<h3 id="preliminares">Preliminares</h3>
+<p>Assumiremos uma amostra aleatória <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> de uma população com densidade <span class="math inline">\(f(\cdot;\theta)\)</span>, onde a forma da densidade é conhecida, mas o parâmetro <span class="math inline">\(\theta\)</span> é desconhecido. Em alguns cenários <span class="math inline">\(\theta\)</span> será um vetor de parâmetros <span class="math inline">\(\theta=(\theta_1,\theta_2,\ldots,\theta_m)\)</span>.</p>
+<p><br></p>
+<div id="def-estimador" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 1 (Estimador)</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade <span class="math inline">\(f(\cdot;\theta)\)</span>. Um estimador <span class="math inline">\(T=t(X_1,X_2,\ldots,X_n)\)</span> é uma estatística usada para estimar alguma função de <span class="math inline">\(\theta\)</span>.</p>
+</div>
+<p><br></p>
+<div id="exm-est_estimador1" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 1</strong></span> A estatística <span class="math inline">\(\bar{X}_n=\frac1n\sum_{i=1}^nX_i\)</span> é um estimador da média <span class="math inline">\(\mu=\mathbb{E}[X]\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="sec-prop_estimadores">Propriedades dos estimadores</h3>
+<div id="def-vies" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 2 (Viés)</strong></span> Um estimador <span class="math inline">\(T=t(X_1,X_2,\ldots,X_n)\)</span> se diz não-viesado do parâmetro <span class="math inline">\(\tau(\theta)\)</span> se e somente se <span class="math inline">\(\mathbb{E}[T]=\tau(\theta)\)</span>, para todo <span class="math inline">\(\theta\in\Theta\)</span>. O viés do estimador <span class="math inline">\(T\)</span> é dado por <span class="math display">\[B(T)=\mathbb{E}[T]-\tau(\theta)=\mathbb{E}\left[t(X_1,X_2,\ldots,X_n)\right]-\tau(\theta).\]</span></p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div id="exm-vies1" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 2</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade <span class="math inline">\(f(\cdot;\mu,\sigma^2)\)</span>. Sejam <span class="math inline">\(\bar{X}_n=\frac1n\sum_{i=1}^nX_i\)</span> e <span class="math inline">\(S^2_n=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X}_n)^2\)</span> os estimadores de <span class="math inline">\(\mu\)</span> e <span class="math inline">\(\sigma^2\)</span>, respectivamente. Qual o viés dos estimadores?</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Sabemos que, <span class="math inline">\(\mathbb{E}[\bar{X}_n]=\mathbb{E}\left[\frac1n\sum_{i=1}^nX_i\right]=\frac1n\sum_{i=1}^n\mathbb{E}[X_i]=\mu\)</span>. Daí, <span class="math inline">\(\bar{X}_n\)</span> é um estimador não-viesado de <span class="math inline">\(\mu\)</span>.</p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Para <span class="math inline">\(S^2_n\)</span>, temos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathbb{E}\left[S^2_n\right]&amp;=\mathbb{E}\left[\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X}_n)^2\right]
+=\frac{1}{n-1}\sum_{i=1}^n\mathbb{E}\left(X_i-\bar{X}_n\right)^2\\
+&amp;=\frac{1}{n-1}\sum_{i=1}^n\mathbb{E}\left(X_i-\mu+\mu-\bar{X}_n\right)^2\\
+&amp;=\frac{1}{n-1}\sum_{i=1}^n\left\{\mathbb{E}\left(X_i-\mu\right)^2+\mathbb{E}\left(\mu-\bar{X}_n\right)^2-2\mathbb{E}\left(X_i-\mu\right)\left(\mu-\bar{X}_n\right)\right\}\\
+&amp;=\frac{1}{n-1}\left\{n\sigma^2-\sigma^2\right\}=\sigma^2. \quad\blacksquare
+\end{align*}\]</span></p>
+</div>
+<p>Daí, <span class="math inline">\(\bar{X}_n\)</span> e <span class="math inline">\(S^2_n\)</span> são esimadores não-viesados de <span class="math inline">\(\mu\)</span> e <span class="math inline">\(\sigma^2\)</span>, respectivamente.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="def-eqm" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 3 (Erro Quadrático Médio)</strong></span> Seja <span class="math inline">\(T=t(X_1,X_2,\ldots,X_n)\)</span> um estimador do parâmetro <span class="math inline">\(\tau(\theta)\)</span>. O Erro Quadrático Médio (EQM) de <span class="math inline">\(T\)</span> define-se como <span class="math display">\[\mathrm{EQM(T)}=\mathbb{E}\left[T-\tau(\theta)\right]^2=\mathbb{E}\left[t(X_1,X_2,\ldots,X_n)-\tau(\theta)\right]^2.\]</span></p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>Note que,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathrm{EQM(T)}&amp;=\mathbb{E}\left[T-\tau(\theta)\right]^2=\mathbb{E}\left[T^2-2T \tau(\theta)+\tau^2(\theta)\right]
+=\mathbb{E}\left[T^2\right]-2\tau(\theta)\mathbb{E}\left[T\right] +\tau^2(\theta)\\
+&amp;=\mathbb{E}\left[T^2\right]-\left[\mathbb{E}T\right]^2+\left[\mathbb{E}T\right]^2+2\tau(\theta)\mathbb{E}\left[T\right] +\tau^2(\theta)
+=\mathrm{var}\left[T\right]+\left[\mathbb{E}T-\tau(\theta)\right]^2\\
+&amp;=\mathrm{var}\left[T\right]+B^2(T). \quad\blacksquare
+\end{align*}\]</span></p>
+</div>
+<p>Do resultado acima, pode-se afirmar que, se o estimador <span class="math inline">\(T\)</span> é não-viesado, então <span class="math inline">\(\mathrm{EQM(T)}=\mathrm{var}[T]\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-vies_var" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 3</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span>. Calcule o EQM do estimador <span class="math inline">\(T=M_2'=\frac1n\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Para o cálculo, podemos aproveitar o resultado do <a href="#/exm-vies1" class="quarto-xref">Exemplo&nbsp;2</a>, dessa forma</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathbb{E}\left[M_2'\right]&amp;=\frac1n\mathbb{E}\left[\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2\right]
+=\frac{n-1}{n}\frac{1}{n-1}\mathbb{E}\left[\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2\right]\\
+&amp;=\frac{n-1}{n}\mathbb{E}\left[S^2\right]=\frac{n-1}{n}\sigma^2. \quad\blacksquare
+\end{align*}\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>O EQM é calculado como</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathrm{EQM}\left(M_2'\right)&amp;=\mathbb{E}\left[\frac{n-1}{n}S^2-\sigma^2\right]^2
+=\mathrm{var}\left[M_2'\right]+\left(\frac{n-1}{n}\sigma^2-\sigma^2\right)^2\\
+&amp;=\mathrm{var}\left[M_2'\right]+\frac{\sigma^4}{n^2}
+=\frac{(n-1)^2}{n^2}\mathrm{var}\left[S^2\right]+\frac{\sigma^4}{n^2}.
+\end{align*}\]</span></p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Dessa forma, temos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathrm{EQM}\left(M_2'\right) &amp;=\frac{(n-1)^2}{n^2}\mathrm{var}\left[S^2\right]+\frac{\sigma^4}{n^2}
+= \frac{(n-1)^2}{n^2}\frac1n\left(\mu_4-\frac{n-3}{n-1}\sigma^4\right)+\frac{\sigma^4}{n^2},
+\end{align*}\]</span></p>
+</div>
+<p>para <span class="math inline">\(n&gt;1\)</span>, onde <span class="math inline">\(\mu_4=\mathbb{E}(X_i-\mu)^4\)</span>.</p>
+<p><br></p>
+<hr>
+
+<p><font size="6">vide <a href="https://ffajardo64.github.io/statistical_learning/cursos/STA13820/aula1.html#/88" target="_blank">Exercício 3</a> da Aula 1.</font></p>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>O EQM é comumente utilizado para comparar o desempenho de dois estimadores, por exemplo, se existir um estimador não-viesado <span class="math inline">\(T^*\)</span>, tal que, <span class="math inline">\(\mathrm{var}\left[T^*\right]\le\mathrm{var}\left[T\right]\)</span>, então, o estimador <span class="math inline">\(T^*\)</span> é dito um estimador não-viesado com variância minima.</p>
+</div>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div id="exm-eqm_estimadores" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 4</strong></span> Seja <span class="math inline">\(X_1,X_2\)</span> e <span class="math inline">\(X_3\)</span> uma amostra aleatória de uma população com função de densidade de probabilidade <span class="math inline">\(f(x; \theta, 1)\)</span>, onde <span class="math inline">\(\theta\)</span> e <span class="math inline">\(1\)</span> representam a média e a variância da população, respectivamente. Considere os seguintes estimadores: <span class="math inline">\(T_1=\bar{X}_3=\frac13\sum_{i=1}^3X_i\)</span> e <span class="math inline">\(T_2=\frac12X_1+\frac14X_2+\frac14X_3\)</span>. Calcule o viés e o <span class="math inline">\(\mathrm{EQM}\)</span> dos estimadores.</p>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="2">
+<p>Pelo <a href="https://ffajardo64.github.io/statistical_learning/cursos/STA13820/aula1.html#/86" target="_blank">Corolario 2</a>, temos que <span class="math inline">\(\mathbb{E}T_1=\mathbb{E}[\bar{X}_3]=\theta\)</span> e <span class="math inline">\(\mathrm{var}\left[\bar{X}_3\right]=\frac1n\)</span>. Por outra parte, <span class="math inline">\(\mathbb{E}T_2=\left(\frac12+\frac14+\frac14\right)\theta=\theta\)</span> e <span class="math inline">\(\mathrm{var}\left[T_2\right]=\frac{6}{16}\)</span>. Comparando os dois estimadores, observa-se que o estimador <span class="math inline">\(T_1=\bar{X}_3\)</span> é um estimador não-viesado de menor variância.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-estimadores_unif" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 5</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots, X_n\)</span> uma amostra aleatória de uma população com distribuição uniforme no intervalo <span class="math inline">\((0,\theta)\)</span>. Considere os seguintes estimadores para <span class="math inline">\(\theta\)</span>: <span class="math inline">\(T_1=\bar{X}_n=\frac1n\sum_{i=1}^nX_i\)</span> e <span class="math inline">\(T_2=Y_n=\max\{X_1,X_2,\ldots, X_n\}\)</span>. Calcule o viés e o <span class="math inline">\(\mathrm{EQM}\)</span> dos estimadores.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que, se <span class="math inline">\(X\)</span> é uma variável aleatória de uma população com distribuição uniforme no intervalo <span class="math inline">\((0,\theta)\)</span>, então <span class="math inline">\(\mathbb{E}[X]=\frac12\theta\)</span> e <span class="math inline">\(\mathrm{var}[X]=\frac{\theta^2}{12}\)</span>. Dessa forma, temos que <span class="math inline">\(\mathbb{E}T_1=\frac12\theta\)</span> e <span class="math inline">\(\mathrm{var}\left[T_1\right]=\frac{\theta^2}{12n}\)</span>. De fato, o estimador <span class="math inline">\(T_1\)</span> é um estimador viesado para <span class="math inline">\(\theta\)</span>.</p>
+<p>O <span class="math inline">\(\mathrm{EQM}\)</span> do estimador <span class="math inline">\(T_1\)</span> é dado por <span class="math display">\[\mathrm{EQM}(T_1)=\frac{\theta^2}{12n}+\left(\frac12\theta-\theta\right)^2=\frac{1+3n}{12n}\theta^2.\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Por outra parte,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+f_{Y_n}(y)&amp;=\frac{n!}{(n-1)!(n-n)!}\left[F(y)\right]^{n-1}[1-F(y)]^{n-n}f(y)\\
+&amp;=n\left[F(y)\right]^{n-1}f(y)=n\left(\frac{y}{\theta}\right)^{n-1}\frac1\theta\mathbb{I}_{(0,\theta)}(y).
+\end{align*}\]</span></p>
+</div>
+<p>Dessa forma,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathbb{E}Y_n &amp;=\int_0^\theta x\frac{nx^{n-1}}{\theta^n}\,dx=\frac{n}{\theta^n}\left.\frac{x^{n+1}}{n+1}\right|_0^\theta
+=\frac{n}{\theta^n}\frac{\theta^{n+1}}{n+1}=\frac{n}{n+1}\theta;  \\ \\
+\mathbb{E}Y^2_n &amp;=\int_0^\theta x^2\frac{nx^{n-1}}{\theta^n}\,dx=\frac{n}{\theta^n}\left.\frac{x^{n+2}}{n+2}\right|_0^\theta
+=\frac{n}{\theta^n}\frac{\theta^{n+2}}{n+2}=\frac{n}{n+2}\theta^2.
+\end{align*}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Assim, <span class="math inline">\(\mathrm{var}[Y_n]=\frac{n}{n+2}\theta^2-\left(\frac{n}{n+1}\theta\right)^2=\frac{n(n+1)^2-n^2(n+2)}{(n+1)^2(n+2)}\theta^2=\frac{n}{(n+1)^2(n+2)}\theta^2\)</span>. Dessa forma,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathrm{EQM}(T_2) &amp;= \frac{n}{(n+1)^2(n+2)}\theta^2+\left(\frac{n}{n+1}\theta-\theta\right)^2\\
+&amp;=\frac{n}{(n+1)^2(n+2)}\theta^2+\frac{1}{(n+1)^2}\theta^2\\
+&amp;=\frac{n+n+2}{(n+1)^2(n+2)}\theta^2=\frac{2}{(n+1)(n+2)}\theta^2.
+\end{align*}\]</span></p>
+</div>
+<p>Observa-se que, o estimador <span class="math inline">\(T_2\)</span> é assintoticamente não-viesado e o <span class="math inline">\(\mathrm{EQM}(T_2)\longrightarrow0\)</span>, quando <span class="math inline">\(n\to\infty\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<div id="exm-estimador_mood" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 6</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots, X_n\)</span> uma amostra aleatória de uma população com densidade <span class="math inline">\(f(\cdot; \mu, \sigma^2)\)</span>.</p>
+<ol type="1">
+<li>Mostre que <span class="math inline">\(\sum_{i=1}^na_iX_i\)</span> é um estimador não-viesado de <span class="math inline">\(\mu\)</span>, para qualquer conjunto de constantes <span class="math inline">\(a_1,a_2,\ldots,a_n\)</span>, tal que <span class="math inline">\(\sum_{i=1}^na_i=1\)</span>;</li>
+</ol>
+<div class="fragment fade-in" data-fragment-index="1">
+<p><span class="math display">\[\mathbb{E}\left[\sum_{i=1}^na_iX_i\right]=\sum_{i=1}^na_i\mathbb{E}\left[X_i\right]=\sum_{i=1}^na_i\mu=\mu\sum_{i=1}^na_i=\mu;\]</span></p>
+</div>
+<div class="fragment fade-in" data-fragment-index="2">
+<ol start="2" type="1">
+<li>Se <span class="math inline">\(\sum_{i=1}^na_i=1\)</span>, mostre que <span class="math inline">\(\mathrm{var}\left[\sum_{i=1}^na_iX_i\right]\)</span> tem valor mínimo quando <span class="math inline">\(a_i=\frac1n\)</span>, com <span class="math inline">\(i=1,2,\ldots,n\)</span>.</li>
+</ol>
+</div>
+</div>
+<div class="fragment fade-in" data-fragment-index="3">
+<p>Sabemos que,</p>
+<p><span class="math display">\[\mathrm{var}\left[\sum_{i=1}^na_iX_i\right]=\sum_{i=1}^na^2_i\mathrm{var}\left[X_i\right]=\sum_{i=1}^na^2_i\sigma^2=\sigma^2\sum_{i=1}^na^2_i. \]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>O termo <span class="math inline">\(\sum_{i=1}^na^2_i\)</span> pode ser reescrito como</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\sum_{i=1}^na^2_i &amp;= \sum_{i=1}^n\left(a_i-\frac1n+\frac1n\right)^2
+= \sum_{i=1}^n\left(a_i-\frac1n\right)^2+\sum_{i=1}^n\frac{1}{n^2}+2\sum_{i=1}^n\left(a_i-\frac1n\right)\frac1n\\
+&amp;= \sum_{i=1}^n\left(a_i-\frac1n\right)^2+\frac{1}{n}+\frac2n\sum_{i=1}^n\left(a_i-\frac1n\right)= \sum_{i=1}^n\left(a_i-\frac1n\right)^2+\frac{1}{n}.
+\end{align*}\]</span></p>
+</div>
+<p>Daí,</p>
+<p><span class="math display">\[\mathrm{var}\left[\sum_{i=1}^na_iX_i\right]=\sigma^2\sum_{i=1}^na^2_i=\sigma^2\left[\sum_{i=1}^n\left(a_i-\frac1n\right)^2+\frac{1}{n}\right]=\sigma^2\sum_{i=1}^n\left(a_i-\frac1n\right)^2+\frac{\sigma^2}{n}.\]</span></p>
+</section>
+<section class="slide level2">
+
+<p>Para avaliar os valores de <span class="math inline">\(a_i\)</span> que minimizam a variância, considere o seguinte cenário</p>
+<p><span class="math display">\[\underset{c\in\mathbb{R}}{\arg\min}\,\mathcal{h}(c)=\underset{c\in\mathbb{R}}{\arg\min}\sum_{i=1}^n\left(a_i-c\right)^2.\]</span> Assim, <span class="math inline">\(\mathcal{h}'(c)=\sum_{i=1}^n2\left(a_i-c\right)(-1)\)</span>, então para <span class="math inline">\(\mathcal{h}'(c)=0\)</span>, <span class="math inline">\(c=\frac1n\)</span> um ponto crítico. Sendo a segunda derivada positiva, o valor <span class="math inline">\(c=\frac1n\)</span> é um mínimo. Dessa forma, a variância de <span class="math inline">\(\sum_{i=1}^na_iX_i\)</span> será mínima quando <span class="math inline">\(a_i=\frac1n\)</span>, para <span class="math inline">\(i=1,2,3,\ldots,n\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<div id="def-consistencia_eqm" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 4 (Consistência em Erro Quadrático Médio)</strong></span> Seja <span class="math inline">\(T_1,T_2,\ldots,T_k, T_{k+1}, \ldots\)</span> uma sequência de estimadores de <span class="math inline">\(\tau(\theta)\)</span>, tal que <span class="math inline">\(T_k=t(X_1,X_2,\ldots,X_n)\)</span>. A sequência <span class="math inline">\(\{T_k\}\)</span> se diz consistente em Erro Quadrático Médio, com respeito a <span class="math inline">\(\tau(\theta)\)</span>, <em>see</em> <span class="math display">\[\lim_{k\to\infty}\mathbb{E}\left[T_k-\tau(\theta)\right]^2=0,\]</span> para todo <span class="math inline">\(\theta\in\Theta\)</span>.</p>
+</div>
+<p><br></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>A consistência em <span class="math inline">\(\mathrm{EQM}\)</span> implica que tanto a variância, quanto o viés, se aproximam de zero quando <span class="math inline">\(n\to\infty\)</span>.</p>
+</div>
+</div>
+</div>
+<!-- Faltan los ejercicios de esta definición -->
+</section>
+<section class="slide level2">
+
+<div id="def-consistencia" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 5 (Consistência)</strong></span> Seja <span class="math inline">\(T_1,T_2,\ldots,T_k, T_{k+1}, \ldots\)</span> uma sequência de estimadores de <span class="math inline">\(\tau(\theta)\)</span>, tal que <span class="math inline">\(T_k=t(X_1,X_2,\ldots,X_n)\)</span>. A sequência <span class="math inline">\(\{T_k\}\)</span> se diz consistente, com respeito a <span class="math inline">\(\tau(\theta)\)</span>, <em>see</em> <span class="math display">\[ T_k \overset{p}{\longrightarrow} \tau(\theta),\]</span> para todo <span class="math inline">\(\theta\in\Theta\)</span>.</p>
+</div>
+<p><br></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>Se um estimador é consistente em <span class="math inline">\(\mathrm{EQM}\)</span>, então, o estimador é consistente. Tal afirmação pode ser verificada com a seguinte relação:</p>
+<p><span class="math display">\[\mathbb{P}\left(|T_n-\tau(\theta)|&lt;\epsilon\right)=\mathbb{P}\left(|T_n-\tau(\theta)|^2&lt;\epsilon^2\right)\ge1-\frac{\mathbb{E}\left[T_n-\tau(\theta)\right]^2}{\epsilon^2}.\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="método-dos-momentos" class="slide level2 center" data-background-color="#172a46">
+<h2>Método dos momentos</h2>
+</section>
+<section class="slide level2">
+
+<p>Seja <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> uma amostra aleatória de uma população com distribuição que envolve o parâmetro <span class="math inline">\(\theta=(\theta_1, \theta_2,\ldots, \theta_k)\)</span>. Seja <span class="math inline">\(M_j'=\frac1n\sum_{i=1}^nX_i^j\)</span> o <span class="math inline">\(j\)</span>-ésimo momento amostral em torno de zero. O método dos momentos consiste em determinar as estatísticas que convergem em probabilidade para cada componente <span class="math inline">\(\theta_j\)</span>, com <span class="math inline">\(j=1,2,\ldots, k\)</span>, do parâmetro <span class="math inline">\(\theta=(\theta_1, \theta_2,\ldots, \theta_k)\)</span>, a partir do sistema de equações:</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+M_1' &amp;\overset{p}{\longrightarrow} \mu_1'\\
+M_2' &amp;\overset{p}{\longrightarrow} \mu_2'\\
+&amp;\hspace{0.5cm}\vdots \\
+M_k' &amp;\overset{p}{\longrightarrow} \mu_k'.
+\end{align*}\]</span></p>
+</div>
+<p>O método dos momentos baseia-se na lei dos grandes números e pode-se formalizar com o seguinte resultado.</p>
+</section>
+<section class="slide level2">
+
+<div class="box2">
+<div id="thm-metodo_momentos" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 1</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição que envolve um parâmetro <span class="math inline">\(\theta\)</span>. Se <span class="math inline">\(\mu_{2r}=\mathbb{E}X^{2r}\)</span> existe, então</p>
+<p><span class="math display">\[\frac1n\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^r \overset{p}{\longrightarrow} \mu_r.
+\]</span></p>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="proof">
+<p><span class="proof-title"><em>Prova</em>. </span>Sabemos que, <span class="math inline">\(\mu_r=\mathbb{E}\left[X-\mu\right]^r\)</span>, onde <span class="math inline">\(\mu=\mathbb{E}X\)</span>, daí</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mu_r &amp;= \mathbb{E}\left[X-\mu\right]^r = \mathbb{E}\left(\sum_{j=0}^r\binom{r}{j}X^j(-\mu)^{r-j}\right)\\
+&amp;=\sum_{j=0}^r\binom{r}{j}(-\mu)^{r-j}\mathbb{E}X^j=\sum_{j=0}^r\binom{r}{j}\mu_j'(-\mu)^{r-j}.
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Por outro lado, temos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\frac1n\sum_{j=1}^n\left(X_i-\bar{X}_n\right)^r &amp;= \frac1n\sum_{i=1}^n\sum_{j=0}^r\binom{r}{j}X_i^j(-\bar{X}_n)^{r-j}
+=\sum_{j=0}^r\left[\frac1n\sum_{i=1}^n\binom{r}{j}X_i^j(-\bar{X}_n)^{r-j}\right]\\
+&amp;=\sum_{j=0}^r\binom{r}{j}(-\bar{X}_n)^{r-j}\frac1n\sum_{i=1}^nX_i^j=\sum_{j=0}^r\binom{r}{j}(-\bar{X}_n)^{r-j}M_j'.
+\end{align*}\]</span></p>
+</div>
+<p>Assumindo que o momento <span class="math inline">\(\mu_{2r}\)</span> existe, então os momentos <span class="math inline">\(\mu_s\)</span> e <span class="math inline">\(\mu_s'\)</span> existem para <span class="math inline">\(s\le 2r\)</span>. Daí,</p>
+<p><span class="math display">\[M_r=\sum_{j=0}^r\binom{r}{j}M_j'(-\bar{X}_n)^{r-j} \overset{p}{\longrightarrow} \sum_{j=0}^r\binom{r}{j}\mu_j'(-\mu)^{r-j}=\mu_r,
+\]</span></p>
+<p>onde <span class="math inline">\(\mu_r'=\mathbb{E}[X^r]\)</span> e <span class="math inline">\(\mu_r=\mathbb{E}[(X-\mu_X)^r]\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<div id="exm-mm_normal" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 7</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots, X_n\)</span> uma amostra aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span>. Encontre os estimadores para <span class="math inline">\(\mu\)</span> e <span class="math inline">\(\sigma^2\)</span> pelo método dos momentos.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Pelo método dos momentos, temos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\bar{X}_n=\frac1n\sum_{i=1}^nX_i &amp;\overset{p}{\longrightarrow} \mu;\\
+\frac1n\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2 &amp;\overset{p}{\longrightarrow} \sigma^2.
+\end{align*}\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-mm_gama" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 8</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots, X_n\)</span> uma amostra aleatória de uma população com função de densidade dada por <span class="math display">\[f(x;\theta)=\frac{\theta_2^{\theta_1}}{\Gamma(\theta_1)}x^{\theta_1-1}e^{-\theta_2 x}\mathbb{I}_{(0,\infty)}(x).\]</span> Encontre os estimadores para <span class="math inline">\(\theta_1\)</span> e <span class="math inline">\(\theta_2\)</span> pelo método dos momentos.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>A função de densidade de probabilidade acima representa a densidade gamma com parâmetros <span class="math inline">\(\theta_1\)</span> e <span class="math inline">\(\theta_2\)</span>. Dessa forma, se <span class="math inline">\(X\)</span> é uma variável aleatória de uma população com distribuição gamma<span class="math inline">\((\theta_1, \theta_2)\)</span>, então <span class="math inline">\(\mathbb{E}X=\frac{\theta_1}{\theta_2}\)</span> e <span class="math inline">\(\mathrm{var}[X]=\frac{\theta_1}{\theta_2^2}\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma, pelo método dos momentos, temos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\bar{X}_n &amp;\overset{p}{\longrightarrow} \frac{\theta_1}{\theta_2};\\
+\frac1n\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2 &amp;\overset{p}{\longrightarrow} \frac{\theta_1}{\theta_2^2}.
+\end{align*}\]</span></p>
+</div>
+<p>Daí, <span class="math inline">\(\dfrac{\bar{X}_n}{\frac1n\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2 } \overset{p}{\longrightarrow} \theta_2\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<p>Por outra parte, <span class="math inline">\(\dfrac{1}{\bar{X}_n} \overset{p}{\longrightarrow} \dfrac{\theta_2}{\theta_1}\)</span> ou <span class="math inline">\(\left(\dfrac{\theta_1}{\bar{X}_n}\right)^2 \overset{p}{\longrightarrow} \theta_2^2\)</span>, então</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\dfrac{\dfrac{\theta_1}{\frac1n\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2}}{\left(\dfrac{\theta_1}{\bar{X}_n}\right)^2}
+= \dfrac{\bar{X}_n^2}{\theta_1\frac1n\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2} &amp;\overset{p}{\longrightarrow} 1,
+\end{align*}\]</span></p>
+</div>
+<p>daí, <span class="math inline">\(\dfrac{\bar{X}_n^2}{\frac1n\sum_{i=1}^n\left(X_i-\bar{X}_n\right)^2} \overset{p}{\longrightarrow} \theta_1. \quad\blacksquare\)</span></p>
+</section>
+<section class="slide level2">
+
+<div id="exm-mm_gama" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 9</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots, X_n\)</span> uma amostra aleatória de uma população com distribuição uniforme no intervalo <span class="math inline">\((-\theta,\theta)\)</span>. Encontre um estimador para <span class="math inline">\(\theta\)</span> pelo método dos momentos.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sendo <span class="math inline">\(X\)</span> uma variável aleatória com distribuição uniforme em <span class="math inline">\((-\theta, \theta)\)</span>, temos que, <span class="math inline">\(\mathbb{E}X=\mu=0\)</span> e <span class="math inline">\(\mathrm{var}[X]=\dfrac{4\theta^2}{12}=\dfrac13\theta^2\)</span>.</p>
+<p><br></p>
+<p>Dessa forma, <span class="math inline">\(\bar{X}_n \overset{p}{\longrightarrow} \mu=0\)</span>, o que significa que o estimador <span class="math inline">\(\bar{X}_n\)</span> não tem informação sobre <span class="math inline">\(\theta\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Nesse caso, será necessário verificar o segundo momento:</p>
+<p><span class="math display">\[\frac1n\sum_{i=1}^nX_i^2 \overset{p}{\longrightarrow} \frac13\theta^2.\]</span> Daí, o estimador de momentos para <span class="math inline">\(\theta\)</span> é dado por</p>
+<p><span class="math display">\[\sqrt{\frac3n\sum_{i=1}^nX_i^2} \overset{p}{\longrightarrow} \theta. \quad\blacksquare\]</span></p>
+</section>
+<section class="slide level2">
+
+<div id="exm-mm_gama" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 10</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots, X_n\)</span> uma amostra aleatória de uma população com função de densidade de probabilidade <span class="math inline">\(f(x;\theta)=\theta e^{-\theta x}\mathbb{I}_{(0,\infty)}(x)\)</span>, com <span class="math inline">\(\theta&gt;0\)</span>. Determine um estimador para a mediana da distribuição da amostra pelo método dos momentos.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Primeiramente, será necessário encontrar o formato analítico da mediana. Para uma variável aleatória <span class="math inline">\(X\)</span>, de uma população com função de densidade de probabilidade <span class="math inline">\(f(x;\theta)=\theta e^{-\theta x}\mathbb{I}_{(0,\infty)}(x)\)</span>, com <span class="math inline">\(\theta&gt;0\)</span>, a função de distribuição acumulada é dada por:</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathbb{P}[X\le x]&amp;=\int_0^x\theta e^{-\theta y}\,dy=\left.e^{-\theta y}\right|_x^0
+=1-e^{-\theta x}.
+\end{align*}\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Daí, a mediana é calculada como <span class="math inline">\(1-e^{-\theta x_{0.5}}=\frac12\)</span> ou <span class="math inline">\(x_{0.5}=\dfrac{\log2}{\theta}\)</span>.</p>
+<p>Por outro lado, sabemos que <span class="math inline">\(\mathbb{E}X=\dfrac1\theta\)</span>, então</p>
+<p><span class="math display">\[\bar{X}_n \log2 \overset{p}{\longrightarrow} \frac{\log2}{\theta}. \quad\blacksquare\]</span></p>
+</section>
+<section id="método-de-máxima-verossimilhança" class="slide level2 center" data-background-color="#172a46">
+<h2>Método de máxima verossimilhança</h2>
+</section>
+<section class="slide level2">
+
+<div id="def-funcao_mv" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 6 (Função de verossimilhança)</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade (ou probabilidade) conjunta <span class="math inline">\(f(x_1,x_2,\ldots,x_n;\theta)\)</span>. A função de verossimilhança define-se como a função do parâmetro <span class="math inline">\(\theta\)</span> dada por</p>
+<p><span class="math display">\[L(\theta)=\prod_{i=1}^nf(x_i;\theta).\]</span></p>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>A verossimilhança é interpretada como uma função do vetor de parâmetros para um conjunto de dados fixo, e serve para medir o quanto esses dados suportam uma hipótese sobre <span class="math inline">\(\theta\)</span>. Em outras palavras, a verossimilhança expressa a <em>plausibilidade</em> de um vetor <span class="math inline">\(\theta\)</span> explicar os dados observados. Nesse sentido, ela estabelece uma ordem natural de preferência entre diferentes valores possíveis de <span class="math inline">\(\theta\)</span>.</p>
+<p>É fundamental observar que a família de distribuições deve ser escolhida antes da construção da função de verossimilhança. Essa escolha pode ser guiada por intuição, por princípios teóricos gerais ou ainda por evidências empíricas provenientes de estudos anteriores.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>É importante ressaltar que verossimilhança e probabilidade são conceitos distintos. A verossimilhança, entendida como uma medida de <em>plausibilidade</em> relativa entre diferentes valores de <span class="math inline">\(\theta\)</span>, não satisfaz, em geral, as propriedades fundamentais de uma função de probabilidade. Por outro lado, a probabilidade expressa a incerteza associada aos possíveis resultados de um experimento cujo desfecho ainda não foi observado.</p>
+<p>Sob a perspectiva probabilística, os resultados do experimento são variáveis aleatórias, enquanto o parâmetro <span class="math inline">\(\theta\)</span> é considerado fixo. Em contraste, na abordagem da verossimilhança, os dados observados são tratados como fixos, e o parâmetro <span class="math inline">\(\theta\)</span> é que varia.</p>
+</div>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div id="def-estimador_mv" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 7 (Estimador de máxima verossimilhança)</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade (ou probabilidade) conjunta <span class="math inline">\(f(x_1,x_2,\ldots,x_n;\theta)\)</span> e <span class="math inline">\(L(\theta)=L(\theta; x_1,x_2,\ldots,x_n)\)</span> a função de verossimilhança associada à amostra. Se <span class="math inline">\(\hat{\theta}=t(x_1,x_2,\ldots,x_n)\)</span> é o valor <span class="math inline">\(\theta\in\Theta\)</span> que maximiza <span class="math inline">\(L(\theta)\)</span>, então <span class="math inline">\(\hat{\theta}=t(X_1,X_2,\ldots,X_n)\)</span> é o estimador de Máxima Verossimilhança (MV) de <span class="math inline">\(\theta\)</span>.</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>Se a função de verossimilhança contém <span class="math inline">\(k\)</span> parâmetros, i.e.</p>
+<p><span class="math display">\[L(\theta_1,\theta_2,\ldots,\theta_k)=\prod_{i=1}^nf(x_i;\theta_1,\theta_2,\ldots,\theta_k),\]</span> então, os estimadores MV dos parâmetros <span class="math inline">\(\theta_1,\theta_2,\ldots,\theta_k\)</span> são as variáveis aletaórias</p>
+<p><span class="math display">\[\hat{\theta}_j=t(X_1,X_2,\ldots,X_n), \quad j=1,2,\ldots, k\]</span> sob certas condições de regularidade, o ponto onde a verossimilhança é máxima é uma solução das <span class="math inline">\(k\)</span> equações</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\frac{\partial L(\theta_1,\theta_2,\ldots,\theta_k)}{\partial\theta_1}&amp;=0 \\
+\frac{\partial L(\theta_1,\theta_2,\ldots,\theta_k)}{\partial\theta_2}&amp;=0 \\
+&amp; \ \ \vdots \\
+\frac{\partial L(\theta_1,\theta_2,\ldots,\theta_k)}{\partial\theta_k}&amp;=0.
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-mv_normal" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 11</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade</p>
+<p><span class="math display">\[f(x;\mu,\sigma^2)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac12\left(\frac{x-\mu}{\sigma}\right)^2}\mathbb{I}_\mathbb{R}(x).\]</span> Calcule o estimador de MV para <span class="math inline">\(\theta=(\mu, \sigma^2)\)</span>.</p>
+</div>
+<p><br><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>A função de verossimilhança é dada por</p>
+<p><span class="math display">\[L(\theta)=\prod_{i=1}^nf(x_i;\mu, \sigma^2)=\left(2\pi\sigma^2\right)^{-\frac{n}{2}}\exp\left\{-\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\mu)^2\right\}\prod_{i=1}^n\mathbb{I}_{\mathbb{R}}(x_i).\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Daí, a função log-verossimilhança é dada por</p>
+<p><span class="math display">\[\log L(\theta)=\cal{l}(\theta)=-\frac{n}{2}\log\left(2\pi\sigma^2\right)-\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\mu)^2+\log\prod_{i=1}^n\mathbb{I}_{\mathbb{R}}(x_i).\]</span></p>
+<p>Calculando as derivadas parciais, temos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\frac{\partial \cal{l}(\theta)}{\partial\mu}&amp;=\frac{1}{\sigma^2}\sum_{i=1}^n(x_i-\mu); &amp;
+\frac{\partial \cal{l}(\theta)}{\partial\sigma}&amp;= -\frac{n}{\sigma}+\frac{1}{\sigma^3}\sum_{i=1}^n(x_i-\mu)^2;\\
+\frac{\partial^2\cal{l}(\theta)}{\partial\mu^2}&amp;=-\frac{n}{\sigma^2}; &amp; \frac{\partial^2\cal{l}(\theta)}{\partial\sigma^2}&amp;= \frac{n}{\sigma^2}-\frac{3}{\sigma^4}\sum_{i=1}^n(x_i-\mu)^2;\\
+\frac{\partial^2\cal{l}(\theta)}{\partial\mu\partial\sigma}&amp;= -\frac{2}{\sigma^3}\sum_{i=1}^n(x_i-\mu). &amp;
+\end{align*}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Para encontrar os pontos críticos igualamos a zero e resolvemos sistemas de equações. Dessa forma, temos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\frac{1}{\hat\sigma^2}\sum_{i=1}^n(x_i-\hat\mu)&amp;=0 \\
+-\frac{n}{\hat\sigma}+\frac{1}{\hat\sigma^3}\sum_{i=1}^n(x_i-\hat\mu)^2&amp;=0.
+\end{align*}\]</span></p>
+</div>
+<p>Daí, <span class="math inline">\(\hat\mu=\bar{x}_n\)</span> e <span class="math inline">\(\hat\sigma^2=\frac1n\sum_{i=1}^n(x_i-\bar{x}_n)^2\)</span> representam as soluções do sistema de equações.</p>
+</section>
+<section class="slide level2">
+
+<p>Para verificar se <span class="math inline">\(\hat\theta=(\hat\mu, \hat\sigma^2)\)</span> é ponto de máximo, pode-se usar o critério da segunda derivada, i.e., note que <span class="math inline">\(\left.\frac{\partial^2\cal{l}(\theta)}{\partial\mu^2}\right|_{\hat\theta=(\hat\mu,\hat\sigma^2) }=-\frac{n}{\hat\sigma^2}&lt;0\)</span> e</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+D&amp;=\left.\frac{\partial^2\cal{l}(\theta)}{\partial\mu^2}\frac{\partial^2\cal{l}(\theta)}{\partial\sigma^2}-\left(\frac{\partial^2\cal{l}(\theta)}{\partial\mu\partial\sigma}\right)^2\right|_{\hat\theta=(\hat\mu,\hat\sigma^2) }\\
+&amp;=
+-\frac{n}{\hat\sigma^2}\left(\frac{n}{\hat\sigma^2}-\frac{3}{\hat\sigma^4}\sum_{i=1}^n(x_i-\hat\mu)^2\right)-
+\left(-\frac{2}{\hat\sigma^3}\sum_{i=1}^n(x_i-\hat\mu)\right)^2\\
+&amp;=\frac{3n}{\hat\sigma^6}\sum_{i=1}^n(x_i-\hat\mu)^2-\frac{n^2}{\hat\sigma^4}=
+\frac{3n^2}{\hat\sigma^4}-\frac{n^2}{\hat\sigma^4}&gt;0.
+\end{align*}\]</span></p>
+</div>
+<p>Dessa forma, o estimador de máxima verossimilhança para <span class="math inline">\(\theta=(\mu, \sigma^2)\)</span> é dado por <span class="math inline">\(\hat\theta=\left(\bar{X}_n, \frac1n\sum_{i=1}^n(X_i-\bar{X}_n)^2\right)\)</span>. <span class="math inline">\(\quad\blacksquare\)</span></p>
+</section>
+<section class="slide level2">
+
+<div class="box2">
+<div id="thm-metodo_mv" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 2</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição que envolve um parâmetro <span class="math inline">\(\theta\)</span>. Seja <span class="math inline">\(L(\theta)=f(x_1,x_2,\ldots,x_n;\theta)\)</span> com <span class="math inline">\(\theta\in\Theta\)</span>, a função de verossimilhança e <span class="math inline">\(\hat\theta\)</span> um estimador de máxima verossimilhança de <span class="math inline">\(\theta\)</span>. Então:</p>
+<p><span class="math inline">\(i.\)</span> Se <span class="math inline">\(\tau(\theta)\)</span> é uma função <span class="math inline">\(1-1\)</span>, ou seja, <span class="math inline">\(\tau(\theta_1)=\tau(\theta_2)\)</span> se e somente se (<em>see</em>) <span class="math inline">\(\theta_1=\theta_2\)</span>, então <span class="math inline">\(\tau(\hat\theta)\)</span> é um estimador de máxima verossimilhança de <span class="math inline">\(\tau(\theta)\)</span>, i.e., <span class="math inline">\(\tau(\hat\theta)\)</span> é um valor de <span class="math inline">\(\tau(\theta)\)</span> que maximiza <span class="math inline">\(L(\theta)\)</span>;</p>
+<p><span class="math inline">\(ii.\)</span> <span class="math inline">\(\tau(\hat\theta)\)</span> é um estimador de máxima verossimilhança de <span class="math inline">\(\tau(\theta)\)</span> ainda se <span class="math inline">\(\tau(\cdot)\)</span> não é <span class="math inline">\(1-1\)</span> e se <span class="math inline">\(\theta\)</span> é vetor.</p>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="proof">
+<p><span class="proof-title"><em>Prova</em>. </span><span class="math inline">\(i.\)</span> Sabemos que, <span class="math inline">\(\tau:\Theta \longrightarrow \Theta^*\)</span>, tal que, para <span class="math inline">\(\theta\in\Theta\)</span> então <span class="math inline">\(\tau(\theta)=\theta^*\)</span>. Como <span class="math inline">\(\tau(\cdot)\)</span> é <span class="math inline">\(1-1\)</span>, então <span class="math inline">\(\theta=\tau^{-1}(\theta^*)\)</span>. Por outro lado, como a função de verossimilhança <span class="math inline">\(L(\theta)\)</span> tem valor máximo em <span class="math inline">\(\hat\theta\)</span>, ou equivalentemente <span class="math inline">\(L(\theta)\)</span> tem máximo <span class="math inline">\(\tau^{-1}(\hat\theta^*)=\hat\theta\)</span>, ou seja <span class="math inline">\(\hat\theta^*=\tau(\hat\theta)\)</span>. Daí, o estimador de MV de <span class="math inline">\(\theta^*\)</span> é <span class="math inline">\(\hat\theta^*\)</span>, ou de forma equivalente, o estimador de MV de <span class="math inline">\(\tau(\theta)\)</span> é <span class="math inline">\(\tau(\hat\theta)\)</span>;</p>
+<p><span class="math inline">\(ii.\)</span> Sabemos que <span class="math inline">\(\hat\theta\)</span> maximiza <span class="math inline">\(L(\theta)\)</span>. Assim, vários valores de <span class="math inline">\(\hat\theta\)</span> tem imagem <span class="math inline">\(\tau(\hat\theta)=\hat\theta^*\)</span> e um desses valores maximiza <span class="math inline">\(L(\theta)\)</span>. <span class="math inline">\(\quad\blacksquare\)</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<!-- ## Referências -->
+<!-- ::: {#refs} -->
+<!-- ::: -->
+</section>
+<section id="política-de-proteção-aos-direitos-autorais" class="slide level2">
+<h2>Política de proteção aos direitos autorais</h2>
+<blockquote>
+<p><span style="color:grey"><font size="6">O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser o detentor dos direitos sobre o conteúdo disponível na plataforma, o <strong>LECON</strong> e o <strong>NEAEST</strong> detém direito exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5<sup>o</sup>, inciso XXVII, da Constituição Federal e os Artigos 7<sup>o</sup> e 28<sup>o</sup>, da Lei 9.610/98. A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do <strong>LECON</strong> e o <strong>NEAEST</strong>, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo caracterizar conduta criminosa, conforme Artigo 184<sup>o</sup>, §1<sup>o</sup> a 3<sup>o</sup>, do Código Penal. É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer conteúdo disponível na plataforma.</font></span></p>
+</blockquote>
+
+<img data-src="images/logo_neaest_lecon.png" class="quarto-figure quarto-figure-center r-stretch" width="1800"><p><span style="color:grey"><font size="4">Material elaborado pela equipe LECON/NEAEST: Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi e Nátaly A. Jiménez.</font></span></p>
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="images/Lecon_logo2024_transparente.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="aula2_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="aula2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="aula2_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="aula2_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="aula2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="aula2_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="aula2_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="aula2_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="aula2_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="aula2_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="aula2_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'fast',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copiada");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copiada");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
