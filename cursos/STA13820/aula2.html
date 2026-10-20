@@ -6,8 +6,8 @@
 <script src="aula2_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="aula2_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="aula2_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="aula2_files/libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.18">
+<link href="aula2_files/libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="LECON/DEST - UFES">
   <title> STA13823 - Inferência Estatística I   Estimação pontual </title>
@@ -20,13 +20,10 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
+    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: 1.5em;}
-    div.column{flex: auto;}
-    @media screen {
-    div.columns{gap: min(4vw, 1.5em);}
-    div.column{overflow-x: auto;}
-    }
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -146,10 +143,10 @@ Estimação pontual<br>
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-LECON/DEST - UFES
+LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 18 outubro, 2026
+            Última atualização: 20 outubro, 2026
           </p>
     </div>
 </div>
@@ -540,10 +537,7 @@ M_k' &amp;\overset{p}{\longrightarrow} \mu_k'.
 
 <p>Nesse caso, será necessário verificar o segundo momento:</p>
 <p><span class="math display">\[\frac1n\sum_{i=1}^nX_i^2 \overset{p}{\longrightarrow} \frac13\theta^2.\]</span> Daí, o estimador de momentos para <span class="math inline">\(\theta\)</span> é dado por</p>
-<p><span class="math display">\[\sqrt{\frac3n\sum_{i=1}^nX_i^2} \overset{p}{\longrightarrow} \theta. \quad\blacksquare\]</span></p>
-</section>
-<section class="slide level2">
-
+<p><span class="math display">\[\sqrt{\frac3n\sum_{i=1}^nX_i^2} \overset{p}{\longrightarrow} \theta. \quad\blacksquare\]</span> ***</p>
 <div id="exm-mm_gama" class="theorem example">
 <p><span class="theorem-title"><strong>Exemplo 10</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots, X_n\)</span> uma amostra aleatória de uma população com função de densidade de probabilidade <span class="math inline">\(f(x;\theta)=\theta e^{-\theta x}\mathbb{I}_{(0,\infty)}(x)\)</span>, com <span class="math inline">\(\theta&gt;0\)</span>. Determine um estimador para a mediana da distribuição da amostra pelo método dos momentos.</p>
 </div>
@@ -566,6 +560,83 @@ M_k' &amp;\overset{p}{\longrightarrow} \mu_k'.
 </section>
 <section id="método-de-máxima-verossimilhança" class="slide level2 center" data-background-color="#172a46">
 <h2>Método de máxima verossimilhança</h2>
+</section>
+<section class="slide level2">
+
+<div id="exm-maximavero" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 11</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots, X_n\)</span> uma amostra aleatória de uma população com distribuição Bernoulli com parâmetro <span class="math inline">\(p\in(0,1)\)</span>.</p>
+<p><br><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Neste caso, um estimador razoável para <span class="math inline">\(p\)</span> poderia ser</p>
+<p><span class="math display">\[\hat{p}=\frac{X_1+X_2+\cdots+X_n}{n}=\bar{X}_n,\]</span> i.e., o estimador é construido com o quociente entre duas variáveis, uam que representa o número de sucessos e outra que representa o total de experimentos. Dessa forma, uma estimativa do estimador destaca a proporção de sucessos na realização do experimento.</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Sabemos que <span class="math inline">\(\mathbb{P}[X_i=x_i]=p^{x_i}(1-p)^{1-x_i}\mathbb{I}_{\{0,1\}}(x_i)\)</span>, dessa forma se consideramos <span class="math inline">\(X_1,X_2,\dots,X_n\)</span>, temos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathbb{P}\left[X_1=x_1,X_2=x_2,\ldots,X_n=x_n\right]&amp;=\prod_{i=1}^np^{x_i}(1-p)^{1-x_i}\mathbb{I}_{\{0,1\}}(x_i)\\
+&amp;=p^{\sum_{i=1}^nx_i}(1-p)^{n-\sum_{i=1}^nx_i}\prod_{i=1}^n\mathbb{I}_{\{0,1\}}(x_i).
+\end{align*}\]</span></p>
+</div>
+<p>Assim, parece razoável escolher um valor de <span class="math inline">\(p\)</span> que maximize a probabilidade acima.</p>
+<p><br></p>
+<p>Daí, uma boa estimativa para <span class="math inline">\(p\)</span> seria obtida maximizando a probabilidade</p>
+<p><span class="math display">\[L(p)=p^{\sum_{i=1}^nx_i}(1-p)^{n-\sum_{i=1}^nx_i}\prod_{i=1}^n\mathbb{I}_{\{0,1\}}(x_i).\]</span></p>
+</section>
+<section class="slide level2">
+
+<p>Como a função <span class="math inline">\(\log(\cdot)\)</span> é estritamente crescente (monotônica) para valores maiores que zero, isso significa que o ponto que maximiza uma função <span class="math inline">\(g(x)\)</span> é exatamente o mesmo ponto de maximiza <span class="math inline">\(\log g(x)\)</span>, ou seja</p>
+<p><span class="math display">\[\underset{x}{\arg\max}\, g(x) = \underset{x}{\arg\max}\, \log g(x).\]</span> Daí,</p>
+<p><span class="math display">\[{\cal l}(p)=\log L(p)=\sum_{i=1}^nx_i\log p+\left(n-\sum_{i=1}^nx_i\right)\log(1-p)+\log\prod_{i=1}^n\mathbb{I}_{\{0,1\}}(x_i)\]</span></p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\frac{\partial{\cal l}(p)}{\partial p}&amp;=\frac{1}{p}\sum_{i=1}^nx_i-\left(n-\sum_{i=1}^nx_i\right)\frac{1}{1-p}.
+\end{align*}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\frac{1}{\hat{p}}\sum_{i=1}^nx_i-\frac{n-\sum_{i=1}^nx_i}{1-\hat{p}}&amp;=0
+\end{align*}\]</span></p>
+</div>
+<p>sendo <span class="math inline">\(\hat{p}=\bar{x}_n\)</span> um extremo local.</p>
+<p>Para verificar se <span class="math inline">\(\hat{p}\)</span> é ponto de máximo, verifica-se o valor da segunda derivada, i.e.</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\frac{\partial^2{\cal l}(p)}{\partial p^2}&amp;=-\frac{1}{p^2}\sum_{i=1}^nx_i-\left(n-\sum_{i=1}^nx_i\right)\frac{1}{(1-p)^2}&lt;0.
+\end{align*}\]</span></p>
+</div>
+<p>Daí, <span class="math inline">\(\hat{p}=\bar{x}_n\)</span> é um máximo global, ou seja, o valor <span class="math inline">\(\hat{p}\)</span> é um valor, tal que, <span class="math inline">\(L(p)\)</span> fornece a máxima probabilidade de se obter o que foi obtido na amostra.</p>
+</section>
+<section class="slide level2">
+
+<p>A estatística <span class="math inline">\(\hat{p}=\bar{X}_n\)</span> é chamada de estimador de máxima verossimilhança (MV) para o parâmetro <span class="math inline">\(p\)</span>. A função <span class="math inline">\(L(p)\)</span> é chamada <em>função de verossimilhança</em>.</p>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Considere <span class="math inline">\(f_X(\boldsymbol{x}\vert{}\theta)\)</span> a função de probabilidade conjunta (no caso discreto) ou a função densidade de probabilidade conjunta (no caso contínuo) de uma amostra aleatória <span class="math inline">\(\boldsymbol{X} = (X_1, X_2, \dots, X_n)\)</span>. Define-se a função de verossimilhança, denotada por <span class="math inline">\(L(\theta\vert{}\boldsymbol{x})\)</span>, como essa mesma função conjunta vista como uma função do parâmetro <span class="math inline">\(\theta\)</span>, fixando-se os valores observados <span class="math inline">\(\boldsymbol{x} = (x_1, x_2, \dots, x_n)\)</span>. Em outras palavras:</li>
+</ul>
+<p><span class="math display">\[L(\theta\vert{}\boldsymbol{x}) = f_X(\boldsymbol{x}\vert{}\theta).\]</span> Apesar da definição sugerir uma mera troca de notação, a função de verossimilhança e a função conjunta possuem distinções conceituais profundas:</p>
+<ol type="a">
+<li><p><strong>Domínio e Continuidade</strong>: Como <span class="math inline">\(L(\theta\vert{}\boldsymbol{x})\)</span> é uma função de <span class="math inline">\(\theta\)</span>, ela pode ser contínua em relação ao parâmetro mesmo quando <span class="math inline">\(f_X(\boldsymbol{x}\vert{}\theta)\)</span> se refere a variáveis aleatórias discretas, desde que o espaço paramétrico seja contínuo;</p></li>
+<li><p><strong>Natureza Probabilística</strong>: A função de verossimilhança não é uma densidade ou distribuição de probabilidade em relação a <span class="math inline">\(\theta\)</span>. Sua integração (ou somatório) sobre todo o espaço paramétrico <span class="math inline">\(\Theta\)</span> não é necessariamente igual a 1. Consequentemente, o valor obtido por <span class="math inline">\(L(\theta\vert{}\boldsymbol{x})\)</span> não representa uma probabilidade ou densidade de probabilidade para o parâmetro <span class="math inline">\(\theta\)</span>.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section class="slide level2">
 
@@ -593,7 +664,7 @@ M_k' &amp;\overset{p}{\longrightarrow} \mu_k'.
 <p><strong>Observação</strong></p>
 </div>
 <div class="callout-content">
-<p>É importante ressaltar que verossimilhança e probabilidade são conceitos distintos. A verossimilhança, entendida como uma medida de <em>plausibilidade</em> relativa entre diferentes valores de <span class="math inline">\(\theta\)</span>, não satisfaz, em geral, as propriedades fundamentais de uma função de probabilidade. Por outro lado, a probabilidade expressa a incerteza associada aos possíveis resultados de um experimento cujo desfecho ainda não foi observado.</p>
+<p>É importante ressaltar que verossimilhança e probabilidade são conceitos distintos. A verossimilhança, entendida como uma medida de <em>plausibilidade</em> relativa entre diferentes valores de <span class="math inline">\(\theta\)</span>, não satisfaz, em geral, as propriedades fundamentais de uma função de probabilidade. Por outro lado, a probabilidade expressa a incerteza associada aos possíveis resultados de um experimento cujo desfecho ainda não foi observado. Daí, se antes o objetivo era calcular a probabilidade de uma variável aleatória assumir determinados valores dada uma distribuição conhecida, agora buscamos inferir as características dessa distribuição com base nos valores efetivamente observados na amostra</p>
 <p>Sob a perspectiva probabilística, os resultados do experimento são variáveis aleatórias, enquanto o parâmetro <span class="math inline">\(\theta\)</span> é considerado fixo. Em contraste, na abordagem da verossimilhança, os dados observados são tratados como fixos, e o parâmetro <span class="math inline">\(\theta\)</span> é que varia.</p>
 </div>
 </div>
@@ -634,7 +705,7 @@ M_k' &amp;\overset{p}{\longrightarrow} \mu_k'.
 <section class="slide level2">
 
 <div id="exm-mv_normal" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 11</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade</p>
+<p><span class="theorem-title"><strong>Exemplo 12</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade</p>
 <p><span class="math display">\[f(x;\mu,\sigma^2)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac12\left(\frac{x-\mu}{\sigma}\right)^2}\mathbb{I}_\mathbb{R}(x).\]</span> Calcule o estimador de MV para <span class="math inline">\(\theta=(\mu, \sigma^2)\)</span>.</p>
 </div>
 <p><br><br></p>
@@ -702,6 +773,78 @@ D&amp;=\left.\frac{\partial^2\cal{l}(\theta)}{\partial\mu^2}\frac{\partial^2\cal
 </section>
 <section class="slide level2">
 
+<div id="exm-mv_unif1" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 13</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição uniforme em <span class="math inline">\((0,\theta)\)</span>, com <span class="math inline">\(\theta\)</span> desconhecido. Qual o estimador de máxima verossimilhança para <span class="math inline">\(\theta\)</span>?</p>
+</div>
+<p><br><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que <span class="math inline">\(f(x|\theta)=\frac{1}{\theta}\mathbb{I}_{(0,\theta)}(x)\)</span>. Daí,</p>
+<p><span class="math display">\[L(\theta)=\prod_{i=1}^n\frac{1}{\theta}\mathbb{I}_{(0,\theta)}(x_i)=\frac{1}{\theta^n}\prod_{i=1}^n\mathbb{I}_{(0,\theta)}(x_i)=\frac{1}{\theta^n}\mathbb{I}_{(0,\theta)}(Y_n),\]</span> para <span class="math inline">\(i=1,2,\ldots,n\)</span>.</p>
+<p>Por outra parte, observe que <span class="math inline">\(\mathbb{I}_{(0,\theta)}(Y_n)=\mathbb{I}_{(Y_n,\infty)}(\theta)\)</span>. Isso significa que,</p>
+<p><span class="math display">\[L(\theta)=\frac{1}{\theta^n}\mathbb{I}_{(Y_n,\infty)}(\theta).\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<h4 id="função-de-verossimilhança-de-u0-theta-para-n5-e-y_n4">Função de Verossimilhança de <span class="math inline">\(U(0, \theta)\)</span> para <span class="math inline">\(n=5\)</span> e <span class="math inline">\(y_{n}=4\)</span></h4>
+
+<img data-src="aula2_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" width="672"><div class="fragment fade-in" data-fragment-index="1">
+<p><font size="6">Nesse caso, <span class="math inline">\(L(\theta)\)</span> não possui máximo, i.e., <strong>não existe</strong> estimador de máxima verossimilhança.</font></p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-mv_unif1" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 14</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição uniforme em <span class="math inline">\([0,\theta]\)</span>, com <span class="math inline">\(\theta\)</span> desconhecido. Qual o estimador de máxima verossimilhança para <span class="math inline">\(\theta\)</span>?</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Nesse cenário, temos que</p>
+<p><span class="math display">\[L(\theta)=\frac{1}{\theta^n}\mathbb{I}_{[0,\theta]}(Y_n)=\frac{1}{\theta^n}\mathbb{I}_{[Y_n,\infty)}(\theta),\]</span> para <span class="math inline">\(i=1,2,\ldots,n\)</span>. Nesse caso, o estimador de máxima verossimilhança para <span class="math inline">\(\theta\)</span> é dado por <span class="math inline">\(Y_n=\max\{X_1,X_2,\ldots,X_n\}\)</span>.</p>
+<p><br><br></p>
+<div class="box2">
+<div id="exr-exercicio1" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercício 1</strong></span> Mostre que <span class="math inline">\(Y_n\)</span> é consistente para <span class="math inline">\(\theta\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-mv_gamma" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 15</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> umas amostra aleatória de uma população com distribuição <span class="math inline">\(Gama(\alpha,\beta)\)</span>, i.e.,</p>
+<p><span class="math display">\[f(x;\alpha,\beta)=\frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}\mathbb{I}_{(0,\infty)}(x).\]</span> Encontre o estimador de máxima verossimilhança para <span class="math inline">\(\theta=(\alpha,\beta)\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que <span class="math inline">\(L(\theta)=L(\alpha\,\beta)=\prod_{i=1}^n\left[\frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}\mathbb{I}_{(0,\infty)}(x)\right]\)</span>. Daí,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\log L(\alpha,\beta)&amp;=\sum_{i=1}^n\left[\alpha\log\beta-\log\Gamma(\alpha)+(\alpha-1)\log x_i-\beta x_i \right]+\log\prod_{i=1}^n\mathbb{I}_{(0,\infty)}(x_i)\\
+&amp;=n\alpha\log\beta-n\log\Gamma(\alpha)+(\alpha-1)\sum_{i=1}^n\log x_i-\beta\sum_{i=1}^nx_i+\log\prod_{i=1}^n\mathbb{I}_{(0,\infty)}(x_i).
+\end{align*}\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\frac{\partial}{\partial\alpha}\log L(\alpha,\beta)&amp;=n\log\beta-n\psi(\alpha)+\sum_{i=1}^n\log x_i;\\
+\frac{\partial}{\partial\beta}\log L(\alpha,\beta)&amp;=n\frac{\alpha}{\beta}-\sum_{i=1}^nx_i,
+\end{align*}\]</span></p>
+</div>
+<p>onde, a função <span class="math inline">\(\psi(\alpha)=\frac{\partial}{\partial\alpha}\log\Gamma(\alpha)\)</span> é a chamada função <em>digama</em>.</p>
+<p>Portanto,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\bar{x}_n&amp;=\frac{\hat{\alpha}}{\hat{\beta}}\\
+\psi(\hat{\alpha})-\log\left(\frac{\hat{\alpha}}{\bar{x}_n}\right)&amp;=\frac1n\log x_i
+\end{align*}\]</span></p>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<p><strong>Para resolver o sistema será necessário utilizar métodos numéricos!</strong></p>
+</div>
 <!-- ## Referências -->
 <!-- ::: {#refs} -->
 <!-- ::: -->
