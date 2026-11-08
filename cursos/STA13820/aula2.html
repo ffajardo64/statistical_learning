@@ -31,7 +31,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="aula2_files/libs/revealjs/dist/theme/quarto-c9c4e882fc2dd0b2b0565851b88a3cd5.css">
   <link href="aula2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="aula2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -146,7 +166,7 @@ Estimação pontual<br>
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 20 outubro, 2026
+            Última atualização: 08 novembro, 2026
           </p>
     </div>
 </div>
@@ -571,7 +591,7 @@ M_k' &amp;\overset{p}{\longrightarrow} \mu_k'.
 <p><br><br></p>
 <div class="fragment fade-in" data-fragment-index="1">
 <p>Neste caso, um estimador razoável para <span class="math inline">\(p\)</span> poderia ser</p>
-<p><span class="math display">\[\hat{p}=\frac{X_1+X_2+\cdots+X_n}{n}=\bar{X}_n,\]</span> i.e., o estimador é construido com o quociente entre duas variáveis, uam que representa o número de sucessos e outra que representa o total de experimentos. Dessa forma, uma estimativa do estimador destaca a proporção de sucessos na realização do experimento.</p>
+<p><span class="math display">\[\hat{p}=\frac{X_1+X_2+\cdots+X_n}{n}=\bar{X}_n,\]</span> i.e., o estimador é construido com o quociente entre duas variáveis, uma que representa o número de sucessos e outra que representa o total de experimentos. Dessa forma, uma estimativa do estimador destaca a proporção de sucessos na realização do experimento.</p>
 </div>
 </div>
 </section>
@@ -658,6 +678,9 @@ M_k' &amp;\overset{p}{\longrightarrow} \mu_k'.
 </div>
 </div>
 </div>
+<hr>
+
+<p><font size="5">Para detalhes revisar, e.g., <span class="citation" data-cites="mood:graybill:boes:1974">Mood et al. (<a href="#/referências" role="doc-biblioref" onclick="">1974</a>)</span> ou <span class="citation" data-cites="hogg:mckean:craig:2019">Hogg et al. (<a href="#/referências" role="doc-biblioref" onclick="">2019</a>)</span>.</font></p>
 </section>
 <section class="slide level2">
 
@@ -848,9 +871,322 @@ D&amp;=\left.\frac{\partial^2\cal{l}(\theta)}{\partial\mu^2}\frac{\partial^2\cal
 <div class="fragment fade-in" data-fragment-index="1">
 <p><strong>Para resolver o sistema será necessário utilizar métodos numéricos!</strong></p>
 </div>
-<!-- ## Referências -->
-<!-- ::: {#refs} -->
-<!-- ::: -->
+</section>
+<section class="slide level2">
+
+<div id="def-inf_fisher" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 8</strong></span> A quantidade</p>
+<p><span class="math display">\[I_F(\theta)=\mathbb{E}\left[\frac{\partial}{\partial\theta}\log f(X_1,X_2,\ldots,X_n;\theta)\right]^2\]</span></p>
+<p>é chamada de <strong>Informação de Fisher</strong>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div id="def-eficiencia" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 9 (Eficiência)</strong></span> A eficiência de um estimador <span class="math inline">\(\hat\theta\)</span>, não-viesado para o parâmetro <span class="math inline">\(\theta\)</span>, define-se como</p>
+<p><span class="math display">\[EF(\hat\theta)=\frac{LI(\theta)}{\mathrm{var}[\hat\theta]},\]</span></p>
+<p>onde <span class="math inline">\(LI(\theta)=\frac{1}{nI_F(\theta)}\)</span>, representa o limte inferior de Cramér-Rao para a variância<sup>1</sup>.</p>
+</div>
+<div class="fragment fade-in" data-fragment-index="2">
+<hr>
+
+<p><font size="6"><sup>1</sup>Quando <span class="math inline">\(EF(\hat\theta)=1\)</span>, então <span class="math inline">\(\mathrm{var}[\hat\theta]=LI(\theta)\)</span>, nesse caso <span class="math inline">\(\hat\theta\)</span> é chamado de estimador eficiente.</font></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-inf_fisher" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 16</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span> conhecida.</p>
+<p>Sabemos que,</p>
+<p><span class="math display">\[f(x;\mu)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac12\left(\frac{x-\mu}{\sigma}\right)^2}\mathbb{I}_\mathbb{R}(x).\]</span></p>
+<p>Daí,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\log f(x;\mu)&amp;=-\log\sqrt{2\pi} -\frac12\log\sigma^2-\frac12\left(\frac{x-\mu}{\sigma}\right)^2+\log\mathbb{I}_\mathbb{R}(x)\\
+\frac{\partial}{\partial\mu}\log f(x;\mu)&amp;=\frac{1}{\sigma^2}(x-\mu).
+\end{align*}\]</span></p>
+</div>
+<p>A função <span class="math inline">\(\frac{\partial}{\partial\mu}\log f(X;\mu)\)</span> é chamada de <em>função escore</em> e <span class="math inline">\(\mathbb{E}\left[\frac{\partial}{\partial\mu}\log f(X;\mu)\right]=0\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>A informação de Fisher é calculada como</p>
+<p><span class="math display">\[\mathbb{E}\left[\frac{\partial}{\partial\mu}\log f(X;\mu)\right]^2=\frac{1}{\sigma^2}.\]</span></p>
+<p>Dessa forma, <span class="math inline">\(LI(\theta)=\frac{1}{nI_F(\theta)}=\frac{\sigma^2}{n}\)</span>.</p>
+<p>Sabemos que <span class="math inline">\(\mathrm{var}\left[\bar{X}\right]=\frac{\sigma^2}{n}\)</span>, então <span class="math inline">\(\bar{X}\)</span> é um estimador eficiente para <span class="math inline">\(\mu\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="thm-cramer_rao" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 3</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com densidade <span class="math inline">\(f(\cdot,\theta)\)</span>, onde <span class="math inline">\(\theta\in\Theta\subset\mathbb{R}\)</span>. Seja <span class="math inline">\(T=t(X_1,X_2,\ldots,X_n)\)</span> um estimador não-viesado para <span class="math inline">\(\tau(\theta)\)</span>. Considere as seguintes condições de regularidade:</p>
+<ol type="a">
+<li><p><span class="math inline">\(\frac{\partial}{\partial\theta}\log f(x;\theta)\)</span> existe para todo <span class="math inline">\(x\)</span> e todo <span class="math inline">\(\theta\in\Theta\)</span>;</p></li>
+<li><p><span class="math inline">\(\frac{\partial}{\partial\theta}\iint\cdots\iint\prod_{i=1}^nf(x_i;\theta)\,dx_1dx_2\ldots dx_n=\iint\cdots\iint \frac{\partial}{\partial\theta}\prod_{i=1}^nf(x_i;\theta)\,dx_1dx_2\ldots dx_n;\)</span></p></li>
+<li><div class="math">
+<span class="math display">\[\begin{align*}
+\frac{\partial}{\partial\theta}\iint\cdots\iint t(x_1,x_2,\ldots,x_n)&amp;\prod_{i=1}^nf(x_i;\theta)\,dx_1dx_2\ldots dx_n\\
+&amp;=\iint\cdots\iint  t(x_1,x_2,\ldots,x_n) \frac{\partial}{\partial\theta}\prod_{i=1}^nf(x_i;\theta)\,dx_1dx_2\ldots dx_n;
+\end{align*}\]</span>
+</div></li>
+</ol>
+</div>
+<ol start="4" type="a">
+<li>Se <span class="math inline">\(0&lt;\mathbb{E}\left[\frac{\partial}{\partial\theta}\log f(x;\theta)\right]^2&lt;\infty\)</span> para todo <span class="math inline">\(\theta\in\Theta\)</span>, então</li>
+</ol>
+<p><span class="math display">\[\mathrm{var}[T]\ge\frac{[\tau'(\theta)]^2}{n\mathbb{E}\left[\frac{\partial}{\partial\theta}\log f(x;\theta)\right]^2},\]</span></p>
+<p>onde <span class="math inline">\(T=t(X_1,X_2,\ldots,X_n)\)</span> é um estimador não-viesado da <span class="math inline">\(\tau(\theta)\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>A igualdade é satisfeita <em>see</em> existe uma função <span class="math inline">\(\kappa(\theta, n)\)</span>, tal que</p>
+<p><span class="math display">\[\sum_{i=1}^n\frac{\partial}{\partial}\log f(x_i;\theta)=\kappa(\theta,n)\left[t(x_1,x_2,\ldots,x_n)-\tau(\theta)\right]\]</span></p>
+</div>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="proof">
+<p><span class="proof-title"><em>Prova</em>. </span></p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\tau'(\theta)&amp;=\frac{\partial}{\partial\theta}\tau(\theta)=\frac{\partial}{\partial\theta}\mathbb{E}[T]\\
+&amp;=\frac{\partial}{\partial\theta}\iint\cdots\iint t(x_1,x_2,\ldots,x_n)\prod_{i=1}^nf(x_i;\theta)\,dx_1dx_2\ldots dx_n\\
+&amp;=\iint\cdots\iint  t(x_1,x_2,\ldots,x_n) \frac{\partial}{\partial\theta}\prod_{i=1}^nf(x_i;\theta)\,dx_1dx_2\ldots dx_n
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\tau'(\theta)&amp;=\iint\cdots\iint  t(x_1,x_2,\ldots,x_n) \frac{\partial}{\partial\theta}\prod_{i=1}^nf(x_i;\theta)\,dx_1dx_2\ldots dx_n\\
+&amp;\hspace{15cm}-\tau(\theta)\iint\cdots\iint \frac{\partial}{\partial\theta}\prod_{i=1}^nf(x_i;\theta)\,dx_1dx_2\ldots dx_n\\
+&amp;=\iint\cdots\iint [t(x_1,x_2,\ldots,x_n)-\tau(\theta)]\frac{\partial}{\partial\theta}\prod_{i=1}^nf(x_i;\theta)\,dx_1dx_2\ldots dx_n\\
+&amp;=\iint\cdots\iint [t(x_1,\ldots,x_n)-\tau(\theta)]\frac{\partial}{\partial\theta}\log\prod_{i=1}^nf(x_i;\theta)\prod_{i=1}^nf(x_i;\theta)\,dx_1dx_2\ldots dx_n\\
+&amp;=\mathbb{E}\left[[t(x_1,\ldots,x_n)-\tau(\theta)]\frac{\partial}{\partial\theta}\log\prod_{i=1}^nf(x_i;\theta)\right].
+\end{align*}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Pela desigualdade de Cauchy-Schwarz, temos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+[\tau'(\theta)]^2&amp;\le\mathbb{E}\left[[t(x_1,\ldots,x_n)-\tau(\theta)]\right]^2\mathbb{E}\left[\frac{\partial}{\partial\theta}\log\prod_{i=1}^nf(x_i;\theta)\right]^2\\
+&amp;=\mathrm{var}[\hat\theta]\,\mathbb{E}\left[\frac{\partial}{\partial\theta}\log\prod_{i=1}^nf(x_i;\theta)\right]^2\\
+\mathrm{var}[\hat\theta]&amp;\ge\frac{[\tau'(\theta)]^2}{\mathbb{E}\left[\frac{\partial}{\partial\theta}\log\prod_{i=1}^nf(x_i;\theta)\right]^2}.
+\end{align*}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Por outro lado, sabemos que</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathbb{E}\left[\frac{\partial}{\partial\theta}\log\prod_{i=1}^nf(x_i;\theta)\right]^2&amp;=
+\mathbb{E}\left[\sum_{i=1}^n\frac{\partial}{\partial\theta}\log f(x_i;\theta)\right]^2\\
+&amp;=\sum_{i=1}^n\sum_{j=1}^n\mathbb{E}\left[\sum_{i=1}^n\frac{\partial}{\partial\theta}\log f(x_i;\theta)\right]\mathbb{E}\left[\sum_{i=1}^n\frac{\partial}{\partial\theta}\log f(x_j;\theta)\right]\\
+&amp;=n\mathbb{E}\left[\frac{\partial}{\partial\theta}\log f(x;\theta)\right]^2.
+\end{align*}\]</span></p>
+</div>
+<p>Ainda,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathbb{E}\left[\frac{\partial}{\partial\theta}\log f(x;\theta)\right]&amp;=
+\int\frac{\partial}{\partial\theta}\log f(x,\theta)f(x,\theta)\,dx=\frac{\partial}{\partial\theta}\int f(x,\theta)\,dx=0.
+\end{align*}\]</span></p>
+</div>
+</section>
+<section id="estatísticas-suficientes" class="slide level2 center" data-background-color="#172a46">
+<h2>Estatísticas suficientes</h2>
+</section>
+<section class="slide level2">
+
+<p>Ao resumir a informação de um conjunto de dados por meio de uma estatística, é fundamental que não haja perda de informação sobre o parâmetro <span class="math inline">\(\theta\)</span>. Em outros termos, a estatística proposta deve ser capaz de conservar toda a informação referente a <span class="math inline">\(\theta\)</span> contida na amostra.</p>
+<p>Assim, se pudermos usar uma estatística <span class="math inline">\(T = t(X_1, X_2, \ldots, X_n)\)</span> para extrair toda a informação que a amostra <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> contém sobre <span class="math inline">\(\theta\)</span>, dizemos que <span class="math inline">\(T\)</span> é uma estatística suficiente para <span class="math inline">\(\theta\)</span>. Desse modo, o conhecimento de <span class="math inline">\(T\)</span>, sem a necessidade de toda a amostra individualmente, é suficiente para a realização de inferências sobre <span class="math inline">\(\theta\)</span>.</p>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div id="def-suficiencia" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 10 (Estatística Suficiente)</strong></span> Seja <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> uma amostra aleatória de uma população com função de densidade (ou probabilidade) <span class="math inline">\(f(x;\theta)\)</span>, com <span class="math inline">\(\theta \in \Theta\)</span>. Dizemos que a estatística <span class="math inline">\(T = t(X_1, X_2, \ldots, X_n)\)</span> é suficiente para <span class="math inline">\(\theta\)</span> se a distribuição condicional da amostra <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span>, dado <span class="math inline">\(T = t\)</span>, não depende de <span class="math inline">\(\theta\)</span> para todo <span class="math inline">\(t\)</span> no suporte de <span class="math inline">\(T\)</span>.</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observação</strong></p>
+</div>
+<div class="callout-content">
+<p>Seja <span class="math inline">\(T = t(X_1, X_2, \ldots, X_n)\)</span> uma estatística com função de densidade <span class="math inline">\(f_T(t,\theta)\)</span>, então <span class="math inline">\(T\)</span> é uma estatística suficiente para <span class="math inline">\(\theta\)</span> <em>see</em></p>
+<p><span class="math display">\[\frac{f(x_1,\theta)f(x_2,\theta)\ldots f(x_n,\theta)}{f_T(t,\theta)}=H(x_1,x_2,\ldots,x_n),\]</span></p>
+<p>onde <span class="math inline">\(f_T(t;\theta)=f_T\left(t(x_1,x_2,\ldots,x_n),\theta\right)\)</span> e <span class="math inline">\(H(x_1,x_2,\ldots,x_n)\)</span> não depende de <span class="math inline">\(\theta\)</span>.</p>
+<p><br></p>
+<p>Em geral, não é necessário assumir a independência das variáveis aleatórias da amostra. Nesses casos mais gerais, uma estatística <span class="math inline">\(T = t(X_1, X_2, \ldots, X_n)\)</span> é suficiente para <span class="math inline">\(\theta\)</span> se a razão entre a densidade conjunta da amostra e a densidade de <span class="math inline">\(T\)</span> não depender de <span class="math inline">\(\theta\)</span>, ou seja: <span class="math display">\[\frac{f(x_1, x_2, \ldots, x_n; \theta)}{f_T(t; \theta)} = H(x_1, x_2, \ldots, x_n),\]</span></p>
+<p>onde <span class="math inline">\(H(x_1, x_2, \ldots, x_n)\)</span> é uma função da amostra que não depende do parâmetro <span class="math inline">\(\theta\)</span> para todo <span class="math inline">\((x_1, \ldots, x_n)\)</span> tal que <span class="math inline">\(t(x_1, \ldots, x_n) = t\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-suf_poisson" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 17</strong></span> Seja <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> uma amostra aleatória de uma população com distribuição Poisson<span class="math inline">\((\lambda)\)</span>, com <span class="math inline">\(\lambda &gt; 0\)</span>. Mostre que <span class="math inline">\(T = \sum_{i=1}^n X_i\)</span> é uma estatística suficiente para o parâmetro <span class="math inline">\(\lambda\)</span>.</p>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Como as variáveis são independentes, a função de probabilidade conjunta é o produto das probabilidades marginais, i.e.,</p>
+<p><span class="math display">\[f(x_1, x_2, \ldots, x_n; \lambda) = \prod_{i=1}^n \frac{e^{-\lambda} \lambda^{x_i}}{x_i!} = \frac{e^{-n\lambda} \lambda^{\sum_{i=1}^n x_i}}{\prod_{i=1}^n x_i!}\]</span></p>
+<p>Fazendo <span class="math inline">\(t = \sum_{i=1}^n x_i\)</span>, temos:</p>
+<p><span class="math display">\[f(x_1, x_2, \ldots, x_n; \lambda) = \frac{e^{-n\lambda} \lambda^t}{\prod_{i=1}^n x_i!}.\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Por outro lado, sabemos que a soma de <span class="math inline">\(n\)</span> variáveis independentes com distribuição Poisson<span class="math inline">\((\lambda)\)</span> também segue uma distribuição Poisson com parâmetro <span class="math inline">\(n\lambda\)</span>. Dessa forma, a função de probabilidade de <span class="math inline">\(T\)</span> é dada por:</p>
+<p><span class="math display">\[f_T(t; \lambda) = \mathbb{P}[T = t] = \frac{e^{-n\lambda} (n\lambda)^t}{t!} = \frac{e^{-n\lambda} n^t \lambda^t}{t!}.\]</span></p>
+<p>Calculando a razão entre a densidade conjunta e a densidade de <span class="math inline">\(T\)</span>, tem-se que:</p>
+<p><span class="math display">\[\frac{f(x_1, x_2, \ldots, x_n; \lambda)}{f_T(t; \lambda)} = \frac{\frac{e^{-n\lambda} \lambda^t}{\prod_{i=1}^n x_i!}}{\frac{e^{-n\lambda} n^t \lambda^t}{t!}}= \frac{t!}{\left(\prod_{i=1}^n x_i!\right) n^t} = H(x_1, x_2, \ldots, x_n). \quad\blacksquare\]</span></p>
+</section>
+<section class="slide level2">
+
+<div id="exm-suf_bernoulli" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 18</strong></span> Seja <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> uma amostra aleatória de uma população com distribuição Bernoulli<span class="math inline">\((p)\)</span>, com <span class="math inline">\(p\in(0,1)\)</span>. Mostre que<br>
+<span class="math inline">\(T = \sum_{i=1}^n X_i\)</span> é uma estatística suficiente para o parâmetro <span class="math inline">\(p\)</span>.</p>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Seja <span class="math inline">\(T = \sum_{i=1}^n X_i\)</span> o total de sucessos, então</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathbb{P}[X_1=x_1,X_2=x_2,\ldots,X_n=x_n|T=t]&amp;=\frac{\mathbb{P}[X_1=x_1,\ldots,X_n=x_n,T=t]}{\mathbb{P}[T=t]}\\ \\
+&amp;=\frac{\mathbb{P}[X_i=x_1,X_2=x_2,\ldots,X_n=x_n]}{\mathbb{P}[T=t]}\\ \\
+&amp;=\frac{\prod_{i=1}^n\mathbb{P}[X_i=x_i]}{\mathbb{P}[T=t]}.
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathbb{P}[X_1=x_1,X_2=x_2,\ldots,X_n=x_n|T=t]&amp;=
+\frac{\prod_{i=1}^n p^{x_i}(1-p)^{1-x_i}}{\binom{n}{\sum_{i=1}^nx_i}p^{\sum_{i=1}^nx_i}(1-p)^{n-\sum_{i=1}^nx_i}}\\
+&amp;=\frac{1}{\binom{n}{\sum_{i=1}^nx_i}}.
+\end{align*}\]</span></p>
+</div>
+<p>Daí, <span class="math inline">\(T = \sum_{i=1}^n X_i\)</span> é uma estatística suficiente para <span class="math inline">\(p\)</span>.</p>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div id="exm-suf_gamma" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 19</strong></span> Seja <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> uma amostra aleatória de uma população com distribuição Gama<span class="math inline">\(\left(\frac1\theta,2\right)\)</span>, com <span class="math inline">\(\theta &gt; 0\)</span>, ou seja</p>
+<p><span class="math display">\[f\left(x; \frac1\theta,2\right)=\frac{1}{\theta^2\Gamma(2)}xe^{-\frac1\theta x}\mathbb{I}_{(0,\infty)}(x).\]</span></p>
+<p>Mostre que <span class="math inline">\(T = \sum_{i=1}^n X_i\)</span> é uma estatística suficiente para o parâmetro <span class="math inline">\(\theta\)</span>.</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Sabemos que, a função geradora de momentos é dada por</p>
+<p><span class="math display">\[M(t)=\left(\frac{1}{1-\frac1\theta t}\right)^2,\]</span></p>
+<p>com <span class="math inline">\(t&lt;\frac1\theta\)</span>.</p>
+<p>Daí, a função geradora de momentos de <span class="math inline">\(T = \sum_{i=1}^n X_i\)</span> é dada por</p>
+<p><span class="math display">\[M(t)=\prod_{i=1}^n\mathbb{E}\left[e^{tX_i}\right]=\left(\frac{1}{1-\frac1\theta t}\right)^2,\]</span></p>
+<p>ou seja, <span class="math inline">\(T\)</span> segue uma distribuição Gama<span class="math inline">\(\left(\frac1\theta,2n\right)\)</span>, daí</p>
+<p><span class="math display">\[f\left(t; \frac1\theta,2n\right)=\frac{1}{\theta^{2n}\Gamma(2n)}t^{2n-1}e^{-\frac1\theta t}\mathbb{I}_{(0,\infty)}(t).\]</span></p>
+</section>
+<section class="slide level2">
+
+<p>Daí,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+f(x_1,x_2,\ldots,x_n,\theta|T=t)&amp;=\frac{f(x_1,x_2,\ldots,x_n)}{f_T(t)}\\
+&amp;=\frac{\left(\frac{x_1e^{-\frac1\theta x_1}}{\theta^2\Gamma(2)}\right)\left(\frac{x_2e^{-\frac1\theta x_2}}{\theta^2\Gamma(2)}\right)\cdots\left(\frac{x_ne^{-\frac1\theta x_n}}{\theta^2\Gamma(2)}\right)}{\frac{\left(\sum_{i=1}^nx_i\right)^{2n-1}e^{-\frac1\theta\sum_{i=1}^nx_i}}{\Gamma(2n)\theta^{2n}}}\\
+&amp;=\frac{\Gamma(2n)}{\left[\Gamma(2)\right]^n\frac{\prod_{i=1}^nx_i}{\left(\sum_{i=1}^nx_i\right)^{2n-1}}}.
+\end{align*}\]</span></p>
+</div>
+<p>Daí, <span class="math inline">\(T = \sum_{i=1}^n X_i\)</span> é uma estatística suficiente para <span class="math inline">\(\theta\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="thm-cramer_rao" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 4 (Critério de fatoração de Fisher-Neyman)</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade <span class="math inline">\(f(x,\theta)\)</span>, com <span class="math inline">\(\theta\in\Theta\)</span>. A estatística <span class="math inline">\(T=t(X_1,X_2,\ldots,X_n)\)</span> é suficiente para <span class="math inline">\(\theta\)</span> <em>see</em> a função de densidade conjunta de <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> pode ser fatorada como</p>
+<p><span class="math display">\[f(x_1,x_2,\ldots,x_n)=\kappa_1\left(t(x_1,x_2,\ldots,x_n);\theta\right)\kappa_2(x_1,x_2,\ldots,x_n),\]</span> onde <span class="math inline">\(k_2(x_1,x_2,\ldots,x_n)\)</span> não depende de <span class="math inline">\(\theta\)</span>.</p>
+</div>
+</div>
+<p><br></p>
+<div class="proof">
+<p><span class="proof-title"><em>Prova</em>. </span>Para detalhes revisar <span class="citation" data-cites="hogg:mckean:craig:2019">Hogg et al. (<a href="#/referências" role="doc-biblioref" onclick="">2019</a>)</span> ou <span class="citation" data-cites="lehmann:casella:1983">Lehmann e Casella (<a href="#/referências" role="doc-biblioref" onclick="">1983</a>)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div id="exm-fisher_neyman" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 20</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com distribuição normal com média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma^2\)</span> conhecido. Use o teorema de Fisher-Neyman para encontrar uma estatística suficiente para <span class="math inline">\(\mu\)</span>.</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+f(x_1,x_2,\ldots,x_n,\mu)&amp;=(2\pi\sigma^2)^{-n/2}\exp\left\{-\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\mu)^2\right\}\\
+&amp;=\underbrace{(2\pi\sigma^2)^{-n/2}\exp\left\{-\frac{1}{2\sigma^2}\sum_{i=1}^nx_i^2\right\}}_{\kappa_2(x_1,x_2,\ldots,x_n)}\underbrace{\exp\left\{-\frac{\mu}{2\sigma^2}\sum_{i=1}^n(\mu-2x_i)\right\}}_{\kappa_1(t(x_1,x_2,\ldots,x_n),\mu)}\\
+\end{align*}\]</span></p>
+</div>
+<p>onde</p>
+<p><span class="math display">\[\exp\left\{-\frac{\mu}{2\sigma^2}\sum_{i=1}^n(\mu-2x_i)\right\}=\exp\left\{-\frac{1}{2\sigma^2}\left(n\mu^2-2\mu\sum_{i=1}^nx_i\right)\right\}.\]</span></p>
+<p>Daí, <span class="math inline">\(T=\sum_{i=1}^nX_i\)</span> é uma estatística suficiente para <span class="math inline">\(\mu\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<div id="exm-fn_ex" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 21</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com densidade <span class="math inline">\(f(x,\theta)=\theta x^{\theta-1}\mathbb{I}_{(0,1)}(x)\)</span>, com <span class="math inline">\(\theta&gt;0\)</span>. Use o teorema de Fisher-Neyman para encontrar uma estatística suficiente para <span class="math inline">\(\theta\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+f(x_1,x_2,\ldots,x_n)&amp;=\prod_{i=1}^n\theta x_i^{\theta-1}\mathbb{I}_{(0,1)}(x_i)
+=\theta^n\prod_{i=1}^nx_i^{\theta-1}\mathbb{I}_{(0,1)}(x_i)\\
+&amp;=\underbrace{\theta^n\prod_{i=1}^nx_i^{\theta}}_{\kappa_1(t(x_1,x_2,\ldots,x_n),\theta)}\underbrace{\frac{\prod_{i=1}^n\mathbb{I}_{(0,1)}(x_i)}{\prod_{i=1}^nx_i}}_{\kappa_2(x_1,x_2,\ldots,x_n)}.
+\end{align*}\]</span></p>
+</div>
+<p>Daí, <span class="math inline">\(\prod_{i=1}^nX_i\)</span> é uma estatística suficiente para <span class="math inline">\(\theta\)</span>.</p>
+</div>
+</section>
+<section id="referências" class="slide level2 smaller scrollable">
+<h2>Referências</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-hogg:mckean:craig:2019" class="csl-entry" role="listitem">
+Hogg, R., McKean, J., e Craig, A. (2019), <em>Introduction to Mathematical Statistics</em>, Prentice Hall.
+</div>
+<div id="ref-lehmann:casella:1983" class="csl-entry" role="listitem">
+Lehmann, E. L., e Casella, G. (1983), <em>Theory of Point Estimation</em>, Springer.
+</div>
+<div id="ref-mood:graybill:boes:1974" class="csl-entry" role="listitem">
+Mood, A., Graybill, F., e Boes, D. (1974), <em>Introduction to the theory of statistics</em>, McGraw-Hill Higher Education.
+</div>
+</div>
 </section>
 <section id="política-de-proteção-aos-direitos-autorais" class="slide level2">
 <h2>Política de proteção aos direitos autorais</h2>
