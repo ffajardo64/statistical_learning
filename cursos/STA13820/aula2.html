@@ -166,7 +166,7 @@ Estimação pontual<br>
 LECON/DEST - UFES 
 </div>
         <p class="quarto-title-affiliation">
-            Última atualização: 08 novembro, 2026
+            Última atualização: 10 novembro, 2026
           </p>
     </div>
 </div>
@@ -935,7 +935,7 @@ D&amp;=\left.\frac{\partial^2\cal{l}(\theta)}{\partial\mu^2}\frac{\partial^2\cal
 <ol start="4" type="a">
 <li>Se <span class="math inline">\(0&lt;\mathbb{E}\left[\frac{\partial}{\partial\theta}\log f(x;\theta)\right]^2&lt;\infty\)</span> para todo <span class="math inline">\(\theta\in\Theta\)</span>, então</li>
 </ol>
-<p><span class="math display">\[\mathrm{var}[T]\ge\frac{[\tau'(\theta)]^2}{n\mathbb{E}\left[\frac{\partial}{\partial\theta}\log f(x;\theta)\right]^2},\]</span></p>
+<p><span class="math display">\[\mathrm{var}[T]\ge\frac{[\tau'(\theta)]^2}{n\mathbb{E}\left[\frac{\partial}{\partial\theta}\log f(X;\theta)\right]^2},\]</span></p>
 <p>onde <span class="math inline">\(T=t(X_1,X_2,\ldots,X_n)\)</span> é um estimador não-viesado da <span class="math inline">\(\tau(\theta)\)</span>.</p>
 </div>
 </section>
@@ -986,9 +986,9 @@ D&amp;=\left.\frac{\partial^2\cal{l}(\theta)}{\partial\mu^2}\frac{\partial^2\cal
 <p>Pela desigualdade de Cauchy-Schwarz, temos que</p>
 <div class="math">
 <p><span class="math display">\[\begin{align*}
-[\tau'(\theta)]^2&amp;\le\mathbb{E}\left[[t(x_1,\ldots,x_n)-\tau(\theta)]\right]^2\mathbb{E}\left[\frac{\partial}{\partial\theta}\log\prod_{i=1}^nf(x_i;\theta)\right]^2\\
-&amp;=\mathrm{var}[\hat\theta]\,\mathbb{E}\left[\frac{\partial}{\partial\theta}\log\prod_{i=1}^nf(x_i;\theta)\right]^2\\
-\mathrm{var}[\hat\theta]&amp;\ge\frac{[\tau'(\theta)]^2}{\mathbb{E}\left[\frac{\partial}{\partial\theta}\log\prod_{i=1}^nf(x_i;\theta)\right]^2}.
+[\tau'(\theta)]^2&amp;\le\mathbb{E}\left[[t(x_1,\ldots,x_n)-\tau(\theta)]\right]^2\mathbb{E}\left[\frac{\partial}{\partial\theta}\log\prod_{i=1}^nf(X_i;\theta)\right]^2\\ \\
+&amp;=\mathrm{var}[\hat\theta]\,\mathbb{E}\left[\frac{\partial}{\partial\theta}\log\prod_{i=1}^nf(X_i;\theta)\right]^2\\ \\
+\mathrm{var}[\hat\theta]&amp;\ge\frac{[\tau'(\theta)]^2}{\mathbb{E}\left[\frac{\partial}{\partial\theta}\log\prod_{i=1}^nf(X_i;\theta)\right]^2}.
 \end{align*}\]</span></p>
 </div>
 </section>
@@ -997,16 +997,16 @@ D&amp;=\left.\frac{\partial^2\cal{l}(\theta)}{\partial\mu^2}\frac{\partial^2\cal
 <p>Por outro lado, sabemos que</p>
 <div class="math">
 <p><span class="math display">\[\begin{align*}
-\mathbb{E}\left[\frac{\partial}{\partial\theta}\log\prod_{i=1}^nf(x_i;\theta)\right]^2&amp;=
-\mathbb{E}\left[\sum_{i=1}^n\frac{\partial}{\partial\theta}\log f(x_i;\theta)\right]^2\\
-&amp;=\sum_{i=1}^n\sum_{j=1}^n\mathbb{E}\left[\sum_{i=1}^n\frac{\partial}{\partial\theta}\log f(x_i;\theta)\right]\mathbb{E}\left[\sum_{i=1}^n\frac{\partial}{\partial\theta}\log f(x_j;\theta)\right]\\
-&amp;=n\mathbb{E}\left[\frac{\partial}{\partial\theta}\log f(x;\theta)\right]^2.
+\mathbb{E}\left[\frac{\partial}{\partial\theta}\log\prod_{i=1}^nf(X_i;\theta)\right]^2&amp;=
+\mathbb{E}\left[\sum_{i=1}^n\frac{\partial}{\partial\theta}\log f(X_i;\theta)\right]^2\\
+&amp;=\sum_{i=1}^n\sum_{j=1}^n\mathbb{E}\left[\frac{\partial}{\partial\theta}\log f(X_i;\theta)\right]\mathbb{E}\left[\frac{\partial}{\partial\theta}\log f(X_j;\theta)\right]\\
+&amp;=n\mathbb{E}\left[\frac{\partial}{\partial\theta}\log f(X;\theta)\right]^2.
 \end{align*}\]</span></p>
 </div>
 <p>Ainda,</p>
 <div class="math">
 <p><span class="math display">\[\begin{align*}
-\mathbb{E}\left[\frac{\partial}{\partial\theta}\log f(x;\theta)\right]&amp;=
+\mathbb{E}\left[\frac{\partial}{\partial\theta}\log f(X;\theta)\right]&amp;=
 \int\frac{\partial}{\partial\theta}\log f(x,\theta)f(x,\theta)\,dx=\frac{\partial}{\partial\theta}\int f(x,\theta)\,dx=0.
 \end{align*}\]</span></p>
 </div>
@@ -1069,8 +1069,7 @@ D&amp;=\left.\frac{\partial^2\cal{l}(\theta)}{\partial\mu^2}\frac{\partial^2\cal
 <section class="slide level2">
 
 <div id="exm-suf_bernoulli" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 18</strong></span> Seja <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> uma amostra aleatória de uma população com distribuição Bernoulli<span class="math inline">\((p)\)</span>, com <span class="math inline">\(p\in(0,1)\)</span>. Mostre que<br>
-<span class="math inline">\(T = \sum_{i=1}^n X_i\)</span> é uma estatística suficiente para o parâmetro <span class="math inline">\(p\)</span>.</p>
+<p><span class="theorem-title"><strong>Exemplo 18</strong></span> Seja <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> uma amostra aleatória de uma população com distribuição Bernoulli<span class="math inline">\((p)\)</span>, com <span class="math inline">\(p\in(0,1)\)</span>. Mostre que <span class="math inline">\(T = \sum_{i=1}^n X_i\)</span> é uma estatística suficiente para o parâmetro <span class="math inline">\(p\)</span>.</p>
 <p><br></p>
 <div class="fragment fade-in" data-fragment-index="1">
 <p>Seja <span class="math inline">\(T = \sum_{i=1}^n X_i\)</span> o total de sucessos, então</p>
@@ -1172,6 +1171,150 @@ f(x_1,x_2,\ldots,x_n)&amp;=\prod_{i=1}^n\theta x_i^{\theta-1}\mathbb{I}_{(0,1)}(
 \end{align*}\]</span></p>
 </div>
 <p>Daí, <span class="math inline">\(\prod_{i=1}^nX_i\)</span> é uma estatística suficiente para <span class="math inline">\(\theta\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-fn_uniform" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 22</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com densidade uniforme no intervalo <span class="math inline">\([0,\theta]\)</span>. Use o teorema de Fisher-Neyman para encontrar uma estatística suficiente para <span class="math inline">\(\theta\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que, a densidade conjunta é dada por</p>
+<p><span class="math display">\[f(x_1,x_2,\ldots,x_n,\theta)=\prod_{i=1}^n\frac1\theta\mathbb{I}_{[0,\theta]}(x_i)=\frac{1}{\theta^n}\prod_{i=1}^n\mathbb{I}_{[0,\theta]}(x_i)=\frac{1}{\theta^n}\mathbb{I}_{[Y_n,\infty]}(\theta).\]</span> Observe que, a densidade conjunta só depende da amostra por meio de <span class="math inline">\(Y_n=\max\{X_1,X_2,\ldots,X_n\}\)</span>, i.e., <span class="math inline">\(Y_n\)</span> é uma estatística suficiente para <span class="math inline">\(\theta\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="thm-suficiencia2" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 5</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade <span class="math inline">\(f(\cdot,\theta)\)</span>, com <span class="math inline">\(\theta\in\Theta\)</span>. Seja <span class="math inline">\(T=t(X_1,X_2,\ldots,X_n)\)</span> uma estatística suficiente para <span class="math inline">\(\theta\)</span>. Seja <span class="math inline">\(S=g(T)\)</span>, onde <span class="math inline">\(g(\cdot)\)</span> é uma função <span class="math inline">\(1-1\)</span>, i.e., invertível no suporte <span class="math inline">\(T\)</span>. Então, <span class="math inline">\(S\)</span> é uma estatística suficiente para <span class="math inline">\(\theta\)</span>.</p>
+</div>
+</div>
+<p><br></p>
+<div class="proof">
+<p><span class="proof-title"><em>Prova</em>. </span>Se <span class="math inline">\(T\)</span> é uma estatística suficiente, então, pelo teorema de fatoração de Fisher-Neyman, tem-se que</p>
+<p><span class="math display">\[f(x_1,x_2,\ldots,x_n)=\kappa_1(t,\theta)\kappa_2(x_1,x_2,\ldots,x_n)=\kappa_1\left(g^{-1}(s),\theta\right)\kappa_2(x_1,\ldots,x_n).\]</span></p>
+<p>Dessa forma, <span class="math inline">\(S\)</span> é uma estatística suficiente.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="thm-suficiencia3" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 6</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade <span class="math inline">\(f(\cdot,\theta)\)</span>, com <span class="math inline">\(\theta\in\Theta\)</span>. Seja <span class="math inline">\(T=t(X_1,X_2,\ldots,X_n)\)</span> uma estatística suficiente para <span class="math inline">\(\theta\)</span>. Se o estimador de máxima verossimilhança para <span class="math inline">\(\theta\)</span> existe e é único, então, o mesmo depende da amostra apenas por meio da estatística <span class="math inline">\(T\)</span>.</p>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="proof">
+<p><span class="proof-title"><em>Prova</em>. </span>Seja <span class="math inline">\(\mathbf{x}=(x_1,x_2,\ldots,x_n)\)</span>. Pelo Teorema da Fatoração de Neyman-Fisher, como <span class="math inline">\(T\)</span> é uma estatística suficiente para <span class="math inline">\(\theta\)</span>, a função de verossimilhança <span class="math inline">\(L(\theta; \mathbf{x})\)</span> pode ser fatorada como:</p>
+<p><span class="math display">\[L(\theta; \mathbf{x}) = f(x_1, x_2, \ldots, x_n; \theta) = \kappa_1(t, \theta) \cdot h(x_1, x_2, \ldots, x_n)\]</span> Por definição, o estimador de máxima verossimilhança <span class="math inline">\(\hat{\theta}\)</span> é o valor de <span class="math inline">\(\theta \in \Theta\)</span> que maximiza a função de verossimilhança <span class="math inline">\(L(\theta; \mathbf{x})\)</span>, i.e.,</p>
+<p><span class="math display">\[\hat{\theta} = \arg\max_{\theta \in \Theta} L(\theta; \mathbf{x})\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Daí,</p>
+<p><span class="math display">\[\hat{\theta} = \arg\max_{\theta \in \Theta} \left[\kappa_1(t(\mathbf{x}); \theta) \cdot \kappa_2(\mathbf{x}) \right].\]</span> Portanto, maximizar <span class="math inline">\(L(\theta; \mathbf{x})\)</span> em relação a <span class="math inline">\(\theta\)</span> é equivalente a maximizar a função <span class="math inline">\(\kappa_1(t(\mathbf{x}); \theta)\)</span>, i.e.,</p>
+<p><span class="math display">\[\hat{\theta} = \arg\max_{\theta \in \Theta} \kappa_1(t(\mathbf{x}); \theta)\]</span></p>
+<p>Dessa forma, o ponto de máximo resultante <span class="math inline">\(\hat{\theta}\)</span> depende dos dados observados exclusivamente por meio do valor de <span class="math inline">\(T = t(\mathbf{x})\)</span>. Assim,</p>
+<p><span class="math display">\[\hat{\theta} = u(T),\]</span></p>
+<p>ou seja, o estimador de máxima verossimilhança de <span class="math inline">\(\theta\)</span> é necessariamente uma função da estatística suficiente <span class="math inline">\(T\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<div id="exm-fn_uniform" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 23</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população com função de densidade <span class="math inline">\(f(x,\theta)=\theta e^{-\theta x}\mathbb{I}_{(0,\infty)}(x)\)</span>, onde <span class="math inline">\(\theta&gt;0\)</span>.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sabemos que,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+L(\theta)&amp;=\prod_{i=1}^n \theta e^{-\theta x_i}\mathbb{I}_{(0,\infty)}(x_i)
+=\theta^ne^{-\theta\sum_{i=1}^nx_i}\prod_{i=1}^n\mathbb{I}_{(0,\infty)}(x_i)\\
+\log L(\theta)&amp;=n\log\theta-\theta\sum_{i=1}^nx_i+\log\prod_{i=1}^n\mathbb{I}_{(0,\infty)}(x_i).
+\end{align*}\]</span></p>
+</div>
+<p>Daí,</p>
+<p><span class="math display">\[\frac{\partial}{\partial\theta}\log L(\theta)=\frac{n}{\theta}-\sum_{i=1}^nx_i.\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Dessa forma, <span class="math inline">\(\hat\theta=\frac{1}{\bar{x}}\)</span>. Verificando o sinal da segunda derivada pode-se confirmar que o punto é um máximo local. Por outro lado, observe que</p>
+<p><span class="math display">\[L(\theta)=\underbrace{\theta^ne^{-\theta\sum_{i=1}^nx_i}}_{\kappa_1(t,\theta)}\underbrace{\prod_{i=1}^n\mathbb{I}_{(0,\infty)}(x_i)}_{\kappa_2(\mathbf{x})}.\]</span></p>
+<p>Então, <span class="math inline">\(T=\sum_{i=1}^nX_i\)</span> é uma estatística suficiente para <span class="math inline">\(\theta\)</span>. Ainda, o estimador de máxima verossimilhança <span class="math inline">\(\hat\theta=\frac{1}{\bar{X}}=\frac{n}{T}\)</span> é função deuma estatística suficiente.<span class="math inline">\(\quad\blacksquare\)</span></p>
+</section>
+<section class="slide level2">
+
+<div class="box">
+<div id="thm-rao_blackwell" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 7 (Teorema de Rao-Blackwell)</strong></span> Seja <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span> uma amostra aleatória de uma população cuja distribuição conjunta envolve o parâmetro <span class="math inline">\(\theta\)</span> desconhecido. Seja <span class="math inline">\(Y=u(X_,X_2,\ldots,X_n)\)</span> uma estatística suficiente para <span class="math inline">\(\theta\)</span> e seja <span class="math inline">\(T=t(X_1,X_2,\ldots,X_n)\)</span> um estimador não-viesado para <span class="math inline">\(\theta\)</span>. Considere <span class="math inline">\(T^*=\varphi(Y)=\mathbb{E}[T|Y]\)</span>, então</p>
+<p><span class="math inline">\(i.\)</span> <span class="math inline">\(T^*\)</span> é um estimador não-viesado para <span class="math inline">\(\theta\)</span>;</p>
+<p><span class="math inline">\(ii.\)</span> <span class="math inline">\(\mathrm{var}(T^*)\le \mathrm{var}(T)\)</span>.</p>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="proof">
+<p><span class="proof-title"><em>Prova</em>. </span>Como <span class="math inline">\(Y\)</span> é uma estatística suficiente para <span class="math inline">\(\theta\)</span>, então a distribuição conjunta <span class="math inline">\((X_1,X_2,\ldots,X_n|Y)\)</span> não envolve <span class="math inline">\(\theta\)</span>. Daí, a distribuição de <span class="math inline">\((T|Y)\)</span> não envolve <span class="math inline">\(\theta\)</span>. Então, <span class="math inline">\(\mathbb{E}[T|Y]=T^*\)</span> não envolve <span class="math inline">\(\theta\)</span>, assim <span class="math inline">\(T^*\)</span> é um estimador de <span class="math inline">\(\theta\)</span>. Ainda, <span class="math inline">\(\mathbb{E}[T^*]=\mathbb{E}\left[\mathbb{E}[T|Y]\right]=\mathbb{E}[T]=\theta\)</span>. Daí, <span class="math inline">\(T^*\)</span> é não-viesado.</p>
+<p>Por outro lado, sabemos que</p>
+<p><span class="math display">\[\mathrm{var}[T]=\mathbb{E}[\mathrm{var}[T|Y]]+\mathrm{var}[\mathbb{E}[T|Y]].\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Porém, <span class="math inline">\(\mathbb{P}\left[\mathrm{var[T|Y]\ge0}\right]=1\)</span>, então <span class="math inline">\(\mathbb{E}[\mathrm{var}[T|Y]]\ge0\)</span>, daí</p>
+<p><span class="math display">\[\mathrm{var}[T]\ge\mathrm{var}[\mathbb{E}[T|Y]]=\mathrm{var}[T^*].\]</span></p>
+<p>Isso significa que, se tivermos uma estatística suficiente <span class="math inline">\(Y\)</span> para um parâmetro <span class="math inline">\(\theta\)</span>, então a procura de um estimador não-viesado de mínima variância para <span class="math inline">\(\theta\)</span> pode ser restrita à classe dos estimadores que são função de <span class="math inline">\(Y\)</span>.</p>
+<p><br><br></p>
+<div class="box2">
+<div id="exr-exercicio1" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercício 2</strong></span> Mostre que, se <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span> são variáveis aleatórias, então <span class="math inline">\(\mathrm{var}[Y]=\mathrm{var}[\mathbb{E}[Y|X]]+\mathbb{E}[\mathrm{var}[Y|X]]\)</span>.</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exm-RB_bernoulli" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 24</strong></span> Seja <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> uma amostra aleatória de uma população com distribuição Bernoulli<span class="math inline">\((p)\)</span>, onde <span class="math inline">\(p \in (0,1)\)</span> desconhecido.</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Pelo Teorema da Fatoração de Fisher-Neyman, temos que <span class="math inline">\(T = \sum_{i=1}^n X_i\)</span> é uma estatística suficiente para <span class="math inline">\(p\)</span>.</p>
+<p><br></p>
+<p>Considere o estimador <span class="math inline">\(X_1\)</span> para estimar <span class="math inline">\(p\)</span>. Nesse cenário, seja <span class="math inline">\(W = X_1\)</span>. Dessa forma, <span class="math inline">\(\mathbb{E}[W] = \mathbb{E}[X_1] = p\)</span>. Portanto, <span class="math inline">\(W = X_1\)</span> é um estimador não-viesado para <span class="math inline">\(p\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Para melhorar o estimador <span class="math inline">\(W\)</span>, calculamos a esperança condicional de <span class="math inline">\(W\)</span> dada a estatística suficiente <span class="math inline">\(T = t\)</span>, i.e.,</p>
+<p><span class="math display">\[\varphi(T) = \mathbb{E}[W \mid T = t] = \mathbb{E}[X_1 \mid T = t].\]</span></p>
+<p>Assim, <span class="math inline">\(\mathbb{E}[X_1 \mid T = t] = \mathbb{P}[X_1 = 1 \mid T = t]\)</span>. Portanto,</p>
+<p><span class="math display">\[\mathbb{P}[X_1 = 1 \mid T = t] = \frac{\mathbb{P}[X_1 = 1 \text{ e } T = t]}{\mathbb{P}[T = t]} = \frac{\mathbb{P}\left[X_1 = 1 \text{ e } \sum_{i=2}^n X_i = t - 1\right]}{\mathbb{P}[T = t]}.\]</span></p>
+<p>Como <span class="math inline">\(X_1\)</span> é independente de <span class="math inline">\(X_2, \ldots, X_n\)</span> e a soma <span class="math inline">\(\sum_{i=2}^n X_i\)</span> segue uma distribuição Binomial<span class="math inline">\((n-1, p)\)</span>, então</p>
+<p><span class="math display">\[\mathbb{P}[X_1 = 1 \mid T = t] = \frac{\mathbb{P}[X_1 = 1]\, \mathbb{P}\left[\sum_{i=2}^n X_i = t - 1\right]}{\mathbb{P}[T = t]}.\]</span></p>
+</section>
+<section class="slide level2">
+
+<p>Daí,</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\mathbb{P}[X_1 = 1 \mid T = t] &amp;= \frac{p \left[ \binom{n-1}{t-1} p^{t-1} (1-p)^{(n-1)-(t-1)} \right]}{\binom{n}{t} p^t (1-p)^{n-t}}\\
+&amp;= \frac{\binom{n-1}{t-1}}{\binom{n}{t}} = \frac{\frac{(n-1)!}{(t-1)!(n-t)!}}{\frac{n!}{t!(n-t)!}} = \frac{t}{n}
+\end{align*}\]</span></p>
+</div>
+<p>Portanto, o novo estimador é dado por</p>
+<p><span class="math display">\[\varphi(T) = \frac{T}{n} = \frac{1}{n} \sum_{i=1}^n X_i = \bar{X}.\quad\blacksquare\]</span></p>
+</section>
+<section class="slide level2">
+
+<div class="fragment fade-in" data-fragment-index="1">
+
 </div>
 </section>
 <section id="referências" class="slide level2 smaller scrollable">
