@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Permanência Estudantil na Ufes — Análise Exploratória (N = 631)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f172a;
+      --muted: #475569;
+      --paper: #f8fafc;
+      --card: #ffffff;
+      --ufes-blue: #003366;
+      --ufes-accent: #0284c7;
+      --risk-rose: #be123c;
+      --risk-amber: #d97706;
+      --safe-emerald: #047857;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--paper);
+      color: var(--ink);
+      scroll-behavior: smooth;
+    }
+    h1, h2, h3, .serif {
+      font-family: 'Fraunces', serif;
+    }
+    .editorial-grid {
+      background-image: radial-gradient(#cbd5e1 0.75px, transparent 0.75px);
+      background-size: 20px 20px;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #ffffff; }
+      .shadow-sm, .shadow-md, .shadow-lg { box-shadow: none !important; }
+      section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-sky-100 selection:text-sky-950">
+
+  <!-- Barra de Navegação Editorial -->
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200 no-print">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between text-xs sm:text-sm">
+      <div class="flex items-center gap-2 font-bold text-[#003366] tracking-tight">
+        <span class="w-2.5 h-2.5 rounded-full bg-rose-600 inline-block"></span>
+        <span>OBSERVATÓRIO DE PERMANÊNCIA · UFES</span>
+      </div>
+      <div class="hidden md:flex items-center gap-6 text-slate-600 font-medium">
+        <a href="#amostra" class="hover:text-[#003366] transition">1. Amostra</a>
+        <a href="#dimensoes" class="hover:text-[#003366] transition">2. Dimensões de Risco</a>
+        <a href="#saude-mental" class="hover:text-[#003366] transition">3. Saúde Mental</a>
+        <a href="#financeiro" class="hover:text-[#003366] transition">4. Dimensão Financeira</a>
+        <a href="#correlacoes" class="hover:text-[#003366] transition">5. Fatores de Evasão</a>
+      </div>
+      <button onclick="window.print()" class="bg-[#003366] hover:bg-sky-900 text-white px-3.5 py-1.5 rounded-md font-semibold text-xs transition shadow-sm">
+        Exportar PDF / Imprimir
+      </button>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Editorial -->
+  <header class="bg-[#003366] text-white border-b-4 border-amber-500">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-sky-200 text-xs font-semibold uppercase tracking-wider mb-4">
+        Análise Exploratória de Dados · Questionário Institucional (50 Itens Likert)
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-bold leading-tight max-w-4xl">
+        O que ameaça a permanência estudantil na Ufes?
+      </h1>
+      <p class="mt-4 text-sky-100/90 text-base sm:text-lg max-w-3xl leading-relaxed">
+        Diagnóstico empírico baseado em <strong>631 respostas completas</strong> (de 905 registros coletados em 2026) nos quatro campi da Universidade Federal do Espírito Santo. Os dados confirmam a centralidade da <strong>saúde mental</strong> (fator mais prevalente) e da <strong>vulnerabilidade financeira</strong> (maior vetor direto de ideação de abandono por custo).
+      </p>
+
+      <!-- KPIs Principais -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
+        <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-xl p-4">
+          <div class="text-xs uppercase tracking-wider text-sky-200 font-semibold">Amostra Válida</div>
+          <div class="text-3xl font-bold mt-1 serif">631</div>
+          <div class="text-xs text-sky-100/80 mt-1">100% dos 50 itens respondidos (69,7% de 905 acessos)</div>
+        </div>
+        <div class="bg-rose-950/50 backdrop-blur-sm border border-rose-400/30 rounded-xl p-4">
+          <div class="text-xs uppercase tracking-wider text-rose-200 font-semibold">Ansiedade & Cansaço</div>
+          <div class="text-3xl font-bold mt-1 serif text-rose-300">47,2%</div>
+          <div class="text-xs text-rose-100/80 mt-1">Concordam que a ansiedade dificulta a concentração (Q31)</div>
+        </div>
+        <div class="bg-amber-950/40 backdrop-blur-sm border border-amber-400/30 rounded-xl p-4">
+          <div class="text-xs uppercase tracking-wider text-amber-200 font-semibold">Risco Financeiro Direto</div>
+          <div class="text-3xl font-bold mt-1 serif text-amber-300">26,6%</div>
+          <div class="text-xs text-amber-100/80 mt-1">Relatam dificuldades financeiras que afetam a permanência (Q37)</div>
+        </div>
+        <div class="bg-emerald-950/40 backdrop-blur-sm border border-emerald-400/30 rounded-xl p-4">
+          <div class="text-xs uppercase tracking-wider text-emerald-200 font-semibold">Crença na Formação</div>
+          <div class="text-3xl font-bold mt-1 serif text-emerald-300">89,9%</div>
+          <div class="text-xs text-emerald-100/80 mt-1">Acreditam que o curso trará boas oportunidades (Q1)</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 space-y-14">
+
+    <!-- SEÇÃO 1: PERFIL DA AMOSTRA -->
+    <section id="amostra" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-slate-100 pb-4 mb-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-sky-700">01 · Composição dos Respondentes</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Quem respondeu ao levantamento (n = 631)</h2>
+        </div>
+        <p class="text-xs text-slate-500 mt-2 md:mt-0">Excluídos 184 registros sem respostas Likert e 90 parciais.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+        <!-- Gráfico de Campi -->
+        <div class="bg-slate-50 rounded-xl p-5 border border-slate-100">
+          <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-3">Distribuição por Campus</h3>
+          <div class="h-56">
+            <canvas id="campusChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Indicadores Sociodemográficos em Barras SVG -->
+        <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <!-- Sexo Biológico -->
+          <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/60">
+            <div class="text-xs font-bold uppercase text-slate-500 mb-2">Sexo Biológico</div>
+            <div class="flex justify-between text-sm font-semibold mb-1">
+              <span>Feminino: 416 (65,9%)</span>
+              <span>Masculino: 215 (34,1%)</span>
+            </div>
+            <div class="w-full h-3 bg-slate-200 rounded-full overflow-hidden flex">
+              <div class="bg-[#003366] h-full" style="width: 65.9%"></div>
+              <div class="bg-sky-400 h-full" style="width: 34.1%"></div>
+            </div>
+          </div>
+
+          <!-- Trabalho Atual -->
+          <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/60">
+            <div class="text-xs font-bold uppercase text-slate-500 mb-2">Trabalha Atualmente? (n = 624 válidos)</div>
+            <div class="flex justify-between text-sm font-semibold mb-1">
+              <span>Não: 362 (57,4%)</span>
+              <span class="text-amber-700">Sim: 262 (41,5%)</span>
+            </div>
+            <div class="w-full h-3 bg-slate-200 rounded-full overflow-hidden flex">
+              <div class="bg-slate-600 h-full" style="width: 58.0%"></div>
+              <div class="bg-amber-500 h-full" style="width: 42.0%"></div>
+            </div>
+            <p class="text-[11px] text-slate-500 mt-1.5">7 respondentes (1,1%) não informaram situação laboral.</p>
+          </div>
+
+          <!-- Assistência Estudantil -->
+          <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/60">
+            <div class="text-xs font-bold uppercase text-slate-500 mb-2">Recebe Assistência Estudantil?</div>
+            <div class="flex justify-between text-sm font-semibold mb-1">
+              <span>Não: 441 (69,9%)</span>
+              <span class="text-emerald-700">Sim: 190 (30,1%)</span>
+            </div>
+            <div class="w-full h-3 bg-slate-200 rounded-full overflow-hidden flex">
+              <div class="bg-slate-400 h-full" style="width: 69.9%"></div>
+              <div class="bg-emerald-600 h-full" style="width: 30.1%"></div>
+            </div>
+          </div>
+
+          <!-- Perfil Étnico-Racial -->
+          <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/60">
+            <div class="text-xs font-bold uppercase text-slate-500 mb-2">Autodeclaração Étnico-Racial</div>
+            <ul class="text-xs space-y-1.5 text-slate-700">
+              <li class="flex justify-between"><span>Branca</span><strong>270 (42,8%)</strong></li>
+              <li class="flex justify-between"><span>Parda</span><strong>213 (33,8%)</strong></li>
+              <li class="flex justify-between"><span>Negra / Preta</span><strong>138 (21,9%)</strong></li>
+              <li class="flex justify-between text-slate-500"><span>Prefiro não informar (7) / Indígena (3)</span><span>10 (1,6%)</span></li>
+            </ul>
+          </div>
+
+          <!-- Período e Ingresso -->
+          <div class="sm:col-span-2 p-4 rounded-xl border border-sky-100 bg-sky-50/60 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <span class="text-xs font-bold uppercase text-sky-900">Concentração em Calouros e Ingressantes Recentes</span>
+              <p class="text-xs text-slate-600 mt-0.5">
+                <strong>44,1%</strong> ingressaram em 2026 (278 alunos) e <strong>30,6%</strong> cursam o 1º período (193 alunos), seguidos pelo 2º período (111; 17,6%).
+              </p>
+            </div>
+            <span class="px-3 py-1 bg-white border border-sky-200 rounded-lg text-xs font-bold text-[#003366]">
+              48,2% no 1º Ano (1º e 2º períodos)
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: PANORAMA DAS 8 DIMENSÕES LATENTES -->
+    <section id="dimensoes" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <div class="border-b border-slate-100 pb-4 mb-6">
+        <span class="text-xs font-bold uppercase tracking-widest text-rose-700">02 · Síntese Multidimensional (Escala 1 a 5 de Vulnerabilidade)</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Verificação das Hipóteses: Saúde Mental e Finanças no Topo</h2>
+        <p class="text-sm text-slate-600 mt-2 max-w-3xl">
+          Agrupando os 50 itens em 8 dimensões analíticas (com inversão dos itens protetivos para que <strong>5 = maior vulnerabilidade</strong>), a <strong>Saúde Mental e Sobrecarga</strong> apresenta a maior média de severidade da amostra (3,28), enquanto a <strong>Vulnerabilidade Financeira</strong> exibe o maior impacto direto sobre o pensamento de abandonar o curso por custo (<em>r</em> = 0,612).
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 h-80">
+          <canvas id="dimensionsChart"></canvas>
+        </div>
+        <div class="lg:col-span-5 space-y-3">
+          <div class="p-4 rounded-xl bg-rose-50 border border-rose-200">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase text-rose-800">1º Lugar em Prevalência</span>
+              <span class="text-sm font-bold text-rose-900 bg-rose-200/70 px-2 py-0.5 rounded">Média 3,28 / 5,0</span>
+            </div>
+            <h4 class="font-bold text-slate-900 mt-1">Saúde Mental e Sobrecarga Emocional</h4>
+            <p class="text-xs text-slate-700 mt-1 leading-relaxed">
+              <strong>47,2%</strong> dos discentes atingem escore médio ≥ 3,5 nessa dimensão. Ansiedade (Q31), cansaço extremo (Q38) e sobrecarga (Q44) afetam quase metade do corpo discente, independentemente do curso.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-amber-50 border border-amber-200">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase text-amber-800">Maior Correlação com Evasão Financeira</span>
+              <span class="text-sm font-bold text-amber-900 bg-amber-200/70 px-2 py-0.5 rounded">r = 0,612</span>
+            </div>
+            <h4 class="font-bold text-slate-900 mt-1">Vulnerabilidade Financeira</h4>
+            <p class="text-xs text-slate-700 mt-1 leading-relaxed">
+              Embora a média geral seja 2,56 (com alta dispersão: DP = 1,13), <strong>23,5%</strong> estão em faixa crítica (≥ 3,5), com dificuldades em transporte (31,4%), alimentação (26,1%) e materiais (21,6%).
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase text-slate-600">2º Maior Escore Médio</span>
+              <span class="text-sm font-bold text-slate-800 bg-slate-200 px-2 py-0.5 rounded">Média 3,11 / 5,0</span>
+            </div>
+            <h4 class="font-bold text-slate-900 mt-1">Déficit de Autorregulação e Tempo</h4>
+            <p class="text-xs text-slate-700 mt-1 leading-relaxed">
+              <strong>33,1%</strong> apresentam escore ≥ 3,5, puxados pela dificuldade em administrar o tempo de estudo (45,2% de concordância na Q8) e manter atenção (36,8% na Q48).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3 & 4: DETALHAMENTO SAÚDE MENTAL vs FINANCEIRO -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+      <!-- BLOCO 3: SAÚDE MENTAL -->
+      <section id="saude-mental" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-7 shadow-sm flex flex-col justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-rose-700">03 · Dimensão Psicoemocional</span>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">Saúde Mental e Sobrecarga</h2>
+          <p class="text-xs text-slate-600 mt-1 mb-5">Percentual de concordância (notas 4 e 5) vs. discordância (notas 1 e 2) nos itens críticos.</p>
+
+          <div class="space-y-4">
+            <!-- Q31 -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-slate-800">Q31. Ansiedade dificulta concentração nos estudos</span>
+                <span class="text-rose-700 font-bold">47,2% concordam (M = 3,39)</span>
+              </div>
+              <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden flex">
+                <div class="bg-rose-600 h-full" style="width: 47.2%" title="Concordam: 47.2%"></div>
+                <div class="bg-slate-300 h-full" style="width: 25.2%" title="Neutro: 25.2%"></div>
+                <div class="bg-emerald-500/70 h-full" style="width: 27.6%" title="Discordam: 27.6%"></div>
+              </div>
+            </div>
+
+            <!-- Q38 -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-slate-800">Q38. Cansaço extremo prejudica desempenho acadêmico</span>
+                <span class="text-rose-700 font-bold">46,4% concordam (M = 3,33)</span>
+              </div>
+              <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden flex">
+                <div class="bg-rose-600 h-full" style="width: 46.4%"></div>
+                <div class="bg-slate-300 h-full" style="width: 25.1%"></div>
+                <div class="bg-emerald-500/70 h-full" style="width: 28.5%"></div>
+              </div>
+            </div>
+
+            <!-- Q45 -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-slate-800">Q45. Problemas emocionais afetam desempenho no curso</span>
+                <span class="text-rose-700 font-bold">42,9% concordam (M = 3,17)</span>
+              </div>
+              <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden flex">
+                <div class="bg-rose-600 h-full" style="width: 42.9%"></div>
+                <div class="bg-slate-300 h-full" style="width: 21.8%"></div>
+                <div class="bg-emerald-500/70 h-full" style="width: 35.3%"></div>
+              </div>
+            </div>
+
+            <!-- Q44 -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-slate-800">Q44. Sobrecarga com as demandas acadêmicas</span>
+                <span class="text-rose-700 font-bold">41,4% concordam (M = 3,24)</span>
+              </div>
+              <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden flex">
+                <div class="bg-rose-600 h-full" style="width: 41.4%"></div>
+                <div class="bg-slate-300 h-full" style="width: 29.1%"></div>
+                <div class="bg-emerald-500/70 h-full" style="width: 29.5%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 text-[11px] text-slate-500 mt-4 pt-3 border-t border-slate-100">
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-rose-600"></span> Concordam (4–5)</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-slate-300"></span> Neutro (3)</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-500/70"></span> Discordam (1–2)</span>
+          </div>
+        </div>
+
+        <div class="mt-6 bg-rose-50/70 border border-rose-100 rounded-xl p-4 text-xs text-slate-700 leading-relaxed">
+          <strong>Efeito Transversal:</strong> A dimensão de Saúde Mental correlaciona-se significativamente tanto com o abandono por motivos financeiros (<em>r</em> = 0,388) quanto com o abandono por falta de perspectiva profissional (<em>r</em> = 0,328), atuando como amplificador de risco.
+        </div>
+      </section>
+
+      <!-- BLOCO 4: DIMENSÃO FINANCEIRA -->
+      <section id="financeiro" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-7 shadow-sm flex flex-col justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-amber-700">04 · Condições Materiais e Trabalho</span>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">Vulnerabilidade Financeira</h2>
+          <p class="text-xs text-slate-600 mt-1 mb-5">Indicadores de restrição econômica e impacto direto na permanência.</p>
+
+          <div class="space-y-4">
+            <!-- Q11 Invertido -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-slate-800">Q11. Situação financeira NÃO é estável para manter estudos</span>
+                <span class="text-amber-700 font-bold">36,3% sem estabilidade (M = 3,02)</span>
+              </div>
+              <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden flex">
+                <div class="bg-amber-600 h-full" style="width: 36.3%"></div>
+                <div class="bg-slate-300 h-full" style="width: 27.2%"></div>
+                <div class="bg-emerald-500/70 h-full" style="width: 36.5%"></div>
+              </div>
+            </div>
+
+            <!-- Q20 -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-slate-800">Q20. Dificuldade para pagar transporte até a universidade</span>
+                <span class="text-amber-700 font-bold">31,4% concordam (M = 2,61)</span>
+              </div>
+              <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden flex">
+                <div class="bg-amber-600 h-full" style="width: 31.4%"></div>
+                <div class="bg-slate-300 h-full" style="width: 16.6%"></div>
+                <div class="bg-emerald-500/70 h-full" style="width: 52.0%"></div>
+              </div>
+            </div>
+
+            <!-- Q37 -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-slate-800">Q37. Dificuldades financeiras afetam permanência no curso</span>
+                <span class="text-amber-700 font-bold">26,6% concordam (M = 2,54)</span>
+              </div>
+              <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden flex">
+                <div class="bg-amber-600 h-full" style="width: 26.6%"></div>
+                <div class="bg-slate-300 h-full" style="width: 21.4%"></div>
+                <div class="bg-emerald-500/70 h-full" style="width: 52.0%"></div>
+              </div>
+            </div>
+
+            <!-- Q4 -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-slate-800">Q4. Dificuldade financeira para se alimentar adequadamente</span>
+                <span class="text-amber-700 font-bold">26,1% concordam (M = 2,38)</span>
+              </div>
+              <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden flex">
+                <div class="bg-amber-600 h-full" style="width: 26.1%"></div>
+                <div class="bg-slate-300 h-full" style="width: 16.8%"></div>
+                <div class="bg-emerald-500/70 h-full" style="width: 57.1%"></div>
+              </div>
+            </div>
+
+            <!-- Q24 -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-slate-800">Q24. Deixa de se dedicar aos estudos por precisar trabalhar</span>
+                <span class="text-amber-700 font-bold">26,0% concordam (M = 2,44)</span>
+              </div>
+              <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden flex">
+                <div class="bg-amber-600 h-full" style="width: 26.0%"></div>
+                <div class="bg-slate-300 h-full" style="width: 19.5%"></div>
+                <div class="bg-emerald-500/70 h-full" style="width: 54.5%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 bg-amber-50/70 border border-amber-100 rounded-xl p-4 text-xs text-slate-700 leading-relaxed">
+          <strong>Gatilho de Evasão (Q27):</strong> <strong>16,6%</strong> dos estudantes (105 alunos) já pensaram ativamente em abandonar o curso por motivos financeiros — taxa 61% superior à ideação de abandono por falta de perspectiva profissional (<strong>10,3%</strong> na Q10).
+        </div>
+      </section>
+    </div>
+
+    <!-- SEÇÃO 5: MATRIZ DE CORRELAÇÃO COM IDEAÇÃO DE EVASÃO -->
+    <section id="correlacoes" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <div class="border-b border-slate-100 pb-4 mb-6">
+        <span class="text-xs font-bold uppercase tracking-widest text-[#003366]">05 · Análise de Correlação (Pearson r)</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Dois Caminhos Distintos para o Abandono na Ufes</h2>
+        <p class="text-sm text-slate-600 mt-2 max-w-4xl">
+          O cruzamento estatístico revela que o pensamento de evasão não é monolítico: ele se divide em <strong>Evasão por Restrição Material (Q27)</strong> e <strong>Evasão por Desencanto Vocacional/Carreira (Q10)</strong>, ambos atravessados pela saúde mental e pela desmotivação acadêmica.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 h-80">
+          <canvas id="correlationChart"></canvas>
+        </div>
+
+        <div class="lg:col-span-5 space-y-4">
+          <div class="border-l-4 border-amber-500 pl-4 py-1">
+            <h3 class="text-base font-bold text-slate-900">Vetor 1: Abandono por Motivos Financeiros (Q27)</h3>
+            <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+              Fortemente impulsionado pela <strong>Vulnerabilidade Financeira (<em>r</em> = 0,612)</strong>, seguida por <strong>Saúde Mental/Sobrecarga (<em>r</em> = 0,388)</strong>, <strong>Desmotivação (<em>r</em> = 0,352)</strong>, <strong>Dificuldade Acadêmica (<em>r</em> = 0,351)</strong> e <strong>Conflito Trabalho-Estudo (<em>r</em> = 0,350)</strong>.
+            </p>
+          </div>
+
+          <div class="border-l-4 border-[#003366] pl-4 py-1">
+            <h3 class="text-base font-bold text-slate-900">Vetor 2: Abandono por Falta de Perspectiva (Q10)</h3>
+            <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+              Guiado pela <strong>Insegurança de Carreira e Dúvida sobre o Curso (<em>r</em> = 0,603)</strong> — especialmente a dúvida se escolheu o curso certo (Q23, <em>r</em> = 0,495) e a dificuldade de relacionar o curso à carreira (Q32, <em>r</em> = 0,467).
+            </p>
+          </div>
+
+          <div class="bg-slate-900 text-white rounded-xl p-4 text-xs leading-relaxed">
+            <div class="font-bold text-sky-300 uppercase tracking-wider mb-1">Síntese para Gestão Institucional</div>
+            Enquanto políticas de <strong>assistência estudantil (alimentação e transporte)</strong> atacam diretamente o vetor financeiro (Q27), ações de <strong>acolhimento psicológico e orientação vocacional no 1º ano</strong> são indispensáveis para mitigar o desgaste emocional (47,2%) e a dúvida de carreira.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
+    Base de dados: <code>dataset_final20261103.csv</code> · Total de registros: 905 | Casos completos analisados: 631 (50 itens Likert) · Ufes.
+  </footer>
+
+  <script>
+    // 1. Gráfico de Campi
+    new Chart(document.getElementById('campusChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Goiabeiras (445)', 'Maruípe (70)', 'Alegre (69)', 'São Mateus (47)'],
+        datasets: [{
+          data: [445, 70, 69, 47],
+          backgroundColor: ['#003366', '#0284c7', '#059669', '#d97706'],
+          borderWidth: 2,
+          borderColor: '#ffffff'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { boxWidth: 12, font: { size: 11, family: 'Plus Jakarta Sans' } }
+          }
+        },
+        cutout: '62%'
+      }
+    });
+
+    // 2. Gráfico das 8 Dimensões (Média e % Crítico >= 3.5)
+    new Chart(document.getElementById('dimensionsChart'), {
+      type: 'bar',
+      data: {
+        labels: [
+          'Saúde Mental e Sobrecarga',
+          'Déficit de Autorregulação',
+          'Desmotivação Acadêmica',
+          'Vulnerabilidade Financeira',
+          'Insegurança Carreira/Curso',
+          'Conflito Trabalho-Estudo',
+          'Fragilidade Vínculo/Apoio',
+          'Dificuldade Acadêmica'
+        ],
+        datasets: [
+          {
+            label: 'Média de Vulnerabilidade (1 a 5)',
+            data: [3.28, 3.11, 2.85, 2.56, 2.40, 2.39, 2.38, 2.24],
+            backgroundColor: [
+              '#be123c', '#0284c7', '#475569', '#d97706',
+              '#64748b', '#94a3b8', '#94a3b8', '#cbd5e1'
+            ],
+            borderRadius: 6
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            min: 1,
+            max: 5,
+            grid: { color: '#f1f5f9' },
+            title: { display: true, text: 'Escore Médio (1 = Baixo Risco | 5 = Alto Risco)', font: { size: 11 } }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { font: { size: 11, weight: '600' } }
+          }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              afterLabel: function(ctx) {
+                const pcts = ['47,2%', '33,1%', '35,7%', '23,5%', '11,1%', '28,2%', '10,9%', '9,4%'];
+                return 'Alunos em faixa crítica (≥ 3,5): ' + pcts[ctx.dataIndex];
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // 3. Gráfico Comparativo de Correlações com Ideação de Evasão
+    new Chart(document.getElementById('correlationChart'), {
+      type: 'bar',
+      data: {
+        labels: [
+          'Vulnerabilidade Financeira',
+          'Insegurança Carreira/Curso',
+          'Desmotivação Acadêmica',
+          'Saúde Mental e Sobrecarga',
+          'Dificuldade Acadêmica',
+          'Fragilidade Vínculo/Apoio',
+          'Conflito Trabalho-Estudo',
+          'Déficit de Autorregulação'
+        ],
+        datasets: [
+          {
+            label: 'Evasão por Motivos Financeiros (Q27)',
+            data: [0.612, 0.334, 0.352, 0.388, 0.351, 0.290, 0.350, 0.283],
+            backgroundColor: '#d97706',
+            borderRadius: 4
+          },
+          {
+            label: 'Evasão por Falta de Perspectiva (Q10)',
+            data: [0.192, 0.603, 0.444, 0.328, 0.386, 0.396, 0.184, 0.295],
+            backgroundColor: '#003366',
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            min: 0,
+            max: 0.7,
+            grid: { color: '#f1f5f9' },
+            title: { display: true, text: 'Correlação de Pearson (r)', font: { size: 11 } }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { font: { size: 11, weight: '600' } }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { boxWidth: 12, font: { size: 11 } }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fatores Sociodemográficos, Saúde Mental e Evasão por Centro — Ufes (N = 631)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f172a;
+      --paper: #f8fafc;
+      --ufes-navy: #003366;
+      --ufes-sky: #0284c7;
+      --rose-risk: #be123c;
+      --amber-risk: #d97706;
+      --emerald-safe: #047857;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--paper);
+      color: var(--ink);
+      scroll-behavior: smooth;
+    }
+    h1, h2, h3, .serif {
+      font-family: 'Fraunces', serif;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #ffffff; }
+      section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-sky-100 selection:text-sky-950">
+
+  <!-- Barra de Navegação -->
+  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 no-print">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between text-xs sm:text-sm">
+      <div class="flex items-center gap-2 font-bold text-[#003366]">
+        <span class="w-2.5 h-2.5 rounded-full bg-rose-600 inline-block"></span>
+        <span>ANÁLISE MULTIVARIADA · PERMANÊNCIA UFES (N = 631)</span>
+      </div>
+      <div class="hidden md:flex items-center gap-5 text-slate-600 font-medium">
+        <a href="#variaveis" class="hover:text-[#003366] transition">1. Síntese das Variáveis</a>
+        <a href="#evasao" class="hover:text-[#003366] transition">2. Impacto na Evasão</a>
+        <a href="#saude-mental" class="hover:text-[#003366] transition">3. Impacto na Saúde Mental</a>
+        <a href="#centros" class="hover:text-[#003366] transition">4. Ranking por Centro</a>
+      </div>
+      <button onclick="window.print()" class="bg-[#003366] hover:bg-sky-900 text-white px-3.5 py-1.5 rounded-md font-semibold text-xs transition shadow-sm">
+        Imprimir / PDF
+      </button>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Editorial -->
+  <header class="bg-[#003366] text-white border-b-4 border-amber-500">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-14">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-sky-200 text-xs font-semibold uppercase tracking-wider mb-4">
+        Testes Não-Paramétricos (Mann-Whitney U e Kruskal-Wallis) · dataset_final20261103.csv
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-bold leading-tight max-w-4xl">
+        Perfil Sociodemográfico, Saúde Mental e Risco de Evasão na Ufes
+      </h1>
+      <p class="mt-4 text-sky-100/90 text-base sm:text-lg max-w-3xl leading-relaxed">
+        Avaliação estatística da influência de <strong>Sexo Biológico</strong>, <strong>Raça/Cor</strong>, <strong>Trabalho Atual</strong> e <strong>Assistência Estudantil</strong> sobre os indicadores de evasão e saúde mental nos <strong>11 Centros de Ensino</strong> da Ufes (<em>N</em> = 631 respostas completas).
+      </p>
+
+      <!-- Alerta Metodológico sobre Turno -->
+      <div class="mt-6 bg-amber-950/60 border border-amber-400/40 rounded-xl p-4 flex items-start gap-3 max-w-4xl">
+        <span class="text-amber-300 font-bold text-sm mt-0.5">⚠ Nota de Base de Dados (Turno):</span>
+        <p class="text-xs sm:text-sm text-amber-100/95 leading-relaxed">
+          O arquivo <code>dataset_final20261103.csv</code> (166 colunas) <strong>não possui campo ou pergunta sobre o Turno do curso</strong> (matutino, vespertino, noturno ou integral). Estão registrados apenas <em>Período Atual</em>, <em>Ano de ingresso</em>, <em>Campus</em> e <em>Centro de Ensino</em>. As análises abaixo cobrem integralmente as demais variáveis solicitadas.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 space-y-12">
+
+    <!-- SEÇÃO 1: QUADRO-RESUMO DE SIGNIFICÂNCIA ESTATÍSTICA -->
+    <section id="variaveis" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <div class="border-b border-slate-100 pb-4 mb-6">
+        <span class="text-xs font-bold uppercase tracking-widest text-sky-700">01 · Verificação de Hipóteses (p &lt; 0,05)</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">O que Afeta Estatisticamente a Evasão e a Saúde Mental?</h2>
+        <p class="text-sm text-slate-600 mt-1">
+          A influência ocorre de forma <strong>seletiva</strong>: enquanto <strong>Raça</strong> e <strong>Assistência Estudantil</strong> discriminam fortemente a evasão por motivos financeiros, o <strong>Sexo Biológico</strong> é o único fator sociodemográfico com diferença significativa na Saúde Mental.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Card Sexo -->
+        <div class="rounded-xl border border-rose-200 bg-rose-50/40 p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase text-slate-700">Sexo Biológico</span>
+              <span class="px-2 py-0.5 rounded bg-rose-600 text-white text-[11px] font-bold">Afeta Saúde Mental</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed mt-2">
+              <strong>Evasão:</strong> Sem diferença significativa (<em>p</em> = 0,378).<br/>
+              <strong>Saúde Mental:</strong> Diferença altamente significativa (<strong><em>p</em> = 0,0027</strong>). Mulheres apresentam escore médio de <strong>3,38</strong> (49,8% em faixa crítica ≥ 3,5) contra <strong>3,09</strong> nos homens (42,3%).
+            </p>
+          </div>
+          <div class="mt-4 pt-2 border-t border-rose-200/60 text-[11px] text-rose-900 font-semibold">
+            Feminino (n=416) vs. Masculino (n=215)
+          </div>
+        </div>
+
+        <!-- Card Raça -->
+        <div class="rounded-xl border border-amber-200 bg-amber-50/40 p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase text-slate-700">Raça / Cor</span>
+              <span class="px-2 py-0.5 rounded bg-amber-600 text-white text-[11px] font-bold">Afeta Evasão Fin.</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed mt-2">
+              <strong>Evasão Financeira (Q27):</strong> Diferença significativa (<strong><em>p</em> = 0,0050</strong>). Estudantes negros/pretos (24,6%) e pardos (18,3%) têm mais que o dobro de risco que brancos (11,1%).<br/>
+              <strong>Saúde Mental:</strong> Sem diferença entre grupos (<em>p</em> = 0,8875).
+            </p>
+          </div>
+          <div class="mt-4 pt-2 border-t border-amber-200/60 text-[11px] text-amber-900 font-semibold">
+            Branca (270), Parda (213), Negra/Preta (138)
+          </div>
+        </div>
+
+        <!-- Card Assistência Estudantil -->
+        <div class="rounded-xl border border-sky-200 bg-sky-50/40 p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase text-slate-700">Assistência Estudantil</span>
+              <span class="px-2 py-0.5 rounded bg-[#003366] text-white text-[11px] font-bold">Focalização Alvo</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed mt-2">
+              <strong>Evasão Financeira (Q27):</strong> Diferença significativa (<strong><em>p</em> = 0,0003</strong>). Bolsistas têm maior ideação financeira (24,7% vs. 13,2%), refletindo a <em>focalização</em> da política no público vulnerável.<br/>
+              <strong>Saúde Mental:</strong> Sem diferença significativa (<em>p</em> = 0,1151).
+            </p>
+          </div>
+          <div class="mt-4 pt-2 border-t border-sky-200/60 text-[11px] text-sky-900 font-semibold">
+            Recebe (n=190) vs. Não recebe (n=441)
+          </div>
+        </div>
+
+        <!-- Card Trabalha Atualmente -->
+        <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase text-slate-700">Trabalha Atualmente</span>
+              <span class="px-2 py-0.5 rounded bg-slate-600 text-white text-[11px] font-bold">Efeito Indireto</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed mt-2">
+              <strong>Evasão Direta:</strong> Não altera diretamente Q27 (<em>p</em> = 0,9363) ou Q10 (<em>p</em> = 0,7633).<br/>
+              <strong>Saúde Mental:</strong> Diferença não significativa (<em>p</em> = 0,2790; 47,7% vs. 47,0%).<br/>
+              <strong>Impacto Real:</strong> Eleva o conflito tempo-estudo (Q43: 51,9% vs. 6,1%).
+            </p>
+          </div>
+          <div class="mt-4 pt-2 border-t border-slate-200 text-[11px] text-slate-700 font-semibold">
+            Sim (n=262) vs. Não (n=362) · 7 sem inf.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: IMPACTO NA EVASÃO (Q27 E Q10) -->
+    <section id="evasao" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <div class="border-b border-slate-100 pb-4 mb-6">
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-700">02 · Recortes Sociodemográficos e Ideação de Abandono</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Como as Variáveis Afetam o Pensamento de Abandonar o Curso</h2>
+        <p class="text-sm text-slate-600 mt-1 max-w-4xl">
+          Percentual de concordância (notas 4 e 5) em <strong>Evasão por Motivos Financeiros (Q27)</strong> e <strong>Evasão por Falta de Perspectiva Profissional (Q10)</strong> segundo cada subgrupo.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 h-80">
+          <canvas id="evasionSubgroupChart"></canvas>
+        </div>
+        <div class="lg:col-span-5 space-y-4 text-xs">
+          <div class="p-4 rounded-xl bg-amber-50 border border-amber-200">
+            <div class="font-bold text-amber-900 uppercase">1. Desigualdade Racial na Permanência Material (p = 0,0050)</div>
+            <p class="text-slate-700 mt-1 leading-relaxed">
+              Enquanto apenas <strong>11,1%</strong> dos estudantes brancos pensam em abandonar o curso por questões financeiras (Q27), essa taxa sobe para <strong>18,3%</strong> entre pardos e atinge <strong>24,6%</strong> entre negros/pretos (mais que o dobro). O índice de vulnerabilidade financeira também difere fortemente (<em>p</em> &lt; 0,0001).
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-sky-50 border border-sky-200">
+            <div class="font-bold text-sky-900 uppercase">2. O Paradoxo da Assistência Estudantil (p = 0,0003)</div>
+            <p class="text-slate-700 mt-1 leading-relaxed">
+              Discentes que recebem assistência estudantil apresentam maior índice de ideação de evasão financeira (<strong>24,7%</strong> vs. <strong>13,2%</strong>) porque o programa seleciona justamente os estudantes de menor renda. Sem o auxílio, o abandono efetivo tenderia a ser ainda maior.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="font-bold text-slate-800 uppercase">3. O Papel do Trabalho (Q24 e Q43)</div>
+            <p class="text-slate-700 mt-1 leading-relaxed">
+              Trabalhar não aumenta a ideação imediata de abandono (16,4% vs. 16,9%), pois a renda do trabalho mitiga a carência material (vulnerabilidade financeira crítica cai de 26,0% para 20,2%). Contudo, <strong>51,9%</strong> dos trabalhadores relatam que a jornada prejudica os estudos (Q43).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3: IMPACTO NA SAÚDE MENTAL -->
+    <section id="saude-mental" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <div class="border-b border-slate-100 pb-4 mb-6">
+        <span class="text-xs font-bold uppercase tracking-widest text-rose-700">03 · Desgaste Psicoemocional por Subgrupo</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Influência das Variáveis na Saúde Mental (Q31, Q38, Q44 e Q45)</h2>
+        <p class="text-sm text-slate-600 mt-1 max-w-4xl">
+          A sobrecarga emocional é transversal a raça (<em>p</em> = 0,8875), trabalho (<em>p</em> = 0,2790) e assistência estudantil (<em>p</em> = 0,1151), mas apresenta forte recorte de <strong>Sexo Biológico (<em>p</em> = 0,0027)</strong>.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 h-72">
+          <canvas id="mentalHealthSubgroupChart"></canvas>
+        </div>
+        <div class="lg:col-span-5 space-y-3 text-xs">
+          <div class="p-4 rounded-xl bg-rose-50 border border-rose-200">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-rose-900 uppercase">Assimetria de Sexo Biológico</span>
+              <span class="px-2 py-0.5 bg-rose-600 text-white rounded font-bold">p = 0,0027</span>
+            </div>
+            <p class="text-slate-700 mt-1.5 leading-relaxed">
+              Quase metade das mulheres (<strong>49,8%</strong>) encontra-se em faixa crítica de saúde mental (escore médio ≥ 3,5; média geral 3,38), frente a <strong>42,3%</strong> dos homens (média 3,09). O gap aparece sobretudo na ansiedade que prejudica a concentração (Q31) e no cansaço extremo (Q38).
+            </p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="font-bold text-slate-800 uppercase">Universalidade do Adoecimento Acadêmico</div>
+            <p class="text-slate-700 mt-1 leading-relaxed">
+              Entre brancos (48,5%), pardos (46,0%) e negros/pretos (44,9%), bem como entre trabalhadores (47,7%) e não trabalhadores (47,0%), o percentual em alerta emocional permanece estável em torno de <strong>45% a 49%</strong> — indicando um estressor estrutural da rotina universitária.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4: CLASSIFICAÇÃO POR CENTRO DE ENSINO -->
+    <section id="centros" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-slate-100 pb-4 mb-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-[#003366]">04 · Panorama Institucional (11 Centros · N = 631)</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Classificação dos Centros de Ensino por Saúde Mental e Risco de Evasão</h2>
+        </div>
+        <span class="text-xs text-slate-500 mt-2 md:mt-0">Ordenado pelo escore médio de Saúde Mental (1 a 5) · Kruskal-Wallis H = 15,29 (p = 0,1218)</span>
+      </div>
+
+      <!-- Gráfico de Barras dos 11 Centros -->
+      <div class="h-80 mb-8">
+        <canvas id="centrosChart"></canvas>
+      </div>
+
+      <!-- Tabela Completa dos 11 Centros -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="bg-slate-100 text-slate-800 border-b border-slate-200">
+              <th class="py-2.5 px-3 font-bold">Pos.</th>
+              <th class="py-2.5 px-3 font-bold">Centro de Ensino (Campus)</th>
+              <th class="py-2.5 px-3 font-bold text-center">n</th>
+              <th class="py-2.5 px-3 font-bold text-center">Média Saúde Mental</th>
+              <th class="py-2.5 px-3 font-bold text-center">Saúde Mental Crítica (≥3,5)</th>
+              <th class="py-2.5 px-3 font-bold text-center">Ansiedade (Q31 ≥4)</th>
+              <th class="py-2.5 px-3 font-bold text-center">Emocional (Q45 ≥4)</th>
+              <th class="py-2.5 px-3 font-bold text-center">Evasão Fin. (Q27 ≥4)</th>
+              <th class="py-2.5 px-3 font-bold text-center">Evasão Persp. (Q10 ≥4)</th>
+              <th class="py-2.5 px-3 font-bold text-center">Alguma Ideação Evasão</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700">
+            <tr class="bg-rose-50/40">
+              <td class="py-2.5 px-3 font-bold text-rose-700">1º</td>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">Centro de Ciências da Saúde (CCS — Maruípe)</td>
+              <td class="py-2.5 px-3 text-center">70</td>
+              <td class="py-2.5 px-3 text-center font-bold text-rose-700">3,55</td>
+              <td class="py-2.5 px-3 text-center font-semibold">55,7%</td>
+              <td class="py-2.5 px-3 text-center">55,7%</td>
+              <td class="py-2.5 px-3 text-center">48,6%</td>
+              <td class="py-2.5 px-3 text-center">14,3%</td>
+              <td class="py-2.5 px-3 text-center">5,7%</td>
+              <td class="py-2.5 px-3 text-center">18,6%</td>
+            </tr>
+            <tr class="bg-rose-50/30">
+              <td class="py-2.5 px-3 font-bold text-rose-700">2º</td>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">Centro de Ciências Agrárias e Engenharias (CCAE — Alegre)</td>
+              <td class="py-2.5 px-3 text-center">17</td>
+              <td class="py-2.5 px-3 text-center font-bold text-rose-700">3,49</td>
+              <td class="py-2.5 px-3 text-center font-semibold">58,8%</td>
+              <td class="py-2.5 px-3 text-center">64,7%</td>
+              <td class="py-2.5 px-3 text-center">58,8%</td>
+              <td class="py-2.5 px-3 text-center">11,8%</td>
+              <td class="py-2.5 px-3 text-center">11,8%</td>
+              <td class="py-2.5 px-3 text-center">17,6%</td>
+            </tr>
+            <tr class="bg-rose-50/20">
+              <td class="py-2.5 px-3 font-bold text-rose-700">3º</td>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">Centro de Ciências Humanas e Naturais (CCHN — Goiabeiras)</td>
+              <td class="py-2.5 px-3 text-center">93</td>
+              <td class="py-2.5 px-3 text-center font-bold text-rose-700">3,47</td>
+              <td class="py-2.5 px-3 text-center font-semibold">55,9%</td>
+              <td class="py-2.5 px-3 text-center">55,9%</td>
+              <td class="py-2.5 px-3 text-center">46,2%</td>
+              <td class="py-2.5 px-3 text-center font-semibold text-amber-700">22,6%</td>
+              <td class="py-2.5 px-3 text-center">5,4%</td>
+              <td class="py-2.5 px-3 text-center">24,7%</td>
+            </tr>
+            <tr class="bg-sky-50/40">
+              <td class="py-2.5 px-3 font-bold text-[#003366]">4º</td>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">Centro de Ciências Exatas (CCE — Goiabeiras)</td>
+              <td class="py-2.5 px-3 text-center">37</td>
+              <td class="py-2.5 px-3 text-center font-bold text-[#003366]">3,37</td>
+              <td class="py-2.5 px-3 text-center font-semibold">56,8%</td>
+              <td class="py-2.5 px-3 text-center">37,8%</td>
+              <td class="py-2.5 px-3 text-center font-semibold text-rose-700">51,4%</td>
+              <td class="py-2.5 px-3 text-center">16,2%</td>
+              <td class="py-2.5 px-3 text-center font-bold text-indigo-700">18,9%</td>
+              <td class="py-2.5 px-3 text-center">24,3%</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-bold text-slate-600">5º</td>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">Centro Universitário Norte do Espírito Santo (Ceunes — São Mateus)</td>
+              <td class="py-2.5 px-3 text-center">47</td>
+              <td class="py-2.5 px-3 text-center font-bold">3,33</td>
+              <td class="py-2.5 px-3 text-center">48,9%</td>
+              <td class="py-2.5 px-3 text-center">51,1%</td>
+              <td class="py-2.5 px-3 text-center">51,1%</td>
+              <td class="py-2.5 px-3 text-center font-bold text-amber-700">25,5%</td>
+              <td class="py-2.5 px-3 text-center">12,8%</td>
+              <td class="py-2.5 px-3 text-center font-bold text-rose-700">29,8%</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-bold text-slate-600">6º</td>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">Centro de Ciências Jurídicas e Econômicas (CCJE — Goiabeiras)</td>
+              <td class="py-2.5 px-3 text-center">139</td>
+              <td class="py-2.5 px-3 text-center font-bold">3,22</td>
+              <td class="py-2.5 px-3 text-center">43,9%</td>
+              <td class="py-2.5 px-3 text-center">43,9%</td>
+              <td class="py-2.5 px-3 text-center">38,1%</td>
+              <td class="py-2.5 px-3 text-center">11,5%</td>
+              <td class="py-2.5 px-3 text-center">11,5%</td>
+              <td class="py-2.5 px-3 text-center">20,9%</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-bold text-slate-600">7º</td>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">Centro de Ciências Exatas, Naturais e da Saúde (CCENS — Alegre)</td>
+              <td class="py-2.5 px-3 text-center">52</td>
+              <td class="py-2.5 px-3 text-center font-bold">3,15</td>
+              <td class="py-2.5 px-3 text-center">36,5%</td>
+              <td class="py-2.5 px-3 text-center">38,5%</td>
+              <td class="py-2.5 px-3 text-center">44,2%</td>
+              <td class="py-2.5 px-3 text-center font-semibold text-amber-700">21,2%</td>
+              <td class="py-2.5 px-3 text-center">13,5%</td>
+              <td class="py-2.5 px-3 text-center">23,1%</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-bold text-slate-600">8º</td>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">Centro Tecnológico (CT — Goiabeiras)</td>
+              <td class="py-2.5 px-3 text-center">64</td>
+              <td class="py-2.5 px-3 text-center font-bold">3,14</td>
+              <td class="py-2.5 px-3 text-center">43,8%</td>
+              <td class="py-2.5 px-3 text-center">48,4%</td>
+              <td class="py-2.5 px-3 text-center">37,5%</td>
+              <td class="py-2.5 px-3 text-center">14,1%</td>
+              <td class="py-2.5 px-3 text-center">9,4%</td>
+              <td class="py-2.5 px-3 text-center">18,8%</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-bold text-slate-600">9º</td>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">Centro de Artes (CAr — Goiabeiras)</td>
+              <td class="py-2.5 px-3 text-center">66</td>
+              <td class="py-2.5 px-3 text-center font-bold">3,14</td>
+              <td class="py-2.5 px-3 text-center">39,4%</td>
+              <td class="py-2.5 px-3 text-center">43,9%</td>
+              <td class="py-2.5 px-3 text-center">34,8%</td>
+              <td class="py-2.5 px-3 text-center">18,2%</td>
+              <td class="py-2.5 px-3 text-center">12,1%</td>
+              <td class="py-2.5 px-3 text-center">25,8%</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-bold text-slate-600">10º</td>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">Centro de Educação (CE — Goiabeiras)</td>
+              <td class="py-2.5 px-3 text-center">29</td>
+              <td class="py-2.5 px-3 text-center font-bold">3,13</td>
+              <td class="py-2.5 px-3 text-center">44,8%</td>
+              <td class="py-2.5 px-3 text-center">37,9%</td>
+              <td class="py-2.5 px-3 text-center">44,8%</td>
+              <td class="py-2.5 px-3 text-center">13,8%</td>
+              <td class="py-2.5 px-3 text-center">13,8%</td>
+              <td class="py-2.5 px-3 text-center">20,7%</td>
+            </tr>
+            <tr class="bg-emerald-50/40">
+              <td class="py-2.5 px-3 font-bold text-emerald-700">11º</td>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">Centro de Educação Física e Desportos (CEFD — Goiabeiras)</td>
+              <td class="py-2.5 px-3 text-center">17</td>
+              <td class="py-2.5 px-3 text-center font-bold text-emerald-700">2,87</td>
+              <td class="py-2.5 px-3 text-center">35,3%</td>
+              <td class="py-2.5 px-3 text-center">35,3%</td>
+              <td class="py-2.5 px-3 text-center">29,4%</td>
+              <td class="py-2.5 px-3 text-center">11,8%</td>
+              <td class="py-2.5 px-3 text-center font-bold text-emerald-700">0,0%</td>
+              <td class="py-2.5 px-3 text-center font-bold text-emerald-700">11,8%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="p-3.5 rounded-xl bg-rose-50 border border-rose-100 text-slate-700">
+          <strong class="text-rose-900">Maior Pressão Psicoemocional:</strong> O <strong>CCS (3,55)</strong>, o <strong>CCAE (3,49)</strong> e o <strong>CCHN (3,47)</strong> lideram o desgaste mental, seguidos de perto pelo <strong>CCE (3,37)</strong>, onde 56,8% estão em faixa crítica.
+        </div>
+        <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-100 text-slate-700">
+          <strong class="text-amber-900">Maior Risco de Evasão no Interior:</strong> O <strong>Ceunes (São Mateus)</strong> apresenta a maior ideação combinada de abandono (<strong>29,8%</strong>), impulsionada pelo fator financeiro (<strong>25,5%</strong> na Q27).
+        </div>
+        <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-100 text-slate-700">
+          <strong class="text-emerald-900">Menor Desgaste e Evasão (CEFD):</strong> O <strong>CEFD</strong> registra a menor média de vulnerabilidade emocional (<strong>2,87</strong>) e <strong>0%</strong> de abandono por perspectiva profissional — reforçando o papel protetivo da vivência corporal e esportiva.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
+    Fonte: <code>dataset_final20261103.csv</code> · Respostas completas analisadas: N = 631 · Testes estatísticos: Mann-Whitney U e Kruskal-Wallis.
+  </footer>
+
+  <script>
+    // 1. Gráfico de Ideação de Evasão por Subgrupo
+    new Chart(document.getElementById('evasionSubgroupChart'), {
+      type: 'bar',
+      data: {
+        labels: [
+          'Feminino (n=416)', 'Masculino (n=215)',
+          'Branca (n=270)', 'Parda (n=213)', 'Negra/Preta (n=138)',
+          'Sem Assistência (n=441)', 'Com Assistência (n=190)',
+          'Não Trabalha (n=362)', 'Trabalha (n=262)'
+        ],
+        datasets: [
+          {
+            label: 'Evasão Financeira (Q27 ≥ 4)',
+            data: [17.8, 14.4, 11.1, 18.3, 24.6, 13.2, 24.7, 16.9, 16.4],
+            backgroundColor: '#d97706',
+            borderRadius: 4
+          },
+          {
+            label: 'Evasão Perspectiva (Q10 ≥ 4)',
+            data: [9.1, 12.6, 10.0, 11.3, 9.4, 11.1, 8.4, 9.9, 10.7],
+            backgroundColor: '#003366',
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            min: 0,
+            max: 30,
+            grid: { color: '#f1f5f9' },
+            title: { display: true, text: '% de Concordância (Notas 4 e 5)', font: { size: 11 } }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { font: { size: 11, weight: '600' } }
+          }
+        },
+        plugins: {
+          legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } }
+        }
+      }
+    });
+
+    // 2. Gráfico de Saúde Mental por Subgrupo (% Crítico >= 3.5)
+    new Chart(document.getElementById('mentalHealthSubgroupChart'), {
+      type: 'bar',
+      data: {
+        labels: [
+          'Feminino (p=0,0027*)', 'Masculino',
+          'Branca', 'Parda', 'Negra/Preta',
+          'Com Assistência', 'Sem Assistência',
+          'Trabalha', 'Não Trabalha'
+        ],
+        datasets: [{
+          label: '% em Faixa Crítica de Saúde Mental (≥ 3,5)',
+          data: [49.8, 42.3, 48.5, 46.0, 44.9, 48.4, 46.7, 47.7, 47.0],
+          backgroundColor: [
+            '#be123c', '#fda4af',
+            '#64748b', '#64748b', '#64748b',
+            '#0284c7', '#94a3b8',
+            '#475569', '#94a3b8'
+          ],
+          borderRadius: 5
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            min: 0,
+            max: 60,
+            grid: { color: '#f1f5f9' },
+            title: { display: true, text: '% com Escore Médio ≥ 3,5 (Q31, Q38, Q44, Q45)', font: { size: 11 } }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { font: { size: 11, weight: '600' } }
+          }
+        },
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+
+    // 3. Gráfico dos 11 Centros de Ensino
+    new Chart(document.getElementById('centrosChart'), {
+      type: 'bar',
+      data: {
+        labels: [
+          'CCS (Maruípe)', 'CCAE (Alegre)', 'CCHN (Goiabeiras)',
+          'CCE (Goiabeiras)', 'Ceunes (São Mateus)', 'CCJE (Goiabeiras)',
+          'CCENS (Alegre)', 'CT (Goiabeiras)', 'CAr (Goiabeiras)',
+          'CE (Goiabeiras)', 'CEFD (Goiabeiras)'
+        ],
+        datasets: [
+          {
+            label: 'Média Saúde Mental (1 a 5)',
+            data: [3.55, 3.49, 3.47, 3.37, 3.33, 3.22, 3.15, 3.14, 3.14, 3.13, 2.87],
+            backgroundColor: [
+              '#be123c', '#be123c', '#e11d48',
+              '#003366', '#0284c7', '#475569',
+              '#64748b', '#64748b', '#64748b',
+              '#94a3b8', '#059669'
+            ],
+            borderRadius: 5
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            min: 2.0,
+            max: 4.0,
+            grid: { color: '#f1f5f9' },
+            title: { display: true, text: 'Escore Médio de Vulnerabilidade Emocional (1–5)', font: { size: 11 } }
+          },
+          x: {
+            grid: { display: false },
+            ticks: { font: { size: 10, weight: '600' } }
+          }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              afterLabel: function(ctx) {
+                const criticos = ['55,7%', '58,8%', '55,9%', '56,8%', '48,9%', '43,9%', '36,5%', '43,8%', '39,4%', '44,8%', '35,3%'];
+                const evasao = ['18,6%', '17,6%', '24,7%', '24,3%', '29,8%', '20,9%', '23,1%', '18,8%', '25,8%', '20,7%', '11,8%'];
+                return [
+                  'Saúde Mental Crítica (≥3,5): ' + criticos[ctx.dataIndex],
+                  'Alguma Ideação de Evasão (≥4): ' + evasao[ctx.dataIndex]
+                ];
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infográfico | Conclusões sobre Evasão no 1º Ano – CCE/Ufes (2019–2024)</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js para visualizações limpas e fiéis aos números citados -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- Fonte Inter (Editorial / Acadêmica) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              DEFAULT: '#1E3A5F',
+              light: '#2B5080',
+              dark: '#142842',
+              50: '#F0F4F8',
+            },
+            teal: {
+              DEFAULT: '#0F766E',
+              light: '#149B90',
+              50: '#F0FDFA',
+            },
+            amber: {
+              DEFAULT: '#D97706',
+              light: '#F59E0B',
+              50: '#FFFBEB',
+            },
+            surface: '#F8FAFC',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #F8FAFC;
+      color: #1E293B;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Estilos específicos para impressão / exportação PDF limpa */
+    @media print {
+      body {
+        background-color: #FFFFFF !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-break-inside {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .shadow-sm, .shadow-md, .shadow-lg {
+        box-shadow: none !important;
+      }
+      .border {
+        border-color: #CBD5E1 !important;
+      }
+    }
+
+    /* Animação sutil nos cartões */
+    .academic-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .academic-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(30, 58, 95, 0.08), 0 8px 10px -6px rgba(30, 58, 95, 0.04);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-navy selection:text-white">
+
+  <!-- Barra Superior Fixa de Navegação & Impressão (Oculta na Impressão) -->
+  <nav class="no-print sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap items-center justify-between py-3 gap-3">
+        <!-- Identificação Rápida -->
+        <div class="flex items-center gap-2.5">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-navy text-white font-bold text-sm">
+            4.
+          </span>
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-teal block">Síntese da Conclusão</span>
+            <span class="text-sm font-bold text-navy">Evasão no 1º Ano • CCE/Ufes</span>
+          </div>
+        </div>
+
+        <!-- Links de Navegação Rápida -->
+        <div class="hidden md:flex items-center gap-1 text-xs font-medium text-slate-600">
+          <a href="#panorama" class="px-3 py-2 rounded-lg hover:bg-navy-50 hover:text-navy transition">1. Panorama</a>
+          <a href="#renda" class="px-3 py-2 rounded-lg hover:bg-navy-50 hover:text-navy transition">2. Renda Familiar</a>
+          <a href="#predicao" class="px-3 py-2 rounded-lg hover:bg-navy-50 hover:text-navy transition">3. Variáveis & Predição</a>
+          <a href="#cursos-inep" class="px-3 py-2 rounded-lg hover:bg-navy-50 hover:text-navy transition">4. Cursos & Inep</a>
+          <a href="#agenda" class="px-3 py-2 rounded-lg hover:bg-navy-50 hover:text-navy transition">5. Lacunas & Agenda</a>
+        </div>
+
+        <!-- Botão de Impressão / Salvar PDF -->
+        <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-navy hover:bg-navy-light text-white text-xs sm:text-sm font-semibold shadow-sm transition cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+          <span>Imprimir / Salvar PDF</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Container Principal do Infográfico -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10">
+
+    <!-- ===================================================================== -->
+    <!-- BLOCO 1: CABEÇALHO / CONTEXTO GERAL                                   -->
+    <!-- ===================================================================== -->
+    <header id="panorama" class="print-break-inside bg-gradient-to-br from-navy via-navy to-navy-dark text-white rounded-3xl p-6 sm:p-10 shadow-lg relative overflow-hidden">
+      <!-- Elemento decorativo sutil em SVG -->
+      <svg class="absolute right-0 top-0 h-full w-1/2 opacity-10 pointer-events-none" viewBox="0 0 400 400" fill="none">
+        <circle cx="320" cy="80" r="180" stroke="white" stroke-width="2"/>
+        <circle cx="320" cy="80" r="120" stroke="white" stroke-width="1.5"/>
+        <circle cx="320" cy="80" r="60" stroke="white" stroke-width="1"/>
+      </svg>
+
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Coluna Textual -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-semibold tracking-wide uppercase text-teal-200">
+            <span>Seção 4 • Conclusão do Estudo</span>
+          </div>
+          <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+            Evasão no Primeiro Ano nos Cursos de Ciências Exatas da Ufes
+          </h1>
+          <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+            Análise da associação entre as características registradas no ingresso pelo <strong>Sisu</strong> e a saída no 1º ano nos <strong>7 cursos do Centro de Ciências Exatas (CCE/Ufes)</strong>, abrangendo <strong>6 coortes (2019 a 2024)</strong> — incluindo duas de calendário alterado (ensino remoto e greve).
+          </p>
+
+          <!-- Metadados de Definição -->
+          <div class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div class="bg-white/10 rounded-2xl p-3.5 border border-white/15">
+              <span class="font-bold text-amber-300 block mb-1">O que conta como evasão?</span>
+              <p class="text-slate-200 leading-relaxed">
+                A <strong>não renovação da matrícula</strong> no curso de ingresso (inclui troca interna de curso, como nos indicadores do Inep, pois o registro não informa o destino).
+              </p>
+            </div>
+            <div class="bg-white/10 rounded-2xl p-3.5 border border-white/15">
+              <span class="font-bold text-teal-200 block mb-1">Quando a saída é registrada?</span>
+              <p class="text-slate-200 leading-relaxed">
+                A <strong>maior parte atribuída ao 1º semestre</strong>, lançada no fim do período letivo ou no intervalo entre semestres — não na data exata da decisão.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna Destaque Numérico (1 em cada 4 = 25%) -->
+        <div class="lg:col-span-5">
+          <div class="bg-white text-slate-800 rounded-2xl p-6 shadow-md border border-slate-100">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold uppercase tracking-wider text-navy">Taxa Global no 1º Ano</span>
+              <span class="px-2.5 py-1 rounded-full bg-navy-50 text-navy text-xs font-semibold">Coortes 2019–2024</span>
+            </div>
+
+            <div class="flex items-baseline gap-3 my-2">
+              <span class="text-5xl sm:text-6xl font-extrabold text-navy tracking-tight">25%</span>
+              <span class="text-sm sm:text-base font-semibold text-slate-600 leading-snug">
+                1 em cada 4 ingressantes deixou o curso no 1º ano
+              </span>
+            </div>
+
+            <!-- Pictograma visual de 4 ingressantes (1 sai, 3 permanecem) -->
+            <div class="mt-5 pt-4 border-t border-slate-100">
+              <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
+                <span>Proporção de ingressantes no 1º ano:</span>
+                <span class="font-semibold text-navy">1 saída : 3 permanências</span>
+              </div>
+              <div class="grid grid-cols-4 gap-2.5" aria-label="1 em cada 4 ingressantes deixou o curso">
+                <!-- 1 que saiu -->
+                <div class="flex flex-col items-center p-2.5 rounded-xl bg-amber-50 border border-amber-200">
+                  <svg class="w-7 h-7 text-amber" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                  </svg>
+                  <span class="text-[11px] font-bold text-amber mt-1">Deixou (25%)</span>
+                </div>
+                <!-- 3 que permaneceram -->
+                <div class="flex flex-col items-center p-2.5 rounded-xl bg-teal-50 border border-teal-200">
+                  <svg class="w-7 h-7 text-teal" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                  </svg>
+                  <span class="text-[11px] font-medium text-teal mt-1">Ficou</span>
+                </div>
+                <div class="flex flex-col items-center p-2.5 rounded-xl bg-teal-50 border border-teal-200">
+                  <svg class="w-7 h-7 text-teal" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                  </svg>
+                  <span class="text-[11px] font-medium text-teal mt-1">Ficou</span>
+                </div>
+                <div class="flex flex-col items-center p-2.5 rounded-xl bg-teal-50 border border-teal-200">
+                  <svg class="w-7 h-7 text-teal" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                  </svg>
+                  <span class="text-[11px] font-medium text-teal mt-1">Ficou</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===================================================================== -->
+    <!-- BLOCO 2: O PAPEL DA RENDA FAMILIAR (INDÍCIO FRACO / HIPÓTESE)         -->
+    <!-- ===================================================================== -->
+    <section id="renda" class="print-break-inside space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-teal">Eixo 01 • Variável Socioeconômica</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-navy">O Papel da Renda Familiar: Indício Fraco e Hipótese</h2>
+        </div>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber text-xs font-semibold">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          Achado Exploratório e Frágil
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Visualização da Curva de Risco por Renda (SVG Esquemático Fiel ao Texto) -->
+        <div class="lg:col-span-7 academic-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <h3 class="text-base font-bold text-navy">Comportamento da Curva de Risco Estimado por Renda</h3>
+            <p class="text-xs text-slate-500 mt-1">
+              Risco relativo estimado ajustado pela origem escolar (referência: renda mediana de 2,25 Salários Mínimos).
+            </p>
+          </div>
+
+          <!-- Gráfico SVG Ilustrativo Fiel aos Marcos Citados (1 SM, 2,25 SM, ~3 SM) -->
+          <div class="my-4 bg-slate-50 rounded-xl p-4 border border-slate-100">
+            <svg viewBox="0 0 540 220" class="w-full h-auto overflow-visible" role="img" aria-label="Curva esquemática do risco estimado por renda familiar: maior em 1 SM (+25% acima da mediana de 2,25 SM), caindo até 3 SM e quase plana depois">
+              <!-- Linhas de grade horizontais -->
+              <line x1="60" y1="45" x2="510" y2="45" stroke="#E2E8F0" stroke-dasharray="4 4"/>
+              <line x1="60" y1="100" x2="510" y2="100" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="5 3"/>
+              <line x1="60" y1="155" x2="510" y2="155" stroke="#E2E8F0" stroke-dasharray="4 4"/>
+              <line x1="60" y1="180" x2="510" y2="180" stroke="#94A3B8" stroke-width="1.5"/>
+
+              <!-- Labels Eixo Y -->
+              <text x="52" y="49" text-anchor="end" class="text-[11px] fill-amber font-bold">&gt; +25%</text>
+              <text x="52" y="104" text-anchor="end" class="text-[11px] fill-navy font-semibold">Ref. (1,0x)</text>
+              <text x="52" y="159" text-anchor="end" class="text-[11px] fill-slate-400">Menor</text>
+
+              <!-- Área sombreada sob a curva -->
+              <path d="M 100 45 C 150 65, 195 90, 235 100 C 275 110, 310 125, 345 128 L 495 131 L 495 180 L 100 180 Z" fill="url(#rendaGrad)" opacity="0.25"/>
+              <defs>
+                <linearGradient id="rendaGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#D97706"/>
+                  <stop offset="45%" stop-color="#1E3A5F"/>
+                  <stop offset="100%" stop-color="#0F766E"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Curva Principal -->
+              <path d="M 100 45 C 150 65, 195 90, 235 100 C 275 110, 310 125, 345 128 L 495 131" fill="none" stroke="#1E3A5F" stroke-width="3.5" stroke-linecap="round"/>
+
+              <!-- Ponto 1: 1 SM -->
+              <line x1="100" y1="45" x2="100" y2="180" stroke="#D97706" stroke-dasharray="3 3"/>
+              <circle cx="100" cy="45" r="6.5" fill="#D97706" stroke="#FFFFFF" stroke-width="2"/>
+              <rect x="65" y="10" width="118" height="24" rx="6" fill="#FFFBEB" stroke="#FCD34D"/>
+              <text x="124" y="25" text-anchor="middle" class="text-[11px] fill-amber font-bold">+1/4 (+25%) acima</text>
+
+              <!-- Ponto 2: 2,25 SM (Mediana) -->
+              <line x1="235" y1="100" x2="235" y2="180" stroke="#1E3A5F" stroke-dasharray="3 3"/>
+              <circle cx="235" cy="100" r="6" fill="#1E3A5F" stroke="#FFFFFF" stroke-width="2"/>
+              <rect x="180" y="66" width="110" height="22" rx="6" fill="#F0F4F8" stroke="#CBD5E1"/>
+              <text x="235" y="80" text-anchor="middle" class="text-[10px] fill-navy font-semibold">Mediana (2,25 SM)</text>
+
+              <!-- Ponto 3: Perto de 3 SM -->
+              <line x1="345" y1="128" x2="345" y2="180" stroke="#0F766E" stroke-dasharray="3 3"/>
+              <circle cx="345" cy="128" r="6" fill="#0F766E" stroke="#FFFFFF" stroke-width="2"/>
+              <text x="420" y="118" text-anchor="middle" class="text-[11px] fill-teal font-semibold">Quase plana após ~3 SM →</text>
+
+              <!-- Labels Eixo X -->
+              <text x="100" y="198" text-anchor="middle" class="text-[11px] fill-slate-700 font-bold">1 SM</text>
+              <text x="235" y="198" text-anchor="middle" class="text-[11px] fill-slate-700 font-bold">2,25 SM</text>
+              <text x="345" y="198" text-anchor="middle" class="text-[11px] fill-slate-700 font-bold">~3 SM</text>
+              <text x="470" y="198" text-anchor="middle" class="text-[11px] fill-slate-500">Rendas maiores</text>
+            </svg>
+          </div>
+
+          <p class="text-xs text-slate-600 leading-relaxed">
+            <strong>Por que é tratada como hipótese?</strong> O modo de incluir a renda no modelo e a leitura dos valores-<em>p</em> foram definidos após explorar os próprios dados. Além disso, sem a <strong>coorte de 2024</strong> (marcada pela greve e pela nova regra de cotas) ou sob outros métodos de estimação, a evidência perde ainda mais força.
+          </p>
+        </div>
+
+        <!-- Coluna Direita: Cards de Destaque da Renda -->
+        <div class="lg:col-span-5 flex flex-col gap-4 justify-between">
+          <!-- Card 1: Risco em 1 SM -->
+          <div class="academic-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+            <div class="flex items-start gap-3.5">
+              <div class="p-2.5 rounded-xl bg-amber-50 text-amber shrink-0 font-extrabold text-lg">
+                +25%
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-navy">Risco em 1 Salário Mínimo</h4>
+                <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                  Em <strong>1 SM</strong>, o risco estimado ficou pouco mais de <strong>1/4 acima</strong> do observado na renda mediana (<strong>2,25 SM</strong>), mesmo após ajuste pela origem escolar.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Permanência na faixa até 1 SM -->
+          <div class="academic-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <span class="text-[11px] font-bold uppercase tracking-wider text-teal">Grupo de Maior Risco (até 1 SM)</span>
+                <h4 class="text-base font-bold text-navy mt-0.5">2 em cada 3 permaneceram</h4>
+                <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                  A faixa de até 1 SM reuniu <strong>1 em cada 8 ingressantes</strong> no CCE. Embora apresente maior frequência relativa de saída, <strong>dois terços (2/3) permaneceram</strong> — logo, a renda não identifica individualmente quem vai sair.
+                </p>
+              </div>
+              <!-- Mini Donut SVG 2/3 -->
+              <div class="shrink-0 flex flex-col items-center">
+                <svg class="w-16 h-16 -rotate-90" viewBox="0 0 36 36">
+                  <circle cx="18" cy="18" r="14" fill="none" stroke="#E2E8F0" stroke-width="4"/>
+                  <circle cx="18" cy="18" r="14" fill="none" stroke="#0F766E" stroke-width="4" stroke-dasharray="58.6 88" stroke-linecap="round"/>
+                </svg>
+                <span class="text-[11px] font-extrabold text-teal -mt-10 mb-5">2/3</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Nota sobre Seletividade do Sisu -->
+          <div class="academic-card bg-navy-50 rounded-2xl p-4 border border-navy/15">
+            <p class="text-xs text-navy leading-relaxed">
+              <strong>Efeito da seleção pelo Sisu:</strong> Como o CCE admite apenas quem atinge a nota de corte em cada modalidade, a seleção estreita diferenças prévias, alinhando-se à literatura que aponta desigualdades menores de evasão por renda nas universidades federais.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- BLOCO 3: DEMAIS VARIÁVEIS DE INGRESSO & CAPACIDADE PREDITIVA          -->
+    <!-- ===================================================================== -->
+    <section id="predicao" class="print-break-inside space-y-4">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-teal">Eixo 02 • Perfil na Matrícula</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-navy">Demais Variáveis de Ingresso &amp; Baixa Capacidade Preditiva</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Card 1: Variáveis Inconclusivas e Limites de Efeito -->
+        <div class="academic-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-lg bg-navy-50 text-navy flex items-center justify-center font-bold text-sm">±</span>
+            <h3 class="text-base font-bold text-navy">Associação Inconclusiva</h3>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Para <strong>nota de seleção, origem escolar, sexo e cor/raça</strong>, os dados não permitem afirmar nem descartar associação com a evasão no 1º ano (devido à pouca precisão e ao número de matrículas em cada categoria).
+          </p>
+          <div class="pt-3 border-t border-slate-100 space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/70">
+              <span class="font-bold text-navy block">Origem Escolar (vs. Ampla Privada):</span>
+              <span class="text-slate-600">O risco dos demais grupos fica entre <strong>~0,5x e 1,5x</strong> (este limite superior apenas nos cotistas de escola federal). <strong>Nenhum grupo chega ao dobro (2,0x).</strong></span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/70">
+              <span class="font-bold text-navy block">Nota de Seleção (+100 pontos):</span>
+              <span class="text-slate-600">O risco cai no máximo <strong>quase 1/4 (-25%)</strong> e sobe no máximo <strong>1/10 (+10%)</strong>.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Simulador Visual dos Limites de Risco Relativo -->
+        <div class="academic-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <h3 class="text-base font-bold text-navy">Até Onde os Efeitos Poderiam Ir?</h3>
+            <p class="text-xs text-slate-500 mt-1">Intervalos plausíveis de risco relativo frente ao grupo de referência (1,0x):</p>
+          </div>
+
+          <div class="space-y-5 my-4">
+            <!-- Barra 1: Grupos de Origem Escolar -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1.5">
+                <span class="text-slate-700">Origem escolar (vs. Ampla Privada)</span>
+                <span class="text-navy">0,5x a 1,5x</span>
+              </div>
+              <div class="relative h-6 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+                <!-- Marca de Referência 1.0x (50% da barra de 0 a 2.0x) -->
+                <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-navy z-10" title="Referência 1,0x"></div>
+                <!-- Faixa 0.5x (25%) até 1.5x (75%) -->
+                <div class="absolute left-1/4 right-1/4 top-1 bottom-1 bg-teal/80 rounded-full flex items-center justify-center text-[10px] font-bold text-white">
+                  &lt; 2,0x (nunca o dobro)
+                </div>
+              </div>
+              <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                <span>0x</span>
+                <span>0,5x</span>
+                <span class="font-bold text-navy">1,0x (Ref.)</span>
+                <span>1,5x</span>
+                <span>2,0x</span>
+              </div>
+            </div>
+
+            <!-- Barra 2: +100 pontos na Nota -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1.5">
+                <span class="text-slate-700">+100 pts na nota de seleção</span>
+                <span class="text-navy">~0,75x a 1,10x</span>
+              </div>
+              <div class="relative h-6 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+                <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-navy z-10"></div>
+                <!-- Faixa ~0.75x (37.5%) até 1.10x (55%) -->
+                <div class="absolute left-[37.5%] w-[17.5%] top-1 bottom-1 bg-navy/80 rounded-full"></div>
+              </div>
+              <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                <span>-25% (quase 1/4)</span>
+                <span class="font-bold text-navy">1,0x</span>
+                <span>+10% (1/10)</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-[11px] text-slate-500 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+            Nota: Mais da metade dos cotistas ingressou por vagas <strong>sem critério de renda</strong>, reduzindo a sobreposição entre cota e renda.
+          </p>
+        </div>
+
+        <!-- Card 3: Baixa Discriminação (< 60%) -->
+        <div class="academic-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <h3 class="text-base font-bold text-navy">Poder Preditivo na Matrícula</h3>
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-50 text-amber text-[11px] font-bold border border-amber-200">Baixo</span>
+            </div>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              Curso e coorte sozinhos praticamente não separam quem sai de quem fica. Somar renda, origem, nota, sexo e cor/raça quase não melhora a discriminação.
+            </p>
+          </div>
+
+          <!-- Medidor Visual: 50% (Sorteio) vs <60% (Modelo) -->
+          <div class="my-4 p-4 rounded-xl bg-navy-50 border border-navy/10 text-center">
+            <span class="text-xs font-semibold text-slate-600 block">Discriminação entre pares (saiu vs. ficou)</span>
+            <div class="text-3xl sm:text-4xl font-extrabold text-navy my-1">&lt; 60%</div>
+            <span class="text-[11px] text-slate-500 block">
+              Mesmo nos dados do próprio ajuste (que a exageram), fica pouco acima de um <strong>sorteio (50%)</strong>.
+            </span>
+
+            <!-- Barra comparativa 50% vs 60% -->
+            <div class="mt-3 pt-3 border-t border-navy/10">
+              <div class="w-full h-3 bg-slate-200 rounded-full overflow-hidden flex">
+                <div class="bg-slate-400 h-full" style="width: 50%" title="Sorteio: 50%"></div>
+                <div class="bg-amber h-full" style="width: 9%" title="Ganho marginal: < 10%"></div>
+              </div>
+              <div class="flex justify-between text-[10px] font-semibold mt-1">
+                <span class="text-slate-500">50% (Sorteio)</span>
+                <span class="text-amber">&lt; 60% (Modelo completo)</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-xs font-medium text-navy">
+            Conclusão prática: No momento da matrícula, o perfil registrado pouco antecipa a evasão precoce.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- BLOCO 4: COMPARAÇÃO ENTRE OS 7 CURSOS E INDICADORES (UFES VS. INEP)   -->
+    <!-- ===================================================================== -->
+    <section id="cursos-inep" class="print-break-inside space-y-4">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-teal">Eixo 03 • Dimensão Institucional e Nacional</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-navy">Comparação entre os 7 Cursos e Indicadores (Ufes vs. Inep)</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Coluna Esquerda: Homogeneidade entre os 7 Cursos -->
+        <div class="lg:col-span-6 academic-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <h3 class="text-base font-bold text-navy">Os 7 Cursos se Pareceram Mais do que se Diferenciaram</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Faixa de evasão no 1º ano entre os cursos do CCE/Ufes</p>
+            </div>
+            <span class="px-2.5 py-1 rounded-lg bg-teal-50 text-teal text-xs font-bold shrink-0">7 Cursos</span>
+          </div>
+
+          <!-- Gráfico de Barras Horizontais dos Extremos (Chart.js) -->
+          <div class="h-44 w-full">
+            <canvas id="cursosChart"></canvas>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+              <span class="text-xs font-bold text-navy block">Destaque em Estatística</span>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Em todos os cursos a maioria saiu no 1º semestre, com pico em <strong>Estatística</strong>: quase <strong>9 em cada 10 saídas</strong> ocorreram logo no 1º semestre.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+              <span class="text-xs font-bold text-navy block">Licenciatura vs. Bacharelado</span>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Após o ajuste pelas características de ingresso, o curso não se distinguiu e a <strong>licenciatura não se separou do bacharelado</strong> no CCE.
+              </p>
+            </div>
+          </div>
+
+          <p class="text-[11px] text-slate-500 italic">
+            *Hipótese exploratória: a renda pareceu pesar mais nas 3 licenciaturas (sobretudo Matemática) e no bacharelado em Estatística do que nos bacharelados em Física, Matemática e Química, mas o número pequeno de evasões por curso exige cautela.
+          </p>
+        </div>
+
+        <!-- Coluna Direita: Contraste Ufes vs. Inep (Coorte 2019) -->
+        <div class="lg:col-span-6 academic-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <h3 class="text-base font-bold text-navy">Registro Interno Ufes vs. Indicador do Inep</h3>
+                <p class="text-xs text-slate-500 mt-0.5">Comparação na coorte de ingresso de 2019 (ano de ingresso)</p>
+              </div>
+              <span class="px-2.5 py-1 rounded-lg bg-navy-50 text-navy text-xs font-bold shrink-0">Coorte 2019</span>
+            </div>
+
+            <!-- Gráfico de Barras Comparativo (Chart.js) -->
+            <div class="h-44 w-full mt-3">
+              <canvas id="inepChart"></canvas>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200/80 space-y-1.5">
+            <h4 class="text-xs font-bold text-navy flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-amber"></span>
+              Por que o registro da Ufes dá o dobro do indicador do Inep (~24% vs. 12,0%)?
+            </h4>
+            <p class="text-xs text-slate-700 leading-relaxed">
+              Não é atraso de lançamento (todas as saídas da coorte 2019 foram lançadas em 2019). Parte decorre das <strong>desistências no 1º semestre sem nenhum registro no histórico</strong> — que talvez nem tenham chegado ao Censo da Educação Superior como ingressantes — além das regras de vínculo informadas ao Censo. Por isso, as duas taxas <strong>não se comparam diretamente</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- BLOCO 5: LACUNAS DE REGISTRO E AGENDA FUTURA                          -->
+    <!-- ===================================================================== -->
+    <section id="agenda" class="print-break-inside space-y-4">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-teal">Eixo 04 • Implicações Práticas e Pesquisa</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-navy">Lacunas de Registro e Agenda Futura para Agir no 1º Ano</h2>
+      </div>
+
+      <!-- Diagnóstico de Sinais durante o 1º Ano -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="academic-card bg-white rounded-2xl p-5 border-l-4 border-l-slate-400 border border-slate-200 shadow-sm">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Sinal Insuficiente no 1º Semestre</span>
+          <h3 class="text-base font-bold text-navy mt-1">Reprovação não distingue quem sai</h3>
+          <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+            A reprovação no 1º semestre não separa quem abandona de quem permanece, pois <strong>a maioria dos estudantes que ficaram também reprovou</strong> em alguma disciplina. Além disso, a reprovação por falta só aparece no histórico ao fim do semestre.
+          </p>
+        </div>
+
+        <div class="academic-card bg-white rounded-2xl p-5 border-l-4 border-l-teal border border-slate-200 shadow-sm">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-teal">Sinal Imediato no Cadastro</span>
+          <h3 class="text-base font-bold text-navy mt-1">Trancamento antecede saídas posteriores</h3>
+          <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+            Ao contrário da reprovação, o <strong>trancamento entra no registro no momento em que acontece</strong>. Na maioria dos estudantes que trancaram no 1º ano sem sair imediatamente, o trancamento antecedeu a saída nos anos seguintes.
+          </p>
+        </div>
+      </div>
+
+      <!-- Grade: 4 Dados Ausentes + 2 Próximos Passos de Pesquisa -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- 4 Dados Ausentes no Cadastro Atual -->
+        <div class="lg:col-span-7 academic-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+          <h3 class="text-base font-bold text-navy mb-1">O que falta registrar no cadastro acadêmico atual?</h3>
+          <p class="text-xs text-slate-500 mb-4">Informações essenciais para reconhecer o risco enquanto o estudante ainda está no curso:</p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <!-- Lacuna 1 -->
+            <div class="p-3.5 rounded-xl bg-navy-50/70 border border-navy/10">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="w-6 h-6 rounded-md bg-navy text-white text-xs font-bold flex items-center justify-center">1</span>
+                <h4 class="text-xs font-bold text-navy">Frequência nas 1ªs semanas</h4>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Mostraria quando o aluno deixou de ir às aulas em tempo real, antes do lançamento tardio no fim do semestre.
+              </p>
+            </div>
+
+            <!-- Lacuna 2 -->
+            <div class="p-3.5 rounded-xl bg-navy-50/70 border border-navy/10">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="w-6 h-6 rounded-md bg-navy text-white text-xs font-bold flex items-center justify-center">2</span>
+                <h4 class="text-xs font-bold text-navy">Assistência estudantil</h4>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Permitiria avaliar se o risco associado à renda difere entre quem recebe auxílio e quem não recebe.
+              </p>
+            </div>
+
+            <!-- Lacuna 3 -->
+            <div class="p-3.5 rounded-xl bg-navy-50/70 border border-navy/10">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="w-6 h-6 rounded-md bg-navy text-white text-xs font-bold flex items-center justify-center">3</span>
+                <h4 class="text-xs font-bold text-navy">Ordem de opção no Sisu</h4>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Indicaria, entre ingressantes de nota parecida, quem escolheu o curso como prioridade e quem entrou pela nota.
+              </p>
+            </div>
+
+            <!-- Lacuna 4 -->
+            <div class="p-3.5 rounded-xl bg-navy-50/70 border border-navy/10">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="w-6 h-6 rounded-md bg-navy text-white text-xs font-bold flex items-center justify-center">4</span>
+                <h4 class="text-xs font-bold text-navy">Destino de quem sai</h4>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Separaria o <strong>abandono do ensino superior</strong> da <strong>troca de curso</strong> (viabilizando modelos de riscos competitivos).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Próximos Passos de Pesquisa -->
+        <div class="lg:col-span-5 academic-card bg-gradient-to-br from-teal to-navy text-white rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="inline-block px-2.5 py-0.5 rounded-full bg-white/15 text-xs font-semibold mb-3">
+              Agenda de Investigação
+            </span>
+            <h3 class="text-lg font-bold leading-snug">Próximos Passos para Novas Coortes</h3>
+            <p class="text-xs text-teal-100 mt-1">Perguntas que dependem do acompanhamento de novas turmas regulares:</p>
+
+            <ul class="mt-4 space-y-3 text-xs">
+              <li class="flex items-start gap-2.5 bg-white/10 p-3 rounded-xl border border-white/15">
+                <span class="font-extrabold text-amber-300 text-sm">→</span>
+                <span>
+                  <strong>Testar a renda na regra atual de cotas:</strong> verificar se o indício da renda se confirma em coortes de calendário regular sob a nova lei de cotas (com modelo já pré-definido) e se pesa mais nas licenciaturas e em Estatística.
+                </span>
+              </li>
+              <li class="flex items-start gap-2.5 bg-white/10 p-3 rounded-xl border border-white/15">
+                <span class="font-extrabold text-amber-300 text-sm">→</span>
+                <span>
+                  <strong>Notas específicas do Enem:</strong> testar se as notas de <strong>Ciências da Natureza e Matemática</strong> antecipam melhor a permanência do que a média geral, avaliando o peso do preparo nos conteúdos específicos do CCE.
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-white/15 text-[11px] text-slate-200">
+            Escopo do estudo: 1º ano dos 7 cursos do CCE/Ufes (2019–2024).
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rodapé Editorial -->
+    <footer class="pt-4 pb-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
+      <p>
+        Fonte: Seção <strong>4. Conclusão</strong> — Estudo sobre evasão no 1º ano no Centro de Ciências Exatas (CCE/Ufes), coortes 2019–2024.
+      </p>
+      <p class="font-medium text-navy">
+        Painel Síntese • Dados estritamente fiéis ao texto original
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- Scripts de Inicialização dos Gráficos (Chart.js) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Configuração global limpa para estética editorial
+      Chart.defaults.font.family = "'Inter', sans-serif";
+      Chart.defaults.color = '#475569';
+
+      // 1. Gráfico: Extremos de Evasão entre os 7 Cursos do CCE/Ufes
+      const ctxCursos = document.getElementById('cursosChart').getContext('2d');
+      new Chart(ctxCursos, {
+        type: 'bar',
+        data: {
+          labels: [
+            'Menor taxa: Lic. em Química',
+            'Média global (7 cursos CCE)',
+            'Maior taxa: Bach. em Física'
+          ],
+          datasets: [{
+            label: 'Evasão no 1º ano (%)',
+            data: [21.1, 25.0, 27.4],
+            backgroundColor: [
+              '#0F766E', // Azul-petróleo
+              '#1E3A5F', // Azul-marinho institucional
+              '#D97706'  // Âmbar/ocre
+            ],
+            borderRadius: 8,
+            barThickness: 24
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return ' ' + context.parsed.x.toFixed(1).replace('.', ',') + '% no 1º ano';
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              min: 0,
+              max: 35,
+              grid: { color: '#F1F5F9' },
+              ticks: {
+                callback: (val) => val + '%',
+                font: { size: 11 }
+              }
+            },
+            y: {
+              grid: { display: false },
+              ticks: {
+                font: { size: 11, weight: '600' },
+                color: '#1E293B'
+              }
+            }
+          }
+        }
+      });
+
+      // 2. Gráfico: Indicador Inep vs. Registro Interno Ufes (Coorte 2019)
+      const ctxInep = document.getElementById('inepChart').getContext('2d');
+      new Chart(ctxInep, {
+        type: 'bar',
+        data: {
+          labels: [
+            'CCE/Ufes (Indicador Inep)',
+            'Federais - Áreas (Inep)',
+            'Registro Interno Ufes (Dobro)'
+          ],
+          datasets: [{
+            label: 'Perda no ano de ingresso - Coorte 2019 (%)',
+            data: [12.0, 12.5, 24.0],
+            backgroundColor: [
+              '#0F766E',
+              '#64748B',
+              '#1E3A5F'
+            ],
+            borderRadius: 8,
+            barThickness: 36
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  if (context.dataIndex === 2) {
+                    return ' O dobro da taxa do Inep (~24,0%)';
+                  }
+                  return ' ' + context.parsed.y.toFixed(1).replace('.', ',') + '% (Coorte 2019)';
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              min: 0,
+              max: 30,
+              grid: { color: '#F1F5F9' },
+              ticks: {
+                callback: (val) => val + '%',
+                font: { size: 11 }
+              }
+            },
+            x: {
+              grid: { display: false },
+              ticks: {
+                font: { size: 11, weight: '600' },
+                color: '#1E293B'
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

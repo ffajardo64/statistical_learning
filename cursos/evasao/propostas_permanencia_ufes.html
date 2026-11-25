@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plano de Ação e Propostas — Permanência nas Ciências Exatas (Ufes)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f172a;
+      --paper: #f8fafc;
+      --ufes-navy: #003366;
+      --ufes-sky: #0284c7;
+      --accent-rose: #be123c;
+      --accent-amber: #d97706;
+      --accent-emerald: #047857;
+      --accent-teal: #0d9488;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--paper);
+      color: var(--ink);
+      scroll-behavior: smooth;
+    }
+    h1, h2, h3, .serif {
+      font-family: 'Fraunces', serif;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #ffffff; }
+      section, article { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-sky-100 selection:text-sky-950">
+
+  <!-- Barra de Navegação -->
+  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 no-print">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between text-xs sm:text-sm">
+      <div class="flex items-center gap-2 font-bold text-[#003366]">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block"></span>
+        <span>ESTRATÉGIA DE PERMANÊNCIA · EXATAS UFES</span>
+      </div>
+      <div class="hidden md:flex items-center gap-5 text-slate-600 font-medium">
+        <a href="#cursos" class="hover:text-[#003366] transition">1. Cursos Mapeados</a>
+        <a href="#diagnostico" class="hover:text-[#003366] transition">2. Diagnóstico Cruzado</a>
+        <a href="#propostas" class="hover:text-[#003366] transition">3. 7 Propostas de Intervenção</a>
+        <a href="#matriz" class="hover:text-[#003366] transition">4. Matriz de Implementação</a>
+      </div>
+      <button onclick="window.print()" class="bg-[#003366] hover:bg-sky-900 text-white px-3.5 py-1.5 rounded-md font-semibold text-xs transition shadow-sm cursor-pointer">
+        Imprimir / PDF
+      </button>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Editorial -->
+  <header class="bg-[#003366] text-white border-b-4 border-emerald-500">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-14">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-sky-200 text-xs font-semibold uppercase tracking-wider mb-4">
+        Síntese de Evidências (TCC CCE 2019–2024 + Levantamento Ufes 2026)
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-bold leading-tight max-w-4xl">
+        Propostas para Minimizar a Evasão nos Cursos de Ciências Exatas da Ufes
+      </h1>
+      <p class="mt-4 text-sky-100/90 text-base sm:text-lg max-w-3xl leading-relaxed">
+        Integração entre os achados longitudinais dos registros acadêmicos do <strong>CCE (2019–2024)</strong> e os dados primários de <strong>87 estudantes completos das áreas de Exatas</strong> (37 do CCE e 50 de Exatas no CCENS, Ceunes e CT) extraídos do levantamento institucional (<em>N</em> = 631).
+      </p>
+
+      <!-- Destaques Numéricos -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+        <div class="bg-white/10 border border-white/15 rounded-xl p-4">
+          <div class="text-xs uppercase tracking-wider text-sky-200 font-semibold">Evasão no 1º Ano (CCE)</div>
+          <div class="text-3xl font-bold mt-1 serif">~25%</div>
+          <div class="text-xs text-sky-100/80 mt-1">De 21,1% (Química Lic.) a 27,4% (Física Bach.), concentrada no 1º semestre</div>
+        </div>
+        <div class="bg-rose-950/50 border border-rose-400/30 rounded-xl p-4">
+          <div class="text-xs uppercase tracking-wider text-rose-200 font-semibold">Alerta Emocional (CCE)</div>
+          <div class="text-3xl font-bold mt-1 serif text-rose-300">56,8%</div>
+          <div class="text-xs text-rose-100/80 mt-1">Em faixa crítica de Saúde Mental/Sobrecarga (vs. 47,1% nos demais cursos)</div>
+        </div>
+        <div class="bg-amber-950/40 border border-amber-400/30 rounded-xl p-4">
+          <div class="text-xs uppercase tracking-wider text-amber-200 font-semibold">Reprovação Crítica (Exatas)</div>
+          <div class="text-3xl font-bold mt-1 serif text-amber-300">33,3%</div>
+          <div class="text-xs text-amber-100/80 mt-1">Reprovaram em disciplinas importantes (2,3× maior que nos demais cursos: 14,7%)</div>
+        </div>
+        <div class="bg-emerald-950/40 border border-emerald-400/30 rounded-xl p-4">
+          <div class="text-xs uppercase tracking-wider text-emerald-200 font-semibold">Apoio Pedagógico (CCE)</div>
+          <div class="text-3xl font-bold mt-1 serif text-emerald-300">54,1%</div>
+          <div class="text-xs text-emerald-100/80 mt-1">Relatam dificuldade de administrar o tempo de estudo (Q8)</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 space-y-12">
+
+    <!-- SEÇÃO 1: CURSOS DE EXATAS CONTEMPLADOS NO CSV -->
+    <section id="cursos" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-slate-100 pb-4 mb-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-sky-700">01 · Escopo Empírico do Arquivo CSV (n = 87 Completos)</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Cursos de Exatas Contemplados na Base</h2>
+        </div>
+        <span class="text-xs text-slate-500 mt-2 md:mt-0">4 Centros · 3 Campi (Goiabeiras, Alegre e São Mateus)</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- CCE -->
+        <div class="rounded-xl border border-sky-200 bg-sky-50/50 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase text-[#003366]">CCE · Goiabeiras</span>
+            <span class="px-2 py-0.5 bg-[#003366] text-white text-xs font-bold rounded">n = 37</span>
+          </div>
+          <ul class="text-xs space-y-1.5 text-slate-700">
+            <li class="flex justify-between"><span>Estatística e Ciência de Dados</span><strong>15</strong></li>
+            <li class="flex justify-between"><span>Física (Licenciatura)</span><strong>6</strong></li>
+            <li class="flex justify-between"><span>Matemática (Licenciatura)</span><strong>6</strong></li>
+            <li class="flex justify-between"><span>Química (Bacharelado)</span><strong>4</strong></li>
+            <li class="flex justify-between"><span>Matemática (Bacharelado)</span><strong>3</strong></li>
+            <li class="flex justify-between"><span>Química (Licenciatura)</span><strong>3</strong></li>
+            <li class="flex justify-between text-slate-400 italic"><span>Física (Bacharelado)*</span><span>1 parcial</span></li>
+          </ul>
+        </div>
+
+        <!-- CCENS -->
+        <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase text-slate-700">CCENS · Alegre</span>
+            <span class="px-2 py-0.5 bg-slate-700 text-white text-xs font-bold rounded">n = 28</span>
+          </div>
+          <ul class="text-xs space-y-1.5 text-slate-700">
+            <li class="flex justify-between"><span>Sistemas de Informação</span><strong>13</strong></li>
+            <li class="flex justify-between"><span>Ciência da Computação</span><strong>6</strong></li>
+            <li class="flex justify-between"><span>Matemática (Licenciatura)</span><strong>4</strong></li>
+            <li class="flex justify-between"><span>Química (Licenciatura)</span><strong>3</strong></li>
+            <li class="flex justify-between"><span>Geologia</span><strong>2</strong></li>
+          </ul>
+        </div>
+
+        <!-- Ceunes -->
+        <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase text-slate-700">Ceunes · São Mateus</span>
+            <span class="px-2 py-0.5 bg-slate-700 text-white text-xs font-bold rounded">n = 12</span>
+          </div>
+          <ul class="text-xs space-y-1.5 text-slate-700">
+            <li class="flex justify-between"><span>Ciência da Computação (Bach.)</span><strong>4</strong></li>
+            <li class="flex justify-between"><span>Química (Licenciatura)</span><strong>4</strong></li>
+            <li class="flex justify-between"><span>Matemática (Licenciatura)</span><strong>3</strong></li>
+            <li class="flex justify-between"><span>Física (Licenciatura)</span><strong>1</strong></li>
+          </ul>
+        </div>
+
+        <!-- CT -->
+        <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase text-slate-700">CT · Goiabeiras</span>
+              <span class="px-2 py-0.5 bg-slate-700 text-white text-xs font-bold rounded">n = 10</span>
+            </div>
+            <ul class="text-xs space-y-1.5 text-slate-700">
+              <li class="flex justify-between"><span>Ciência da Computação (Bach.)</span><strong>10</strong></li>
+            </ul>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-200 text-[11px] text-slate-600">
+            <strong>Perfil Exatas (n = 87):</strong> 46,0% trabalham atualmente (40 alunos) e 32,2% recebem assistência estudantil (28 alunos).
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: DIAGNÓSTICO COMPARATIVO (EXATAS vs DEMAIS CURSOS) -->
+    <section id="diagnostico" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <div class="border-b border-slate-100 pb-4 mb-6">
+        <span class="text-xs font-bold uppercase tracking-widest text-rose-700">02 · Onde as Exatas Sofrem Mais Pressão</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Exatas (n = 87) e CCE (n = 37) vs. Demais Cursos da Ufes (n = 544)</h2>
+        <p class="text-sm text-slate-600 mt-2 max-w-4xl">
+          Enquanto os dados de ingresso (Sisu/renda) pouco discriminam quem sai no 1º ano, a vivência acadêmica revela gargalos agudos nas Exatas: <strong>reprovação em disciplinas-chave (33,3% vs. 14,7%)</strong>, <strong>sobrecarga emocional no CCE (56,8% em faixa crítica)</strong> e <strong>gestão do tempo (54,1% no CCE)</strong>.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 h-80">
+          <canvas id="exatasComparisonChart"></canvas>
+        </div>
+        <div class="lg:col-span-5 space-y-3 text-xs">
+          <div class="p-4 rounded-xl bg-rose-50 border border-rose-200">
+            <div class="font-bold text-rose-900 uppercase">1. Gargalo Pedagógico e Reprovação (Q41 & Q28)</div>
+            <p class="text-slate-700 mt-1 leading-relaxed">
+              Nos cursos de Exatas, <strong>33,3%</strong> já reprovaram em disciplinas importantes (37,8% no CCE), contra apenas <strong>14,7%</strong> nos demais cursos da Ufes. Além disso, <strong>21,8%</strong> relatam dificuldades frequentes de aprovação (27,0% no CCE).
+            </p>
+          </div>
+          <div class="p-4 rounded-xl bg-amber-50 border border-amber-200">
+            <div class="font-bold text-amber-900 uppercase">2. Sobrecarga Emocional e Exaustão (Q44, Q45 & Q38)</div>
+            <p class="text-slate-700 mt-1 leading-relaxed">
+              No CCE, <strong>51,4%</strong> afirmam que problemas emocionais afetam o desempenho (Q45), <strong>48,6%</strong> sentem-se sobrecarregados com as demandas acadêmicas (Q44) e <strong>45,9%</strong> relatam cansaço extremo (Q38).
+            </p>
+          </div>
+          <div class="p-4 rounded-xl bg-sky-50 border border-sky-200">
+            <div class="font-bold text-sky-900 uppercase">3. Pertencimento e Perspectiva Profissional (Q47, Q5 & Q10)</div>
+            <p class="text-slate-700 mt-1 leading-relaxed">
+              Apenas <strong>43,2%</strong> dos alunos do CCE sentem que fazem parte do curso (contra 55,2% fora das Exatas) e <strong>45,9%</strong> interagem com colegas (vs. 62,0% na Ufes geral), enquanto <strong>18,9%</strong> no CCE já consideraram abandonar o curso por falta de perspectiva profissional (vs. 9,7%).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3: AS 7 PROPOSTAS ESTRATÉGICAS DE INTERVENÇÃO -->
+    <section id="propostas">
+      <div class="mb-6">
+        <span class="text-xs font-bold uppercase tracking-widest text-emerald-700">03 · Recomendações Baseadas nas Evidências</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Sete Propostas Estratégicas para Reduzir a Evasão nas Exatas</h2>
+        <p class="text-sm text-slate-600 mt-1">Cada proposta articula as lacunas apontadas nas conclusões do TCC (CCE) com os indicadores críticos medidos no questionário institucional de permanência.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
+
+        <!-- PROPOSTA 1 -->
+        <article class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between border-t-4 border-t-[#003366]">
+          <div>
+            <div class="flex items-center justify-between text-xs font-bold text-[#003366] mb-2">
+              <span>PROPOSTA 01 · ALERTA PRECOCE</span>
+              <span class="bg-sky-100 px-2 py-0.5 rounded">1º Semestre</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Monitoramento de Frequência nas Primeiras Semanas</h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              O TCC demonstra que o perfil do Sisu não identifica quem sairá e que a maioria das evasões ocorre no 1º semestre, mas só entra no sistema no fim do período como reprovação por falta.
+            </p>
+            <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-700 space-y-1.5">
+              <div><strong>Ação:</strong> Registro semanal de presença nas disciplinas introdutórias (Cálculo I, Física I, Química Geral, Algoritmos) até a 4ª semana de aula.</div>
+              <div><strong>Gatilho:</strong> Busca ativa imediata pelo colegiado e assistência estudantil após 2 faltas consecutivas, antes da desistência silenciosa ou trancamento.</div>
+            </div>
+          </div>
+          <div class="mt-4 text-[11px] font-semibold text-sky-800 bg-sky-50 px-3 py-1.5 rounded-lg">
+            Alvo: ~90% das saídas de Estatística e ~75% das saídas do 1º ano no CCE ocorrem no 1º semestre.
+          </div>
+        </article>
+
+        <!-- PROPOSTA 2 -->
+        <article class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between border-t-4 border-t-rose-600">
+          <div>
+            <div class="flex items-center justify-between text-xs font-bold text-rose-700 mb-2">
+              <span>PROPOSTA 02 · SAÚDE MENTAL</span>
+              <span class="bg-rose-100 px-2 py-0.5 rounded">Acolhimento</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Núcleos de Acolhimento Psicológico e Gestão de Sobrecarga</h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              Saúde Mental é a dimensão mais crítica nas Exatas (56,8% em faixa crítica no CCE), atuando como amplificador tanto do abandono financeiro (<em>r</em> = 0,388) quanto vocacional (<em>r</em> = 0,328).
+            </p>
+            <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-700 space-y-1.5">
+              <div><strong>Ação:</strong> Plantões de escuta psicológica descentralizados nos centros (CCE, CT, CCENS e Ceunes) em períodos de avaliações parciais.</div>
+              <div><strong>Oficinas Práticas:</strong> Treinamento em gestão de tempo e autorregulação de estudo (atacando os 54,1% do CCE com dificuldade na Q8).</div>
+            </div>
+          </div>
+          <div class="mt-4 text-[11px] font-semibold text-rose-800 bg-rose-50 px-3 py-1.5 rounded-lg">
+            Alvo: 51,4% no CCE têm desempenho afetado por questões emocionais (Q45).
+          </div>
+        </article>
+
+        <!-- PROPOSTA 3 -->
+        <article class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between border-t-4 border-t-amber-500">
+          <div>
+            <div class="flex items-center justify-between text-xs font-bold text-amber-700 mb-2">
+              <span>PROPOSTA 03 · PERMANÊNCIA MATERIAL</span>
+              <span class="bg-amber-100 px-2 py-0.5 rounded">Assistência</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Auxílio Emergencial de Ingresso e Focalização nas Licenciaturas</h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              Vulnerabilidade financeira tem correlação de <em>r</em> = 0,612 com o abandono por custo, e o TCC aponta indício de maior peso da baixa renda nas licenciaturas e em Estatística.
+            </p>
+            <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-700 space-y-1.5">
+              <div><strong>Ação:</strong> Concessão provisória automática de auxílio alimentação/transporte no ato da matrícula para ingressantes de até 1,5 SM enquanto tramita o edital regular.</div>
+              <div><strong>Integração de Dados:</strong> Cruzar registros da Proaeci com o histórico acadêmico para avaliar o efeito protetivo real das bolsas.</div>
+            </div>
+          </div>
+          <div class="mt-4 text-[11px] font-semibold text-amber-800 bg-amber-50 px-3 py-1.5 rounded-lg">
+            Alvo: 28,7% nas Exatas têm dificuldade com transporte (Q20) e 27,6% sofrem risco financeiro direto (Q37).
+          </div>
+        </article>
+
+        <!-- PROPOSTA 4 -->
+        <article class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between border-t-4 border-t-emerald-600">
+          <div>
+            <div class="flex items-center justify-between text-xs font-bold text-emerald-700 mb-2">
+              <span>PROPOSTA 04 · NIVELAMENTO</span>
+              <span class="bg-emerald-100 px-2 py-0.5 rounded">Pedagógico</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Nivelamento em Matemática/Ciências e Tutoria entre Pares</h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              O TCC sugere que notas em Matemática e Ciências da Natureza no Enem antecipam melhor a permanência que a nota geral, e o CSV mostra reprovação 2,3× maior nas Exatas (33,3%).
+            </p>
+            <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-700 space-y-1.5">
+              <div><strong>Ação:</strong> Módulo diagnóstico e oficinas de pré-cálculo/base científica nas primeiras semanas, sem caráter punitivo.</div>
+              <div><strong>Monitoria Ativa:</strong> Grupos de estudo guiados por veteranos bolsistas (fortalecendo a interação entre colegas, onde o CCE tem menor pertencimento: 43,2%).</div>
+            </div>
+          </div>
+          <div class="mt-4 text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-lg">
+            Alvo: Reduzir o ciclo de reprovação em disciplinas-tronco (Q41: 37,8% no CCE).
+          </div>
+        </article>
+
+        <!-- PROPOSTA 5 -->
+        <article class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between border-t-4 border-t-indigo-600">
+          <div>
+            <div class="flex items-center justify-between text-xs font-bold text-indigo-700 mb-2">
+              <span>PROPOSTA 05 · IDENTIDADE & CARREIRA</span>
+              <span class="bg-indigo-100 px-2 py-0.5 rounded">Vocacional</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Ambientação Profissional e Clareza de Carreira desde o 1º Ano</h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              Insegurança de carreira e dúvida sobre a escolha do curso explicam fortemente o abandono por falta de perspectiva (<em>r</em> = 0,603), que atinge 18,9% no CCE (quase o dobro do restante da Ufes).
+            </p>
+            <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-700 space-y-1.5">
+              <div><strong>Ação:</strong> Disciplinas integradoras no 1º período conectando teoria básica a aplicações reais (ciência de dados, indústria, pesquisa e docência).</div>
+              <div><strong>Atenção à 2ª Opção Sisu:</strong> Identificar ingressantes que entraram por nota de corte sem 1ª opção pelo curso para mentoria vocacional dedicada.</div>
+            </div>
+          </div>
+          <div class="mt-4 text-[11px] font-semibold text-indigo-800 bg-indigo-50 px-3 py-1.5 rounded-lg">
+            Alvo: 27,0% no CCE têm dúvidas se escolheram o curso certo (Q23).
+          </div>
+        </article>
+
+        <!-- PROPOSTA 6 (NOVA: ATIVIDADES FÍSICAS E INTEGRAÇÃO ESPORTIVA) -->
+        <article class="lg:col-span-3 bg-white rounded-2xl border border-teal-200 p-6 shadow-sm flex flex-col justify-between border-t-4 border-t-teal-600 bg-gradient-to-b from-teal-50/30 to-white">
+          <div>
+            <div class="flex items-center justify-between text-xs font-bold text-teal-700 mb-2">
+              <span>PROPOSTA 06 · BEM-ESTAR FÍSICO & PERTENCIMENTO</span>
+              <span class="bg-teal-100 text-teal-800 px-2 py-0.5 rounded">Movimenta Exatas</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Programa de Atividades Físicas e Integração Esportiva ("Movimenta Exatas / Ufes Ativa")</h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              Fundamentada nos elevados índices de sobrecarga emocional (<strong>51,4%</strong> no CCE na Q45), cansaço extremo (<strong>45,9%</strong> no CCE na Q38), menor senso de pertencimento (<strong>43,2%</strong> no CCE na Q47 vs. <strong>55,2%</strong> fora das Exatas) e menor interação entre colegas (<strong>45,9%</strong> no CCE na Q5 vs. <strong>62,0%</strong> geral).
+            </p>
+            <div class="mt-4 pt-3 border-t border-teal-100 text-xs text-slate-700 space-y-1.5">
+              <div><strong>Ação:</strong> Práticas esportivas coletivas, torneios intercursos e oficinas de movimento como reguladores de estresse e ansiedade e promotores de vínculos entre calouros e veteranos.</div>
+              <div><strong>Desenho Operacional Flexível:</strong> Oferta opcional nos intervalos de almoço, início da manhã ou pós-18h para não colidir com os <strong>46,0%</strong> das Exatas que trabalham, articulada entre Proaeci, CEFD, núcleos esportivos (Alegre/São Mateus) e Atléticas.</div>
+            </div>
+          </div>
+          <div class="mt-4 text-[11px] font-semibold text-teal-900 bg-teal-100/70 px-3 py-1.5 rounded-lg">
+            Alvo: Combater a exaustão (45,9% CCE) e elevar o pertencimento (43,2% CCE) sem sobrecarregar a grade.
+          </div>
+        </article>
+
+        <!-- PROPOSTA 7 (RENUMERADA: GOVERNANÇA DE DADOS) -->
+        <article class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between border-t-4 border-t-slate-700">
+          <div>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-700 mb-2">
+              <span>PROPOSTA 07 · GOVERNANÇA DE DADOS</span>
+              <span class="bg-slate-200 px-2 py-0.5 rounded">Institucional</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Qualificação dos Registros Acadêmicos e Riscos Competitivos</h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              O TCC aponta que a base da Ufes mistura transferência interna com evasão do ensino superior, além de não registrar ordem de opção no Sisu nem motivo de saída.
+            </p>
+            <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-700 space-y-1.5">
+              <div><strong>Ação:</strong> Distinguir no sistema acadêmico a <em>mobilidade interna (reopção/novo Sisu na Ufes)</em> do <em>abandono do sistema</em>, aplicando modelos de riscos competitivos.</div>
+              <div><strong>Protocolo de Trancamento:</strong> Como o trancamento no 1º ano antecede a evasão futura, tornar obrigatória uma entrevista de acolhimento antes da efetivação.</div>
+            </div>
+          </div>
+          <div class="mt-4 text-[11px] font-semibold text-slate-800 bg-slate-100 px-3 py-1.5 rounded-lg">
+            Alvo: Antecipar saídas pós-trancamento e alinhar indicadores internos ao Censo/Inep.
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4: MATRIZ DE PRIORIZAÇÃO E IMPLEMENTAÇÃO -->
+    <section id="matriz" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <div class="border-b border-slate-100 pb-4 mb-6">
+        <span class="text-xs font-bold uppercase tracking-widest text-[#003366]">04 · Roteiro de Execução Institucional</span>
+        <h2 class="text-2xl font-bold text-slate-900 mt-1">Matriz de Implementação por Horizonte Temporal e Atores</h2>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs sm:text-sm">
+          <thead>
+            <tr class="bg-slate-100 text-slate-800 border-b border-slate-200">
+              <th class="py-3 px-4 font-bold">Eixo de Intervenção</th>
+              <th class="py-3 px-4 font-bold">Evidência Empírica (CCE + CSV)</th>
+              <th class="py-3 px-4 font-bold">Prazo</th>
+              <th class="py-3 px-4 font-bold">Atores Responsáveis</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700">
+            <tr>
+              <td class="py-3 px-4 font-semibold text-[#003366]">1. Alerta de Frequência (Semanas 1–4)</td>
+              <td class="py-3 px-4">Saídas concentradas no 1º semestre sem sinal prévio no Sisu</td>
+              <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold text-xs">Imediato (1 sem.)</span></td>
+              <td class="py-3 px-4">Colegiados de Curso (CCE, CCENS, Ceunes, CT) e Docentes</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold text-rose-700">2. Plantão Psicológico & Gestão de Tempo</td>
+              <td class="py-3 px-4">56,8% em alerta emocional no CCE; 54,1% com déficit de tempo (Q8)</td>
+              <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold text-xs">Imediato (1 sem.)</span></td>
+              <td class="py-3 px-4">Direções de Centro, Proaeci e Departamentos de Psicologia</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold text-amber-700">3. Auxílio Emergencial de Ingresso</td>
+              <td class="py-3 px-4">Correlação <em>r</em> = 0,612 com evasão financeira; 46% trabalham nas Exatas</td>
+              <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-semibold text-xs">Curto Prazo (1 ano)</span></td>
+              <td class="py-3 px-4">Proaeci e Administração Central (Editais de Assistência)</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold text-emerald-700">4. Nivelamento Científico & Tutoria Pares</td>
+              <td class="py-3 px-4">33,3% reprovam em disciplinas-chave (2,3× acima do resto da Ufes)</td>
+              <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-semibold text-xs">Curto Prazo (1 ano)</span></td>
+              <td class="py-3 px-4">Prograd, Coordenações de Graduação e PETs / Centros Acadêmicos</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold text-indigo-700">5. Integração de Carreira & Mentoria Sisu</td>
+              <td class="py-3 px-4">27,0% no CCE duvidam da escolha do curso; 18,9% cogitam sair por carreira</td>
+              <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-semibold text-xs">Curto Prazo (1 ano)</span></td>
+              <td class="py-3 px-4">NDEs (Núcleos Docentes Estruturantes) e Empresas Juniores</td>
+            </tr>
+            <tr class="bg-teal-50/40">
+              <td class="py-3 px-4 font-semibold text-teal-800">6. Atividades Físicas & Integração Esportiva (Horários Flexíveis)</td>
+              <td class="py-3 px-4">51,4% desgaste emocional (Q45), 45,9% exaustão (Q38) e 43,2% pertencimento no CCE (Q47)</td>
+              <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-teal-100 text-teal-900 font-semibold text-xs">Curto Prazo (1 sem. – 1 ano)</span></td>
+              <td class="py-3 px-4">Proaeci, CEFD, Núcleos Esportivos (Alegre/São Mateus) e Atléticas</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold text-slate-800">7. Rastreamento de Destino & Trancamento</td>
+              <td class="py-3 px-4">Trancamento no 1º ano precede evasão; troca interna infla taxa do CCE</td>
+              <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-semibold text-xs">Médio Prazo (1–2 anos)</span></td>
+              <td class="py-3 px-4">Prograd, STI (Sistemas Acadêmicos) e Observatório Institucional</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
+    Fontes integradas: Conclusões do TCC sobre evasão no CCE/Ufes (2019–2024) e base empírica <code>dataset_final20261103.csv</code> (n = 87 discentes completos de Exatas; N = 631 total Ufes).
+  </footer>
+
+  <script>
+    new Chart(document.getElementById('exatasComparisonChart'), {
+      type: 'bar',
+      data: {
+        labels: [
+          'Saúde Mental Crítica (≥3,5)',
+          'Dificuldade Gestão Tempo (Q8)',
+          'Sobrecarga Acadêmica (Q44)',
+          'Reprovação Importante (Q41)',
+          'Trabalha Atualmente',
+          'Dúvida Escolha Curso (Q23)',
+          'Risco Financeiro Direto (Q37)',
+          'Evasão por Perspectiva (Q10)'
+        ],
+        datasets: [
+          {
+            label: 'CCE — Goiabeiras (n = 37)',
+            data: [56.8, 54.1, 48.6, 37.8, 40.5, 27.0, 24.3, 18.9],
+            backgroundColor: '#003366',
+            borderRadius: 4
+          },
+          {
+            label: 'Todas as Exatas CSV (n = 87)',
+            data: [48.3, 49.4, 47.1, 33.3, 46.0, 24.1, 27.6, 13.8],
+            backgroundColor: '#0284c7',
+            borderRadius: 4
+          },
+          {
+            label: 'Demais Cursos Ufes (n = 544)',
+            data: [47.1, 44.5, 40.4, 14.7, 41.4, 16.0, 26.5, 9.7],
+            backgroundColor: '#cbd5e1',
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            min: 0,
+            max: 65,
+            grid: { color: '#f1f5f9' },
+            title: { display: true, text: 'Percentual de Discentes (%)', font: { size: 11 } }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { font: { size: 11, weight: '600' } }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { boxWidth: 12, font: { size: 11 } }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) {
+                return ctx.dataset.label + ': ' + ctx.parsed.x + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

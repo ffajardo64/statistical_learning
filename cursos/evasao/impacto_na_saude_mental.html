@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carreira, Finanças, Desempenho e Saúde Mental por Centro — Ufes (N = 631)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f172a;
+      --paper: #f8fafc;
+      --ufes-navy: #003366;
+      --ufes-sky: #0284c7;
+      --rose-risk: #be123c;
+      --amber-risk: #d97706;
+      --emerald-safe: #047857;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--paper);
+      color: var(--ink);
+      scroll-behavior: smooth;
+    }
+    h1, h2, h3, .serif {
+      font-family: 'Fraunces', serif;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #ffffff; }
+      section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-sky-100 selection:text-sky-950">
+
+  <!-- Barra de Navegação -->
+  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 no-print">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between text-xs sm:text-sm">
+      <div class="flex items-center gap-2 font-bold text-[#003366]">
+        <span class="w-2.5 h-2.5 rounded-full bg-rose-600 inline-block"></span>
+        <span>DIMENSÕES DE PERMANÊNCIA & SAÚDE MENTAL · UFES</span>
+      </div>
+      <div class="hidden md:flex items-center gap-5 text-slate-600 font-medium">
+        <a href="#dimensoes" class="hover:text-[#003366] transition">1. As 5 Dimensões</a>
+        <a href="#influencia" class="hover:text-[#003366] transition">2. Influência na Saúde Mental</a>
+        <a href="#centros" class="hover:text-[#003366] transition">3. Resultados por Centro</a>
+        <a href="#tabela" class="hover:text-[#003366] transition">4. Matriz Completa</a>
+      </div>
+      <button onclick="window.print()" class="bg-[#003366] hover:bg-sky-900 text-white px-3.5 py-1.5 rounded-md font-semibold text-xs transition shadow-sm">
+        Imprimir / PDF
+      </button>
+    </div>
+  </nav>
+
+  <!-- Cabeçalho Editorial -->
+  <header class="bg-[#003366] text-white border-b-4 border-rose-500">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-14">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-sky-200 text-xs font-semibold uppercase tracking-wider mb-4">
+        Modelagem Multivariada & Análise por Centro · dataset_final20261103.csv (N = 631)
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-bold leading-tight max-w-4xl">
+        Carreira, Finanças e Desempenho: O que Mais Impacta a Saúde Mental na Ufes?
+      </h1>
+      <p class="mt-4 text-sky-100/90 text-base sm:text-lg max-w-3xl leading-relaxed">
+        Análise psicométrica e regressão linear múltipla (<em>R²</em> = 32,5%; <em>p</em> &lt; 0,0001) avaliando como <strong>Adaptabilidade de Carreira</strong>, <strong>Expectativas de Carreira</strong>, <strong>Motivos Financeiros</strong> e <strong>Desempenho Acadêmico</strong> se relacionam com o desgaste emocional nos <strong>11 Centros Acadêmicos</strong> da Ufes.
+      </p>
+
+      <!-- KPIs Principais -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+        <div class="bg-white/10 border border-white/15 rounded-xl p-4">
+          <div class="text-xs uppercase tracking-wider text-sky-200 font-semibold">Variância Explicada (OLS)</div>
+          <div class="text-3xl font-bold mt-1 serif">32,5%</div>
+          <div class="text-xs text-sky-100/80 mt-1">Da variabilidade na Saúde Mental explicada pelas 4 dimensões</div>
+        </div>
+        <div class="bg-rose-950/50 border border-rose-400/30 rounded-xl p-4">
+          <div class="text-xs uppercase tracking-wider text-rose-200 font-semibold">1º Preditor: Desempenho</div>
+          <div class="text-3xl font-bold mt-1 serif text-rose-300">r = -0,452</div>
+          <div class="text-xs text-rose-100/80 mt-1">Menor desempenho acadêmico eleva fortemente a sobrecarga (β = -0,381)</div>
+        </div>
+        <div class="bg-amber-950/40 border border-amber-400/30 rounded-xl p-4">
+          <div class="text-xs uppercase tracking-wider text-amber-200 font-semibold">2º Preditor: Finanças</div>
+          <div class="text-3xl font-bold mt-1 serif text-amber-300">r = +0,399</div>
+          <div class="text-xs text-amber-100/80 mt-1">Pressão financeira agrava diretamente o sofrimento emocional (β = +0,275)</div>
+        </div>
+        <div class="bg-emerald-950/40 border border-emerald-400/30 rounded-xl p-4">
+          <div class="text-xs uppercase tracking-wider text-emerald-200 font-semibold">3º Preditor: Expectativas</div>
+          <div class="text-3xl font-bold mt-1 serif text-emerald-300">r = -0,331</div>
+          <div class="text-xs text-emerald-100/80 mt-1">Boas expectativas de carreira protegem contra o desgaste (β = -0,246)</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 space-y-12">
+
+    <!-- SEÇÃO 1: DEFINIÇÃO E CONSISTÊNCIA DAS 5 DIMENSÕES -->
+    <section id="dimensoes" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <div class="border-b border-slate-100 pb-4 mb-6">
+        <span class="text-xs font-bold uppercase tracking-widest text-sky-700">01 · Estrutura Psicométrica (Escala 1 a 5 · N = 631)</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Composição e Consistência Interna (Alfa de Cronbach) das Dimensões</h2>
+        <p class="text-sm text-slate-600 mt-1">
+          Dimensões protetivas (<strong>Adaptabilidade</strong>, <strong>Expectativas</strong> e <strong>Desempenho</strong>) têm polaridade positiva (5 = melhor condição), enquanto <strong>Motivos Financeiros</strong> e <strong>Saúde Mental</strong> medem intensidade de vulnerabilidade/risco (5 = maior desgaste).
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+        <!-- Dimensão 1 -->
+        <div class="rounded-xl border border-emerald-200 bg-emerald-50/40 p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-bold text-emerald-800 mb-1">
+              <span>PROTETIVA</span>
+              <span>α = 0,715</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-900">Adaptabilidade de Carreira</h3>
+            <div class="text-2xl font-bold text-emerald-700 mt-2 serif">3,94 <span class="text-xs font-normal text-slate-500">(DP 0,64)</span></div>
+            <p class="text-[11px] text-slate-600 mt-2 leading-relaxed">
+              <strong>7 itens:</strong> Adaptação de planos (Q7), responsabilidade profissional (Q30), busca de atuação (Q35), novas formas de aprender (Q36), projeção futura (Q39), clareza de caminhos (Q49) e conexão curso-carreira (Q32 inv.).
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-emerald-200/60 text-[11px] font-semibold text-emerald-900">
+            Maior média geral entre os construtos
+          </div>
+        </div>
+
+        <!-- Dimensão 2 -->
+        <div class="rounded-xl border border-sky-200 bg-sky-50/40 p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-bold text-sky-800 mb-1">
+              <span>PROTETIVA</span>
+              <span>α = 0,698</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-900">Expectativas de Carreira</h3>
+            <div class="text-2xl font-bold text-[#003366] mt-2 serif">3,85 <span class="text-xs font-normal text-slate-500">(DP 0,71)</span></div>
+            <p class="text-[11px] text-slate-600 mt-2 leading-relaxed">
+              <strong>5 itens:</strong> Boas oportunidades de trabalho (Q1), expectativa de remuneração (Q13), retorno do esforço futuro (Q19), segurança profissional (Q9 inv.) e confiança de empregabilidade na área (Q25 inv.).
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-sky-200/60 text-[11px] font-semibold text-sky-900">
+            Varia fortemente entre centros (p = 0,0002)
+          </div>
+        </div>
+
+        <!-- Dimensão 3 -->
+        <div class="rounded-xl border border-indigo-200 bg-indigo-50/40 p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-bold text-indigo-800 mb-1">
+              <span>PROTETIVA</span>
+              <span>α = 0,867</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-900">Desempenho Acadêmico</h3>
+            <div class="text-2xl font-bold text-indigo-700 mt-2 serif">3,72 <span class="text-xs font-normal text-slate-500">(DP 0,94)</span></div>
+            <p class="text-[11px] text-slate-600 mt-2 leading-relaxed">
+              <strong>6 itens:</strong> Boas notas (Q14), confiança de aprovação (Q17), acompanhamento de conteúdo (Q40), ausência de dificuldades de aprovação (Q28 inv.), desempenho comparativo (Q33 inv.) e não reprovação (Q41 inv.).
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-indigo-200/60 text-[11px] font-semibold text-indigo-900">
+            Maior contraste entre centros (p &lt; 0,0001)
+          </div>
+        </div>
+
+        <!-- Dimensão 4 -->
+        <div class="rounded-xl border border-amber-200 bg-amber-50/40 p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-bold text-amber-800 mb-1">
+              <span>RISCO MATERIAL</span>
+              <span>α = 0,862</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-900">Motivos Financeiros</h3>
+            <div class="text-2xl font-bold text-amber-700 mt-2 serif">2,47 <span class="text-xs font-normal text-slate-500">(DP 1,10)</span></div>
+            <p class="text-[11px] text-slate-600 mt-2 leading-relaxed">
+              <strong>6 itens:</strong> Dificuldade para alimentação (Q4), instabilidade financeira (Q11 inv.), falta de recursos para materiais (Q16), custo de transporte (Q20), ideação de abandono financeiro (Q27) e risco à permanência (Q37).
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-amber-200/60 text-[11px] font-semibold text-amber-900">
+            22,7% da amostra em faixa crítica (≥ 3,5)
+          </div>
+        </div>
+
+        <!-- Dimensão 5 -->
+        <div class="rounded-xl border border-rose-200 bg-rose-50/50 p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-bold text-rose-800 mb-1">
+              <span>DESFECHO / RISCO</span>
+              <span>α = 0,811</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-900">Saúde Mental (Sobrecarga)</h3>
+            <div class="text-2xl font-bold text-rose-700 mt-2 serif">3,28 <span class="text-xs font-normal text-slate-500">(DP 1,10)</span></div>
+            <p class="text-[11px] text-slate-600 mt-2 leading-relaxed">
+              <strong>4 itens:</strong> Ansiedade que dificulta concentração (Q31), cansaço extremo prejudicando desempenho (Q38), sobrecarga com demandas acadêmicas (Q44) e problemas emocionais afetando o curso (Q45).
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-rose-200/60 text-[11px] font-semibold text-rose-900">
+            47,2% dos discentes em alerta crítico (≥ 3,5)
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: INFLUÊNCIA NA SAÚDE MENTAL (CORRELAÇÃO E REGRESSÃO) -->
+    <section id="influencia" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <div class="border-b border-slate-100 pb-4 mb-6">
+        <span class="text-xs font-bold uppercase tracking-widest text-rose-700">02 · Análise de Influência Estatística (Correlação Bivariada & Regressão Múltipla OLS)</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Como Cada Dimensão Influencia a Saúde Mental dos Estudantes</h2>
+        <p class="text-sm text-slate-600 mt-1 max-w-4xl">
+          Isoladamente, todas as quatro dimensões apresentam correlação altamente significativa com o desgaste emocional (<em>p</em> &lt; 10⁻¹³). Quando analisadas em conjunto na regressão múltipla, <strong>Desempenho Acadêmico</strong>, <strong>Motivos Financeiros</strong> e <strong>Expectativas de Carreira</strong> mantêm efeito direto independente, enquanto <strong>Adaptabilidade de Carreira</strong> atua indiretamente via Expectativas (<em>r</em> = 0,553) e Desempenho (<em>r</em> = 0,369).
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 h-80">
+          <canvas id="influenceChart"></canvas>
+        </div>
+
+        <div class="lg:col-span-5 space-y-3 text-xs">
+          <div class="p-4 rounded-xl bg-indigo-50 border border-indigo-200">
+            <div class="flex justify-between font-bold text-indigo-900 uppercase">
+              <span>1. Desempenho Acadêmico (Principal Vetor)</span>
+              <span>β = -0,381 (p &lt; 0,0001)</span>
+            </div>
+            <p class="text-slate-700 mt-1 leading-relaxed">
+              É o fator mais fortemente associado à Saúde Mental (<em>r</em> = -0,452). A cada 1 ponto de queda no desempenho percebido, o escore de sofrimento/sobrecarga emocional sobe <strong>0,38 ponto</strong> na escala de 1 a 5.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-amber-50 border border-amber-200">
+            <div class="flex justify-between font-bold text-amber-900 uppercase">
+              <span>2. Motivos Financeiros (Pressão Direta)</span>
+              <span>β = +0,275 (p &lt; 0,0001)</span>
+            </div>
+            <p class="text-slate-700 mt-1 leading-relaxed">
+              Segunda maior influência direta (<em>r</em> = +0,399). A insegurança alimentar, de transporte e de permanência alimenta diretamente a ansiedade e a exaustão, mesmo controlando notas e expectativas.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-sky-50 border border-sky-200">
+            <div class="flex justify-between font-bold text-sky-900 uppercase">
+              <span>3. Expectativas de Carreira (Amortecedor)</span>
+              <span>β = -0,246 (p = 0,0001)</span>
+            </div>
+            <p class="text-slate-700 mt-1 leading-relaxed">
+              Ter clareza de empregabilidade e retorno futuro (<em>r</em> = -0,331) reduz significativamente o peso emocional das exigências acadêmicas.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200">
+            <div class="flex justify-between font-bold text-emerald-900 uppercase">
+              <span>4. Adaptabilidade de Carreira (Efeito Mediado)</span>
+              <span>r = -0,298 | β = -0,095 (n.s.)</span>
+            </div>
+            <p class="text-slate-700 mt-1 leading-relaxed">
+              Correlaciona-se fortemente com Expectativas (<em>r</em> = 0,553) e Desempenho (<em>r</em> = 0,369). Na regressão conjunta, seu efeito protetor sobre a saúde mental é absorvido por essas duas vias (<em>p</em> = 0,186).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3: COMPARATIVO VISUAL POR CENTROS ACADÊMICOS -->
+    <section id="centros" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-slate-100 pb-4 mb-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-[#003366]">03 · Perfis por Unidade Acadêmica (11 Centros · N = 631)</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Contrastes entre Centros Acadêmicos nas Cinco Dimensões</h2>
+        </div>
+        <span class="text-xs text-slate-500 mt-2 md:mt-0">Kruskal-Wallis: Desempenho (p &lt; 0,0001) e Expectativas (p = 0,0002) diferem significativamente</span>
+      </div>
+
+      <div class="h-96 mb-6">
+        <canvas id="centersMultidimChart"></canvas>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="p-4 rounded-xl bg-rose-50 border border-rose-200 text-slate-700">
+          <div class="font-bold text-rose-900 uppercase mb-1">Alta Expectativa + Alta Pressão (CCS e CCE)</div>
+          O <strong>CCS (Maruípe)</strong> lidera o desgaste emocional (<strong>3,55</strong>), mesmo possuindo a maior Adaptabilidade (4,11) e a 2ª maior Expectativa de Carreira (4,06). Já o <strong>CCE (Exatas)</strong> combina o <strong>menor Desempenho percebido da Ufes (3,22)</strong> com alto desgaste mental (<strong>3,37</strong>; 56,8% em faixa crítica).
+        </div>
+        <div class="p-4 rounded-xl bg-amber-50 border border-amber-200 text-slate-700">
+          <div class="font-bold text-amber-900 uppercase mb-1">Vulnerabilidade Material e Carreira (Ceunes, CCHN e CAr)</div>
+          O <strong>Ceunes (São Mateus)</strong> apresenta a maior pressão por Motivos Financeiros (<strong>2,80</strong>), seguido pelo <strong>CCHN (2,70)</strong> — que também registra a 2ª menor Expectativa de Carreira (3,61), atrás apenas do <strong>Centro de Artes (3,53)</strong>.
+        </div>
+        <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-slate-700">
+          <div class="font-bold text-emerald-900 uppercase mb-1">Equilíbrio Protetivo (CEFD, CE e CT)</div>
+          O <strong>CEFD</strong> combina a maior Expectativa de Carreira (<strong>4,11</strong>), baixo risco financeiro (2,32) e o <strong>menor desgaste emocional da Ufes (2,87)</strong>. O <strong>Centro de Artes (4,32)</strong> e o <strong>Centro de Educação (4,18)</strong> lideram o Desempenho Acadêmico percebido.
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4: TABELA CONSOLIDADA DOS 11 CENTROS -->
+    <section id="tabela" class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <div class="border-b border-slate-100 pb-4 mb-6">
+        <span class="text-xs font-bold uppercase tracking-widest text-slate-600">04 · Síntese Numérica Completa</span>
+        <h2 class="text-2xl font-bold text-slate-900 mt-1">Tabela Comparativa por Centro Acadêmico (Ordenada por Saúde Mental)</h2>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="bg-slate-100 text-slate-800 border-b border-slate-200">
+              <th class="py-3 px-3 font-bold">Centro Acadêmico (Campus)</th>
+              <th class="py-3 px-3 font-bold text-center">n</th>
+              <th class="py-3 px-3 font-bold text-center text-emerald-800">Adaptabilidade Carreira (1–5)</th>
+              <th class="py-3 px-3 font-bold text-center text-sky-900">Expectativas Carreira (1–5)</th>
+              <th class="py-3 px-3 font-bold text-center text-indigo-900">Desempenho Acadêmico (1–5)</th>
+              <th class="py-3 px-3 font-bold text-center text-amber-800">Motivos Financeiros (1–5)</th>
+              <th class="py-3 px-3 font-bold text-center text-rose-800">Saúde Mental Risco (1–5)</th>
+              <th class="py-3 px-3 font-bold text-center">Saúde Mental Crítica (≥3,5)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700">
+            <tr class="bg-rose-50/40">
+              <td class="py-2.5 px-3 font-semibold text-slate-900">1. Centro de Ciências da Saúde (CCS — Maruípe)</td>
+              <td class="py-2.5 px-3 text-center">70</td>
+              <td class="py-2.5 px-3 text-center font-bold text-emerald-700">4,11</td>
+              <td class="py-2.5 px-3 text-center font-semibold">4,06</td>
+              <td class="py-2.5 px-3 text-center">3,58</td>
+              <td class="py-2.5 px-3 text-center">2,36</td>
+              <td class="py-2.5 px-3 text-center font-bold text-rose-700">3,55</td>
+              <td class="py-2.5 px-3 text-center font-semibold">55,7%</td>
+            </tr>
+            <tr class="bg-rose-50/25">
+              <td class="py-2.5 px-3 font-semibold text-slate-900">2. Centro de Ciências Agrárias e Engenharias (CCAE — Alegre)</td>
+              <td class="py-2.5 px-3 text-center">17</td>
+              <td class="py-2.5 px-3 text-center font-semibold">4,03</td>
+              <td class="py-2.5 px-3 text-center">3,82</td>
+              <td class="py-2.5 px-3 text-center">3,57</td>
+              <td class="py-2.5 px-3 text-center">2,52</td>
+              <td class="py-2.5 px-3 text-center font-bold text-rose-700">3,49</td>
+              <td class="py-2.5 px-3 text-center font-semibold">58,8%</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">3. Centro de Ciências Humanas e Naturais (CCHN — Goiabeiras)</td>
+              <td class="py-2.5 px-3 text-center">93</td>
+              <td class="py-2.5 px-3 text-center">3,92</td>
+              <td class="py-2.5 px-3 text-center text-amber-800 font-semibold">3,61</td>
+              <td class="py-2.5 px-3 text-center">3,97</td>
+              <td class="py-2.5 px-3 text-center font-semibold text-amber-700">2,70</td>
+              <td class="py-2.5 px-3 text-center font-bold text-rose-700">3,47</td>
+              <td class="py-2.5 px-3 text-center font-semibold">55,9%</td>
+            </tr>
+            <tr class="bg-sky-50/40">
+              <td class="py-2.5 px-3 font-semibold text-slate-900">4. Centro de Ciências Exatas (CCE — Goiabeiras)</td>
+              <td class="py-2.5 px-3 text-center">37</td>
+              <td class="py-2.5 px-3 text-center">3,96</td>
+              <td class="py-2.5 px-3 text-center">3,93</td>
+              <td class="py-2.5 px-3 text-center font-bold text-indigo-800">3,22</td>
+              <td class="py-2.5 px-3 text-center">2,39</td>
+              <td class="py-2.5 px-3 text-center font-bold text-[#003366]">3,37</td>
+              <td class="py-2.5 px-3 text-center font-semibold">56,8%</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">5. Centro Universitário Norte do Espírito Santo (Ceunes — São Mateus)</td>
+              <td class="py-2.5 px-3 text-center">47</td>
+              <td class="py-2.5 px-3 text-center">4,02</td>
+              <td class="py-2.5 px-3 text-center">3,96</td>
+              <td class="py-2.5 px-3 text-center">3,61</td>
+              <td class="py-2.5 px-3 text-center font-bold text-amber-700">2,80</td>
+              <td class="py-2.5 px-3 text-center font-semibold">3,33</td>
+              <td class="py-2.5 px-3 text-center">48,9%</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">6. Centro de Ciências Jurídicas e Econômicas (CCJE — Goiabeiras)</td>
+              <td class="py-2.5 px-3 text-center">139</td>
+              <td class="py-2.5 px-3 text-center">3,86</td>
+              <td class="py-2.5 px-3 text-center">3,84</td>
+              <td class="py-2.5 px-3 text-center">3,70</td>
+              <td class="py-2.5 px-3 text-center">2,40</td>
+              <td class="py-2.5 px-3 text-center font-semibold">3,22</td>
+              <td class="py-2.5 px-3 text-center">43,9%</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">7. Centro de Ciências Exatas, Naturais e da Saúde (CCENS — Alegre)</td>
+              <td class="py-2.5 px-3 text-center">52</td>
+              <td class="py-2.5 px-3 text-center">3,93</td>
+              <td class="py-2.5 px-3 text-center">3,90</td>
+              <td class="py-2.5 px-3 text-center">3,48</td>
+              <td class="py-2.5 px-3 text-center">2,45</td>
+              <td class="py-2.5 px-3 text-center font-semibold">3,15</td>
+              <td class="py-2.5 px-3 text-center">36,5%</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">8. Centro Tecnológico (CT — Goiabeiras)</td>
+              <td class="py-2.5 px-3 text-center">64</td>
+              <td class="py-2.5 px-3 text-center">3,94</td>
+              <td class="py-2.5 px-3 text-center">4,01</td>
+              <td class="py-2.5 px-3 text-center">3,35</td>
+              <td class="py-2.5 px-3 text-center font-semibold text-emerald-700">2,23</td>
+              <td class="py-2.5 px-3 text-center font-semibold">3,14</td>
+              <td class="py-2.5 px-3 text-center">43,8%</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">9. Centro de Artes (CAr — Goiabeiras)</td>
+              <td class="py-2.5 px-3 text-center">66</td>
+              <td class="py-2.5 px-3 text-center">3,87</td>
+              <td class="py-2.5 px-3 text-center font-bold text-amber-800">3,53</td>
+              <td class="py-2.5 px-3 text-center font-bold text-indigo-700">4,32</td>
+              <td class="py-2.5 px-3 text-center">2,47</td>
+              <td class="py-2.5 px-3 text-center font-semibold">3,14</td>
+              <td class="py-2.5 px-3 text-center">39,4%</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">10. Centro de Educação (CE — Goiabeiras)</td>
+              <td class="py-2.5 px-3 text-center">29</td>
+              <td class="py-2.5 px-3 text-center">3,99</td>
+              <td class="py-2.5 px-3 text-center">3,95</td>
+              <td class="py-2.5 px-3 text-center font-semibold">4,18</td>
+              <td class="py-2.5 px-3 text-center">2,59</td>
+              <td class="py-2.5 px-3 text-center font-semibold">3,13</td>
+              <td class="py-2.5 px-3 text-center">44,8%</td>
+            </tr>
+            <tr class="bg-emerald-50/40">
+              <td class="py-2.5 px-3 font-semibold text-slate-900">11. Centro de Educação Física e Desportos (CEFD — Goiabeiras)</td>
+              <td class="py-2.5 px-3 text-center">17</td>
+              <td class="py-2.5 px-3 text-center">3,99</td>
+              <td class="py-2.5 px-3 text-center font-bold text-sky-900">4,11</td>
+              <td class="py-2.5 px-3 text-center">3,75</td>
+              <td class="py-2.5 px-3 text-center">2,32</td>
+              <td class="py-2.5 px-3 text-center font-bold text-emerald-700">2,87</td>
+              <td class="py-2.5 px-3 text-center">35,3%</td>
+            </tr>
+            <tr class="bg-slate-900 text-white font-bold">
+              <td class="py-3 px-3">Média Geral Ufes (Todos os Centros)</td>
+              <td class="py-3 px-3 text-center">631</td>
+              <td class="py-3 px-3 text-center">3,94</td>
+              <td class="py-3 px-3 text-center">3,85</td>
+              <td class="py-3 px-3 text-center">3,72</td>
+              <td class="py-3 px-3 text-center">2,47</td>
+              <td class="py-3 px-3 text-center">3,28</td>
+              <td class="py-3 px-3 text-center">47,2%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
+    Base de dados: <code>dataset_final20261103.csv</code> · Respostas completas analisadas: N = 631 · Métodos: Alfa de Cronbach, Correlação de Pearson/Spearman, Regressão OLS e Kruskal-Wallis.
+  </footer>
+
+  <script>
+    // 1. Gráfico de Correlação e Coeficientes de Regressão com Saúde Mental
+    new Chart(document.getElementById('influenceChart'), {
+      type: 'bar',
+      data: {
+        labels: [
+          'Desempenho Acadêmico',
+          'Motivos Financeiros (Risco)',
+          'Expectativas de Carreira',
+          'Adaptabilidade de Carreira'
+        ],
+        datasets: [
+          {
+            label: 'Correlação Bivariada (Pearson r)',
+            data: [-0.452, 0.399, -0.331, -0.298],
+            backgroundColor: '#003366',
+            borderRadius: 4
+          },
+          {
+            label: 'Coeficiente Regressão Múltipla (β)',
+            data: [-0.381, 0.275, -0.246, -0.095],
+            backgroundColor: '#e11d48',
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            min: -0.55,
+            max: 0.50,
+            grid: { color: '#f1f5f9' },
+            title: { display: true, text: 'Magnitude da Associação com Risco de Saúde Mental (< 0 Protege | > 0 Agrava)', font: { size: 11 } }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { font: { size: 11, weight: '600' } }
+          }
+        },
+        plugins: {
+          legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } }
+        }
+      }
+    });
+
+    // 2. Gráfico Agrupado dos 11 Centros Acadêmicos
+    new Chart(document.getElementById('centersMultidimChart'), {
+      type: 'bar',
+      data: {
+        labels: [
+          'CCS', 'CCAE', 'CCHN', 'CCE', 'Ceunes', 'CCJE',
+          'CCENS', 'CT', 'CAr', 'CE', 'CEFD'
+        ],
+        datasets: [
+          {
+            label: 'Adaptabilidade Carreira',
+            data: [4.11, 4.03, 3.92, 3.96, 4.02, 3.86, 3.93, 3.94, 3.87, 3.99, 3.99],
+            backgroundColor: '#059669',
+            borderRadius: 3
+          },
+          {
+            label: 'Expectativas Carreira',
+            data: [4.06, 3.82, 3.61, 3.93, 3.96, 3.84, 3.90, 4.01, 3.53, 3.95, 4.11],
+            backgroundColor: '#0284c7',
+            borderRadius: 3
+          },
+          {
+            label: 'Desempenho Acadêmico',
+            data: [3.58, 3.57, 3.97, 3.22, 3.61, 3.70, 3.48, 3.35, 4.32, 4.18, 3.75],
+            backgroundColor: '#4f46e5',
+            borderRadius: 3
+          },
+          {
+            label: 'Motivos Financeiros (Risco)',
+            data: [2.36, 2.52, 2.70, 2.39, 2.80, 2.40, 2.45, 2.23, 2.47, 2.59, 2.32],
+            backgroundColor: '#d97706',
+            borderRadius: 3
+          },
+          {
+            label: 'Saúde Mental (Risco)',
+            data: [3.55, 3.49, 3.47, 3.37, 3.33, 3.22, 3.15, 3.14, 3.14, 3.13, 2.87],
+            backgroundColor: '#be123c',
+            borderRadius: 3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            min: 1.5,
+            max: 4.6,
+            grid: { color: '#f1f5f9' },
+            title: { display: true, text: 'Escore Médio por Centro (Escala 1 a 5)', font: { size: 11 } }
+          },
+          x: {
+            grid: { display: false },
+            ticks: { font: { size: 11, weight: '700' } }
+          }
+        },
+        plugins: {
+          legend: { position: 'top', labels: { boxWidth: 11, font: { size: 11 } } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
